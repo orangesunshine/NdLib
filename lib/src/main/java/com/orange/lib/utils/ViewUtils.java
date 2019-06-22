@@ -27,11 +27,9 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.StringRes;
 
-import com.blankj.utilcode.util.ToastUtils;
-import com.orange.chat2piao.R;
-import com.orange.chat2piao.base.adapterPattern.TextWatcherAdapter;
-import com.orange.chat2piao.base.common.VerifyCallback;
-import com.orange.chat2piao.base.globle.GlobleImpl;
+import com.orange.lib.R;
+import com.orange.lib.common.adapterpattern.TextWatcherAdapter;
+import com.orange.lib.common.globle.GlobleImpl;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -147,7 +145,7 @@ public class ViewUtils {
 
     public static void copy2Clipboard(Context context, TextView tv) {
         if (null == tv) {
-            ToastUtils.showShort("复制失败！");
+//            ToastUtils.showShort("复制失败！");
             return;
         }
         String trim = tv.getText().toString().trim();
@@ -160,9 +158,9 @@ public class ViewUtils {
             ClipData clip = ClipData.newPlainText(TAG_COPY, trim);
             //传入clipdata对象.
             clipboard.setPrimaryClip(clip);
-            ToastUtils.showShort("复制成功");
+//            ToastUtils.showShort("复制成功");
         } else {
-            ToastUtils.showShort("复制内容为空");
+//            ToastUtils.showShort("复制内容为空");
         }
     }
 
@@ -213,17 +211,17 @@ public class ViewUtils {
     /**
      * 验证Edit输入内容是否满足验证条件
      */
-    public static void verifyEditContent(EditText edtv, final VerifyCallback callback) {
-        if (null == edtv) return;
-        edtv.addTextChangedListener(new TextWatcherAdapter() {
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (null != callback) {
-                    callback.verify(callback.verify(s));
-                }
-            }
-        });
-    }
+//    public static void verifyEditContent(EditText edtv, final VerifyCallback callback) {
+//        if (null == edtv) return;
+//        edtv.addTextChangedListener(new TextWatcherAdapter() {
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//                if (null != callback) {
+//                    callback.verify(callback.verify(s));
+//                }
+//            }
+//        });
+//    }
 
     /**
      * imageview设置圆形图片

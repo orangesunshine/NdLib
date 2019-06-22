@@ -1,12 +1,15 @@
 package com.orange.lib.activity;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.widget.FrameLayout;
 
+import androidx.fragment.app.FragmentActivity;
+
 import com.orange.lib.common.holder.DefaultHolder;
 import com.orange.lib.common.holder.IHolder;
+import com.orange.lib.component.toast.DefaultToast;
+import com.orange.lib.component.toast.IToast;
 
 /**
  * 基础activity
@@ -17,62 +20,48 @@ public abstract class BaseActivity extends FragmentActivity {
     protected BaseActivity mActivity;//activity引用
     protected boolean isActivityAlive;//判断activity是不是活的
     protected IHolder mHolder;//view容器
-
+    protected IToast mToast;
 
     /**
      * onCreate生命周期调用
      */
-    private void onActivityCreate(Bundle bundle) {
+    public void onActivityCreate(Bundle bundle) {
         FrameLayout content = getWindow().getDecorView().findViewById(android.R.id.content);
-        int contentLayoutId = getTempleteLayoutId();
-        if (-1 == contentLayoutId)
-            contentLayoutId = getContentLayoutId();
+        int contentLayoutId = getContentLayoutId();
         if (-1 == contentLayoutId)
             throw new IllegalArgumentException("-1 == contentLayoutId");
-        LayoutInflater.from(mActivity).inflate(getContentLayoutId(), content, true);
-        initVars(content, bundle);
-        templeteLayout(contentLayoutId);
+        LayoutInflater.from(this).inflate(contentLayoutId, content, true);
+        mHolder = new DefaultHolder(content);
+        initVars(bundle);
         init();
-    }
-
-    /**
-     * 处理模板布局文件
-     */
-    protected void templeteLayout(int templeteContentLayoutId) {
-    }
-
-    /**
-     * 获取模板布局文件
-     *
-     * @return
-     */
-    protected int getTempleteLayoutId() {
-        return -1;
     }
 
     /**
      * 初始化控件
      */
-    protected abstract void init();
+    protected void init() {
+        //1.状态栏
+    }
 
     /**
      * 初始化变量
      *
-     * @param contentView
      * @param bundle
      */
-    protected void initVars(FrameLayout contentView, Bundle bundle) {
+    protected void initVars(Bundle bundle) {
         mActivity = this;
         isActivityAlive = true;
-        mHolder = new DefaultHolder(contentView);
+        mToast = new DefaultToast();//吐司
     }
 
     /**
      * onDestory生命周期调用
      */
-    private void onActivityDestroy() {
+    public void onActivityDestroy() {
         mActivity = null;
         isActivityAlive = false;
+        if (null != mHolder)
+            mHolder.clear();
     }
 
     /**
@@ -80,7 +69,5 @@ public abstract class BaseActivity extends FragmentActivity {
      *
      * @return
      */
-    protected int getContentLayoutId() {
-        return -1;
-    }
+    protected abstract int getContentLayoutId();
 }

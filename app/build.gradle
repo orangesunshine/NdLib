@@ -1,14 +1,26 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion project.ANDROID_BUILD_SDK_VERSION as int
     defaultConfig {
-        applicationId "com.orange.ndlib"
-        minSdkVersion 15
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        applicationId project.APPLICATION_ID
+        minSdkVersion project.ANDROID_BUILD_MIN_SDK_VERSION as int
+        targetSdkVersion project.ANDROID_BUILD_TARGET_SDK_VERSION as int
+        versionCode project.VERSION_CODE as int
+        versionName project.VERSION_NAME
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            //选择要添加的对应cpu类型的.so库。
+            abiFilters 'armeabi', 'armeabi-v7a', 'armeabi-v8a'
+            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
+        }
+
+        manifestPlaceholders = [
+                JPUSH_PKGNAME: applicationId,
+                JPUSH_APPKEY : project.JPUSH_APPKEY, //JPush上注册的包名对应的appkey.
+                JPUSH_CHANNEL: project.JPUSH_CHANNEL, //暂时填写默认值即可.
+        ]
     }
     buildTypes {
         release {
@@ -16,12 +28,21 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:28.0.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation "androidx.appcompat:appcompat:${ANDROIDX}"
+    implementation "com.google.android.material:material:${MATERIAL}"
+    implementation "androidx.constraintlayout:constraintlayout:${CONSTRAINTLAYOUT}"
+    testImplementation 'junit:junit:4.13-beta-3'
+    androidTestImplementation "androidx.test:runner:${RUNNER}"
+    androidTestImplementation "androidx.test.espresso:espresso-core:${ESPRESSOCORE}"
+    implementation project(path: ':lib')
+    implementation project(path: ':thirdparty')
 }

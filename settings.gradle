@@ -1,1 +1,1 @@
-include ':app', ':lib', ':thirdparty'
+include ':app', ':lib', ':thirdparty', ':utils'

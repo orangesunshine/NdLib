@@ -1,19 +1,26 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 28
-
-
+    compileSdkVersion project.ANDROID_BUILD_SDK_VERSION as int
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion project.ANDROID_BUILD_MIN_SDK_VERSION as int
+        targetSdkVersion project.ANDROID_BUILD_TARGET_SDK_VERSION as int
+        versionCode project.VERSION_CODE as int
+        versionName project.VERSION_NAME
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        ndk {
+            //选择要添加的对应cpu类型的.so库。
+            abiFilters 'armeabi', 'armeabi-v7a', 'armeabi-v8a'
+            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
+        }
 
+        manifestPlaceholders = [
+                JPUSH_PKGNAME: project.APPLICATION_ID,
+                JPUSH_APPKEY : project.JPUSH_APPKEY, //JPush上注册的包名对应的appkey.
+                JPUSH_CHANNEL: project.JPUSH_CHANNEL, //暂时填写默认值即可.
+        ]
     }
-
     buildTypes {
         release {
             minifyEnabled false
@@ -21,14 +28,45 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
-    api fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "androidx.appcompat:appcompat:${ANDROIDX}"
+    implementation "com.google.android.material:material:${MATERIAL}"
+    implementation "androidx.constraintlayout:constraintlayout:${CONSTRAINTLAYOUT}"
+    testImplementation 'junit:junit:4.13-beta-3'
+    androidTestImplementation "androidx.test:runner:${RUNNER}"
+    androidTestImplementation "androidx.test.espresso:espresso-core:${ESPRESSOCORE}"
 
-    api 'com.android.support:appcompat-v7:28.0.0'
-    api 'com.github.czy1121:loadinglayout:1.0.1'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation "cn.jiguang.sdk:jmessage:${JPUSH_JMESSAGE}"  // 此处以JMessage 2.8.2 版本为例。
+    implementation "cn.jiguang.sdk:jcore:${JPUSH_JCORE}"  // 此处以JCore 1.2.7 版本为例。
+    //implementation "com.stephentuso:welcome:${STEPHENTUSO_WELCOME}"
+    implementation "com.jakewharton:butterknife:${BUTTERKNIFE}"
+    annotationProcessor "com.jakewharton:butterknife-compiler:${BUTTERKNIFE}"
+    implementation "com.githang:status-bar-compat:${STATUS_BAR_COMPAT}"
+    implementation "com.orhanobut:logger:${ORHANOBUT_LOGGER}"
+    //refresh
+    implementation "com.scwang.smartrefresh:SmartRefreshLayout:${SMARTREFRESHLAYOUT}"
+    implementation "com.scwang.smartrefresh:SmartRefreshHeader:${SMARTREFRESHLAYOUT}"
+
+    //guava
+//    implementation "com.google.guava:guava:${GUAVA}"
+    implementation "com.blankj:utilcodex:${UTILCODEX}"
+
+    //glide
+    implementation "com.github.bumptech.glide:glide:${GLIDE}"
+    annotationProcessor "com.github.bumptech.glide:compiler:${GLIDE}"
+
+    //retrofit
+    implementation "com.squareup.retrofit2:retrofit:${RETROFIT}"
+    implementation "com.squareup.retrofit2:converter-gson:${RETROFIT}"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:${RETROFIT}"
+    implementation "io.reactivex.rxjava2:rxandroid:${RXANDROID}"
+    implementation "com.squareup.okhttp3:logging-interceptor:${LOGGINGINTERCEPTOR}"
+    implementation project(path: ':lib')
 }

@@ -1,10 +1,10 @@
 package com.orange.lib.common.holder;
-
-import android.support.annotation.ColorRes;
-import android.support.annotation.StringRes;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.ColorRes;
+import androidx.annotation.StringRes;
 
 public interface IHolder extends View.OnClickListener {
 
