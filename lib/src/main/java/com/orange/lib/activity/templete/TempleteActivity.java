@@ -6,18 +6,10 @@ import android.widget.FrameLayout;
 
 import com.orange.lib.R;
 import com.orange.lib.activity.BaseActivity;
-import com.orange.lib.common.holder.IHolder;
 import com.orange.lib.component.pagestatus.IPageStatus;
 
 public abstract class TempleteActivity extends BaseActivity {
     protected IPageStatus mLoadingLayout;
-
-    /**
-     * 处理模板布局文件
-     */
-    protected void templeteLayout(IHolder holder, int templeteContentLayoutId) {
-
-    }
 
     @Override
     protected void attachView(FrameLayout content) {
@@ -25,7 +17,6 @@ public abstract class TempleteActivity extends BaseActivity {
         if (-1 == templeteLayoutId)
             throw new IllegalArgumentException("-1 == contentLayoutId");
         LayoutInflater.from(this).inflate(templeteLayoutId, content, true);
-        attachStub();
     }
 
     /**
@@ -39,6 +30,7 @@ public abstract class TempleteActivity extends BaseActivity {
             contentStub.setLayoutResource(getContentLayoutId());
             contentStub.inflate();
         }
+        super.attachStub();
     }
 
     /**

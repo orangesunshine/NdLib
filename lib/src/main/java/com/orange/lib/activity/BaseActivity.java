@@ -55,6 +55,9 @@ public abstract class BaseActivity<P extends IPresenter> extends FragmentActivit
         //视图
         attachView(content);
 
+        //占位
+        attachStub();
+
         //mvp
         mPresenter = getPresenter();
         if (null != mPresenter)
@@ -86,7 +89,6 @@ public abstract class BaseActivity<P extends IPresenter> extends FragmentActivit
 
         if (null != mHolder.getView(R.id.stub_content))
             throw new IllegalArgumentException("BaseActivity 不能再次插入content试图");
-        attachStub();
     }
 
     /**
