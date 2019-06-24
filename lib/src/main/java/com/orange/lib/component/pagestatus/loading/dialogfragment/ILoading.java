@@ -1,4 +1,4 @@
-package com.orange.lib.component.loading;
+package com.orange.lib.component.pagestatus.loading.dialogfragment;
 
 /**
  * 网络loading

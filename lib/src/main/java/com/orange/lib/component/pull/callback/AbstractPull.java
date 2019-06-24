@@ -1,9 +1,10 @@
-package com.orange.lib.component.pull;
+package com.orange.lib.component.pull.callback;
 
 import android.view.View;
 
 
 import androidx.core.util.Preconditions;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.orange.lib.R;
 import com.orange.lib.common.holder.IHolder;
@@ -16,16 +17,19 @@ public class AbstractPull<REFRESH extends View> implements IPullCallback {
     protected Type mType;
     protected int mPageIndex;
     protected REFRESH refreshLayout;
+    protected RecyclerView recyclerView;
     protected INetCallback mNetCallback;
     protected IPageNetRequest mPageNetRequest;
 
     public <T> AbstractPull(IHolder holder, IPageNetRequest<T> pageRequest) {
         refreshLayout = holder.getView(R.id.refreshlayout);
+        recyclerView = holder.getView(R.id.recyclerview);
         mPageNetRequest = pageRequest;
     }
 
-    public <T> AbstractPull(REFRESH refreshLayout, IPageNetRequest<T> pageRequest) {
+    public <T> AbstractPull(REFRESH refreshLayout, RecyclerView recyclerView, IPageNetRequest<T> pageRequest) {
         this.refreshLayout = refreshLayout;
+        this.recyclerView = recyclerView;
         mPageNetRequest = pageRequest;
     }
 

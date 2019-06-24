@@ -24,6 +24,12 @@ public abstract class BaseApplication extends Application implements IApp {
                 if(activity instanceof BaseActivity)
                     ((BaseActivity) activity).onActivityCreate(bundle);
             }
+
+            @Override
+            public void onActivityDestroyed(Activity activity) {
+                if(activity instanceof BaseActivity)
+                    ((BaseActivity) activity).onActivityDestroy();
+            }
         });
     }
 

@@ -17,7 +17,7 @@ public class CommonActionBar implements IActionBar<LinearLayout> {
 
     public CommonActionBar(IHolder holder) {
         mHolder = holder;
-        mHolder.setOnItemChildClick(new IHolder.OnItemChildClickListener() {
+        mHolder.addOnItemChildClick(new IHolder.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(View view) {
                 int i = view.getId();

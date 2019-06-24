@@ -1,7 +1,7 @@
 package com.orange.lib.component.pull;
 
-public class PullAdapter implements IPull {
-    protected IPull mPull;
+public class RefreshLoadmoreAdapter implements IRefreshLoadmore {
+    protected IRefreshLoadmore mPull;
 
     /**
      * 刷新
@@ -19,28 +19,6 @@ public class PullAdapter implements IPull {
     public void loadmore() {
         if (null != mPull)
             mPull.loadmore();
-    }
-
-    /**
-     * 刷新完成
-     *
-     * @param noData
-     */
-    @Override
-    public void finishRefresh(boolean noData) {
-        if (null != mPull)
-            mPull.finishRefresh(noData);
-    }
-
-    /**
-     * 加载完成
-     *
-     * @param noData
-     */
-    @Override
-    public void finishLoadmore(boolean noData) {
-        if (null != mPull)
-            mPull.finishLoadmore(noData);
     }
 
     /**

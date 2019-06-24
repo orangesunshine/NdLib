@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- pagestatus_id -->
+    <item name="content_id" type="id" />
+    <item name="empty_id" type="id" />
+    <item name="loading_id" type="id" />
+    <item name="error_id" type="id" />
 
     <item name="fl_content" type="id" />
     <!-- stub -->
     <item name="stub_content" type="id" />
     <item name="stub_actbar" type="id" />
     <item name="stub_swiprefresh" type="id" />
+    <item name="stub_loading" type="id" />
+    <item name="stub_empty" type="id" />
+    <item name="stub_error" type="id" />
 
     <!-- refreshlayout -->
     <item name="refreshlayout" type="id" />
@@ -28,4 +36,15 @@
     <item name="fl_right_actbar" type="id" />
     <item name="iv_right_actbar" type="id" />
     <item name="tv_right_actbar" type="id" />
+
+    <!-- empty -->
+    <item name="empty_image" type="id" />
+    <item name="empty_text" type="id" />
+
+    <!-- error -->
+    <item name="error_image" type="id" />
+    <item name="error_text" type="id" />
+
+    <!-- retry -->
+    <item name="retry_button" type="id" />
 </resources>

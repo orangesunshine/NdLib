@@ -192,7 +192,7 @@ public interface IHolder extends View.OnClickListener {
      * @param viewIds
      * @return
      */
-    IHolder setOnItemChildClick(OnItemChildClickListener listener, int... viewIds);
+    IHolder addOnItemChildClick(OnItemChildClickListener listener, int... viewIds);
 
     /**
      * 清空view容器

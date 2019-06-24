@@ -1,4 +1,4 @@
-package com.orange.lib.component.pull;
+package com.orange.lib.component.pull.callback;
 
 public interface IPullCallback {
     /**

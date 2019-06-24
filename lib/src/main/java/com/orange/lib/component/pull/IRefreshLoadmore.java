@@ -1,6 +1,6 @@
 package com.orange.lib.component.pull;
 
-public interface IPull {
+public interface IRefreshLoadmore {
 
     /**
      * 刷新
@@ -11,16 +11,6 @@ public interface IPull {
      * 加载
      */
     void loadmore();
-
-    /**
-     * 刷新完成
-     */
-    void finishRefresh(boolean noData);
-
-    /**
-     * 加载完成
-     */
-    void finishLoadmore(boolean noData);
 
     /**
      * 设置能否加载

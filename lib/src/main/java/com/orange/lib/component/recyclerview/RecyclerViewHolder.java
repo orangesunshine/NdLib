@@ -279,8 +279,8 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder implements IHold
      * @return
      */
     @Override
-    public IHolder setOnItemChildClick(OnItemChildClickListener listener, int... viewIds) {
-        return null == mHolder ? null : mHolder.setOnItemChildClick(listener, viewIds);
+    public IHolder addOnItemChildClick(OnItemChildClickListener listener, int... viewIds) {
+        return null == mHolder ? null : mHolder.addOnItemChildClick(listener, viewIds);
     }
 
     /**

@@ -4,7 +4,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.orange.lib.component.dialog.base.BaseDialog;
 import com.orange.lib.component.dialog.base.ViewHolder;
-import com.orange.lib.component.loading.ILoadingDialogFragment;
+import com.orange.lib.component.pagestatus.loading.dialogfragment.ILoadingDialogFragment;
 import com.orange.lib.constance.IFinalConst;
 
 public class LoadingDialog extends BaseDialog implements ILoadingDialogFragment {

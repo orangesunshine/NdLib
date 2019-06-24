@@ -2,6 +2,7 @@ package com.orange.lib.activity;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewStub;
 import android.widget.FrameLayout;
 
@@ -12,9 +13,14 @@ import com.orange.lib.common.holder.DefaultHolder;
 import com.orange.lib.common.holder.IHolder;
 import com.orange.lib.component.actbar.CommonActionBar;
 import com.orange.lib.component.actbar.IActionBar;
-import com.orange.lib.component.pull.IPull;
+import com.orange.lib.component.pagestatus.DefaultPageStatus;
+import com.orange.lib.component.pagestatus.loading.dialogfragment.DefaultLoading;
+import com.orange.lib.component.pagestatus.loading.dialogfragment.ILoading;
+import com.orange.lib.component.pagestatus.IPageStatus;
+import com.orange.lib.component.pull.IRefreshLoadmore;
 import com.orange.lib.component.toast.DefaultToast;
 import com.orange.lib.component.toast.IToast;
+import com.orange.lib.mvp.model.net.callback.INetCallback;
 import com.orange.lib.mvp.presenter.ifc.IPresenter;
 import com.orange.lib.mvp.view.IView;
 
@@ -30,7 +36,10 @@ public abstract class BaseActivity<P extends IPresenter> extends FragmentActivit
     protected IToast mToast;//吐司
     protected P mPresenter;//mvp
     protected IActionBar mActbar;//标题栏
-    protected IPull mPull;//下拉、加载
+    protected IRefreshLoadmore mPull;//下拉、加载
+    protected ILoading mLoading;
+    protected IPageStatus mPageStatus;
+    protected INetCallback mNetCallback;
 
     /**
      * onCreate生命周期调用
@@ -53,6 +62,15 @@ public abstract class BaseActivity<P extends IPresenter> extends FragmentActivit
 
         //初始化
         init();
+    }
+
+    /**
+     * 判断activity是不是活的
+     *
+     * @return
+     */
+    public boolean isActivityAlive() {
+        return isActivityAlive;
     }
 
     /**
@@ -80,7 +98,27 @@ public abstract class BaseActivity<P extends IPresenter> extends FragmentActivit
         if (null != actbarStub) {
             actbarStub.setLayoutResource(R.layout.stub_actbar_common);
             actbarStub.inflate();
-            mActbar = new CommonActionBar(mHolder);
+        }
+
+        //loading
+        ViewStub loadingStub = mHolder.getView(R.id.stub_loading);
+        if (null != loadingStub) {
+            loadingStub.setLayoutResource(R.layout.stub_loading);
+            loadingStub.inflate();
+        }
+
+        //empty
+        ViewStub emptyStub = mHolder.getView(R.id.stub_empty);
+        if (null != emptyStub) {
+            emptyStub.setLayoutResource(R.layout.stub_empty);
+            emptyStub.inflate();
+        }
+
+        //error
+        ViewStub errorStub = mHolder.getView(R.id.stub_error);
+        if (null != errorStub) {
+            errorStub.setLayoutResource(R.layout.stub_error);
+            errorStub.inflate();
         }
 
         //swippull
@@ -103,6 +141,15 @@ public abstract class BaseActivity<P extends IPresenter> extends FragmentActivit
      * 初始化控件
      */
     protected void init() {
+        mActbar = new CommonActionBar(mHolder);
+        mPageStatus = new DefaultPageStatus(mHolder);
+        mHolder.addOnItemChildClick(new IHolder.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(View v) {
+                requestDatas();
+            }
+        },R.id.retry_button);
+        mPageStatus.showContent();
     }
 
     /**
@@ -124,6 +171,7 @@ public abstract class BaseActivity<P extends IPresenter> extends FragmentActivit
         isActivityAlive = false;
         if (null != mHolder)
             mHolder.clear();
+        mLoading = new DefaultLoading(this);
     }
 
     /**
@@ -148,5 +196,12 @@ public abstract class BaseActivity<P extends IPresenter> extends FragmentActivit
     public void showToast(int stringId) {
         if (null != mToast)
             mToast.showToast(stringId);
+    }
+
+    /**
+     * 数据异常点击刷新
+     */
+    protected void requestDatas() {
+
     }
 }

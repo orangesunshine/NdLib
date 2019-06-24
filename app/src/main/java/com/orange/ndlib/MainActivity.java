@@ -23,7 +23,7 @@ public class MainActivity extends BaseActivity {
      */
     @Override
     protected void init() {
-        mHolder.setOnItemChildClick(new IHolder.OnItemChildClickListener() {
+        mHolder.addOnItemChildClick(new IHolder.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(View v) {
                 switch (v.getId()) {

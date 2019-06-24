@@ -7,10 +7,10 @@ import android.widget.FrameLayout;
 import com.orange.lib.R;
 import com.orange.lib.activity.BaseActivity;
 import com.orange.lib.common.holder.IHolder;
-import com.orange.lib.component.loading.ILoadingLayout;
+import com.orange.lib.component.pagestatus.IPageStatus;
 
 public abstract class TempleteActivity extends BaseActivity {
-    protected ILoadingLayout mLoadingLayout;
+    protected IPageStatus mLoadingLayout;
 
     /**
      * 处理模板布局文件

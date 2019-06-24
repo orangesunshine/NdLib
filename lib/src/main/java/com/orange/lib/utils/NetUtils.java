@@ -2,7 +2,7 @@ package com.orange.lib.utils;
 
 
 import com.orange.lib.common.convert.IConvert;
-import com.orange.lib.component.loading.ILoading;
+import com.orange.lib.component.pagestatus.loading.dialogfragment.ILoading;
 import com.orange.lib.mvp.model.net.INetRequest;
 import com.orange.lib.mvp.model.net.callback.INetCallback;
 import com.orange.lib.mvp.model.net.callback.LoadingNetCallback;

@@ -1,7 +1,7 @@
 package com.orange.lib.mvp.model.net.callback;
 
 
-import com.orange.lib.component.loading.ILoading;
+import com.orange.lib.component.pagestatus.loading.dialogfragment.ILoading;
 
 public class LoadingNetCallback<T> extends DefaultNetCallback<T> {
     private ILoading loading;
