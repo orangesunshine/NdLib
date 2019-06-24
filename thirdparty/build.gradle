@@ -52,7 +52,6 @@ dependencies {
     implementation "com.orhanobut:logger:${ORHANOBUT_LOGGER}"
     //refresh
     implementation "com.scwang.smartrefresh:SmartRefreshLayout:${SMARTREFRESHLAYOUT}"
-    implementation "com.scwang.smartrefresh:SmartRefreshHeader:${SMARTREFRESHLAYOUT}"
 
     //guava
 //    implementation "com.google.guava:guava:${GUAVA}"

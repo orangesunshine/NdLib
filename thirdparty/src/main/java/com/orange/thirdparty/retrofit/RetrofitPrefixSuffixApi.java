@@ -4,6 +4,8 @@ package com.orange.thirdparty.retrofit;
 import com.orange.lib.common.reponse.PullData;
 import com.orange.lib.mvp.model.net.IPrefixSuffixApi;
 import com.orange.lib.mvp.model.net.callback.INetCallback;
+import com.orange.thirdparty.rxjava.LoadingResponseBodyObserver;
+import com.orange.thirdparty.rxjava.PullResponseBodyObserver;
 
 import java.lang.reflect.Type;
 import java.util.Map;

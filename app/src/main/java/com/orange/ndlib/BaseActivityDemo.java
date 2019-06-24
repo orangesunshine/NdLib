@@ -10,6 +10,15 @@ public class BaseActivityDemo extends BaseActivity {
      */
     @Override
     protected int getContentLayoutId() {
-        return R.layout.demo_base;
+        return R.layout.template_activity_actbar;
+    }
+
+    /**
+     * 初始化控件
+     */
+    @Override
+    protected void init() {
+        super.init();
+        mActbar.setLeftText("哈哈哈");
     }
 }

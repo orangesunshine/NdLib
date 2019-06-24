@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <item name="content" type="id" />
+    <item name="fl_content" type="id" />
     <!-- stub -->
     <item name="stub_content" type="id" />
+    <item name="stub_actbar" type="id" />
+    <item name="stub_swiprefresh" type="id" />
 
     <!-- refreshlayout -->
     <item name="refreshlayout" type="id" />

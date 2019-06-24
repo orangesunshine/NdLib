@@ -2,8 +2,8 @@ package com.orange.thirdparty.retrofit;
 
 import android.text.TextUtils;
 
-import com.orange.chat2piao.constant.IFinalConst;
-import com.orange.chat2piao.constant.IInitConst;
+import com.orange.lib.constance.IFinalConst;
+import com.orange.lib.constance.IInitConst;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;

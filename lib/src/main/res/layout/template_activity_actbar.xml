@@ -5,11 +5,12 @@
     android:orientation="vertical">
 
     <include
-        android:id="@+id/layout_actbar"
-        layout="@layout/stub_actbar" />
+        layout="@layout/stub_actbar_common"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <ViewStub
         android:id="@+id/stub_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content" />
 </LinearLayout>
