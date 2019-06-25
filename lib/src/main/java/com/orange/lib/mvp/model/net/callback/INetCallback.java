@@ -19,10 +19,11 @@ public interface INetCallback<T> {
     void onSuccess(T t);
 
     /**
-     * @param noData 没有更多数据：用于pull
-     * @param empty  结果数据为空
+     * @param successs true:onSuccess,false:onError
+     * @param noData   没有更多数据：用于pull
+     * @param empty    结果数据为空
      */
-    void onComplete(boolean noData, boolean empty);
+    void onComplete(boolean successs, boolean noData, boolean empty);
 
     /**
      * 失败

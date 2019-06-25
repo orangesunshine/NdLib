@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.orange.lib.common.holder.IHolder;
 import com.orange.lib.common.reponse.PullData;
-import com.orange.lib.component.pull.callback.AbstractPull;
+import com.orange.lib.component.pull.callback.DefaultPullCallback;
 import com.orange.lib.component.pull.IRefreshLoadmore;
 import com.orange.lib.component.recyclerview.CommonAdapter;
 import com.orange.lib.component.recyclerview.IConvertRecyclerView;
@@ -26,7 +26,7 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
 
-public class SmartRefreshLoadmore extends AbstractPull<SmartRefreshLayout> implements IRefreshLoadmore {
+public class SmartRefreshLoadmore extends DefaultPullCallback<SmartRefreshLayout> implements IRefreshLoadmore {
 
     /**
      * recyclerview 处理网络返回数据

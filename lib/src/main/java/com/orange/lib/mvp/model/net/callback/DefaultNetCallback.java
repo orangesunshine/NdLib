@@ -32,7 +32,7 @@ public class DefaultNetCallback<T> implements INetCallback<T> {
     }
 
     @Override
-    public void onComplete(boolean noData, boolean empty) {
+    public void onComplete(boolean successs, boolean noData, boolean empty) {
         if (IInitConst.sRecordNetLogSwitch) {
             log.append("onComplete: ");
             log.append(LINE_SEPARATOR).append(indentation).append("period: ").append(SystemClock.elapsedRealtime() - startTimeMills).append("ms");

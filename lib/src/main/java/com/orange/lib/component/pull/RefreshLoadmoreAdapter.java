@@ -32,4 +32,14 @@ public class RefreshLoadmoreAdapter implements IRefreshLoadmore {
         if (null != mPull)
             mPull.enableLoadMore(enable);
     }
+
+    /**
+     * 获取当前页数
+     *
+     * @return
+     */
+    @Override
+    public int getCurPage() {
+        return null == mPull ? 0 : mPull.getCurPage();
+    }
 }
