@@ -4,8 +4,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
-    <include layout="@layout/stub_actbar_common" />
+    <ViewStub
+        android:id="@+id/loading_id"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:inflatedId="@id/loading_id" />
 
     <FrameLayout
         android:layout_width="match_parent"

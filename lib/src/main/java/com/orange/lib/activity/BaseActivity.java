@@ -2,7 +2,6 @@ package com.orange.lib.activity;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewStub;
 import android.widget.FrameLayout;
 
@@ -14,15 +13,15 @@ import com.orange.lib.common.holder.IHolder;
 import com.orange.lib.component.actbar.CommonActionBar;
 import com.orange.lib.component.actbar.IActionBar;
 import com.orange.lib.component.pagestatus.DefaultPageStatus;
-import com.orange.lib.component.pagestatus.loading.dialogfragment.DefaultLoading;
-import com.orange.lib.component.pagestatus.loading.dialogfragment.ILoading;
 import com.orange.lib.component.pagestatus.IPageStatus;
-import com.orange.lib.component.pull.IRefreshLoadmore;
+import com.orange.lib.component.pagestatus.loading.dialogfragment.DefaultLoadingDialog;
+import com.orange.lib.component.pagestatus.loading.dialogfragment.ILoadingDialog;
 import com.orange.lib.component.toast.DefaultToast;
 import com.orange.lib.component.toast.IToast;
-import com.orange.lib.mvp.model.net.callback.INetCallback;
 import com.orange.lib.mvp.presenter.ifc.IPresenter;
 import com.orange.lib.mvp.view.IView;
+
+import java.lang.reflect.Method;
 
 /**
  * 基础activity
@@ -36,10 +35,8 @@ public abstract class BaseActivity<P extends IPresenter> extends FragmentActivit
     protected IToast mToast;//吐司
     protected P mPresenter;//mvp
     protected IActionBar mActbar;//标题栏
-    protected IRefreshLoadmore mPull;//下拉、加载
-    protected ILoading mLoading;
+    protected ILoadingDialog mLoading;
     protected IPageStatus mPageStatus;
-    protected INetCallback mNetCallback;
 
     /**
      * onCreate生命周期调用
@@ -98,28 +95,28 @@ public abstract class BaseActivity<P extends IPresenter> extends FragmentActivit
         //actbar占位
         ViewStub actbarStub = mHolder.getView(R.id.stub_actbar);
         if (null != actbarStub) {
-            actbarStub.setLayoutResource(R.layout.stub_actbar_common);
+            actbarStub.setLayoutResource(R.layout.stub_layout_actbar_common);
             actbarStub.inflate();
         }
 
         //loading
         ViewStub loadingStub = mHolder.getView(R.id.stub_loading);
         if (null != loadingStub) {
-            loadingStub.setLayoutResource(R.layout.stub_loading);
+            loadingStub.setLayoutResource(R.layout.stub_layout_loading);
             loadingStub.inflate();
         }
 
         //empty
         ViewStub emptyStub = mHolder.getView(R.id.stub_empty);
         if (null != emptyStub) {
-            emptyStub.setLayoutResource(R.layout.stub_empty);
+            emptyStub.setLayoutResource(R.layout.stub_layout_empty);
             emptyStub.inflate();
         }
 
         //error
         ViewStub errorStub = mHolder.getView(R.id.stub_error);
         if (null != errorStub) {
-            errorStub.setLayoutResource(R.layout.stub_error);
+            errorStub.setLayoutResource(R.layout.stub_layout_error);
             errorStub.inflate();
         }
 
@@ -145,12 +142,30 @@ public abstract class BaseActivity<P extends IPresenter> extends FragmentActivit
     protected void init() {
         mActbar = new CommonActionBar(mHolder);
         mPageStatus = new DefaultPageStatus(mHolder);
-        mHolder.addOnItemChildClick(new IHolder.OnItemChildClickListener() {
-            @Override
-            public void onItemChildClick(View v) {
-                requestDatas();
+        mHolder.addOnItemChildClick(v -> {
+            Class clazz = getClass();
+            while (null != clazz) {
+                String name = clazz.getName();
+                if (name.startsWith("java.") || name.startsWith("javax.") || name.startsWith("android.")) {
+                    break;
+                }
+                Method[] declaredMethods = clazz.getDeclaredMethods();
+                if (null != declaredMethods && declaredMethods.length > 0) {
+                    for (Method declaredMethod : declaredMethods) {
+                        if (null != declaredMethod) {
+                            Retry retry = declaredMethod.getAnnotation(Retry.class);
+                            if (null != retry) {
+                                try {
+                                    declaredMethod.invoke(this);
+                                } catch (Exception e) {
+                                }
+                            }
+                        }
+                    }
+                    clazz = clazz.getSuperclass();
+                }
             }
-        },R.id.retry_button);
+        }, R.id.retry_button);
         mPageStatus.showContent();
     }
 
@@ -173,7 +188,7 @@ public abstract class BaseActivity<P extends IPresenter> extends FragmentActivit
         isActivityAlive = false;
         if (null != mHolder)
             mHolder.clear();
-        mLoading = new DefaultLoading(this);
+        mLoading = new DefaultLoadingDialog(this);
     }
 
     /**
@@ -201,9 +216,60 @@ public abstract class BaseActivity<P extends IPresenter> extends FragmentActivit
     }
 
     /**
-     * 数据异常点击刷新
+     * 显示loading
      */
-    protected void requestDatas() {
+    @Override
+    public void showLoadingDialog() {
+        if (null == mLoading)
+            mLoading = new DefaultLoadingDialog(mActivity);
+        if (isActivityAlive)
+            mLoading.showLoadingDialog();
+    }
 
+    /**
+     * 隐藏
+     */
+    @Override
+    public void dismissLoadingDialog() {
+        if (null == mLoading)
+            mLoading = new DefaultLoadingDialog(mActivity);
+        if (isActivityAlive)
+            mLoading.dismissLoadingDialog();
+    }
+
+    /**
+     * 显示loading
+     */
+    @Override
+    public void showLoading() {
+        if (null != mPageStatus)
+            mPageStatus.showLoading();
+    }
+
+    /**
+     * 显示content
+     */
+    @Override
+    public void showContent() {
+        if (null != mPageStatus)
+            mPageStatus.showContent();
+    }
+
+    /**
+     * 显示empty
+     */
+    @Override
+    public void showEmpty() {
+        if (null != mPageStatus)
+            mPageStatus.showEmpty();
+    }
+
+    /**
+     * 显示error
+     */
+    @Override
+    public void showError() {
+        if (null != mPageStatus)
+            mPageStatus.showError();
     }
 }

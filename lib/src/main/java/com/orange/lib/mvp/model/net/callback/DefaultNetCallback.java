@@ -7,11 +7,19 @@ import com.orange.lib.constance.IInitConst;
 
 import static com.orange.lib.constance.IFinalConst.LINE_SEPARATOR;
 
+/**
+ * 网络请求回调默认实现
+ *
+ * @param <T>
+ */
 public class DefaultNetCallback<T> implements INetCallback<T> {
     private StringBuilder log = new StringBuilder();
     private String indentation = "\u3000\u3000";//缩进
     private long startTimeMills = 0;
 
+    /**
+     * 网络请求开始
+     */
     @Override
     public void onNetStart() {
         if (IInitConst.sRecordNetLogSwitch) {
@@ -20,6 +28,11 @@ public class DefaultNetCallback<T> implements INetCallback<T> {
         }
     }
 
+    /**
+     * 网络请求成功
+     *
+     * @param t
+     */
     @Override
     public void onSuccess(T t) {
         if (IInitConst.sRecordNetLogSwitch) {
@@ -31,6 +44,13 @@ public class DefaultNetCallback<T> implements INetCallback<T> {
         }
     }
 
+    /**
+     * 网络请求完成
+     *
+     * @param successs true:onSuccess,false:onError
+     * @param noData   没有更多数据：用于pull
+     * @param empty    结果数据为空
+     */
     @Override
     public void onComplete(boolean successs, boolean noData, boolean empty) {
         if (IInitConst.sRecordNetLogSwitch) {
@@ -40,6 +60,12 @@ public class DefaultNetCallback<T> implements INetCallback<T> {
         }
     }
 
+    /**
+     * 网络请求错误
+     *
+     * @param code
+     * @param error
+     */
     @Override
     public void onError(int code, Throwable error) {
         if (IInitConst.sRecordNetLogSwitch) {

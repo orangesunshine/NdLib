@@ -1,12 +1,12 @@
 package com.orange.lib.mvp.model.net.callback;
 
 
-import com.orange.lib.component.pagestatus.loading.dialogfragment.ILoading;
+import com.orange.lib.component.pagestatus.loading.dialogfragment.ILoadingDialog;
 
 public class LoadingNetCallback<T> extends DefaultNetCallback<T> {
-    private ILoading loading;
+    private ILoadingDialog loading;
 
-    public LoadingNetCallback(ILoading loading) {
+    public LoadingNetCallback(ILoadingDialog loading) {
         this.loading = loading;
     }
 
@@ -14,13 +14,13 @@ public class LoadingNetCallback<T> extends DefaultNetCallback<T> {
     public void onNetStart() {
         super.onNetStart();
         if (null != loading)
-            loading.showLoading();
+            loading.showLoadingDialog();
     }
 
     @Override
-    public void onComplete(boolean noData, boolean empty) {
-        super.onComplete(noData, empty);
+    public void onComplete(boolean successs, boolean noData, boolean empty) {
+        super.onComplete(successs, noData, empty);
         if (null != loading)
-            loading.dismissLoading();
+            loading.dismissLoadingDialog();
     }
 }

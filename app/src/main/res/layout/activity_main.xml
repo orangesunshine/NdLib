@@ -4,6 +4,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <ViewStub
+        android:id="@+id/stub_actbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_actbar"
+        android:inflatedId="@id/actbar_id" />
+
     <Button
         android:id="@+id/btn_base"
         android:layout_width="match_parent"
@@ -14,6 +20,6 @@
         android:id="@+id/btn_templete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="base" />
+        android:text="temeplete" />
 
 </LinearLayout>

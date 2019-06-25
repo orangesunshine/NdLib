@@ -1,7 +1,5 @@
 package com.orange.lib.component.pull;
 
-import android.view.View;
-
 import com.orange.lib.component.pull.callback.IPullCallback;
 
 public interface IRefreshLoadmore {
@@ -25,14 +23,7 @@ public interface IRefreshLoadmore {
     void enableLoadMore(boolean enable);
 
     /**
-     * 获取当前页数
-     *
-     * @return
-     */
-    int getCurPage();
-
-    /**
-     * 设置回调
+     * 设置刷新、加载回调
      *
      * @param callback
      */

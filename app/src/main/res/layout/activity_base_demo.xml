@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ViewStub
+        android:id="@+id/stub_actbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_actbar"
+        android:inflatedId="@+id/actbar_id" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@id/content_id"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="content" />
+
+            <Button
+                android:id="@+id/btn_loading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="loading" />
+
+            <Button
+                android:id="@+id/btn_empty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="empty" />
+
+            <Button
+                android:id="@+id/btn_error"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="error" />
+
+            <Button
+                android:id="@+id/btn_actbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="actbar" />
+        </LinearLayout>
+
+        <ViewStub
+            android:id="@+id/stub_loading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inflatedId="@+id/loading_id" />
+
+        <ViewStub
+            android:id="@+id/stub_empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inflatedId="@+id/empty_id" />
+
+        <ViewStub
+            android:id="@+id/stub_error"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inflatedId="@+id/error_id" />
+    </FrameLayout>
+</LinearLayout>

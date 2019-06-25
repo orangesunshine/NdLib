@@ -1,21 +1,26 @@
 package com.orange.lib.component.pull.callback;
 
-import androidx.core.util.Preconditions;
+import android.view.View;
 
 import com.orange.lib.mvp.model.net.callback.INetCallback;
 import com.orange.lib.mvp.model.net.pull.IPageNetRequest;
+import com.orange.lib.utils.PageUtils;
+import com.orange.lib.utils.ReflectionUtils;
 
 import java.lang.reflect.Type;
 
 public class DefaultPullCallback implements IPullCallback {
     protected Type mType;
-    protected int mPageIndex;
+    protected View mRefreshLayout;
     protected INetCallback mNetCallback;
     protected IPageNetRequest mPageNetRequest;
 
-    public <T> DefaultPullCallback(IPageNetRequest<T> pageRequest, INetCallback callback) {
-        mPageNetRequest = pageRequest;
+    public <T> DefaultPullCallback(View refreshLayout, IPageNetRequest<T> pageNetRequest, INetCallback callback) {
+        mType = ReflectionUtils.pageNetRequestGenericType(pageNetRequest);
+        mPageNetRequest = pageNetRequest;
         mNetCallback = callback;
+        mRefreshLayout = refreshLayout;
+        PageUtils.resetPageindexTag(refreshLayout);
     }
 
     /**
@@ -23,9 +28,9 @@ public class DefaultPullCallback implements IPullCallback {
      */
     @Override
     public void onPullRefresh() {
-        Preconditions.checkNotNull(mPageNetRequest, mNetCallback);
-        mPageIndex = 1;
-        mPageNetRequest.request(mPageIndex, mType, mNetCallback);
+        PageUtils.resetPageindexTag(mRefreshLayout);
+        if (null != mPageNetRequest && null != mNetCallback)
+            mPageNetRequest.request(PageUtils.getPageindex(mRefreshLayout), mType, mNetCallback);
     }
 
     /**
@@ -33,8 +38,18 @@ public class DefaultPullCallback implements IPullCallback {
      */
     @Override
     public void onPullLoadMore() {
-        Preconditions.checkNotNull(mPageNetRequest, mNetCallback);
-        mPageIndex++;
-        mPageNetRequest.request(mPageIndex, mType, mNetCallback);
+        PageUtils.pageIndexPlus(mRefreshLayout);
+        if (null != mPageNetRequest && null != mNetCallback)
+            mPageNetRequest.request(PageUtils.getPageindex(mRefreshLayout), mType, mNetCallback);
+    }
+
+    /**
+     * 获取当前页数
+     *
+     * @return
+     */
+    @Override
+    public int getCurPage() {
+        return PageUtils.getPageindex(mRefreshLayout);
     }
 }

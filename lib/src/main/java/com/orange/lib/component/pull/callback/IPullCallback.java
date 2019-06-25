@@ -10,4 +10,11 @@ public interface IPullCallback {
      * 上拉加载
      */
     void onPullLoadMore();
+
+    /**
+     * 获取当前页数
+     *
+     * @return
+     */
+    int getCurPage();
 }

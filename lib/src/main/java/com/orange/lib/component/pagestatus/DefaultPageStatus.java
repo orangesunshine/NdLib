@@ -11,6 +11,7 @@ public class DefaultPageStatus implements IPageStatus {
     public DefaultPageStatus(IHolder holder) {
         Preconditions.checkNotNull(holder);
         mHolder = holder;
+        showContent();
     }
 
     /**

@@ -5,17 +5,17 @@ import com.orange.lib.component.dialog.LoadingDialog;
 
 import java.lang.ref.WeakReference;
 
-public class DefaultLoading implements ILoading {
+public class DefaultLoadingDialog implements ILoadingDialog {
     private WeakReference<BaseActivity> mReference;
     private ILoadingDialogFragment mFragment;
 
-    public DefaultLoading(BaseActivity activity) {
+    public DefaultLoadingDialog(BaseActivity activity) {
         mReference = new WeakReference<>(activity);
         mFragment = new LoadingDialog();
     }
 
     @Override
-    public void showLoading() {
+    public void showLoadingDialog() {
         if (null != mReference && null != mFragment) {
             BaseActivity baseActivity = mReference.get();
             if (null != baseActivity && baseActivity.isActivityAlive()) {
@@ -25,7 +25,7 @@ public class DefaultLoading implements ILoading {
     }
 
     @Override
-    public void dismissLoading() {
+    public void dismissLoadingDialog() {
         if (null != mReference && null != mFragment) {
             BaseActivity baseActivity = mReference.get();
             if (null != baseActivity && baseActivity.isActivityAlive()) {

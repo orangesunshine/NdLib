@@ -2,6 +2,7 @@
 <resources>
     <!-- pagestatus_id -->
     <item name="content_id" type="id" />
+    <item name="actbar_id" type="id" />
     <item name="empty_id" type="id" />
     <item name="loading_id" type="id" />
     <item name="error_id" type="id" />

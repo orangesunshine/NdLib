@@ -112,13 +112,13 @@ public class PullResponseBodyObserver<T> implements Observer<ResponseBody> {
     public void onError(Throwable e) {
         if (null != callback) {
             callback.onError(IFinalConst.CODE_ERROR, e);
-            callback.onComplete(true, true);
+            callback.onComplete(false, true, true);
         }
     }
 
     @Override
     public void onComplete() {
         if (null != callback)
-            callback.onComplete(mNoData, mEmpty);
+            callback.onComplete(true, mNoData, mEmpty);
     }
 }

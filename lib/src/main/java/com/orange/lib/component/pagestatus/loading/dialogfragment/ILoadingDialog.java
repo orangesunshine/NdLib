@@ -3,14 +3,14 @@ package com.orange.lib.component.pagestatus.loading.dialogfragment;
 /**
  * 网络loading
  */
-public interface ILoading {
+public interface ILoadingDialog {
     /**
      * 显示
      */
-    void showLoading();
+    void showLoadingDialog();
 
     /**
      * 隐藏
      */
-    void dismissLoading();
+    void dismissLoadingDialog();
 }

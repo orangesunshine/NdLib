@@ -1,28 +1,74 @@
 package com.orange.thirdparty.smartfreshlayout;
 
 
-import com.orange.lib.common.holder.IHolder;
+import android.view.View;
+
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.orange.lib.common.reponse.PullData;
+import com.orange.lib.component.recyclerview.CommonAdapter;
+import com.orange.lib.component.recyclerview.IConvertRecyclerView;
 import com.orange.lib.mvp.model.net.callback.DefaultNetCallback;
-import com.orange.thirdparty.R;
+import com.orange.lib.utils.PageUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
-public class SmartRefreshNetCallback<T> extends DefaultNetCallback<T> {
-    private SmartRefreshLayout refreshLayout;
+/**
+ * SmartRefreshLayout实现INetCallback
+ *
+ * @param <ITEM>
+ */
+public class SmartRefreshNetCallback<ITEM> extends DefaultNetCallback<PullData<ITEM>> {
+    private SmartRefreshLayout mRefreshLayout;
+    protected RecyclerView mRecyclerView;
+    protected View mEmptyView;//页面为空显示
+    protected int mItemLayoutId;//recyclerview的item项布局
+    protected IConvertRecyclerView<ITEM> mConvertRecyclerView;//recyclerview的item项填充数据
 
-    public SmartRefreshNetCallback(IHolder holder) {
-        refreshLayout = holder.getView(R.id.refreshlayout);
+    /**
+     * 构造方法
+     *
+     * @param refreshLayout
+     * @param recyclerView
+     * @param emptyView
+     * @param itemLayoutId
+     * @param convertRecyclerView
+     */
+    public SmartRefreshNetCallback(SmartRefreshLayout refreshLayout, RecyclerView recyclerView, View emptyView, int itemLayoutId, IConvertRecyclerView<ITEM> convertRecyclerView) {
+        mRefreshLayout = refreshLayout;
+        mRecyclerView = recyclerView;
+        mEmptyView = emptyView;
+        mItemLayoutId = itemLayoutId;
+        mConvertRecyclerView = convertRecyclerView;
     }
 
+    /**
+     * 数据成功
+     *
+     * @param pullResponse
+     */
     @Override
-    public void onComplete(boolean noData, boolean empty) {
-        super.onComplete(noData, empty);
-        if (null != refreshLayout) {
+    public void onSuccess(PullData<ITEM> pullResponse) {
+        super.onSuccess(pullResponse);
+        CommonAdapter.adapterDatas(mRefreshLayout.getContext(), mRecyclerView, mEmptyView, mItemLayoutId, null == pullResponse ? null : pullResponse.getList(), PageUtils.isLoadmore(mRefreshLayout), mConvertRecyclerView);
+    }
+
+    /**
+     * 网络请求完成
+     *
+     * @param successs
+     * @param noData
+     * @param empty
+     */
+    @Override
+    public void onComplete(boolean successs, boolean noData, boolean empty) {
+        super.onComplete(successs, noData, empty);
+        if (null != mRefreshLayout) {
             if (noData) {
-                refreshLayout.finishRefreshWithNoMoreData();
-                refreshLayout.finishLoadMoreWithNoMoreData();
+                mRefreshLayout.finishRefreshWithNoMoreData();
+                mRefreshLayout.finishLoadMoreWithNoMoreData();
             } else {
-                refreshLayout.finishRefresh();
-                refreshLayout.finishLoadMore();
+                mRefreshLayout.finishRefresh();
+                mRefreshLayout.finishLoadMore();
             }
         }
     }
