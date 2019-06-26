@@ -4,11 +4,10 @@ import android.widget.Toast;
 
 import com.orange.lib.activity.BaseActivity;
 import com.orange.lib.component.actbar.IActionBarCallback;
-import com.orange.lib.utils.ActivityUtils;
 
 import java.util.Random;
 
-public class BaseActivityDemo extends BaseActivity {
+public class BaseActivitySwipePullDemo extends BaseActivity {
     /**
      * 获取布局文件
      *
@@ -60,10 +59,8 @@ public class BaseActivityDemo extends BaseActivity {
                     }
                     break;
                 case R.id.btn_net_loading:
-                    ActivityUtils.launchActivity(mActivity, BaseActivityLoadingDemo.class);
                     break;
                 case R.id.btn_net_pull:
-                    ActivityUtils.launchActivity(mActivity, BaseActivitySwipePullDemo.class);
                     break;
             }
         }, R.id.btn_content, R.id.btn_loading, R.id.btn_empty, R.id.btn_error, R.id.btn_actbar, R.id.btn_net_loading, R.id.btn_net_pull);

@@ -57,7 +57,7 @@
 
     <style name="ll_actbar_root">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_height">@dimen/height_actbar</item>
         <item name="android:background">@color/colorPrimary</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:orientation">horizontal</item>

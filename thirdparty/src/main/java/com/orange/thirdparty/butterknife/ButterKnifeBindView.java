@@ -2,10 +2,8 @@ package com.orange.thirdparty.butterknife;
 
 import android.view.View;
 
-import com.blankj.utilcode.util.ActivityUtils;
 import com.orange.lib.common.bind.IBindView;
 
-import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 public class ButterKnifeBindView implements IBindView {
@@ -14,8 +12,8 @@ public class ButterKnifeBindView implements IBindView {
 
     @Override
     public void bindViews(View view) {
-        if (null != view)
-            mUnbinder = ButterKnife.bind(ActivityUtils.getActivityByView(view));
+//        if (null != view)
+//            mUnbinder = ButterKnife.bind(ActivityUtils.getActivityByView(view));
     }
 
     @Override

@@ -55,7 +55,7 @@ dependencies {
 
     //guava
 //    implementation "com.google.guava:guava:${GUAVA}"
-    implementation "com.blankj:utilcodex:${UTILCODEX}"
+//    implementation "com.blankj:utilcodex:${UTILCODEX}"
 
     //glide
     implementation "com.github.bumptech.glide:glide:${GLIDE}"

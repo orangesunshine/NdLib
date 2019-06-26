@@ -1,6 +1,7 @@
 package com.orange.ndlib;
 
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.orange.lib.activity.BaseActivity;
 import com.orange.lib.activity.templete.TempleteActivity;
@@ -44,7 +45,10 @@ public class MainActivity extends BaseActivity {
                 case R.id.btn_templete:
                     ActivityUtils.launchActivity(mActivity, TempleteActivity.class);
                     break;
+                case R.id.btn_cocos:
+                    ActivityUtils.launchActivity(mActivity, CocosWebActivity.class);
+                    break;
             }
-        }, R.id.btn_base, R.id.btn_templete);
+        }, R.id.btn_base, R.id.btn_templete, R.id.btn_cocos);
     }
 }

@@ -2,7 +2,6 @@ package com.orange.thirdparty.rxjava;
 
 import android.text.TextUtils;
 
-import com.blankj.utilcode.util.ToastUtils;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonNull;
@@ -97,8 +96,8 @@ public class PullResponseBodyObserver<T> implements Observer<ResponseBody> {
             if (null != callback) {
                 if (null != result && CommonUtils.checkCodeSuccess(code)) {
                     if (!TextUtils.isEmpty(responseMsg) && TextUtils.isEmpty(errorMsg))
-                        ToastUtils.showShort(responseMsg);
-                    callback.onSuccess(result);
+//                        ToastUtils.showShort(responseMsg);
+                        callback.onSuccess(result);
                 } else {
                     if (errorMsg.length() == 0)
                         errorMsg.append(TextUtils.isEmpty(responseMsg) ? "未知异常" : responseMsg);

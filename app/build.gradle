@@ -9,6 +9,7 @@ android {
         versionCode project.VERSION_CODE as int
         versionName project.VERSION_NAME
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
 
         ndk {
             //选择要添加的对应cpu类型的.so库。
@@ -43,6 +44,7 @@ dependencies {
     testImplementation 'junit:junit:4.13-beta-3'
     androidTestImplementation "androidx.test:runner:${RUNNER}"
     androidTestImplementation "androidx.test.espresso:espresso-core:${ESPRESSOCORE}"
+
     implementation project(path: ':lib')
     implementation project(path: ':thirdparty')
 }

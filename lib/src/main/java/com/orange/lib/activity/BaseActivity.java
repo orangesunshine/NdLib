@@ -162,8 +162,8 @@ public abstract class BaseActivity<P extends IPresenter> extends FragmentActivit
                             }
                         }
                     }
-                    clazz = clazz.getSuperclass();
                 }
+                clazz = clazz.getSuperclass();
             }
         }, R.id.retry_button);
         mPageStatus.showContent();
@@ -178,6 +178,7 @@ public abstract class BaseActivity<P extends IPresenter> extends FragmentActivit
         mActivity = this;
         isActivityAlive = true;
         mToast = new DefaultToast();//吐司
+        mLoading = new DefaultLoadingDialog(this);
     }
 
     /**
@@ -188,7 +189,8 @@ public abstract class BaseActivity<P extends IPresenter> extends FragmentActivit
         isActivityAlive = false;
         if (null != mHolder)
             mHolder.clear();
-        mLoading = new DefaultLoadingDialog(this);
+        if (null != mLoading)
+            mLoading.dismissLoadingDialog();
     }
 
     /**

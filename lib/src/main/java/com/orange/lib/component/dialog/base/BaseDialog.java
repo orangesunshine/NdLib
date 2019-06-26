@@ -52,7 +52,7 @@ public abstract class BaseDialog extends DialogFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setStyle(DialogFragment.STYLE_NO_TITLE, R.style.dialogTheme);
-//        mLayoutResId = getContentLayoutId();
+        mLayoutResId = getContentLayoutId();
     }
 
     @Nullable
@@ -181,4 +181,7 @@ public abstract class BaseDialog extends DialogFragment {
      * @param dialog
      */
     public abstract void convertView(ViewHolder holder, BaseDialog dialog);
+
+
+    public abstract int getContentLayoutId();
 }

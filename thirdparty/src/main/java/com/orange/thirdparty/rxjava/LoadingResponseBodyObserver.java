@@ -2,7 +2,6 @@ package com.orange.thirdparty.rxjava;
 
 import android.text.TextUtils;
 
-import com.blankj.utilcode.util.ToastUtils;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonNull;
@@ -81,8 +80,8 @@ public class LoadingResponseBodyObserver<T> implements Observer<ResponseBody> {
             if (null != callback && null != result) {
                 if (CommonUtils.checkCodeSuccess(code)) {
                     if (!TextUtils.isEmpty(responseMsg))
-                        ToastUtils.showShort(responseMsg);
-                    callback.onSuccess(result);
+//                        ToastUtils.showShort(responseMsg);
+                        callback.onSuccess(result);
                     return;
                 }
                 errorMsg.append("succuess code != 200");
@@ -100,14 +99,14 @@ public class LoadingResponseBodyObserver<T> implements Observer<ResponseBody> {
     public void onError(Throwable e) {
         if (null != callback) {
             callback.onError(IFinalConst.CODE_ERROR, e);
-            callback.onComplete(false, true, true);
+            callback.onComplete(false, true, false);
         }
     }
 
     @Override
     public void onComplete() {
         if (null != callback)
-            callback.onComplete(true, true, true);
+            callback.onComplete(true, false, false);
     }
 
 }
