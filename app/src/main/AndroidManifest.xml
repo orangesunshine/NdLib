@@ -18,22 +18,23 @@
 
 
     <application
-        android:name=".NdLibApp"
+        android:name=".app.NdLibApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".BaseActivityDemo"></activity>
-        <activity android:name=".BaseActivityLoadingDemo"></activity>
-        <activity android:name=".BaseActivitySwipePullDemo"></activity>
+        <activity android:name=".activity.base.BaseActivityDemo"></activity>
+        <activity android:name=".activity.base.BaseActivityLoadingDemo"></activity>
+        <activity android:name=".activity.base.BaseActivitySwipePullDemo"></activity>
         <activity android:name=".CocosWebActivity"></activity>
+        <activity android:name=".activity.templete.TempleteDemoActivity" />
     </application>
 </manifest>

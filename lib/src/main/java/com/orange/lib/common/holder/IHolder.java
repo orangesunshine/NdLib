@@ -1,4 +1,5 @@
 package com.orange.lib.common.holder;
+
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,6 +17,22 @@ public interface IHolder extends View.OnClickListener {
      * @return
      */
     <T extends View> T getView(int viewId);
+
+    /**
+     * 根据viewId获取控件
+     *
+     * @param viewId
+     * @return
+     */
+    TextView getTextView(int viewId);
+
+    /**
+     * 根据viewId获取控件
+     *
+     * @param viewId
+     * @return
+     */
+    ImageView getImageView(int viewId);
 
     /**
      * 设置文本

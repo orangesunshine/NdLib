@@ -1,10 +1,8 @@
 package com.orange.lib.component.actbar;
 
-import android.view.ViewGroup;
-
 import androidx.annotation.DrawableRes;
 
-public interface IActionBar<T extends ViewGroup>{
+public interface IActionBar {
     /**
      * 设置左侧图标
      *

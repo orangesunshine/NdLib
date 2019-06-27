@@ -47,6 +47,28 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder implements IHold
     }
 
     /**
+     * 根据viewId获取控件
+     *
+     * @param viewId
+     * @return
+     */
+    @Override
+    public TextView getTextView(int viewId) {
+        return getView(viewId);
+    }
+
+    /**
+     * 根据viewId获取控件
+     *
+     * @param viewId
+     * @return
+     */
+    @Override
+    public ImageView getImageView(int viewId) {
+        return getView(viewId);
+    }
+
+    /**
      * 设置文本
      *
      * @param viewId

@@ -24,7 +24,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.ResponseBody;
 
-public class PullResponseBodyObserver<T> implements Observer<ResponseBody> {
+public class PullResponseBodyObserver implements Observer<ResponseBody> {
     private INetCallback callback;
     private boolean mNoData = false;
     private boolean mEmpty = true;

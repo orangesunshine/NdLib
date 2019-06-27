@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.ViewStub;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import androidx.fragment.app.FragmentActivity;
 
@@ -12,10 +13,10 @@ import com.orange.lib.common.holder.DefaultHolder;
 import com.orange.lib.common.holder.IHolder;
 import com.orange.lib.component.actbar.CommonActionBar;
 import com.orange.lib.component.actbar.IActionBar;
-import com.orange.lib.component.pagestatus.DefaultPageStatus;
 import com.orange.lib.component.pagestatus.IPageStatus;
 import com.orange.lib.component.pagestatus.loading.dialogfragment.DefaultLoadingDialog;
 import com.orange.lib.component.pagestatus.loading.dialogfragment.ILoadingDialog;
+import com.orange.lib.component.pagestatus.loading.dialogfragment.LoadingDialogPageStatus;
 import com.orange.lib.component.toast.DefaultToast;
 import com.orange.lib.component.toast.IToast;
 import com.orange.lib.mvp.presenter.ifc.IPresenter;
@@ -29,6 +30,7 @@ import java.lang.reflect.Method;
  * @method onActivityCreate、onActivityDestroy application->lifecycle回调
  */
 public abstract class BaseActivity<P extends IPresenter> extends FragmentActivity implements IView {
+    protected final String TAG = getClass().getSimpleName();
     protected BaseActivity mActivity;//activity引用
     protected boolean isActivityAlive;//判断activity是不是活的
     protected IHolder mHolder;//view容器
@@ -141,7 +143,8 @@ public abstract class BaseActivity<P extends IPresenter> extends FragmentActivit
      */
     protected void init() {
         mActbar = new CommonActionBar(mHolder);
-        mPageStatus = new DefaultPageStatus(mHolder);
+        mActbar.setTitle(TAG);
+        mPageStatus = createPageStatus();
         mHolder.addOnItemChildClick(v -> {
             Class clazz = getClass();
             while (null != clazz) {
@@ -166,7 +169,15 @@ public abstract class BaseActivity<P extends IPresenter> extends FragmentActivit
                 clazz = clazz.getSuperclass();
             }
         }, R.id.retry_button);
-        mPageStatus.showContent();
+    }
+
+    /**
+     * 创建pagestatus
+     *
+     * @return
+     */
+    protected IPageStatus createPageStatus() {
+        return new LoadingDialogPageStatus(mLoading, mHolder);
     }
 
     /**
@@ -273,5 +284,10 @@ public abstract class BaseActivity<P extends IPresenter> extends FragmentActivit
     public void showError() {
         if (null != mPageStatus)
             mPageStatus.showError();
+    }
+
+    @Retry
+    public void test() {
+        Toast.makeText(mActivity, TAG, Toast.LENGTH_SHORT).show();
     }
 }

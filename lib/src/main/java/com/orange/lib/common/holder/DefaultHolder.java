@@ -1,7 +1,6 @@
 package com.orange.lib.common.holder;
 
 import android.content.Context;
-import android.util.ArrayMap;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +14,6 @@ import androidx.annotation.StringRes;
 import com.orange.lib.utils.ViewUtils;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -64,6 +62,28 @@ public class DefaultHolder implements IHolder {
             mViews.put(viewId, view);
         }
         return (T) view;
+    }
+
+    /**
+     * 根据viewId获取控件
+     *
+     * @param viewId
+     * @return
+     */
+    @Override
+    public TextView getTextView(int viewId) {
+        return getView(viewId);
+    }
+
+    /**
+     * 根据viewId获取控件
+     *
+     * @param viewId
+     * @return
+     */
+    @Override
+    public ImageView getImageView(int viewId) {
+        return getView(viewId);
     }
 
     /**

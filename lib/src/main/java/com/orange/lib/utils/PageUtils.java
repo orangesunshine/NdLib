@@ -12,8 +12,6 @@ public class PageUtils {
      */
     public static void resetPageindexTag(View refreshView) {
         Preconditions.checkNotNull(refreshView);
-        Object tag = refreshView.getTag();
-        if (null != tag) throw new IllegalArgumentException("refreshView 设置pageindex tag 已经存在tag！");
         refreshView.setTag(1);
     }
 

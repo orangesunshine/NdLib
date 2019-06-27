@@ -1,8 +1,6 @@
-package com.orange.ndlib;
+package com.orange.ndlib.app;
 
 import android.content.Context;
-
-import androidx.multidex.MultiDex;
 
 import com.orange.lib.app.BaseApplication;
 

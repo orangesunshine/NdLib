@@ -1,43 +1,51 @@
 package com.orange.lib.component.actbar;
 
-import android.view.View;
-import android.widget.LinearLayout;
-
 import com.orange.lib.R;
 import com.orange.lib.common.holder.IHolder;
 
 /**
- *
+ * 通用标题栏
  */
-public class CommonActionBar implements IActionBar<LinearLayout> {
-
+public class CommonActionBar implements IActionBar {
     //vars
     private IHolder mHolder;
     private IActionBarCallback mActionBarCallback;
 
+    /**
+     * 构造方法
+     *
+     * @param holder
+     */
     public CommonActionBar(IHolder holder) {
         mHolder = holder;
-        mHolder.addOnItemChildClick(new IHolder.OnItemChildClickListener() {
-            @Override
-            public void onItemChildClick(View view) {
-                int i = view.getId();
-                if (i == R.id.fl_left_actbar) {
-                    if (null != mActionBarCallback)
-                        mActionBarCallback.onLeft();
-                } else if (i == R.id.fl_title_actbar) {
-                    if (null != mActionBarCallback)
-                        mActionBarCallback.onCenter();
-                } else if (i == R.id.fl_right_actbar) {
-                    if (null != mActionBarCallback)
-                        mActionBarCallback.onRight();
-                }
-            }
-        }, R.id.fl_left_actbar, R.id.fl_right_actbar, R.id.fl_title_actbar);
+    }
+
+    /**
+     * 构造方法
+     *
+     * @param holder
+     */
+    public CommonActionBar(IHolder holder, IActionBarCallback actionBarCallback) {
+        this(holder);
+        setActionBarCallback(actionBarCallback);
     }
 
     @Override
     public void setActionBarCallback(IActionBarCallback actionBarCallback) {
         mActionBarCallback = actionBarCallback;
+        mHolder.addOnItemChildClick(view -> {
+            int i = view.getId();
+            if (i == R.id.fl_left_actbar) {
+                if (null != mActionBarCallback)
+                    mActionBarCallback.onLeft();
+            } else if (i == R.id.fl_title_actbar) {
+                if (null != mActionBarCallback)
+                    mActionBarCallback.onCenter();
+            } else if (i == R.id.fl_right_actbar) {
+                if (null != mActionBarCallback)
+                    mActionBarCallback.onRight();
+            }
+        }, R.id.fl_left_actbar, R.id.fl_right_actbar, R.id.fl_title_actbar);
     }
 
     @Override

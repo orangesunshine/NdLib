@@ -89,12 +89,15 @@ public class ReflectionUtils {
         Preconditions.checkNotNull(pageNetRequest);
         Type type = null;
         if (null != pageNetRequest) {
-            Type[] genericInterfaces = pageNetRequest.getClass().getGenericInterfaces();
-            Type genericInterface = genericInterfaces[0];
-            type = ((ParameterizedType) genericInterface).getActualTypeArguments()[0];
-        }
-        if (null == type) {
-
+            Type[] types = pageNetRequest.getClass().getGenericInterfaces();
+            if (null != types && types.length > 0)
+                type = types[0];
+            if (null == type || !(type instanceof ParameterizedType))
+                type = pageNetRequest.getClass().getGenericSuperclass();
+            if (null == type || !(type instanceof ParameterizedType)) return null;
+            Type[] actualTypeArguments = ((ParameterizedType) type).getActualTypeArguments();
+            if (null != actualTypeArguments && actualTypeArguments.length > 0)
+                return actualTypeArguments[0];
         }
         return type;
     }

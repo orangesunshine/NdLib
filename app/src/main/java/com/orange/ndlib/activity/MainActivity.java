@@ -1,11 +1,13 @@
-package com.orange.ndlib;
+package com.orange.ndlib.activity;
 
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import com.orange.lib.activity.BaseActivity;
-import com.orange.lib.activity.templete.TempleteActivity;
 import com.orange.lib.utils.ActivityUtils;
+import com.orange.ndlib.CocosWebActivity;
+import com.orange.ndlib.R;
+import com.orange.ndlib.activity.base.BaseActivityDemo;
+import com.orange.ndlib.activity.templete.TempleteDemoActivity;
 import com.orange.thirdparty.statusbar.StatusBarTranslucent;
 
 public class MainActivity extends BaseActivity {
@@ -36,14 +38,13 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void init() {
         super.init();
-        mActbar.setTitle("MainActivity");
         mHolder.addOnItemChildClick(v -> {
             switch (v.getId()) {
                 case R.id.btn_base:
                     ActivityUtils.launchActivity(mActivity, BaseActivityDemo.class);
                     break;
                 case R.id.btn_templete:
-                    ActivityUtils.launchActivity(mActivity, TempleteActivity.class);
+                    ActivityUtils.launchActivity(mActivity, TempleteDemoActivity.class);
                     break;
                 case R.id.btn_cocos:
                     ActivityUtils.launchActivity(mActivity, CocosWebActivity.class);

@@ -27,6 +27,7 @@ public class LoadingDialog extends BaseDialog implements ILoadingDialogFragment 
 
     @Override
     public void dismissLoading() {
-        super.dismissAllowingStateLoss();
+        if (isAdded())
+            super.dismissAllowingStateLoss();
     }
 }

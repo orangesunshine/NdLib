@@ -1,10 +1,11 @@
-package com.orange.ndlib;
+package com.orange.ndlib.activity.base;
 
 import android.widget.Toast;
 
 import com.orange.lib.activity.BaseActivity;
 import com.orange.lib.component.actbar.IActionBarCallback;
 import com.orange.lib.utils.ActivityUtils;
+import com.orange.ndlib.R;
 
 import java.util.Random;
 

@@ -6,10 +6,8 @@ import android.widget.FrameLayout;
 
 import com.orange.lib.R;
 import com.orange.lib.activity.BaseActivity;
-import com.orange.lib.component.pagestatus.IPageStatus;
 
 public abstract class TempleteActivity extends BaseActivity {
-    protected IPageStatus mLoadingLayout;
 
     @Override
     protected void attachView(FrameLayout content) {
@@ -38,7 +36,5 @@ public abstract class TempleteActivity extends BaseActivity {
      *
      * @return
      */
-    protected int getTempleteLayoutId() {
-        return -1;
-    }
+    protected abstract int getTempleteLayoutId();
 }

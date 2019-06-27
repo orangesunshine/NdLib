@@ -1,13 +1,19 @@
-package com.orange.ndlib;
+package com.orange.ndlib.activity.templete;
 
 import android.widget.Toast;
 
-import com.orange.lib.activity.BaseActivity;
+import com.orange.lib.activity.templete.TempleteActivity;
 import com.orange.lib.component.actbar.IActionBarCallback;
+import com.orange.lib.component.pagestatus.IPageStatus;
+import com.orange.lib.component.pagestatus.LoadingPageStatus;
+import com.orange.lib.utils.ActivityUtils;
+import com.orange.ndlib.R;
+import com.orange.ndlib.activity.base.BaseActivityLoadingDemo;
+import com.orange.ndlib.activity.base.BaseActivitySwipePullDemo;
 
 import java.util.Random;
 
-public class BaseActivitySwipePullDemo extends BaseActivity {
+public class TempleteDemoActivity extends TempleteActivity {
     /**
      * 获取布局文件
      *
@@ -15,7 +21,27 @@ public class BaseActivitySwipePullDemo extends BaseActivity {
      */
     @Override
     protected int getContentLayoutId() {
-        return R.layout.activity_base_demo;
+        return R.layout.activity_templete_demo_content;
+    }
+
+    /**
+     * 获取模板布局文件
+     *
+     * @return
+     */
+    @Override
+    protected int getTempleteLayoutId() {
+        return R.layout.template_activity_actbar;
+    }
+
+    /**
+     * 创建pagestatus
+     *
+     * @return
+     */
+    @Override
+    protected IPageStatus createPageStatus() {
+        return new LoadingPageStatus(mHolder);
     }
 
     /**
@@ -59,8 +85,10 @@ public class BaseActivitySwipePullDemo extends BaseActivity {
                     }
                     break;
                 case R.id.btn_net_loading:
+                    ActivityUtils.launchActivity(mActivity, BaseActivityLoadingDemo.class);
                     break;
                 case R.id.btn_net_pull:
+                    ActivityUtils.launchActivity(mActivity, BaseActivitySwipePullDemo.class);
                     break;
             }
         }, R.id.btn_content, R.id.btn_loading, R.id.btn_empty, R.id.btn_error, R.id.btn_actbar, R.id.btn_net_loading, R.id.btn_net_pull);
