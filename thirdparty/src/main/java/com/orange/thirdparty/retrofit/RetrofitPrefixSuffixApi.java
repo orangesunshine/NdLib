@@ -33,7 +33,7 @@ public class RetrofitPrefixSuffixApi implements IPrefixSuffixApi {
      */
     @Override
     public <T> void get(String prefix, String suffix, Map<String, String> params, INetCallback<T> callback) {
-        LoadingResponseBodyObserver.convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApiCallback.class).get(prefix, suffix, params), callback);
+        LoadingResponseBodyObserver.convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApi.class).get(prefix, suffix, params), callback);
     }
 
     /**
@@ -46,7 +46,7 @@ public class RetrofitPrefixSuffixApi implements IPrefixSuffixApi {
      */
     @Override
     public <T extends PullData> void getPull(String prefix, String suffix, Map<String, String> params, Type type, INetCallback<T> callback) {
-        PullResponseBodyObserver.convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApiCallback.class).get(prefix, suffix, params), type, callback);
+        PullResponseBodyObserver.convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApi.class).get(prefix, suffix, params), type, callback);
     }
 
     /**
@@ -60,7 +60,7 @@ public class RetrofitPrefixSuffixApi implements IPrefixSuffixApi {
      */
     @Override
     public <T> void get(Map<String, String> headers, String prefix, String suffix, Map<String, String> params, INetCallback<T> callback) {
-        LoadingResponseBodyObserver.convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApiCallback.class).get(headers, prefix, suffix, params), callback);
+        LoadingResponseBodyObserver.convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApi.class).get(headers, prefix, suffix, params), callback);
     }
 
     /**
@@ -74,7 +74,7 @@ public class RetrofitPrefixSuffixApi implements IPrefixSuffixApi {
      */
     @Override
     public <T extends PullData> void getPull(Map<String, String> headers, String prefix, String suffix, Map<String, String> params, Type type, INetCallback<T> callback) {
-        PullResponseBodyObserver.convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApiCallback.class).get(headers, prefix, suffix, params), type, callback);
+        PullResponseBodyObserver.convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApi.class).get(headers, prefix, suffix, params), type, callback);
     }
 
     /**
@@ -87,7 +87,7 @@ public class RetrofitPrefixSuffixApi implements IPrefixSuffixApi {
      */
     @Override
     public <T> void post(String prefix, String suffix, Map<String, String> params, INetCallback<T> callback) {
-        LoadingResponseBodyObserver.convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApiCallback.class).post(prefix, suffix, params), callback);
+        LoadingResponseBodyObserver.convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApi.class).post(prefix, suffix, params), callback);
     }
 
     /**
@@ -100,7 +100,7 @@ public class RetrofitPrefixSuffixApi implements IPrefixSuffixApi {
      */
     @Override
     public <T extends PullData> void postPull(String prefix, String suffix, Map<String, String> params, Type type, INetCallback<T> callback) {
-        PullResponseBodyObserver.convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApiCallback.class).post(prefix, suffix, params), type, callback);
+        PullResponseBodyObserver.convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApi.class).post(prefix, suffix, params), type, callback);
     }
 
     /**
@@ -114,7 +114,7 @@ public class RetrofitPrefixSuffixApi implements IPrefixSuffixApi {
      */
     @Override
     public <T> void post(Map<String, String> headers, String prefix, String suffix, Map<String, String> params, INetCallback<T> callback) {
-        LoadingResponseBodyObserver.convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApiCallback.class).post(headers, prefix, suffix, params), callback);
+        LoadingResponseBodyObserver.convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApi.class).post(headers, prefix, suffix, params), callback);
     }
 
     /**
@@ -128,6 +128,6 @@ public class RetrofitPrefixSuffixApi implements IPrefixSuffixApi {
      */
     @Override
     public <T extends PullData> void postPull(Map<String, String> headers, String prefix, String suffix, Map<String, String> params, Type type, INetCallback<T> callback) {
-        PullResponseBodyObserver.convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApiCallback.class).post(headers, prefix, suffix, params), type, callback);
+        PullResponseBodyObserver.convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApi.class).post(headers, prefix, suffix, params), type, callback);
     }
 }

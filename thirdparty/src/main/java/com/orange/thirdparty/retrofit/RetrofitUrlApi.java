@@ -30,7 +30,7 @@ public class RetrofitUrlApi implements IUrlApi {
      */
     @Override
     public <T> void get(String url, Map<String, String> params, INetCallback<T> callback) {
-        LoadingResponseBodyObserver.convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApiCallback.class).get(url, params), callback);
+        LoadingResponseBodyObserver.convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApi.class).get(url, params), callback);
     }
 
 
@@ -43,7 +43,7 @@ public class RetrofitUrlApi implements IUrlApi {
      */
     @Override
     public <T> void getPull(String url, Map<String, String> params, Type type, INetCallback<T> callback) {
-        PullResponseBodyObserver.convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApiCallback.class).get(url, params), type, callback);
+        PullResponseBodyObserver.convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApi.class).get(url, params), type, callback);
     }
 
     /**
@@ -56,7 +56,7 @@ public class RetrofitUrlApi implements IUrlApi {
      */
     @Override
     public <T> void get(Map<String, String> headers, String url, Map<String, String> params, INetCallback<T> callback) {
-        LoadingResponseBodyObserver.convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApiCallback.class).get(headers, url, params), callback);
+        LoadingResponseBodyObserver.convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApi.class).get(headers, url, params), callback);
     }
 
 
@@ -70,7 +70,7 @@ public class RetrofitUrlApi implements IUrlApi {
      */
     @Override
     public <T> void getPull(Map<String, String> headers, String url, Map<String, String> params, Type type, INetCallback<T> callback) {
-        PullResponseBodyObserver.convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApiCallback.class).get(headers, url, params), type, callback);
+        PullResponseBodyObserver.convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApi.class).get(headers, url, params), type, callback);
     }
 
     /**
@@ -82,7 +82,7 @@ public class RetrofitUrlApi implements IUrlApi {
      */
     @Override
     public <T> void post(String url, Map<String, String> params, INetCallback<T> callback) {
-        LoadingResponseBodyObserver.convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApiCallback.class).post(url, params), callback);
+        LoadingResponseBodyObserver.convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApi.class).post(url, params), callback);
     }
 
     /**
@@ -94,7 +94,7 @@ public class RetrofitUrlApi implements IUrlApi {
      */
     @Override
     public <T> void postPull(String url, Map<String, String> params, Type type, INetCallback<T> callback) {
-        PullResponseBodyObserver.convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApiCallback.class).post(url, params), type, callback);
+        PullResponseBodyObserver.convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApi.class).post(url, params), type, callback);
     }
 
     /**
@@ -107,7 +107,7 @@ public class RetrofitUrlApi implements IUrlApi {
      */
     @Override
     public <T> void post(Map<String, String> headers, String url, Map<String, String> params, INetCallback<T> callback) {
-        LoadingResponseBodyObserver.convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApiCallback.class).post(headers, url, params), callback);
+        LoadingResponseBodyObserver.convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApi.class).post(headers, url, params), callback);
     }
 
     /**
@@ -119,6 +119,6 @@ public class RetrofitUrlApi implements IUrlApi {
      */
     @Override
     public <T> void postPull(Map<String, String> headers, String url, Map<String, String> params, Type type, INetCallback<T> callback) {
-        PullResponseBodyObserver.convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApiCallback.class).post(headers, url, params), type, callback);
+        PullResponseBodyObserver.convert(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApi.class).post(headers, url, params), type, callback);
     }
 }
