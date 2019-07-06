@@ -1,6 +1,6 @@
-package com.orange.lib.common.adapterpattern;
+package com.orange.lib.loading.adapterpattern;
 
-import com.orange.lib.mvp.model.net.callback.INetCallback;
+import com.orange.lib.loading.callback.INetCallback;
 
 public class NetCallbackAdapter<T> implements INetCallback<T> {
     private INetCallback<T> mNetCallback;
@@ -31,13 +31,11 @@ public class NetCallbackAdapter<T> implements INetCallback<T> {
 
     /**
      * 完成
-     *
-     * @param noData
      */
     @Override
-    public void onComplete(boolean successs, boolean noData, boolean emtpy) {
+    public void onComplete() {
         if (null != mNetCallback)
-            mNetCallback.onComplete(successs, noData, emtpy);
+            mNetCallback.onComplete();
     }
 
     /**

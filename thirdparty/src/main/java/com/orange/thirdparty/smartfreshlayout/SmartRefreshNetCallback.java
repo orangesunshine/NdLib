@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.orange.lib.common.reponse.PullData;
 import com.orange.lib.component.recyclerview.CommonAdapter;
 import com.orange.lib.component.recyclerview.IConvertRecyclerView;
-import com.orange.lib.mvp.model.net.callback.DefaultNetCallback;
+import com.orange.lib.pull.callback.IPullNetCallback;
 import com.orange.lib.utils.PageUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
@@ -17,7 +17,7 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
  *
  * @param <ITEM>
  */
-public class SmartRefreshNetCallback<ITEM> extends DefaultNetCallback<PullData<ITEM>> {
+public class SmartRefreshNetCallback<ITEM> implements IPullNetCallback<PullData<ITEM>> {
     private SmartRefreshLayout mRefreshLayout;
     protected RecyclerView mRecyclerView;
     protected View mEmptyView;//页面为空显示
@@ -48,7 +48,6 @@ public class SmartRefreshNetCallback<ITEM> extends DefaultNetCallback<PullData<I
      */
     @Override
     public void onSuccess(PullData<ITEM> pullResponse) {
-        super.onSuccess(pullResponse);
         CommonAdapter.adapterDatas(mRefreshLayout.getContext(), mRecyclerView, mEmptyView, mItemLayoutId, null == pullResponse ? null : pullResponse.getList(), PageUtils.isLoadmore(mRefreshLayout), mConvertRecyclerView);
     }
 
@@ -61,7 +60,6 @@ public class SmartRefreshNetCallback<ITEM> extends DefaultNetCallback<PullData<I
      */
     @Override
     public void onComplete(boolean successs, boolean noData, boolean empty) {
-        super.onComplete(successs, noData, empty);
         if (null != mRefreshLayout) {
             if (noData) {
                 mRefreshLayout.finishRefreshWithNoMoreData();
@@ -71,5 +69,16 @@ public class SmartRefreshNetCallback<ITEM> extends DefaultNetCallback<PullData<I
                 mRefreshLayout.finishLoadMore();
             }
         }
+    }
+
+    /**
+     * 失败
+     *
+     * @param code
+     * @param error
+     */
+    @Override
+    public void onError(int code, Throwable error) {
+
     }
 }

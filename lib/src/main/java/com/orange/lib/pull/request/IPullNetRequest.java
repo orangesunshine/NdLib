@@ -1,9 +1,9 @@
-package com.orange.lib.mvp.model.net.pull;
+package com.orange.lib.pull.request;
 
 import androidx.annotation.IntDef;
 
 
-import com.orange.lib.mvp.model.net.callback.INetCallback;
+import com.orange.lib.loading.callback.INetCallback;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

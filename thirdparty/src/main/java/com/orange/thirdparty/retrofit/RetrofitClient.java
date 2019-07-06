@@ -27,11 +27,11 @@ public class RetrofitClient {
                     if (TextUtils.isEmpty(baseUrl) && !TextUtils.isEmpty(initBaseUrl))
                         baseUrl = initBaseUrl;
 
-                    String finalBaseUrl = IFinalConst.sBaseUrl;
+                    String finalBaseUrl = IInitConst.sBaseUrl;
                     if (TextUtils.isEmpty(baseUrl) && !TextUtils.isEmpty(finalBaseUrl))
                         baseUrl = finalBaseUrl;
                     if (TextUtils.isEmpty(baseUrl))
-                        baseUrl = "http://127.0.0.1:8080";
+                        baseUrl = IFinalConst.sBaseUrl;
                     client.baseUrl(baseUrl);
                     sInstance = client.build();
                 }

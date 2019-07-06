@@ -1,15 +1,11 @@
-package com.orange.lib.mvp.model.net.callback;
+package com.orange.lib.pull.callback;
 
 /**
  * 网络回调抽象层
  *
  * @param <T>
  */
-public interface INetCallback<T> {
-    /**
-     * 网络请求开始
-     */
-    void onNetStart();
+public interface IPullNetCallback<T> {
 
     /**
      * 成功

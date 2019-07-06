@@ -2,8 +2,10 @@ package com.orange.lib.component.pull.callback;
 
 import android.view.View;
 
-import com.orange.lib.mvp.model.net.callback.INetCallback;
-import com.orange.lib.mvp.model.net.pull.IPageNetRequest;
+import com.orange.lib.pull.adapterpattern.PullNetCallbackAdapter;
+import com.orange.lib.mvp.model.net.common.netcancel.INetCancel;
+import com.orange.lib.pull.request.IPageNetRequest;
+import com.orange.lib.pull.callback.IPullNetCallback;
 import com.orange.lib.utils.PageUtils;
 import com.orange.lib.utils.ReflectionUtils;
 
@@ -12,10 +14,11 @@ import java.lang.reflect.Type;
 public class DefaultPullCallback implements IPullCallback {
     protected Type mType;
     protected View mRefreshLayout;
-    protected INetCallback mNetCallback;
+    protected IPullNetCallback mNetCallback;
     protected IPageNetRequest mPageNetRequest;
+    private boolean mIsRunning;
 
-    public <T> DefaultPullCallback(View refreshLayout, IPageNetRequest<T> pageNetRequest, INetCallback callback) {
+    public <T> DefaultPullCallback(View refreshLayout, IPageNetRequest<T> pageNetRequest, IPullNetCallback callback) {
         mType = ReflectionUtils.pageNetRequestGenericType(pageNetRequest);
         mPageNetRequest = pageNetRequest;
         mNetCallback = callback;
@@ -27,20 +30,52 @@ public class DefaultPullCallback implements IPullCallback {
      * 下拉刷新
      */
     @Override
-    public void onPullRefresh() {
+    public INetCancel onPullRefresh() {
+        if (mIsRunning) return null;
+        mIsRunning = true;
         PageUtils.resetPageindexTag(mRefreshLayout);
         if (null != mPageNetRequest && null != mNetCallback)
-            mPageNetRequest.request(PageUtils.getPageindex(mRefreshLayout), mType, mNetCallback);
+            return mPageNetRequest.request(PageUtils.getPageindex(mRefreshLayout), mType, new PullNetCallbackAdapter(mNetCallback) {
+                /**
+                 * 完成
+                 *
+                 * @param successs
+                 * @param noData
+                 * @param emtpy
+                 */
+                @Override
+                public void onComplete(boolean successs, boolean noData, boolean emtpy) {
+                    super.onComplete(successs, noData, emtpy);
+                    mIsRunning = false;
+                }
+            });
+        return null;
     }
 
     /**
      * 上拉加载
      */
     @Override
-    public void onPullLoadMore() {
+    public INetCancel onPullLoadMore() {
+        if (mIsRunning) return null;
+        mIsRunning = true;
         PageUtils.pageIndexPlus(mRefreshLayout);
         if (null != mPageNetRequest && null != mNetCallback)
-            mPageNetRequest.request(PageUtils.getPageindex(mRefreshLayout), mType, mNetCallback);
+            return mPageNetRequest.request(PageUtils.getPageindex(mRefreshLayout), mType, new PullNetCallbackAdapter(mNetCallback) {
+                /**
+                 * 完成
+                 *
+                 * @param successs
+                 * @param noData
+                 * @param emtpy
+                 */
+                @Override
+                public void onComplete(boolean successs, boolean noData, boolean emtpy) {
+                    super.onComplete(successs, noData, emtpy);
+                    mIsRunning = false;
+                }
+            });
+        return null;
     }
 
     /**

@@ -5,9 +5,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.orange.lib.component.pull.IRefreshLoadmore;
 import com.orange.lib.component.pull.callback.IPullCallback;
+import com.orange.lib.mvp.model.net.common.netcancel.INetCancel;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
+
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * SmartRefreshLayout实现IRefreshLoadmore
@@ -46,22 +49,24 @@ public class SmartRefreshLoadmore implements IRefreshLoadmore {
      *
      * @param callback
      */
-    public void setPullCallback(IPullCallback callback) {
+    public INetCancel setPullCallback(IPullCallback callback) {
         mPullCallback = callback;
+        AtomicReference<INetCancel> netCancel = new AtomicReference<>();
         if (null != mRefreshLayout)
             mRefreshLayout.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
                 @Override
                 public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
                     if (null != callback)
-                        callback.onPullLoadMore();
+                        netCancel.getAndSet(callback.onPullLoadMore());
                 }
 
                 @Override
                 public void onRefresh(@NonNull RefreshLayout refreshLayout) {
                     if (null != callback)
-                        callback.onPullRefresh();
+                        netCancel.getAndSet(callback.onPullRefresh());
                 }
             });
+        return netCancel.get();
     }
 
     /**

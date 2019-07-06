@@ -13,12 +13,13 @@ import com.orange.lib.common.holder.DefaultHolder;
 import com.orange.lib.common.holder.IHolder;
 import com.orange.lib.component.actbar.CommonActionBar;
 import com.orange.lib.component.actbar.IActionBar;
-import com.orange.lib.component.pagestatus.IPageStatus;
 import com.orange.lib.component.pagestatus.loading.dialogfragment.DefaultLoadingDialog;
 import com.orange.lib.component.pagestatus.loading.dialogfragment.ILoadingDialog;
-import com.orange.lib.component.pagestatus.loading.dialogfragment.LoadingDialogPageStatus;
 import com.orange.lib.component.toast.DefaultToast;
 import com.orange.lib.component.toast.IToast;
+import com.orange.lib.loading.pagestatus.IPageStatus;
+import com.orange.lib.loading.pagestatus.LoadingDialogPageStatus;
+import com.orange.lib.loading.pagestatus.LoadingPageStatus;
 import com.orange.lib.mvp.presenter.ifc.IPresenter;
 import com.orange.lib.mvp.view.IView;
 
@@ -38,7 +39,6 @@ public abstract class BaseActivity<P extends IPresenter> extends FragmentActivit
     protected P mPresenter;//mvp
     protected IActionBar mActbar;//标题栏
     protected ILoadingDialog mLoading;
-    protected IPageStatus mPageStatus;
 
     /**
      * onCreate生命周期调用
@@ -144,7 +144,6 @@ public abstract class BaseActivity<P extends IPresenter> extends FragmentActivit
     protected void init() {
         mActbar = new CommonActionBar(mHolder);
         mActbar.setTitle(TAG);
-        mPageStatus = createPageStatus();
         mHolder.addOnItemChildClick(v -> {
             Class clazz = getClass();
             while (null != clazz) {
@@ -248,42 +247,6 @@ public abstract class BaseActivity<P extends IPresenter> extends FragmentActivit
             mLoading = new DefaultLoadingDialog(mActivity);
         if (isActivityAlive)
             mLoading.dismissLoadingDialog();
-    }
-
-    /**
-     * 显示loading
-     */
-    @Override
-    public void showLoading() {
-        if (null != mPageStatus)
-            mPageStatus.showLoading();
-    }
-
-    /**
-     * 显示content
-     */
-    @Override
-    public void showContent() {
-        if (null != mPageStatus)
-            mPageStatus.showContent();
-    }
-
-    /**
-     * 显示empty
-     */
-    @Override
-    public void showEmpty() {
-        if (null != mPageStatus)
-            mPageStatus.showEmpty();
-    }
-
-    /**
-     * 显示error
-     */
-    @Override
-    public void showError() {
-        if (null != mPageStatus)
-            mPageStatus.showError();
     }
 
     @Retry

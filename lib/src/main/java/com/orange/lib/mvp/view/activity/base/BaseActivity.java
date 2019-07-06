@@ -2,7 +2,6 @@ package com.orange.lib.mvp.view.activity.base;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.widget.FrameLayout;
 
 import androidx.fragment.app.FragmentActivity;
@@ -10,7 +9,6 @@ import androidx.fragment.app.FragmentActivity;
 import com.orange.lib.common.config.DefaultConfig;
 import com.orange.lib.common.holder.DefaultHolder;
 import com.orange.lib.common.holder.IHolder;
-import com.orange.lib.component.actbar.CommonActionBar;
 import com.orange.lib.component.actbar.IActionBar;
 import com.orange.lib.component.statusbar.IStatusBar;
 import com.orange.lib.component.toast.DefaultToast;

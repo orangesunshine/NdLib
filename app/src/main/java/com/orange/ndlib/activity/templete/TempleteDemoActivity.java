@@ -4,8 +4,9 @@ import android.widget.Toast;
 
 import com.orange.lib.activity.templete.TempleteActivity;
 import com.orange.lib.component.actbar.IActionBarCallback;
-import com.orange.lib.component.pagestatus.IPageStatus;
-import com.orange.lib.component.pagestatus.LoadingPageStatus;
+import com.orange.lib.loading.pagestatus.IPageStatus;
+import com.orange.lib.loading.pagestatus.LoadingDialogPageStatus;
+import com.orange.lib.loading.pagestatus.LoadingPageStatus;
 import com.orange.lib.utils.ActivityUtils;
 import com.orange.ndlib.R;
 import com.orange.ndlib.activity.base.BaseActivityLoadingDemo;
@@ -50,19 +51,17 @@ public class TempleteDemoActivity extends TempleteActivity {
     @Override
     protected void init() {
         super.init();
+        LoadingDialogPageStatus pageStatus = new LoadingDialogPageStatus(mLoading, mHolder);
         mHolder.addOnItemChildClick(v -> {
             switch (v.getId()) {
                 case R.id.btn_content:
-                    mPageStatus.showContent();
+                    pageStatus.showContent();
                     break;
                 case R.id.btn_loading:
-                    mPageStatus.showLoading();
-                    break;
-                case R.id.btn_empty:
-                    mPageStatus.showEmpty();
+                    pageStatus.showLoading();
                     break;
                 case R.id.btn_error:
-                    mPageStatus.showError();
+                    pageStatus.showError();
                     break;
                 case R.id.btn_actbar:
                     int i = new Random().nextInt(5);

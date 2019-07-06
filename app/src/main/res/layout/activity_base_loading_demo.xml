@@ -14,17 +14,37 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
+        <LinearLayout
             android:id="@+id/content_id"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center" />
+            android:orientation="vertical">
 
-        <ViewStub
-            android:id="@+id/stub_empty"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inflatedId="@+id/empty_id" />
+            <Button
+                android:id="@+id/btn_loading_convert"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="loading_convert" />
+
+            <Button
+                android:id="@+id/btn_loading_page"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="loading_page" />
+
+            <Button
+                android:id="@+id/btn_loading_page_convert"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="loading_page_convert" />
+
+            <TextView
+                android:id="@+id/tv_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:gravity="center" />
+        </LinearLayout>
 
         <ViewStub
             android:id="@+id/stub_error"

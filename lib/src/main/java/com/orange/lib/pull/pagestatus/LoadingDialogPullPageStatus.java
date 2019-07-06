@@ -1,16 +1,18 @@
-package com.orange.lib.component.pagestatus.loading.dialogfragment;
+package com.orange.lib.pull.pagestatus;
 
 import android.view.View;
 
 import com.orange.lib.R;
 import com.orange.lib.common.holder.IHolder;
-import com.orange.lib.component.pagestatus.IPageStatus;
+import com.orange.lib.component.pagestatus.loading.dialogfragment.ILoadingDialog;
+import com.orange.lib.loading.pagestatus.IPageStatus;
+import com.orange.lib.pull.pagestatus.IPullPageStatus;
 import com.orange.lib.utils.ViewUtils;
 
 /**
  * loadingdialog 实现
  */
-public class LoadingDialogPageStatus implements IPageStatus {
+public class LoadingDialogPullPageStatus implements IPullPageStatus {
     private ILoadingDialog mLoadingDialog;//菊花
     private View mContentView;//content页面
     private View mEmptyView;//空页面
@@ -22,7 +24,7 @@ public class LoadingDialogPageStatus implements IPageStatus {
      * @param loadingDialog
      * @param holder
      */
-    public LoadingDialogPageStatus(ILoadingDialog loadingDialog, IHolder holder) {
+    public LoadingDialogPullPageStatus(ILoadingDialog loadingDialog, IHolder holder) {
         this(loadingDialog, holder.getView(R.id.content_id), holder.getView(R.id.empty_id), holder.getView(R.id.error_id));
     }
 
@@ -34,7 +36,7 @@ public class LoadingDialogPageStatus implements IPageStatus {
      * @param emptyView
      * @param errorView
      */
-    public LoadingDialogPageStatus(ILoadingDialog loadingDialog, View contentView, View emptyView, View errorView) {
+    public LoadingDialogPullPageStatus(ILoadingDialog loadingDialog, View contentView, View emptyView, View errorView) {
         mLoadingDialog = loadingDialog;
         mContentView = contentView;
         mEmptyView = emptyView;

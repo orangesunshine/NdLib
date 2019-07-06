@@ -5,12 +5,15 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.orange.lib.component.pull.IRefreshLoadmore;
 import com.orange.lib.component.pull.callback.IPullCallback;
+import com.orange.lib.mvp.model.net.common.netcancel.INetCancel;
+
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * SwipeRefreshLayout实现IRefreshLoadmore
  */
 public class SwipeRefreshLoadmore implements IRefreshLoadmore {
-    protected IFooter mFooter;
+    //    protected IFooter mFooter;
     protected SwipeRefreshLayout mRefreshLayout;
     protected RecyclerView mRecyclerView;
     protected IPullCallback mPullCallback;
@@ -19,27 +22,23 @@ public class SwipeRefreshLoadmore implements IRefreshLoadmore {
      * 构造方法
      *
      * @param refreshLayout
-     * @param footer
      * @param recyclerView
      */
-    public SwipeRefreshLoadmore(SwipeRefreshLayout refreshLayout, IFooter footer, RecyclerView recyclerView) {
+    public SwipeRefreshLoadmore(SwipeRefreshLayout refreshLayout, RecyclerView recyclerView) {
         mRefreshLayout = refreshLayout;
         mRecyclerView = recyclerView;
-        mFooter = footer;
     }
 
     /**
      * 构造方法
      *
      * @param refreshLayout
-     * @param footer
      * @param recyclerView
-     * @param pullCallback      刷新、加载回调
+     * @param pullCallback  刷新、加载回调
      */
-    public SwipeRefreshLoadmore(SwipeRefreshLayout refreshLayout, IFooter footer, RecyclerView recyclerView, IPullCallback pullCallback) {
+    public SwipeRefreshLoadmore(SwipeRefreshLayout refreshLayout, RecyclerView recyclerView, IPullCallback pullCallback) {
         mRefreshLayout = refreshLayout;
         mRecyclerView = recyclerView;
-        mFooter = footer;
         setPullCallback(pullCallback);
     }
 
@@ -49,21 +48,23 @@ public class SwipeRefreshLoadmore implements IRefreshLoadmore {
      * @param callback
      */
     @Override
-    public void setPullCallback(IPullCallback callback) {
+    public INetCancel setPullCallback(IPullCallback callback) {
         mPullCallback = callback;
+        AtomicReference<INetCancel> netCancel = new AtomicReference<>();
         if (null != mRefreshLayout)
             mRefreshLayout.setOnRefreshListener(() -> {
                 if (null != callback)
-                    callback.onPullRefresh();
+                    netCancel.set(callback.onPullRefresh());
             });
         if (null != mRecyclerView)
-            mRecyclerView.addOnScrollListener(new RecyclerOnScrollListener() {
+            mRecyclerView.addOnScrollListener(new RecyclerOnScrollListener(mRefreshLayout) {
                 @Override
                 public void onLoadMore() {
                     if (null != callback)
-                        callback.onPullLoadMore();
+                        netCancel.set(callback.onPullLoadMore());
                 }
             });
+        return netCancel.get();
     }
 
     /**
@@ -80,8 +81,6 @@ public class SwipeRefreshLoadmore implements IRefreshLoadmore {
      */
     @Override
     public void loadmore() {
-        if (null != mFooter)
-            mFooter.showLoading();
     }
 
     /**
@@ -92,7 +91,5 @@ public class SwipeRefreshLoadmore implements IRefreshLoadmore {
      */
     @Override
     public void enableLoadMore(boolean enable) {
-        if (null != mFooter)
-            mFooter.disableLoadmore();
     }
 }

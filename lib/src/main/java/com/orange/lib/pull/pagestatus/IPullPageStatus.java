@@ -1,9 +1,9 @@
-package com.orange.lib.component.pagestatus;
+package com.orange.lib.pull.pagestatus;
 
 /**
  * 页面状态：loading、content、empty、error
  */
-public interface IPageStatus {
+public interface IPullPageStatus {
     /**
      * 显示loading
      */

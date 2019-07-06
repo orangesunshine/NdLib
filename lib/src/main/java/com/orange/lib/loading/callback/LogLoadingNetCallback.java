@@ -1,4 +1,4 @@
-package com.orange.lib.mvp.model.net.callback;
+package com.orange.lib.loading.callback;
 
 import android.os.SystemClock;
 
@@ -12,7 +12,7 @@ import static com.orange.lib.constance.IFinalConst.LINE_SEPARATOR;
  *
  * @param <T>
  */
-public class DefaultNetCallback<T> implements INetCallback<T> {
+public class LogLoadingNetCallback<T> implements INetCallback<T> {
     private StringBuilder log = new StringBuilder();
     private String indentation = "\u3000\u3000";//缩进
     private long startTimeMills = 0;
@@ -46,13 +46,9 @@ public class DefaultNetCallback<T> implements INetCallback<T> {
 
     /**
      * 网络请求完成
-     *
-     * @param successs true:onSuccess,false:onError
-     * @param noData   没有更多数据：用于pull
-     * @param empty    结果数据为空
      */
     @Override
-    public void onComplete(boolean successs, boolean noData, boolean empty) {
+    public void onComplete() {
         if (IInitConst.sRecordNetLogSwitch) {
             log.append("onComplete: ");
             log.append(LINE_SEPARATOR).append(indentation).append("period: ").append(SystemClock.elapsedRealtime() - startTimeMills).append("ms");

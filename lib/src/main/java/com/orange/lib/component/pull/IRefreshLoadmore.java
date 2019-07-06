@@ -1,6 +1,7 @@
 package com.orange.lib.component.pull;
 
 import com.orange.lib.component.pull.callback.IPullCallback;
+import com.orange.lib.mvp.model.net.common.netcancel.INetCancel;
 
 public interface IRefreshLoadmore {
 
@@ -27,5 +28,5 @@ public interface IRefreshLoadmore {
      *
      * @param callback
      */
-    void setPullCallback(IPullCallback callback);
+    INetCancel setPullCallback(IPullCallback callback);
 }

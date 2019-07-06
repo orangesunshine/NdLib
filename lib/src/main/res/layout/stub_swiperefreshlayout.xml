@@ -16,4 +16,5 @@
 
         <include layout="@layout/stub_footer" />
     </LinearLayout>
+
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

@@ -2,8 +2,8 @@ package com.orange.lib.utils;
 
 import androidx.core.util.Preconditions;
 
-import com.orange.lib.mvp.model.net.callback.INetCallback;
-import com.orange.lib.mvp.model.net.pull.IPageNetRequest;
+import com.orange.lib.loading.callback.INetCallback;
+import com.orange.lib.pull.request.IPageNetRequest;
 import com.orange.lib.mvp.presenter.BasePresenter;
 import com.orange.lib.mvp.view.activity.PresenterActivity;
 

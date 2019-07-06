@@ -1,14 +1,20 @@
 package com.orange.ndlib.activity.base;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.orange.lib.activity.BaseActivity;
 import com.orange.lib.component.recyclerview.IConvertRecyclerView;
-import com.orange.lib.component.recyclerview.RecyclerViewHolder;
-import com.orange.lib.mvp.model.net.callback.INetCallback;
-import com.orange.lib.mvp.model.net.pull.IPageNetRequest;
+import com.orange.lib.constance.IFinalConst;
+import com.orange.lib.mvp.model.net.common.netcancel.INetCancel;
+import com.orange.lib.pull.callback.IPullNetCallback;
+import com.orange.lib.pull.pagestatus.IPullPageStatus;
+import com.orange.lib.pull.pagestatus.LoadingDialogPullPageStatus;
+import com.orange.lib.pull.request.IPageNetRequest;
 import com.orange.lib.utils.NetUtils;
 import com.orange.ndlib.R;
 import com.orange.ndlib.response.PullDemoData;
-import com.orange.thirdparty.retrofit.RetrofitUrlApi;
+import com.orange.thirdparty.retrofit.api.pull.RetrofitPullUrlApi;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -30,21 +36,21 @@ public class BaseActivitySwipePullDemo extends BaseActivity {
     @Override
     protected void init() {
         super.init();
-        mActbar.setTitle(TAG);
+        IPullPageStatus pullPageStatus = new LoadingDialogPullPageStatus(mLoading, mHolder);
+        RecyclerView recyclerView = mHolder.getView(R.id.recyclerview);
+        recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
         NetUtils.swipePullAdapterNetData(mHolder, android.R.layout.activity_list_item, new IPageNetRequest<PullDemoData>() {
             @Override
-            public void request(int pageIndex, Type type, INetCallback<PullDemoData> callback) {
+            public INetCancel request(int pageIndex, Type type, IPullNetCallback<PullDemoData> callback) {
                 HashMap<String, String> params = new HashMap<>();
-                params.put("count", "20");
-                params.put("pageIndex", "2");
-                RetrofitUrlApi.getInstance().postPull("http://localhost:8080/ifc/pull", params, type, callback);
+                params.put("count", "30");
+                params.put("pageIndex", String.valueOf(pageIndex));
+                return RetrofitPullUrlApi.getInstance().postPull(IFinalConst.sBaseUrl + "/ifc/pull", params, type, callback);
             }
-        }, new IConvertRecyclerView<String>() {
-            @Override
-            public void convert(RecyclerViewHolder holder, String item, boolean selected) {
-                holder.setImageResource(android.R.id.icon, R.drawable.ic_launcher_background);
-                holder.setText(android.R.id.text1, item);
-            }
+        }, (IConvertRecyclerView<String>) (holder, item, selected) -> {
+            holder.setImageResource(android.R.id.icon, R.drawable.ic_launcher_background);
+            holder.setText(android.R.id.text1, item);
         });
+
     }
 }

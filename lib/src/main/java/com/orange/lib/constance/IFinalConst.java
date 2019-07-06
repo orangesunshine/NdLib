@@ -8,7 +8,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 public interface IFinalConst {
-    String sBaseUrl = "";
+    String sBaseUrl = "http://localhost:8080";
     String FRAGMENT_LOADING_DIALOG = "fragment_loading_dialog";//loadingDilog TAG
 
     //activity类型:base,buz,net,pullndloadmore

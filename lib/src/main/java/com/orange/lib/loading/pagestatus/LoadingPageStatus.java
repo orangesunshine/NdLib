@@ -1,4 +1,4 @@
-package com.orange.lib.component.pagestatus;
+package com.orange.lib.loading.pagestatus;
 
 import android.view.View;
 
@@ -9,7 +9,6 @@ import com.orange.lib.utils.ViewUtils;
 public class LoadingPageStatus implements IPageStatus {
     private View mLoadView;//菊花
     private View mContentView;//content页面
-    private View mEmptyView;//空页面
     private View mErrorView;//错误页面
 
     /**
@@ -18,7 +17,7 @@ public class LoadingPageStatus implements IPageStatus {
      * @param holder
      */
     public LoadingPageStatus(IHolder holder) {
-        this(holder.getView(R.id.loading_id), holder.getView(R.id.content_id), holder.getView(R.id.empty_id), holder.getView(R.id.error_id));
+        this(holder.getView(R.id.loading_id), holder.getView(R.id.content_id), holder.getView(R.id.error_id));
     }
 
     /**
@@ -26,13 +25,11 @@ public class LoadingPageStatus implements IPageStatus {
      *
      * @param loadView    loading页面
      * @param contentView content页面
-     * @param emptyView   空页面
      * @param errorView   错误页面
      */
-    public LoadingPageStatus(View loadView, View contentView, View emptyView, View errorView) {
+    public LoadingPageStatus(View loadView, View contentView, View errorView) {
         mLoadView = loadView;
         mContentView = contentView;
-        mEmptyView = emptyView;
         mErrorView = errorView;
         showContent();
     }
@@ -44,7 +41,6 @@ public class LoadingPageStatus implements IPageStatus {
     public void showLoading() {
         ViewUtils.setVisible(mLoadView, true);
         ViewUtils.setVisible(mContentView, false);
-        ViewUtils.setVisible(mEmptyView, false);
         ViewUtils.setVisible(mErrorView, false);
     }
 
@@ -55,18 +51,6 @@ public class LoadingPageStatus implements IPageStatus {
     public void showContent() {
         ViewUtils.setVisible(mLoadView, false);
         ViewUtils.setVisible(mContentView, true);
-        ViewUtils.setVisible(mEmptyView, false);
-        ViewUtils.setVisible(mErrorView, false);
-    }
-
-    /**
-     * 显示empty
-     */
-    @Override
-    public void showEmpty() {
-        ViewUtils.setVisible(mLoadView, false);
-        ViewUtils.setVisible(mContentView, false);
-        ViewUtils.setVisible(mEmptyView, true);
         ViewUtils.setVisible(mErrorView, false);
     }
 
@@ -77,7 +61,6 @@ public class LoadingPageStatus implements IPageStatus {
     public void showError() {
         ViewUtils.setVisible(mLoadView, false);
         ViewUtils.setVisible(mContentView, false);
-        ViewUtils.setVisible(mEmptyView, false);
         ViewUtils.setVisible(mErrorView, true);
     }
 }

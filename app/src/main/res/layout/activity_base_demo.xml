@@ -33,12 +33,6 @@
                 android:text="loading" />
 
             <Button
-                android:id="@+id/btn_empty"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="empty" />
-
-            <Button
                 android:id="@+id/btn_error"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -62,12 +56,6 @@
                 android:layout_height="wrap_content"
                 android:text="pull_net" />
         </LinearLayout>
-
-        <ViewStub
-            android:id="@+id/stub_empty"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inflatedId="@+id/empty_id" />
 
         <ViewStub
             android:id="@+id/stub_error"

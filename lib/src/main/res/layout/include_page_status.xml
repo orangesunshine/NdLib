@@ -16,12 +16,6 @@
         android:inflatedId="@id/loading_id" />
 
     <ViewStub
-        android:id="@+id/stub_empty"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:inflatedId="@id/empty_id" />
-
-    <ViewStub
         android:id="@+id/stub_error"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
