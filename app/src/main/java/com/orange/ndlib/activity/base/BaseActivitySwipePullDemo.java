@@ -39,7 +39,7 @@ public class BaseActivitySwipePullDemo extends BaseActivity {
         IPullPageStatus pullPageStatus = new LoadingDialogPullPageStatus(mLoading, mHolder);
         RecyclerView recyclerView = mHolder.getView(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
-        NetUtils.swipePullAdapterNetData(mHolder, android.R.layout.activity_list_item, new IPageNetRequest<PullDemoData>() {
+        NetUtils.swipePullAdapterNetData(new IPageNetRequest<PullDemoData>() {
             @Override
             public INetCancel request(int pageIndex, Type type, IPullNetCallback<PullDemoData> callback) {
                 HashMap<String, String> params = new HashMap<>();
@@ -47,7 +47,7 @@ public class BaseActivitySwipePullDemo extends BaseActivity {
                 params.put("pageIndex", String.valueOf(pageIndex));
                 return RetrofitPullUrlApi.getInstance().postPull(IFinalConst.sBaseUrl + "/ifc/pull", params, type, callback);
             }
-        }, (IConvertRecyclerView<String>) (holder, item, selected) -> {
+        }, mHolder, android.R.layout.activity_list_item, (IConvertRecyclerView<String>) (holder, item, selected) -> {
             holder.setImageResource(android.R.id.icon, R.drawable.ic_launcher_background);
             holder.setText(android.R.id.text1, item);
         });

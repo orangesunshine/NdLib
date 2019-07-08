@@ -18,7 +18,7 @@ public class DefaultPullCallback implements IPullCallback {
     protected IPageNetRequest mPageNetRequest;
     private boolean mIsRunning;
 
-    public <T> DefaultPullCallback(View refreshLayout, IPageNetRequest<T> pageNetRequest, IPullNetCallback callback) {
+    public <T> DefaultPullCallback(IPageNetRequest<T> pageNetRequest, View refreshLayout, IPullNetCallback callback) {
         mType = ReflectionUtils.pageNetRequestGenericType(pageNetRequest);
         mPageNetRequest = pageNetRequest;
         mNetCallback = callback;

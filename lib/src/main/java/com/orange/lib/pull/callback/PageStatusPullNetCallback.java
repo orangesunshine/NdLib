@@ -1,48 +1,28 @@
 package com.orange.lib.pull.callback;
 
-import android.view.View;
-
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
+import com.orange.lib.common.convert.IPullConvert;
 import com.orange.lib.common.reponse.PullData;
-import com.orange.lib.component.recyclerview.CommonAdapter;
-import com.orange.lib.component.recyclerview.IConvertRecyclerView;
 import com.orange.lib.pull.pagestatus.IPullPageStatus;
-import com.orange.lib.utils.PageUtils;
 
 public class PageStatusPullNetCallback<ITEM> implements IPullNetCallback<PullData<ITEM>> {
     private IPullPageStatus mPageStatus;
-    protected SwipeRefreshLayout mRefreshLayout;
-    protected RecyclerView mRecyclerView;
-    protected View mEmptyView;
-    protected int mItemLayoutId;
-    protected IConvertRecyclerView<ITEM> mConvertRecyclerView;
+    private IPullConvert<ITEM> mPullConvert;
     private LogPullNetCallback mLogPullNetCallback = new LogPullNetCallback();
 
-    public PageStatusPullNetCallback(IPullPageStatus pageStatus, SwipeRefreshLayout refreshLayout, RecyclerView recyclerView, int itemLayoutId, IConvertRecyclerView<ITEM> convertRecyclerView, LogPullNetCallback logPullNetCallback) {
+    public PageStatusPullNetCallback(IPullPageStatus pageStatus, IPullConvert<ITEM> pullConvert) {
         mPageStatus = pageStatus;
-        mRefreshLayout = refreshLayout;
-        mRecyclerView = recyclerView;
-        mItemLayoutId = itemLayoutId;
-        mConvertRecyclerView = convertRecyclerView;
-        mLogPullNetCallback = logPullNetCallback;
-    }
-
-    public PageStatusPullNetCallback(IPullPageStatus pageStatus) {
-        mPageStatus = pageStatus;
+        mPullConvert = pullConvert;
     }
 
     /**
      * 成功
-     *
-     * @param t
      */
     @Override
     public void onSuccess(PullData<ITEM> pullResponse) {
         if (null != mLogPullNetCallback)
             mLogPullNetCallback.onSuccess(pullResponse);
-        CommonAdapter.adapterDatas(mRefreshLayout.getContext(), mRecyclerView, mEmptyView, mItemLayoutId, null == pullResponse ? null : pullResponse.getList(), PageUtils.isLoadmore(mRefreshLayout), mConvertRecyclerView);
+        if (null != mPullConvert)
+            mPullConvert.convert(pullResponse);
     }
 
     /**
@@ -52,7 +32,16 @@ public class PageStatusPullNetCallback<ITEM> implements IPullNetCallback<PullDat
      */
     @Override
     public void onComplete(boolean successs, boolean noData, boolean empty) {
-
+        if (null != mLogPullNetCallback)
+            mLogPullNetCallback.onComplete(successs, noData, empty);
+        if (null == mPageStatus) return;
+        if (!successs) {
+            mPageStatus.showError();
+        } else if (empty) {
+            mPageStatus.showEmpty();
+        } else {
+            mPageStatus.showContent();
+        }
     }
 
     /**
@@ -63,7 +52,7 @@ public class PageStatusPullNetCallback<ITEM> implements IPullNetCallback<PullDat
      */
     @Override
     public void onError(int code, Throwable error) {
-        if (null != mPageStatus)
-            mPageStatus.showError();
+        if (null != mLogPullNetCallback)
+            mLogPullNetCallback.onError(code, error);
     }
 }
