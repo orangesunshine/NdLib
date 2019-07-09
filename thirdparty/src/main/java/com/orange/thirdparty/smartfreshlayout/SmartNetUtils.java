@@ -35,6 +35,6 @@ public class SmartNetUtils {
      */
     public static <T> INetCancel smartPullAdapterNetData(SmartRefreshLayout refreshLayout, RecyclerView recyclerView, View emptyView, int itemLayoutId, IPageNetRequest<T> pageNetRequest, IConvertRecyclerView<T> convertRecyclerView) {
         IRefreshLoadmore refreshLoadmore = new SmartRefreshLoadmore(refreshLayout, recyclerView);
-        return refreshLoadmore.setPullCallback(new DefaultPullCallback(refreshLayout, pageNetRequest, new SmartRefreshNetCallback(refreshLayout, recyclerView, emptyView, itemLayoutId, convertRecyclerView)));
+        return refreshLoadmore.setPullCallback(new DefaultPullCallback(pageNetRequest, refreshLayout, new SmartRefreshNetCallback(refreshLayout, recyclerView, emptyView, itemLayoutId, convertRecyclerView)));
     }
 }

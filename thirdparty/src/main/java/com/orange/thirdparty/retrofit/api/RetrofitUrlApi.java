@@ -5,7 +5,7 @@ import androidx.core.util.Preconditions;
 import com.orange.lib.mvp.model.net.common.netcancel.INetCancel;
 import com.orange.lib.loading.callback.INetCallback;
 import com.orange.lib.loading.api.IUrlApi;
-import com.orange.thirdparty.retrofit.IRetrofitCommonApiCallback;
+import com.orange.thirdparty.retrofit.IRetrofitCommonApi;
 import com.orange.thirdparty.retrofit.RetrofitClient;
 import com.orange.thirdparty.retrofit.RetrofitNetCancel;
 import com.orange.thirdparty.retrofit.api.pull.RetrofitPullUrlApi;
@@ -45,7 +45,7 @@ public class RetrofitUrlApi implements IUrlApi {
     @Override
     public <T> INetCancel get(String url, Map<String, String> params, INetCallback<T> callback) {
         Preconditions.checkNotNull(mLoadingResponseBodyObserver);
-        Disposable subsribe = mLoadingResponseBodyObserver.subsribe(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApiCallback.class).get(url, params), callback);
+        Disposable subsribe = mLoadingResponseBodyObserver.subsribe(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApi.class).get(url, params), callback);
         return new RetrofitNetCancel(subsribe);
     }
 
@@ -60,7 +60,7 @@ public class RetrofitUrlApi implements IUrlApi {
     @Override
     public <T> INetCancel get(Map<String, String> headers, String url, Map<String, String> params, INetCallback<T> callback) {
         Preconditions.checkNotNull(mLoadingResponseBodyObserver);
-        Disposable subsribe = mLoadingResponseBodyObserver.subsribe(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApiCallback.class).get(headers, url, params), callback);
+        Disposable subsribe = mLoadingResponseBodyObserver.subsribe(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApi.class).get(headers, url, params), callback);
         return new RetrofitNetCancel(subsribe);
     }
 
@@ -74,7 +74,7 @@ public class RetrofitUrlApi implements IUrlApi {
     @Override
     public <T> INetCancel post(String url, Map<String, String> params, INetCallback<T> callback) {
         Preconditions.checkNotNull(mLoadingResponseBodyObserver);
-        Disposable subsribe = mLoadingResponseBodyObserver.subsribe(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApiCallback.class).post(url, params), callback);
+        Disposable subsribe = mLoadingResponseBodyObserver.subsribe(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApi.class).post(url, params), callback);
         return new RetrofitNetCancel(subsribe);
     }
 
@@ -89,7 +89,7 @@ public class RetrofitUrlApi implements IUrlApi {
     @Override
     public <T> INetCancel post(Map<String, String> headers, String url, Map<String, String> params, INetCallback<T> callback) {
         Preconditions.checkNotNull(mLoadingResponseBodyObserver);
-        Disposable subsribe = mLoadingResponseBodyObserver.subsribe(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApiCallback.class).post(headers, url, params), callback);
+        Disposable subsribe = mLoadingResponseBodyObserver.subsribe(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApi.class).post(headers, url, params), callback);
         return new RetrofitNetCancel(subsribe);
     }
 }

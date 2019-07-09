@@ -27,19 +27,25 @@
                 android:text="pull" />
 
             <Button
-                android:id="@+id/btn_pull_page"
+                android:id="@+id/btn_pull_convert"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="pull_page" />
+                android:text="pull_convert" />
+
+            <Button
+                android:id="@+id/btn_pull_holder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="pull_holder" />
+
+            <Button
+                android:id="@+id/btn_pull_holder_convert"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="pull_holder_convert" />
 
             <include layout="@layout/stub_swiperefreshlayout" />
         </LinearLayout>
-
-        <ViewStub
-            android:id="@+id/stub_loading"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inflatedId="@+id/loading_id" />
 
         <ViewStub
             android:id="@+id/stub_empty"

@@ -38,7 +38,7 @@ public class PullResponseBodyObserver {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<ResponseBody>() {
                     @Override
-                    public void accept(ResponseBody responseBody) throws Exception {
+                    public void accept(ResponseBody responseBody){
                         //响应数据onNext
                         if (null == responseBody) return;
                         T result = null;

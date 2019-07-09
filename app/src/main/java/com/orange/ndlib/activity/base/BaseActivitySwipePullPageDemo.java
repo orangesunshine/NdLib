@@ -8,12 +8,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.orange.lib.activity.BaseActivity;
 import com.orange.lib.common.convert.IPullConvert;
-import com.orange.lib.common.convert.PullConvert;
 import com.orange.lib.common.holder.IHolder;
 import com.orange.lib.common.reponse.PullData;
 import com.orange.lib.component.recyclerview.IConvertRecyclerView;
 import com.orange.lib.constance.IFinalConst;
-import com.orange.lib.loading.pagestatus.LoadingDialogPageStatus;
 import com.orange.lib.mvp.model.net.common.netcancel.INetCancel;
 import com.orange.lib.pull.callback.IPullNetCallback;
 import com.orange.lib.pull.pagestatus.LoadingDialogPullPageStatus;
@@ -26,7 +24,7 @@ import com.orange.thirdparty.retrofit.api.pull.RetrofitPullUrlApi;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 
-public class BaseActivitySwipePullDemo extends BaseActivity {
+public class BaseActivitySwipePullPageDemo extends BaseActivity {
     private INetCancel mNetCancel;
 
     /**
@@ -45,7 +43,7 @@ public class BaseActivitySwipePullDemo extends BaseActivity {
     @Override
     protected void init() {
         super.init();
-        new LoadingDialogPullPageStatus(mLoading,mHolder);
+        LoadingDialogPullPageStatus pageStatus = new LoadingDialogPullPageStatus(mLoading, mHolder);
         RecyclerView recyclerView = mHolder.getView(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
         mHolder.addOnItemChildClick(new IHolder.OnItemChildClickListener() {
@@ -53,7 +51,7 @@ public class BaseActivitySwipePullDemo extends BaseActivity {
             public void onItemChildClick(View v) {
                 switch (v.getId()) {
                     case R.id.btn_pull:
-                        mNetCancel = NetUtils.swipePullAdapterNetData(new IPageNetRequest<PullDemoData>() {
+                        mNetCancel = NetUtils.swipePullPageAdapterNetData(new IPageNetRequest<PullDemoData>() {
                             @Override
                             public INetCancel request(int pageIndex, Type type, IPullNetCallback<PullDemoData> callback) {
                                 HashMap<String, String> params = new HashMap<>();
@@ -61,13 +59,13 @@ public class BaseActivitySwipePullDemo extends BaseActivity {
                                 params.put("pageIndex", String.valueOf(pageIndex));
                                 return RetrofitPullUrlApi.getInstance().postPull(IFinalConst.sBaseUrl + "/ifc/pull", params, type, callback);
                             }
-                        }, mHolder.getView(R.id.refreshlayout), mHolder.getView(R.id.recyclerview), mHolder.getView(R.id.empty_id), android.R.layout.activity_list_item, (IConvertRecyclerView<String>) (holder, item, selected) -> {
+                        }, pageStatus, mHolder.getView(R.id.refreshlayout), mHolder.getView(R.id.recyclerview), mHolder.getView(R.id.empty_id), android.R.layout.activity_list_item, (IConvertRecyclerView<String>) (holder, item, selected) -> {
                             holder.setImageResource(android.R.id.icon, R.drawable.ic_launcher_background);
                             holder.setText(android.R.id.text1, item);
                         });
                         break;
                     case R.id.btn_pull_convert:
-                        mNetCancel = NetUtils.swipePullAdapterNetData(new IPageNetRequest<PullDemoData>() {
+                        mNetCancel = NetUtils.swipePullPageAdapterNetData(new IPageNetRequest<PullDemoData>() {
                             @Override
                             public INetCancel request(int pageIndex, Type type, IPullNetCallback<PullDemoData> callback) {
                                 HashMap<String, String> params = new HashMap<>();
@@ -75,7 +73,7 @@ public class BaseActivitySwipePullDemo extends BaseActivity {
                                 params.put("pageIndex", String.valueOf(pageIndex));
                                 return RetrofitPullUrlApi.getInstance().postPull(IFinalConst.sBaseUrl + "/ifc/pull", params, type, callback);
                             }
-                        }, mHolder.getView(R.id.refreshlayout), mHolder.getView(R.id.recyclerview), new IPullConvert<String>() {
+                        }, pageStatus, mHolder.getView(R.id.refreshlayout), mHolder.getView(R.id.recyclerview), new IPullConvert<String>() {
                             @Override
                             public void convert(PullData<String> pullResponse) {
                                 Toast.makeText(mActivity, "pullResponse", Toast.LENGTH_SHORT).show();
@@ -83,7 +81,7 @@ public class BaseActivitySwipePullDemo extends BaseActivity {
                         });
                         break;
                     case R.id.btn_pull_holder:
-                        mNetCancel = NetUtils.swipePullAdapterNetData(new IPageNetRequest<PullDemoData>() {
+                        mNetCancel = NetUtils.swipePullPageAdapterNetData(new IPageNetRequest<PullDemoData>() {
                             @Override
                             public INetCancel request(int pageIndex, Type type, IPullNetCallback<PullDemoData> callback) {
                                 HashMap<String, String> params = new HashMap<>();
@@ -91,13 +89,13 @@ public class BaseActivitySwipePullDemo extends BaseActivity {
                                 params.put("pageIndex", String.valueOf(pageIndex));
                                 return RetrofitPullUrlApi.getInstance().postPull(IFinalConst.sBaseUrl + "/ifc/pull", params, type, callback);
                             }
-                        }, mHolder, android.R.layout.activity_list_item, (IConvertRecyclerView<String>) (holder, item, selected) -> {
+                        }, pageStatus, mHolder, android.R.layout.activity_list_item, (IConvertRecyclerView<String>) (holder, item, selected) -> {
                             holder.setImageResource(android.R.id.icon, R.drawable.ic_launcher_background);
                             holder.setText(android.R.id.text1, item);
                         });
                         break;
                     case R.id.btn_pull_holder_convert:
-                        mNetCancel = NetUtils.swipePullAdapterNetData(new IPageNetRequest<PullDemoData>() {
+                        mNetCancel = NetUtils.swipePullPageAdapterNetData(new IPageNetRequest<PullDemoData>() {
                             @Override
                             public INetCancel request(int pageIndex, Type type, IPullNetCallback<PullDemoData> callback) {
                                 HashMap<String, String> params = new HashMap<>();
@@ -105,7 +103,7 @@ public class BaseActivitySwipePullDemo extends BaseActivity {
                                 params.put("pageIndex", String.valueOf(pageIndex));
                                 return RetrofitPullUrlApi.getInstance().postPull(IFinalConst.sBaseUrl + "/ifc/pull", params, type, callback);
                             }
-                        }, mHolder, new IPullConvert<String>() {
+                        }, pageStatus, mHolder, new IPullConvert<String>() {
                             @Override
                             public void convert(PullData<String> pullResponse) {
                                 Toast.makeText(mActivity, "pullResponse", Toast.LENGTH_SHORT).show();

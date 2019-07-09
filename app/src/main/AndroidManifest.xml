@@ -32,6 +32,7 @@
         <activity android:name=".activity.base.BaseActivityDemo"></activity>
         <activity android:name=".activity.base.BaseActivityLoadingDemo"></activity>
         <activity android:name=".activity.base.BaseActivitySwipePullDemo"></activity>
+        <activity android:name=".activity.base.BaseActivitySwipePullPageDemo"></activity>
         <activity android:name=".CocosWebActivity"></activity>
         <activity android:name=".activity.templete.TempleteDemoActivity" />
     </application>

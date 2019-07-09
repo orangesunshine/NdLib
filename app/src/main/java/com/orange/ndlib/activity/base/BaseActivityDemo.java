@@ -65,8 +65,11 @@ public class BaseActivityDemo extends BaseActivity {
                 case R.id.btn_net_pull:
                     ActivityUtils.launchActivity(mActivity, BaseActivitySwipePullDemo.class);
                     break;
+                case R.id.btn_net_pull_page:
+                    ActivityUtils.launchActivity(mActivity, BaseActivitySwipePullPageDemo.class);
+                    break;
             }
-        }, R.id.btn_content, R.id.btn_loading, R.id.btn_empty, R.id.btn_error, R.id.btn_actbar, R.id.btn_net_loading, R.id.btn_net_pull);
+        }, R.id.btn_content, R.id.btn_loading, R.id.btn_empty, R.id.btn_error, R.id.btn_actbar, R.id.btn_net_loading, R.id.btn_net_pull, R.id.btn_net_pull_page);
         mActbar.setActionBarCallback(new IActionBarCallback() {
             @Override
             public void onLeft() {

@@ -55,6 +55,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="pull_net" />
+
+            <Button
+                android:id="@+id/btn_net_pull_page"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="page_pull_net" />
         </LinearLayout>
 
         <ViewStub
