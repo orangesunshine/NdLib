@@ -1,4 +1,4 @@
-package com.orange.utils;
+package com.orange.utils.base;
 
 import android.app.Activity;
 import android.app.ActivityManager;

@@ -6,7 +6,7 @@ import com.orange.lib.R;
 import com.orange.lib.component.dialog.base.BaseDialog;
 import com.orange.lib.component.dialog.base.ViewHolder;
 import com.orange.lib.component.pagestatus.loading.dialogfragment.ILoadingDialogFragment;
-import com.orange.lib.constance.IFinalConst;
+import com.orange.lib.constance.IConst;
 
 public class LoadingDialog extends BaseDialog implements ILoadingDialogFragment {
     @Override
@@ -22,7 +22,7 @@ public class LoadingDialog extends BaseDialog implements ILoadingDialogFragment 
     @Override
     public void showLoading(FragmentManager manager) {
         if (null != manager)
-            show(manager, IFinalConst.FRAGMENT_LOADING_DIALOG);
+            show(manager, IConst.FRAGMENT_LOADING_DIALOG);
     }
 
     @Override

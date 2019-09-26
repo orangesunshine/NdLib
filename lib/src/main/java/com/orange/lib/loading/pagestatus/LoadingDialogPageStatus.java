@@ -5,8 +5,7 @@ import android.view.View;
 import com.orange.lib.R;
 import com.orange.lib.common.holder.IHolder;
 import com.orange.lib.component.pagestatus.loading.dialogfragment.ILoadingDialog;
-import com.orange.lib.loading.pagestatus.IPageStatus;
-import com.orange.lib.utils.ViewUtils;
+import com.orange.lib.utils.view.Views;
 
 /**
  * loadingdialog 实现
@@ -47,8 +46,8 @@ public class LoadingDialogPageStatus implements IPageStatus {
     public void showLoading() {
         if (null != mLoadingDialog)
             mLoadingDialog.showLoadingDialog();
-        ViewUtils.setVisible(mContentView, false);
-        ViewUtils.setVisible(mErrorView, false);
+        Views.setVisible(mContentView, false);
+        Views.setVisible(mErrorView, false);
     }
 
     /**
@@ -58,8 +57,8 @@ public class LoadingDialogPageStatus implements IPageStatus {
     public void showContent() {
         if (null != mLoadingDialog)
             mLoadingDialog.dismissLoadingDialog();
-        ViewUtils.setVisible(mContentView, true);
-        ViewUtils.setVisible(mErrorView, false);
+        Views.setVisible(mContentView, true);
+        Views.setVisible(mErrorView, false);
     }
 
     /**
@@ -69,7 +68,7 @@ public class LoadingDialogPageStatus implements IPageStatus {
     public void showError() {
         if (null != mLoadingDialog)
             mLoadingDialog.dismissLoadingDialog();
-        ViewUtils.setVisible(mContentView, false);
-        ViewUtils.setVisible(mErrorView, true);
+        Views.setVisible(mContentView, false);
+        Views.setVisible(mErrorView, true);
     }
 }

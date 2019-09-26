@@ -1,4 +1,4 @@
-package com.orange.lib.utils;
+package com.orange.lib.utils.net;
 
 
 import android.view.View;

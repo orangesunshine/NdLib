@@ -2,6 +2,10 @@ package com.orange.lib;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 /**
@@ -12,6 +16,10 @@ import static org.junit.Assert.*;
 public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() {
-        assertEquals(4, 2 + 2);
+        List<String> test = new ArrayList<String>(Arrays.asList(new String[]{"1", "2", "3", "4", "5"}));
+        for (String s : test) {
+            if ("3".equals(s)) test.remove(s);
+        }
+        System.out.println("test = " + test);
     }
 }

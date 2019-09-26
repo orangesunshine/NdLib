@@ -1,0 +1,18 @@
+ext {
+    applicationId = "com.orange.ndlib"
+    appName = "Ndlib"
+    compileSdkVersion = 28
+    minSdkVersion = 16
+    targetSdkVersion = 28
+    versionCode = 1
+    versionName = '1.0.0'
+
+
+    plugin = [
+            "com.android.tools.build:gradle:3.2.1",
+            "com.github.dcendents:android-maven-gradle-plugin:2.1",// 上传到 maven
+            "com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4",// 上传到 bintray
+    ]
+
+
+}

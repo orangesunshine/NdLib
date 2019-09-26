@@ -8,17 +8,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.orange.lib.activity.BaseActivity;
 import com.orange.lib.common.convert.IPullConvert;
-import com.orange.lib.common.convert.PullConvert;
 import com.orange.lib.common.holder.IHolder;
 import com.orange.lib.common.reponse.PullData;
 import com.orange.lib.component.recyclerview.IConvertRecyclerView;
-import com.orange.lib.constance.IFinalConst;
-import com.orange.lib.loading.pagestatus.LoadingDialogPageStatus;
+import com.orange.lib.constance.IConst;
 import com.orange.lib.mvp.model.net.common.netcancel.INetCancel;
 import com.orange.lib.pull.callback.IPullNetCallback;
 import com.orange.lib.pull.pagestatus.LoadingDialogPullPageStatus;
 import com.orange.lib.pull.request.IPageNetRequest;
-import com.orange.lib.utils.NetUtils;
+import com.orange.lib.utils.net.NetUtils;
 import com.orange.ndlib.R;
 import com.orange.ndlib.response.PullDemoData;
 import com.orange.thirdparty.retrofit.api.pull.RetrofitPullUrlApi;
@@ -59,7 +57,7 @@ public class BaseActivitySwipePullDemo extends BaseActivity {
                                 HashMap<String, String> params = new HashMap<>();
                                 params.put("count", "30");
                                 params.put("pageIndex", String.valueOf(pageIndex));
-                                return RetrofitPullUrlApi.getInstance().postPull(IFinalConst.sBaseUrl + "/ifc/pull", params, type, callback);
+                                return RetrofitPullUrlApi.getInstance().postPull(IConst.sBaseUrl + "/ifc/pull", params, type, callback);
                             }
                         }, mHolder.getView(R.id.refreshlayout), mHolder.getView(R.id.recyclerview), mHolder.getView(R.id.empty_id), android.R.layout.activity_list_item, (IConvertRecyclerView<String>) (holder, item, selected) -> {
                             holder.setImageResource(android.R.id.icon, R.drawable.ic_launcher_background);
@@ -73,7 +71,7 @@ public class BaseActivitySwipePullDemo extends BaseActivity {
                                 HashMap<String, String> params = new HashMap<>();
                                 params.put("count", "30");
                                 params.put("pageIndex", String.valueOf(pageIndex));
-                                return RetrofitPullUrlApi.getInstance().postPull(IFinalConst.sBaseUrl + "/ifc/pull", params, type, callback);
+                                return RetrofitPullUrlApi.getInstance().postPull(IConst.sBaseUrl + "/ifc/pull", params, type, callback);
                             }
                         }, mHolder.getView(R.id.refreshlayout), mHolder.getView(R.id.recyclerview), new IPullConvert<String>() {
                             @Override
@@ -89,7 +87,7 @@ public class BaseActivitySwipePullDemo extends BaseActivity {
                                 HashMap<String, String> params = new HashMap<>();
                                 params.put("count", "30");
                                 params.put("pageIndex", String.valueOf(pageIndex));
-                                return RetrofitPullUrlApi.getInstance().postPull(IFinalConst.sBaseUrl + "/ifc/pull", params, type, callback);
+                                return RetrofitPullUrlApi.getInstance().postPull(IConst.sBaseUrl + "/ifc/pull", params, type, callback);
                             }
                         }, mHolder, android.R.layout.activity_list_item, (IConvertRecyclerView<String>) (holder, item, selected) -> {
                             holder.setImageResource(android.R.id.icon, R.drawable.ic_launcher_background);
@@ -103,7 +101,7 @@ public class BaseActivitySwipePullDemo extends BaseActivity {
                                 HashMap<String, String> params = new HashMap<>();
                                 params.put("count", "30");
                                 params.put("pageIndex", String.valueOf(pageIndex));
-                                return RetrofitPullUrlApi.getInstance().postPull(IFinalConst.sBaseUrl + "/ifc/pull", params, type, callback);
+                                return RetrofitPullUrlApi.getInstance().postPull(IConst.sBaseUrl + "/ifc/pull", params, type, callback);
                             }
                         }, mHolder, new IPullConvert<String>() {
                             @Override

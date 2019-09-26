@@ -6,7 +6,7 @@ import com.orange.lib.pull.adapterpattern.PullNetCallbackAdapter;
 import com.orange.lib.mvp.model.net.common.netcancel.INetCancel;
 import com.orange.lib.pull.request.IPageNetRequest;
 import com.orange.lib.pull.callback.IPullNetCallback;
-import com.orange.lib.utils.PageUtils;
+import com.orange.lib.utils.pull.PageUtils;
 import com.orange.lib.utils.ReflectionUtils;
 
 import java.lang.reflect.Type;

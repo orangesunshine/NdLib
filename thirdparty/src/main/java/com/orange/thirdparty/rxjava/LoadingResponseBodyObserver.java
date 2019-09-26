@@ -7,7 +7,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.orange.lib.constance.IFinalConst;
+import com.orange.lib.constance.IConst;
 import com.orange.lib.loading.callback.INetCallback;
 import com.orange.lib.utils.CommonUtils;
 import com.orange.lib.utils.ReflectionUtils;
@@ -20,7 +20,7 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.ResponseBody;
 
-import static com.orange.lib.constance.IFinalConst.LINE_SEPARATOR;
+import static com.orange.lib.constance.IConst.LINE_SEPARATOR;
 
 public class LoadingResponseBodyObserver {
     private Gson mGson = new Gson();
@@ -38,7 +38,7 @@ public class LoadingResponseBodyObserver {
                         //响应数据onNext
                         if (null == responseBody) return;
                         T result = null;
-                        int code = IFinalConst.CODE_ERROR;
+                        int code = IConst.CODE_ERROR;
                         StringBuilder errorMsg = new StringBuilder();
                         String responseMsg = "";
                         try {
@@ -93,7 +93,7 @@ public class LoadingResponseBodyObserver {
                     public void accept(Throwable throwable) throws Exception {
                         //响应数据onError
                         if (null != netCallback) {
-                            netCallback.onError(IFinalConst.CODE_ERROR, throwable);
+                            netCallback.onError(IConst.CODE_ERROR, throwable);
                             netCallback.onComplete();
                         }
                     }

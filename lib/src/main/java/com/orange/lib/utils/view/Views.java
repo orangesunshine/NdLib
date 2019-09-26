@@ -1,4 +1,4 @@
-package com.orange.lib.utils;
+package com.orange.lib.utils.view;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -12,14 +12,12 @@ import android.graphics.Paint;
 import android.graphics.Shader;
 import android.os.Handler;
 import android.os.Looper;
-import android.text.Editable;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.util.Patterns;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,16 +26,15 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.StringRes;
 
 import com.orange.lib.R;
-import com.orange.lib.common.adapterpattern.TextWatcherAdapter;
 import com.orange.lib.common.globle.GlobleImpl;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class ViewUtils {
-    public static final String TAG_COPY = "tag_copy";
+import static com.orange.lib.constance.ITag.TAG_COPY;
 
+public class Views {
     /**
      * 设置文本
      *

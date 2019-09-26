@@ -1,7 +1,7 @@
 package com.orange.lib.common.reponse;
 
 
-import com.orange.lib.constance.IFinalConst;
+import com.orange.lib.constance.IConst;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ public interface PullData<ITEM> {
         boolean noMoreData = true;
         List<ITEM> list = getList();
         if (null == list) return noMoreData;
-        if (list.size() > IFinalConst.PULL_ITEM_COUNT)
+        if (list.size() > IConst.PULL_ITEM_COUNT)
             noMoreData = false;
         return noMoreData;
     }

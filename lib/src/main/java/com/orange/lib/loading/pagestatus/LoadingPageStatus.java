@@ -4,7 +4,7 @@ import android.view.View;
 
 import com.orange.lib.R;
 import com.orange.lib.common.holder.IHolder;
-import com.orange.lib.utils.ViewUtils;
+import com.orange.lib.utils.view.Views;
 
 public class LoadingPageStatus implements IPageStatus {
     private View mLoadView;//菊花
@@ -39,9 +39,9 @@ public class LoadingPageStatus implements IPageStatus {
      */
     @Override
     public void showLoading() {
-        ViewUtils.setVisible(mLoadView, true);
-        ViewUtils.setVisible(mContentView, false);
-        ViewUtils.setVisible(mErrorView, false);
+        Views.setVisible(mLoadView, true);
+        Views.setVisible(mContentView, false);
+        Views.setVisible(mErrorView, false);
     }
 
     /**
@@ -49,9 +49,9 @@ public class LoadingPageStatus implements IPageStatus {
      */
     @Override
     public void showContent() {
-        ViewUtils.setVisible(mLoadView, false);
-        ViewUtils.setVisible(mContentView, true);
-        ViewUtils.setVisible(mErrorView, false);
+        Views.setVisible(mLoadView, false);
+        Views.setVisible(mContentView, true);
+        Views.setVisible(mErrorView, false);
     }
 
     /**
@@ -59,8 +59,8 @@ public class LoadingPageStatus implements IPageStatus {
      */
     @Override
     public void showError() {
-        ViewUtils.setVisible(mLoadView, false);
-        ViewUtils.setVisible(mContentView, false);
-        ViewUtils.setVisible(mErrorView, true);
+        Views.setVisible(mLoadView, false);
+        Views.setVisible(mContentView, false);
+        Views.setVisible(mErrorView, true);
     }
 }

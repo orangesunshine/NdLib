@@ -1,4 +1,4 @@
-package com.orange.lib.utils;
+package com.orange.lib.utils.text;
 
 import android.graphics.Color;
 import android.text.SpannableString;

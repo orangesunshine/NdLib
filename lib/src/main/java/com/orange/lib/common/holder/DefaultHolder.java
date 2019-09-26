@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.ColorInt;
 import androidx.annotation.StringRes;
 
-import com.orange.lib.utils.ViewUtils;
+import com.orange.lib.utils.view.Views;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,8 +19,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class DefaultHolder implements IHolder {
+import static com.orange.lib.constance.ITag.TAG_HOLDER;
 
+public class DefaultHolder implements IHolder {
     //所有控件的集合
     protected SparseArray<View> mViews;
     protected View itemView;
@@ -45,7 +46,7 @@ public class DefaultHolder implements IHolder {
         this.itemView = itemView;
         mViews = new SparseArray<>();
         //构造方法中就指定布局
-        itemView.setTag(this);
+        itemView.setTag(TAG_HOLDER, this);
     }
 
     /**
@@ -108,7 +109,7 @@ public class DefaultHolder implements IHolder {
      */
     @Override
     public IHolder setText(TextView tv, CharSequence text) {
-        ViewUtils.setText(tv, text);
+        Views.setText(tv, text);
         return this;
     }
 
@@ -132,7 +133,7 @@ public class DefaultHolder implements IHolder {
      */
     @Override
     public IHolder setText(TextView tv, @StringRes int stringRes) {
-        ViewUtils.setText(tv, stringRes);
+        Views.setText(tv, stringRes);
         return this;
     }
 
@@ -158,7 +159,7 @@ public class DefaultHolder implements IHolder {
      */
     @Override
     public IHolder setTextSize(TextView tv, float size) {
-        ViewUtils.setTextSize(tv, size);
+        Views.setTextSize(tv, size);
         return this;
     }
 
@@ -184,7 +185,7 @@ public class DefaultHolder implements IHolder {
      */
     @Override
     public IHolder setTextColor(TextView tv, @ColorInt int color) {
-        ViewUtils.setTextColor(tv, color);
+        Views.setTextColor(tv, color);
         return this;
     }
 
@@ -210,7 +211,7 @@ public class DefaultHolder implements IHolder {
      */
     @Override
     public IHolder setImageResource(ImageView iv, int resId) {
-        ViewUtils.setImageResource(iv, resId);
+        Views.setImageResource(iv, resId);
         return this;
     }
 
@@ -236,7 +237,7 @@ public class DefaultHolder implements IHolder {
      */
     @Override
     public IHolder setBackgroundResource(View view, int resId) {
-        ViewUtils.setBackgroundResource(view, resId);
+        Views.setBackgroundResource(view, resId);
         return this;
     }
 
@@ -287,7 +288,7 @@ public class DefaultHolder implements IHolder {
      */
     @Override
     public IHolder setVisible(View view, boolean visible) {
-        ViewUtils.setVisible(view, visible);
+        Views.setVisible(view, visible);
         return this;
     }
 
@@ -313,7 +314,7 @@ public class DefaultHolder implements IHolder {
      */
     @Override
     public IHolder setSelect(View view, boolean selected) {
-        ViewUtils.setSelect(view, selected);
+        Views.setSelect(view, selected);
         return this;
     }
 

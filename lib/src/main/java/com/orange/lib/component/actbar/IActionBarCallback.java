@@ -9,7 +9,7 @@ public interface IActionBarCallback {
     /**
      * 标题栏标题事件
      */
-    void onCenter();
+    void onTitle();
 
     /**
      * 标题栏右侧事件

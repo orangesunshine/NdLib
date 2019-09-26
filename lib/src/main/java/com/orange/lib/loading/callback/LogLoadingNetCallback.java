@@ -5,7 +5,7 @@ import android.os.SystemClock;
 
 import com.orange.lib.constance.IInitConst;
 
-import static com.orange.lib.constance.IFinalConst.LINE_SEPARATOR;
+import static com.orange.lib.constance.IConst.LINE_SEPARATOR;
 
 /**
  * 网络请求回调默认实现

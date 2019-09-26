@@ -6,6 +6,7 @@ import com.orange.lib.loading.callback.INetCallback;
 import com.orange.lib.pull.request.IPageNetRequest;
 import com.orange.lib.mvp.presenter.BasePresenter;
 import com.orange.lib.mvp.view.activity.PresenterActivity;
+import com.orange.lib.utils.text.TextUtils;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;

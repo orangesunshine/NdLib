@@ -77,8 +77,8 @@ public class BaseActivityDemo extends BaseActivity {
             }
 
             @Override
-            public void onCenter() {
-                Toast.makeText(mActivity, "onCenter", Toast.LENGTH_SHORT).show();
+            public void onTitle() {
+                Toast.makeText(mActivity, "onTitle", Toast.LENGTH_SHORT).show();
             }
 
             @Override

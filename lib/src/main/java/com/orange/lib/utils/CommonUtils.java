@@ -1,7 +1,7 @@
 package com.orange.lib.utils;
 
 
-import com.orange.lib.constance.IFinalConst;
+import com.orange.lib.constance.IConst;
 
 public class CommonUtils {
     /**
@@ -11,6 +11,6 @@ public class CommonUtils {
      * @return
      */
     public static boolean checkCodeSuccess(int code) {
-        return IFinalConst.CODE_SUCCESS == code;
+        return IConst.CODE_SUCCESS == code;
     }
 }

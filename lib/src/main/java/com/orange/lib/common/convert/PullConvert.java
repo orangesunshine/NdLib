@@ -10,7 +10,7 @@ import com.orange.lib.common.holder.IHolder;
 import com.orange.lib.common.reponse.PullData;
 import com.orange.lib.component.recyclerview.CommonAdapter;
 import com.orange.lib.component.recyclerview.IConvertRecyclerView;
-import com.orange.lib.utils.PageUtils;
+import com.orange.lib.utils.pull.PageUtils;
 
 public class PullConvert<ITEM> implements IPullConvert<ITEM> {
     protected SwipeRefreshLayout mRefreshLayout;

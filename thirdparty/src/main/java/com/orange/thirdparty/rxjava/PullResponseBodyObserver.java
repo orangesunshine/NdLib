@@ -10,7 +10,7 @@ import com.google.gson.JsonParser;
 import com.google.gson.TypeAdapter;
 import com.google.gson.reflect.TypeToken;
 import com.orange.lib.common.reponse.PullData;
-import com.orange.lib.constance.IFinalConst;
+import com.orange.lib.constance.IConst;
 import com.orange.lib.pull.callback.IPullNetCallback;
 import com.orange.lib.utils.CommonUtils;
 
@@ -42,7 +42,7 @@ public class PullResponseBodyObserver {
                         //响应数据onNext
                         if (null == responseBody) return;
                         T result = null;
-                        int code = IFinalConst.CODE_ERROR;
+                        int code = IConst.CODE_ERROR;
                         StringBuilder errorMsg = new StringBuilder();
                         String responseMsg = "";
                         try {
@@ -102,7 +102,7 @@ public class PullResponseBodyObserver {
                     public void accept(Throwable throwable) throws Exception {
                         //响应数据onError
                         if (null != netCallback) {
-                            netCallback.onError(IFinalConst.CODE_ERROR, throwable);
+                            netCallback.onError(IConst.CODE_ERROR, throwable);
                             netCallback.onComplete(false, true, true);
                         }
                     }

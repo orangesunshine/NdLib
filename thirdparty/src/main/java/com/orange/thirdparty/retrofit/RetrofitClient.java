@@ -2,7 +2,7 @@ package com.orange.thirdparty.retrofit;
 
 import android.text.TextUtils;
 
-import com.orange.lib.constance.IFinalConst;
+import com.orange.lib.constance.IConst;
 import com.orange.lib.constance.IInitConst;
 
 import okhttp3.OkHttpClient;
@@ -31,7 +31,7 @@ public class RetrofitClient {
                     if (TextUtils.isEmpty(baseUrl) && !TextUtils.isEmpty(finalBaseUrl))
                         baseUrl = finalBaseUrl;
                     if (TextUtils.isEmpty(baseUrl))
-                        baseUrl = IFinalConst.sBaseUrl;
+                        baseUrl = IConst.sBaseUrl;
                     client.baseUrl(baseUrl);
                     sInstance = client.build();
                 }

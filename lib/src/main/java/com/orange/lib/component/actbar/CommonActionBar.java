@@ -40,7 +40,7 @@ public class CommonActionBar implements IActionBar {
                     mActionBarCallback.onLeft();
             } else if (i == R.id.fl_title_actbar) {
                 if (null != mActionBarCallback)
-                    mActionBarCallback.onCenter();
+                    mActionBarCallback.onTitle();
             } else if (i == R.id.fl_right_actbar) {
                 if (null != mActionBarCallback)
                     mActionBarCallback.onRight();

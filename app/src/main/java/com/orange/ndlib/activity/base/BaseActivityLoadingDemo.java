@@ -5,12 +5,12 @@ import android.view.View;
 import com.orange.lib.activity.BaseActivity;
 import com.orange.lib.common.convert.IConvert;
 import com.orange.lib.common.holder.IHolder;
-import com.orange.lib.constance.IFinalConst;
+import com.orange.lib.constance.IConst;
 import com.orange.lib.loading.pagestatus.IPageStatus;
 import com.orange.lib.loading.pagestatus.LoadingDialogPageStatus;
 import com.orange.lib.loading.callback.PageStatusNetCallback;
 import com.orange.lib.mvp.model.net.common.netcancel.INetCancel;
-import com.orange.lib.utils.NetUtils;
+import com.orange.lib.utils.net.NetUtils;
 import com.orange.ndlib.R;
 import com.orange.thirdparty.retrofit.api.RetrofitUrlApi;
 
@@ -60,7 +60,7 @@ public class BaseActivityLoadingDemo extends BaseActivity {
                         });
                         break;
                     case R.id.btn_loading_page_convert:
-                        mNetCancel = NetUtils.loadingNetData(callback -> RetrofitUrlApi.getInstance().post(IFinalConst.sBaseUrl + "/ifc/loading", new HashMap<>(), callback), pageStatus, (IConvert<String>) data -> {
+                        mNetCancel = NetUtils.loadingNetData(callback -> RetrofitUrlApi.getInstance().post(IConst.sBaseUrl + "/ifc/loading", new HashMap<>(), callback), pageStatus, (IConvert<String>) data -> {
                             mHolder.setText(R.id.tv_content, data);
                         });
                         break;

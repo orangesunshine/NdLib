@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import androidx.core.util.Preconditions;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.orange.lib.utils.ViewUtils;
+import com.orange.lib.utils.view.Views;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -363,8 +363,8 @@ public class CommonAdapter<ITEM> extends RecyclerView.Adapter<RecyclerViewHolder
 
         @Override
         public void empty(boolean empty) {
-            ViewUtils.setVisible(rv, !empty);
-            ViewUtils.setVisible(emtpy, empty);
+            Views.setVisible(rv, !empty);
+            Views.setVisible(emtpy, empty);
         }
     }
 }

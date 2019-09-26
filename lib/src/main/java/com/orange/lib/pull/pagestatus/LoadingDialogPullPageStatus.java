@@ -5,9 +5,7 @@ import android.view.View;
 import com.orange.lib.R;
 import com.orange.lib.common.holder.IHolder;
 import com.orange.lib.component.pagestatus.loading.dialogfragment.ILoadingDialog;
-import com.orange.lib.loading.pagestatus.IPageStatus;
-import com.orange.lib.pull.pagestatus.IPullPageStatus;
-import com.orange.lib.utils.ViewUtils;
+import com.orange.lib.utils.view.Views;
 
 /**
  * loadingdialog 实现
@@ -51,9 +49,9 @@ public class LoadingDialogPullPageStatus implements IPullPageStatus {
     public void showLoading() {
         if (null != mLoadingDialog)
             mLoadingDialog.showLoadingDialog();
-        ViewUtils.setVisible(mContentView, false);
-        ViewUtils.setVisible(mEmptyView, false);
-        ViewUtils.setVisible(mErrorView, false);
+        Views.setVisible(mContentView, false);
+        Views.setVisible(mEmptyView, false);
+        Views.setVisible(mErrorView, false);
     }
 
     /**
@@ -63,9 +61,9 @@ public class LoadingDialogPullPageStatus implements IPullPageStatus {
     public void showContent() {
         if (null != mLoadingDialog)
             mLoadingDialog.dismissLoadingDialog();
-        ViewUtils.setVisible(mContentView, true);
-        ViewUtils.setVisible(mEmptyView, false);
-        ViewUtils.setVisible(mErrorView, false);
+        Views.setVisible(mContentView, true);
+        Views.setVisible(mEmptyView, false);
+        Views.setVisible(mErrorView, false);
     }
 
     /**
@@ -75,9 +73,9 @@ public class LoadingDialogPullPageStatus implements IPullPageStatus {
     public void showEmpty() {
         if (null != mLoadingDialog)
             mLoadingDialog.dismissLoadingDialog();
-        ViewUtils.setVisible(mContentView, false);
-        ViewUtils.setVisible(mEmptyView, true);
-        ViewUtils.setVisible(mErrorView, false);
+        Views.setVisible(mContentView, false);
+        Views.setVisible(mEmptyView, true);
+        Views.setVisible(mErrorView, false);
     }
 
     /**
@@ -87,8 +85,8 @@ public class LoadingDialogPullPageStatus implements IPullPageStatus {
     public void showError() {
         if (null != mLoadingDialog)
             mLoadingDialog.dismissLoadingDialog();
-        ViewUtils.setVisible(mContentView, false);
-        ViewUtils.setVisible(mEmptyView, false);
-        ViewUtils.setVisible(mErrorView, true);
+        Views.setVisible(mContentView, false);
+        Views.setVisible(mEmptyView, false);
+        Views.setVisible(mErrorView, true);
     }
 }

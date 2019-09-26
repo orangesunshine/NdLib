@@ -42,7 +42,9 @@ dependencies {
     testImplementation 'junit:junit:4.13-beta-3'
     androidTestImplementation "androidx.test:runner:${RUNNER}"
     androidTestImplementation "androidx.test.espresso:espresso-core:${ESPRESSOCORE}"
+    implementation project(path: ':lib')
 
+    //三方
     implementation "cn.jiguang.sdk:jmessage:${JPUSH_JMESSAGE}"  // 此处以JMessage 2.8.2 版本为例。
     implementation "cn.jiguang.sdk:jcore:${JPUSH_JCORE}"  // 此处以JCore 1.2.7 版本为例。
     //implementation "com.stephentuso:welcome:${STEPHENTUSO_WELCOME}"
@@ -67,5 +69,5 @@ dependencies {
     implementation "com.squareup.retrofit2:adapter-rxjava2:${RETROFIT}"
     implementation "io.reactivex.rxjava2:rxandroid:${RXANDROID}"
     implementation "com.squareup.okhttp3:logging-interceptor:${LOGGINGINTERCEPTOR}"
-    implementation project(path: ':lib')
+    implementation 'org.aspectj:aspectjrt:1.8.9'
 }

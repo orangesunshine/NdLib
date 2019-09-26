@@ -7,9 +7,10 @@ import androidx.annotation.IntDef;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-public interface IFinalConst {
+public interface IConst {
     String sBaseUrl = "http://localhost:8080";
     String FRAGMENT_LOADING_DIALOG = "fragment_loading_dialog";//loadingDilog TAG
+
 
     //activity类型:base,buz,net,pullndloadmore
     int ACTIVITY_TYPE_BASE = 0x0001;
@@ -17,10 +18,21 @@ public interface IFinalConst {
     int ACTIVITY_TYPE_NET = 0x0003;
     int ACTIVITY_TYPE_PULLNDLOADMORE = 0x0004;
 
+    //换行符
+    String LINE_SEPARATOR = System.getProperty("line.separator");
+
+    //日志默认tag
+    String TAG_DEFAULT = "tag_default";
+
+    ///////////////////////////////////////////////////////////////////////////
+    // view相关
+    ///////////////////////////////////////////////////////////////////////////
     //duration
     int DURATION_TOAST_DEFAULT = Toast.LENGTH_SHORT;
 
-    //网络请求类型
+    ///////////////////////////////////////////////////////////////////////////
+    // 网络
+    ///////////////////////////////////////////////////////////////////////////
     int REQUEST_BY_GET = 0x001;
     int REQUEST_BY_POST = 0x002;
 
@@ -31,12 +43,10 @@ public interface IFinalConst {
     //pull每次请求数据条数
     int PULL_ITEM_COUNT = 10;
 
-    //换行符
-    String LINE_SEPARATOR = System.getProperty("line.separator");
-
     //刷新|加载
     int TYPE_REFRESH = 0x001;
     int TYPE_LOADMORE = 0x002;
+
     @IntDef({TYPE_REFRESH, TYPE_LOADMORE})
     @Retention(RetentionPolicy.SOURCE)
     @interface PullType {
