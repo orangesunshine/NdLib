@@ -1,4 +1,4 @@
-package com.orange.lib.loading.adapterpattern;
+package com.orange.lib.common.adapterpattern;
 
 import com.orange.lib.loading.callback.INetCallback;
 

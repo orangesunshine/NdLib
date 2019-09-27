@@ -154,7 +154,7 @@ public class NetUtils {
      * @param pageNetRequest 网络请求
      * @param refreshLayout  下拉、加载
      * @param recyclerView   结果处理
-     * @param pullConvert       结果处理
+     * @param pullConvert    结果处理
      * @param <ITEM>         列表项
      * @return
      */

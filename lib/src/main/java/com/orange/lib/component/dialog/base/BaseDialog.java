@@ -33,7 +33,7 @@ public abstract class BaseDialog extends DialogFragment {
     private boolean mShowBottomEnable;//是否底部显示
     private int mMargin = 0;//左右边距
     private int mAnimStyle = 0;//进入退出动画
-    private boolean mOutCancel = true;//点击外部取消
+    private boolean mOutCancel = false;//点击外部取消
     private int mWidth;
     private int mHeight;
 

@@ -2,7 +2,7 @@ package com.orange.lib.component.pull.callback;
 
 import android.view.View;
 
-import com.orange.lib.pull.adapterpattern.PullNetCallbackAdapter;
+import com.orange.lib.common.adapterpattern.PullNetCallbackAdapter;
 import com.orange.lib.mvp.model.net.common.netcancel.INetCancel;
 import com.orange.lib.pull.request.IPageNetRequest;
 import com.orange.lib.pull.callback.IPullNetCallback;

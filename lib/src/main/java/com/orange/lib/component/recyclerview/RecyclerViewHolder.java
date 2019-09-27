@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.StringRes;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.orange.lib.common.holder.DefaultHolder;
+import com.orange.lib.common.holder.CommonHolder;
 import com.orange.lib.common.holder.IHolder;
 
 
@@ -32,7 +32,7 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder implements IHold
      */
     public RecyclerViewHolder(View itemView) {
         super(itemView);
-        mHolder = new DefaultHolder(itemView);
+        mHolder = new CommonHolder(itemView);
     }
 
     /**

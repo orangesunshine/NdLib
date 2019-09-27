@@ -1,4 +1,4 @@
-package com.orange.lib.component.recyclerview.popupwin;
+package com.orange.lib.component.popupwin;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -9,21 +9,23 @@ import android.view.WindowManager;
 import android.widget.PopupWindow;
 
 import com.orange.lib.R;
-import com.orange.lib.common.holder.DefaultHolder;
-import com.orange.lib.component.recyclerview.IConvertContentView;
+import com.orange.lib.common.convert.IHolderConvert;
+import com.orange.lib.common.holder.CommonHolder;
 
 public class CommonPopupWindow<T> {
     protected Context mContext;
     protected View mContentView;
     protected PopupWindow mInstance;
+    protected CommonHolder mHolder;
 
-    public CommonPopupWindow(Context context, int layoutRes, T data, IConvertContentView<T> convertViewHolder) {
+    public CommonPopupWindow(Context context, int layoutRes, T data, IHolderConvert<T> convertViewHolder) {
         mContext = context;
         mContentView = LayoutInflater.from(context).inflate(layoutRes, null, false);
         mInstance = new PopupWindow(mContentView, WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT, true);
         initWindow();
+        mHolder = new CommonHolder(mContentView);
         if (null != convertViewHolder)
-            convertViewHolder.convert(new DefaultHolder(mContentView), data);
+            convertViewHolder.convert(mHolder, data);
     }
 
     public View getContentView() {

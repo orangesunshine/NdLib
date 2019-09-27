@@ -17,7 +17,7 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.orange.lib.common.convert.IHolderConvert;
-import com.orange.lib.common.holder.DefaultHolder;
+import com.orange.lib.common.holder.CommonHolder;
 import com.orange.lib.common.holder.IHolder;
 import com.orange.lib.utils.base.OnActivityDestroyListener;
 import com.orange.lib.utils.base.Preconditions;
@@ -105,7 +105,7 @@ public class CommonToast<T> {
         mLayoutId = layoutId;
         View contentView = LayoutInflater.from(context).inflate(layoutId, null);
         if (!Preconditions.isNull(contentView)) {
-            mHolder = new DefaultHolder(contentView);
+            mHolder = new CommonHolder(contentView);
             convert.convert(mHolder, data);
         }
         if (!Preconditions.isNull(mIToast))

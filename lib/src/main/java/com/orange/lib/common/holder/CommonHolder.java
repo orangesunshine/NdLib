@@ -20,9 +20,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static com.orange.lib.constance.ITag.TAG_HOLDER;
-
-public class DefaultHolder implements IHolder {
+public class CommonHolder implements IHolder {
     //所有控件的集合
     protected SparseArray<View> mViews;
     protected View itemView;
@@ -31,11 +29,25 @@ public class DefaultHolder implements IHolder {
     protected OnItemClickListener mOnItemClickListener;
 
     /**
-     * * 提供一个获取ViewHolder的方法
+     * 解析布局文件生成holder
+     *
+     * @param context
+     * @param parent
+     * @param layoutId
+     * @return
      */
-    public static DefaultHolder getDefaultHolder(Context context, ViewGroup parent, int layoutId) {
-        View itemView = LayoutInflater.from(context).inflate(layoutId, parent, false);
-        return new DefaultHolder(itemView);
+    public static CommonHolder create(Context context, ViewGroup parent, int layoutId) {
+        return create(LayoutInflater.from(context).inflate(layoutId, parent, false));
+    }
+
+    /**
+     * views生成holder
+     *
+     * @param view
+     * @return
+     */
+    public static CommonHolder create(View view) {
+        return new CommonHolder(view);
     }
 
     /**
@@ -43,7 +55,7 @@ public class DefaultHolder implements IHolder {
      *
      * @param itemView item
      */
-    public DefaultHolder(View itemView) {
+    public CommonHolder(View itemView) {
         this.itemView = itemView;
         mViews = new SparseArray<>();
         //构造方法中就指定布局

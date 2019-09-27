@@ -9,7 +9,7 @@ import android.widget.FrameLayout;
 import androidx.fragment.app.FragmentActivity;
 
 import com.orange.lib.R;
-import com.orange.lib.common.holder.DefaultHolder;
+import com.orange.lib.common.holder.CommonHolder;
 import com.orange.lib.common.holder.IHolder;
 import com.orange.lib.component.actbar.CommonActionBar;
 import com.orange.lib.component.actbar.IActionBar;
@@ -43,7 +43,7 @@ public abstract class BaseActivity extends FragmentActivity implements IView {
 
         FrameLayout content = getWindow().getDecorView().findViewById(android.R.id.content);
 
-        mHolder = new DefaultHolder(content);//控件容器
+        mHolder = new CommonHolder(content);//控件容器
 
         attachView(content);//视图
 

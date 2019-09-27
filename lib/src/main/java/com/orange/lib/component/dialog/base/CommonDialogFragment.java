@@ -1,4 +1,4 @@
-package com.orange.lib.component.recyclerview.dialog;
+package com.orange.lib.component.dialog.base;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -20,9 +20,9 @@ import androidx.fragment.app.FragmentTransaction;
 
 
 import com.orange.lib.R;
-import com.orange.lib.common.holder.DefaultHolder;
+import com.orange.lib.common.convert.IHolderConvert;
+import com.orange.lib.common.holder.CommonHolder;
 import com.orange.lib.common.holder.IHolder;
-import com.orange.lib.component.recyclerview.IConvertContentView;
 
 import java.io.Serializable;
 
@@ -33,7 +33,7 @@ public class CommonDialogFragment<T extends Serializable> extends DialogFragment
     //vars
     @LayoutRes
     private int mLayoutId;
-    private IConvertContentView<T> mConvertHolder;
+    private IHolderConvert<T> mConvertHolder;
     private T mData;
     private float mDimAmount = 0.5f;//背景昏暗度
     private boolean mShowBottomEnable;//是否底部显示
@@ -44,14 +44,14 @@ public class CommonDialogFragment<T extends Serializable> extends DialogFragment
     private int mWidth;
     private int mHeight;
 
-    public static <T extends Serializable> CommonDialogFragment<T> newInstance(int layoutId, IConvertContentView<T> holder) {
+    public static <T extends Serializable> CommonDialogFragment<T> newInstance(int layoutId, IHolderConvert<T> holder) {
         CommonDialogFragment fragment = new CommonDialogFragment();
         fragment.setArguments(getExtraBundle(layoutId));
         fragment.setConvertHolder(holder);
         return fragment;
     }
 
-    public static <T extends Serializable> CommonDialogFragment<T> newInstance(int layoutId, T data, IConvertContentView<T> holder) {
+    public static <T extends Serializable> CommonDialogFragment<T> newInstance(int layoutId, T data, IHolderConvert<T> holder) {
         CommonDialogFragment fragment = new CommonDialogFragment();
         fragment.setArguments(getExtraBundle(layoutId, data));
         fragment.setConvertHolder(holder);
@@ -85,7 +85,7 @@ public class CommonDialogFragment<T extends Serializable> extends DialogFragment
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View contentView = inflater.inflate(mLayoutId, container);
-        IHolder holder = new DefaultHolder(contentView);
+        IHolder holder = new CommonHolder(contentView);
         mConvertHolder.convert(holder, mData);
         return contentView;
     }
@@ -202,7 +202,7 @@ public class CommonDialogFragment<T extends Serializable> extends DialogFragment
         return bundle;
     }
 
-    public CommonDialogFragment setConvertHolder(IConvertContentView<T> convertHolder) {
+    public CommonDialogFragment setConvertHolder(IHolderConvert<T> convertHolder) {
         mConvertHolder = convertHolder;
         return this;
     }

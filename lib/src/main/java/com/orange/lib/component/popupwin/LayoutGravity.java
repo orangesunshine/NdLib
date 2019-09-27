@@ -1,4 +1,4 @@
-package com.orange.lib.component.recyclerview.popupwin;
+package com.orange.lib.component.popupwin;
 
 import android.view.View;
 import android.widget.PopupWindow;

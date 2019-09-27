@@ -1,4 +1,4 @@
-package com.orange.lib.pull.adapterpattern;
+package com.orange.lib.common.adapterpattern;
 
 import com.orange.lib.pull.callback.IPullNetCallback;
 
