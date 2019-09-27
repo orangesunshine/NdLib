@@ -23,7 +23,7 @@ public class LoadingDialogPullPageStatus implements IPullPageStatus {
      * @param holder
      */
     public LoadingDialogPullPageStatus(ILoadingDialog loadingDialog, IHolder holder) {
-        this(loadingDialog, holder.getView(R.id.content_id), holder.getView(R.id.empty_id), holder.getView(R.id.error_id));
+        this(loadingDialog, holder.getView(R.id.id_content_orange), holder.getView(R.id.id_empty_orange), holder.getView(R.id.id_error_orange));
     }
 
     /**

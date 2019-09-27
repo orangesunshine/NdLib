@@ -2,7 +2,6 @@ package com.orange.lib.activity.webview;
 
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
-import android.graphics.Paint;
 import android.net.http.SslError;
 import android.os.Build;
 import android.view.KeyEvent;
@@ -21,7 +20,7 @@ import android.widget.LinearLayout;
 import androidx.appcompat.app.AlertDialog;
 
 import com.orange.lib.R;
-import com.orange.lib.activity.BaseActivity;
+import com.orange.lib.mvp.view.activity.base.BaseActivity;
 
 import static android.view.KeyEvent.KEYCODE_BACK;
 
@@ -58,7 +57,7 @@ public class WebviewActivity extends BaseActivity {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         mWebView = new WebView(getApplicationContext());
         mWebView.setLayoutParams(params);
-        FrameLayout content = mHolder.getView(R.id.content_id);
+        FrameLayout content = mHolder.getView(R.id.id_content_orange);
         content.addView(mWebView);
     }
 

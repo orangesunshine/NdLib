@@ -29,6 +29,7 @@ public class Utils {
     }
 
     public static void init(Context context) {
+        System.out.println("Utils.init.context");
         if (Preconditions.isNull(context)) {
             init(getAppByReflect());
             return;
@@ -42,18 +43,20 @@ public class Utils {
      * @param app
      */
     public static void init(Application app) {
+        System.out.println("Utils.init.app");
         if (!Preconditions.isNull(app)) {
             if (Preconditions.isNull(sApplication)) {
                 sApplication = app;
             } else if (sApplication.getClass() != app.getClass()) {
-                sApplication.registerActivityLifecycleCallbacks(ACTIVITY_LIFECYCLE);
+                sApplication.unregisterActivityLifecycleCallbacks(ACTIVITY_LIFECYCLE);
                 ACTIVITY_LIFECYCLE.clearActStack();
                 sApplication = app;
-                sApplication.registerActivityLifecycleCallbacks(ACTIVITY_LIFECYCLE);
             }
+            sApplication.registerActivityLifecycleCallbacks(ACTIVITY_LIFECYCLE);
         } else if (Preconditions.isNull(sApplication)) {
             sApplication = getAppByReflect();
-            sApplication.registerActivityLifecycleCallbacks(ACTIVITY_LIFECYCLE);
+            if (!Preconditions.isNull(sApplication))
+                sApplication.registerActivityLifecycleCallbacks(ACTIVITY_LIFECYCLE);
         }
     }
 
@@ -74,7 +77,7 @@ public class Utils {
      *
      * @return
      */
-    public static Application.ActivityLifecycleCallbacks getActivityLifecycle() {
+    public static ActivityLifecycleImpl getActivityLifecycle() {
         return ACTIVITY_LIFECYCLE;
     }
 
@@ -92,7 +95,7 @@ public class Utils {
      *
      * @return
      */
-    static Context getTopActivityOrApp() {
+    public static Context getTopActivityOrApp() {
         if (isAppForeground()) {
             Activity topAct = ACTIVITY_LIFECYCLE.getTopAct();
             return Preconditions.isNull(topAct) ? getApp() : topAct;

@@ -5,10 +5,10 @@
     android:orientation="vertical">
 
     <ViewStub
-        android:id="@+id/stub_actbar"
+        android:id="@+id/stub_actbar_orange"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_actbar"
-        android:inflatedId="@+id/actbar_id" />
+        android:inflatedId="@+id/id_actbar_orange" />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -48,15 +48,15 @@
         </LinearLayout>
 
         <ViewStub
-            android:id="@+id/stub_empty"
+            android:id="@+id/stub_empty_orange"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:inflatedId="@+id/empty_id" />
+            android:inflatedId="@+id/id_empty_orange" />
 
         <ViewStub
-            android:id="@+id/stub_error"
+            android:id="@+id/stub_error_orange"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:inflatedId="@+id/error_id" />
+            android:inflatedId="@+id/id_error_orange" />
     </FrameLayout>
 </LinearLayout>

@@ -1,13 +1,14 @@
 package com.orange.lib.activity.templete;
 
 import android.view.LayoutInflater;
-import android.view.ViewStub;
 import android.widget.FrameLayout;
 
 import com.orange.lib.R;
-import com.orange.lib.activity.BaseActivity;
+import com.orange.lib.common.holder.IHolder;
+import com.orange.lib.mvp.view.activity.NetActivity;
+import com.orange.lib.utils.base.Preconditions;
 
-public abstract class TempleteActivity extends BaseActivity {
+public abstract class TempleteActivity extends NetActivity {
 
     @Override
     protected void attachView(FrameLayout content) {
@@ -22,13 +23,17 @@ public abstract class TempleteActivity extends BaseActivity {
      */
     @Override
     protected void attachStub() {
-        //content占位
-        ViewStub contentStub = mHolder.getView(R.id.stub_content);
-        if (null != contentStub) {
-            contentStub.setLayoutResource(getContentLayoutId());
-            contentStub.inflate();
-        }
         super.attachStub();
+
+        //content占位
+        attachContent(mHolder);
+    }
+
+    protected void attachContent(IHolder holder) {
+        //content占位
+        if (!Preconditions.isNull(holder)) {
+            stubLayout(R.id.stub_content_orange, getContentLayoutId());
+        }
     }
 
     /**

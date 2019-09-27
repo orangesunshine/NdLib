@@ -1,6 +1,6 @@
 package com.orange.lib.component.pagestatus.loading.dialogfragment;
 
-import com.orange.lib.activity.BaseActivity;
+import com.orange.lib.mvp.view.activity.base.BaseActivity;
 import com.orange.lib.component.dialog.LoadingDialog;
 
 import java.lang.ref.WeakReference;

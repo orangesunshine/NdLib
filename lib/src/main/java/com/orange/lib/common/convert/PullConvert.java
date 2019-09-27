@@ -20,7 +20,7 @@ public class PullConvert<ITEM> implements IPullConvert<ITEM> {
     protected IConvertRecyclerView<ITEM> mConvertRecyclerView;
 
     public PullConvert(IHolder holder, int itemLayoutId, IConvertRecyclerView<ITEM> convertRecyclerView) {
-        this(holder.getView(R.id.refreshlayout), holder.getView(R.id.recyclerview), holder.getView(R.id.empty_id), itemLayoutId, convertRecyclerView);
+        this(holder.getView(R.id.refreshlayout_orange), holder.getView(R.id.recyclerview_orange), holder.getView(R.id.id_empty_orange), itemLayoutId, convertRecyclerView);
     }
 
     public PullConvert(SwipeRefreshLayout refreshLayout, RecyclerView recyclerView, View emptyView, int itemLayoutId, IConvertRecyclerView<ITEM> convertRecyclerView) {

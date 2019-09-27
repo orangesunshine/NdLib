@@ -16,8 +16,9 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StyleRes;
 import androidx.fragment.app.DialogFragment;
 
-
 import com.orange.lib.R;
+import com.orange.lib.utils.size.Screens.Screens;
+import com.orange.lib.utils.size.Sizes;
 
 /**
  * Dialog通用样式
@@ -81,20 +82,18 @@ public abstract class BaseDialog extends DialogFragment {
             }
 
             //设置dialog宽度
-//            if (mWidth == 0) {
-//                params.width = getScreenWidth() - 2 * dp2px(getContext(), mMargin);
-//            } else {
-//                params.width = dp2px(getContext(), mWidth);
-//            }
-//
-//            //设置dialog高度
-//            if (mHeight == 0) {
-//                params.height = WindowManager.LayoutParams.WRAP_CONTENT;
-//            } else {
-//                params.height = dp2px(getContext(), mHeight);
-//            }
-            params.width = 300;
-            params.height = 300;
+            if (mWidth == 0) {
+                params.width = Screens.getScreenWidth() - 2 * Sizes.dp2px(mMargin);
+            } else {
+                params.width = Sizes.dp2px(mWidth);
+            }
+
+            //设置dialog高度
+            if (mHeight == 0) {
+                params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+            } else {
+                params.height = Sizes.dp2px(mHeight);
+            }
 
             //设置dialog动画
             if (mAnimStyle != 0) {

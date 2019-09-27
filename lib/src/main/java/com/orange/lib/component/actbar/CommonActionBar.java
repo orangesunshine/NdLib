@@ -35,58 +35,58 @@ public class CommonActionBar implements IActionBar {
         mActionBarCallback = actionBarCallback;
         mHolder.addOnItemChildClick(view -> {
             int i = view.getId();
-            if (i == R.id.fl_left_actbar) {
+            if (i == R.id.fl_left_actbar_orange) {
                 if (null != mActionBarCallback)
                     mActionBarCallback.onLeft();
-            } else if (i == R.id.fl_title_actbar) {
+            } else if (i == R.id.fl_title_actbar_orange) {
                 if (null != mActionBarCallback)
                     mActionBarCallback.onTitle();
-            } else if (i == R.id.fl_right_actbar) {
+            } else if (i == R.id.fl_right_actbar_orange) {
                 if (null != mActionBarCallback)
                     mActionBarCallback.onRight();
             }
-        }, R.id.fl_left_actbar, R.id.fl_right_actbar, R.id.fl_title_actbar);
+        }, R.id.fl_left_actbar_orange, R.id.fl_right_actbar_orange, R.id.fl_title_actbar_orange);
     }
 
     @Override
     public void setLeftImg(int imgResId) {
         if (null != mHolder) {
-            mHolder.setVisible(R.id.iv_left_actbar, true);
-            mHolder.setVisible(R.id.tv_left_actbar, false);
-            mHolder.setImageResource(R.id.iv_left_actbar, imgResId);
+            mHolder.setVisible(R.id.iv_left_actbar_orange, true);
+            mHolder.setVisible(R.id.tv_left_actbar_orange, false);
+            mHolder.setImageResource(R.id.iv_left_actbar_orange, imgResId);
         }
     }
 
     @Override
     public void setLeftText(String leftText) {
         if (null != mHolder) {
-            mHolder.setVisible(R.id.iv_left_actbar, false);
-            mHolder.setVisible(R.id.tv_left_actbar, true);
-            mHolder.setText(R.id.tv_left_actbar, leftText);
+            mHolder.setVisible(R.id.iv_left_actbar_orange, false);
+            mHolder.setVisible(R.id.tv_left_actbar_orange, true);
+            mHolder.setText(R.id.tv_left_actbar_orange, leftText);
         }
     }
 
     @Override
     public void setTitle(String title) {
         if (null != mHolder)
-            mHolder.setText(R.id.tv_title_actbar, title);
+            mHolder.setText(R.id.tv_title_actbar_orange, title);
     }
 
     @Override
     public void setRightImg(int imgResId) {
         if (null != mHolder) {
-            mHolder.setVisible(R.id.iv_right_actbar, true);
-            mHolder.setVisible(R.id.tv_right_actbar, false);
-            mHolder.setImageResource(R.id.iv_right_actbar, imgResId);
+            mHolder.setVisible(R.id.iv_right_actbar_orange, true);
+            mHolder.setVisible(R.id.tv_right_actbar_orange, false);
+            mHolder.setImageResource(R.id.iv_right_actbar_orange, imgResId);
         }
     }
 
     @Override
     public void setRightText(String rightText) {
         if (null != mHolder) {
-            mHolder.setVisible(R.id.iv_right_actbar, false);
-            mHolder.setVisible(R.id.tv_right_actbar, true);
-            mHolder.setText(R.id.tv_right_actbar, rightText);
+            mHolder.setVisible(R.id.iv_right_actbar_orange, false);
+            mHolder.setVisible(R.id.tv_right_actbar_orange, true);
+            mHolder.setText(R.id.tv_right_actbar_orange, rightText);
         }
     }
 }

@@ -15,6 +15,11 @@ public interface IPageStatus {
     void showContent();
 
     /**
+     * 显示空数据
+     */
+    void showEmpty();
+
+    /**
      * 显示error
      */
     void showError();

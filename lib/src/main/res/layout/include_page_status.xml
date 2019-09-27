@@ -7,17 +7,17 @@
         android:id="@+id/stub_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:inflatedId="@id/content_id" />
+        android:inflatedId="@id/id_content_orange" />
 
     <ViewStub
         android:id="@+id/stub_loading"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:inflatedId="@id/loading_id" />
+        android:inflatedId="@id/id_loading_orange" />
 
     <ViewStub
         android:id="@+id/stub_error"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:inflatedId="@id/error_id" />
+        android:inflatedId="@id/id_error_orange" />
 </FrameLayout>

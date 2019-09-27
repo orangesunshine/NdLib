@@ -13,6 +13,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
+import com.orange.lib.mvp.view.activity.base.BaseActivity;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
@@ -33,7 +35,10 @@ public class ActivityLifecycleImpl implements Application.ActivityLifecycleCallb
 
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
+        System.out.println("ActivityLifecycleImpl.onActivityCreated.activity = " + activity);
         setTopAct(activity);
+        if (activity instanceof BaseActivity)
+            ((BaseActivity) activity).onActivityCreate(savedInstanceState);
     }
 
     @Override
@@ -61,7 +66,7 @@ public class ActivityLifecycleImpl implements Application.ActivityLifecycleCallb
 
     @Override
     public void onActivityStopped(Activity activity) {
-        if (!Preconditions.isNull(activity) && activity.isChangingConfigurations()) {
+        if (activity.isChangingConfigurations()) {
             --mConfigCount;
         } else {
             --mForegroundCount;
@@ -78,8 +83,10 @@ public class ActivityLifecycleImpl implements Application.ActivityLifecycleCallb
     @Override
     public void onActivityDestroyed(Activity activity) {
         mActivityList.remove(activity);
-        fixSoftInputLeaks(activity);
         consumeActivityDesLr(activity);
+        if (activity instanceof BaseActivity)
+            ((BaseActivity) activity).onActivityDestroy();
+        fixSoftInputLeaks(activity);
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -121,7 +128,7 @@ public class ActivityLifecycleImpl implements Application.ActivityLifecycleCallb
         if (!Preconditions.isEmpty(lrs)) {
             for (OnActivityDestroyListener lr : lrs) {
                 if (Preconditions.isNull(lr)) continue;
-                lr.onActivityDestroy(act);
+                lr.onActivityDestroy();
             }
         }
     }

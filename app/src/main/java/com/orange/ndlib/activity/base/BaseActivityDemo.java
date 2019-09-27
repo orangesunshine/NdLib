@@ -1,11 +1,9 @@
 package com.orange.ndlib.activity.base;
 
-import android.widget.Toast;
-
-import com.orange.lib.activity.BaseActivity;
 import com.orange.lib.component.actbar.IActionBarCallback;
-import com.orange.lib.loading.pagestatus.LoadingDialogPageStatus;
-import com.orange.lib.utils.ActivityUtils;
+import com.orange.lib.mvp.view.activity.base.BaseActivity;
+import com.orange.lib.utils.Activitys;
+import com.orange.lib.utils.toast.Toasts;
 import com.orange.ndlib.R;
 
 import java.util.Random;
@@ -27,18 +25,8 @@ public class BaseActivityDemo extends BaseActivity {
     @Override
     protected void init() {
         super.init();
-        LoadingDialogPageStatus pageStatus = new LoadingDialogPageStatus(mLoading, mHolder);
         mHolder.addOnItemChildClick(v -> {
             switch (v.getId()) {
-                case R.id.btn_content:
-                    pageStatus.showContent();
-                    break;
-                case R.id.btn_loading:
-                    pageStatus.showLoading();
-                    break;
-                case R.id.btn_error:
-                    pageStatus.showError();
-                    break;
                 case R.id.btn_actbar:
                     int i = new Random().nextInt(5);
                     switch (i) {
@@ -60,30 +48,30 @@ public class BaseActivityDemo extends BaseActivity {
                     }
                     break;
                 case R.id.btn_net_loading:
-                    ActivityUtils.launchActivity(mActivity, BaseActivityLoadingDemo.class);
+                    Activitys.launchActivity(mActivity, BaseActivityLoadingDemo.class);
                     break;
                 case R.id.btn_net_pull:
-                    ActivityUtils.launchActivity(mActivity, BaseActivitySwipePullDemo.class);
+                    Activitys.launchActivity(mActivity, BaseActivitySwipePullDemo.class);
                     break;
                 case R.id.btn_net_pull_page:
-                    ActivityUtils.launchActivity(mActivity, BaseActivitySwipePullPageDemo.class);
+                    Activitys.launchActivity(mActivity, BaseActivitySwipePullPageDemo.class);
                     break;
             }
         }, R.id.btn_content, R.id.btn_loading, R.id.btn_empty, R.id.btn_error, R.id.btn_actbar, R.id.btn_net_loading, R.id.btn_net_pull, R.id.btn_net_pull_page);
         mActbar.setActionBarCallback(new IActionBarCallback() {
             @Override
             public void onLeft() {
-                Toast.makeText(mActivity, "onLeft", Toast.LENGTH_SHORT).show();
+                Toasts.showMsg("onLeft", 5000);
             }
 
             @Override
             public void onTitle() {
-                Toast.makeText(mActivity, "onTitle", Toast.LENGTH_SHORT).show();
+                Toasts.showMsg("onTitle", 10000);
             }
 
             @Override
             public void onRight() {
-                Toast.makeText(mActivity, "onRight", Toast.LENGTH_SHORT).show();
+                Toasts.showMsg("onRight", 1000);
             }
         });
     }

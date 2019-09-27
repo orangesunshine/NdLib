@@ -8,15 +8,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 public interface IConst {
-    String sBaseUrl = "http://localhost:8080";
+    String sBaseUrl = "http://172.168.70.201:8081";
     String FRAGMENT_LOADING_DIALOG = "fragment_loading_dialog";//loadingDilog TAG
-
-
-    //activity类型:base,buz,net,pullndloadmore
-    int ACTIVITY_TYPE_BASE = 0x0001;
-    int ACTIVITY_TYPE_BUZ = 0x0002;
-    int ACTIVITY_TYPE_NET = 0x0003;
-    int ACTIVITY_TYPE_PULLNDLOADMORE = 0x0004;
 
     //换行符
     String LINE_SEPARATOR = System.getProperty("line.separator");
@@ -29,6 +22,8 @@ public interface IConst {
     ///////////////////////////////////////////////////////////////////////////
     //duration
     int DURATION_TOAST_DEFAULT = Toast.LENGTH_SHORT;
+    int CUSTOM_DURATION_TOAST_DEFAULT = 2000;
+    int CUSTOM_DURATION_TOAST_LONG = 5000;
 
     ///////////////////////////////////////////////////////////////////////////
     // 网络

@@ -18,8 +18,8 @@ public class StatusBarTranslucent implements IStatusBar {
     }
 
     @Override
-    public void setStatusBar(Activity activity) {
+    public void setStatusBar(Activity activity, boolean translucent) {
         Preconditions.checkNotNull(activity);
-        StatusBarCompat.setTranslucent(activity.getWindow(), false);
+        StatusBarCompat.setTranslucent(activity.getWindow(), translucent);
     }
 }

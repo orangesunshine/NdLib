@@ -87,11 +87,11 @@ public class NetUtils {
     // </editor-fold>
 
     public static <ITEM> INetCancel swipePullPageAdapterNetData(IPageNetRequest<? extends PullData<ITEM>> pageNetRequest, IPullPageStatus pageStatus, IHolder holder, int itemLayoutId, IConvertRecyclerView<ITEM> convertRecyclerView) {
-        return swipePullPageAdapterNetData(pageNetRequest, pageStatus, holder.getView(R.id.refreshlayout), holder.getView(R.id.recyclerview), holder.getView(R.id.empty_id), itemLayoutId, convertRecyclerView);
+        return swipePullPageAdapterNetData(pageNetRequest, pageStatus, holder.getView(R.id.refreshlayout_orange), holder.getView(R.id.recyclerview_orange), holder.getView(R.id.id_empty_orange), itemLayoutId, convertRecyclerView);
     }
 
     public static <ITEM> INetCancel swipePullPageAdapterNetData(IPageNetRequest<? extends PullData<ITEM>> pageNetRequest, IPullPageStatus pageStatus, IHolder holder, IPullConvert<ITEM> pullConvert) {
-        return swipePullPageAdapterNetData(pageNetRequest, pageStatus, holder.getView(R.id.refreshlayout), holder.getView(R.id.recyclerview), pullConvert);
+        return swipePullPageAdapterNetData(pageNetRequest, pageStatus, holder.getView(R.id.refreshlayout_orange), holder.getView(R.id.recyclerview_orange), pullConvert);
     }
 
     public static <ITEM> INetCancel swipePullPageAdapterNetData(IPageNetRequest<? extends PullData<ITEM>> pageNetRequest, IPullPageStatus pageStatus, SwipeRefreshLayout refreshLayout, RecyclerView recyclerView, View emptyView, int itemLayoutId, IConvertRecyclerView<ITEM> convertRecyclerView) {
@@ -115,7 +115,7 @@ public class NetUtils {
      * @return
      */
     public static <ITEM> INetCancel swipePullAdapterNetData(IPageNetRequest<? extends PullData<ITEM>> pageNetRequest, IHolder holder, int itemLayoutId, IConvertRecyclerView<ITEM> convertRecyclerView) {
-        return swipePullAdapterNetData(pageNetRequest, holder.getView(R.id.refreshlayout), holder.getView(R.id.recyclerview), holder.getView(R.id.empty_id), itemLayoutId, convertRecyclerView);
+        return swipePullAdapterNetData(pageNetRequest, holder.getView(R.id.refreshlayout_orange), holder.getView(R.id.recyclerview_orange), holder.getView(R.id.id_empty_orange), itemLayoutId, convertRecyclerView);
     }
 
     /**
@@ -128,7 +128,7 @@ public class NetUtils {
      * @return
      */
     public static <ITEM> INetCancel swipePullAdapterNetData(IPageNetRequest<? extends PullData<ITEM>> pageNetRequest, IHolder holder, IPullConvert<ITEM> pullConvert) {
-        return swipePullAdapterNetData(pageNetRequest, holder.getView(R.id.refreshlayout), (RecyclerView) holder.getView(R.id.recyclerview), pullConvert);
+        return swipePullAdapterNetData(pageNetRequest, holder.getView(R.id.refreshlayout_orange), (RecyclerView) holder.getView(R.id.recyclerview_orange), pullConvert);
     }
 
 

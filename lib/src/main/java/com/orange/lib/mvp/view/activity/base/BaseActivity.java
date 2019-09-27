@@ -1,118 +1,164 @@
 package com.orange.lib.mvp.view.activity.base;
 
-import android.app.Activity;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.ViewStub;
 import android.widget.FrameLayout;
 
 import androidx.fragment.app.FragmentActivity;
 
-import com.orange.lib.common.config.DefaultConfig;
+import com.orange.lib.R;
 import com.orange.lib.common.holder.DefaultHolder;
 import com.orange.lib.common.holder.IHolder;
+import com.orange.lib.component.actbar.CommonActionBar;
 import com.orange.lib.component.actbar.IActionBar;
 import com.orange.lib.component.statusbar.IStatusBar;
-import com.orange.lib.component.toast.DefaultToast;
-import com.orange.lib.component.toast.IToast;
-import com.orange.lib.mvp.view.IView;
+import com.orange.lib.mvp.view.ifc.base.IView;
+import com.orange.lib.utils.base.Preconditions;
+import com.orange.lib.utils.log.Logs;
+import com.orange.lib.utils.toast.Toasts;
 
-
-public abstract class BaseActivity<V extends IView> extends FragmentActivity{
-    // <editor-fold defaultstate="collapsed" desc="初始化变量">
-    protected BaseActivity mActivity;
-    protected IToast mToast;
-    protected IHolder mHolder;
-    protected IStatusBar mStatusBar;
-    protected IActionBar mActionBar;
-
-    private boolean mActivityAlive;
-
-    /**
-     * 初始化
-     *
-     * @param bundle
-     */
-    public void initVars(Bundle bundle) {
-        mActivity = this;
-        mActivityAlive = true;
-        mHolder = new DefaultHolder(getWindow().getDecorView().findViewById(android.R.id.content));
-//        mStatusBar = StatusBarTranslucent.getInstance();
-//        mActionBar = buildActionBar();
-        mToast = new DefaultToast();
-    }
-    // </editor-fold>
-
-    // <editor-fold defaultstate="collapsed" desc="生命周期回调方法">
+/**
+ * 基础activity：actbar、statusbar
+ * 模板方法：组装视图、插入占位布局、初始化
+ *
+ * @method onActivityCreate、onActivityDestroy application->lifecycle回调
+ */
+public abstract class BaseActivity extends FragmentActivity implements IView {
+    protected final String TAG = getClass().getSimpleName();
+    protected BaseActivity mActivity;//activity引用
+    protected boolean isActivityAlive;//判断activity是不是活的
+    protected IHolder mHolder;//view容器
+    protected IActionBar mActbar;//标题栏
+    protected IStatusBar mStatusBar;//状态栏
 
     /**
-     * 创建生命周期回调
-     *
-     * @param activity
-     * @param bundle
+     * onCreate生命周期调用
      */
-    public void onActivityCreate(Activity activity, Bundle bundle) {
+    public void onActivityCreate(Bundle bundle) {
+        initVars(bundle);//初始化变量
+
+        statusBar();//状态栏
+
         FrameLayout content = getWindow().getDecorView().findViewById(android.R.id.content);
-        content.removeAllViews();
-//        LayoutInflater.from(activity).inflate(getContentLayoutId(), content, true);
 
-        //初始化操作
-        initVars(bundle);
+        mHolder = new DefaultHolder(content);//控件容器
 
-        //statusbar
-        mStatusBar.setStatusBar(activity);
+        attachView(content);//视图
 
-        //toast
-        if (null == mToast)
-            mToast = DefaultConfig.getInstance().buildToast();
+        attachStub();//占位
 
-        //初始化
-        init();
+        init();//初始化
     }
 
+    protected void initVars(Bundle bundle) {
+        mActivity = this;
+        isActivityAlive = true;
+    }
 
     /**
-     * 销毁生命周期回调
-     *
-     * @param context
+     * 状态栏
      */
-    public void onActivityDestroy(BaseActivity context) {
-        mActivityAlive = false;
-        if (null != mHolder)
-            mHolder.clear();
+    protected void statusBar() {
+//        mStatusBar = StatusBarTranslucent.getInstance();
+//        if (!Preconditions.isNull(mStatusBar))
+//            mStatusBar.setStatusBar(mActivity);
     }
-    // </editor-fold>
-
-    // <editor-fold defaultstate="collapsed" desc="判断activity 是不是活的">
 
     /**
-     * 判断activity 是不是活的
+     * 判断activity是不是活的
      *
      * @return
      */
     public boolean isActivityAlive() {
-        return mActivityAlive;
+        boolean ret = isActivityAlive && !isFinishing();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            ret &= !isDestroyed();
+        }
+        return ret;
     }
-    // </editor-fold>
-
-    // <editor-fold defaultstate="collapsed" desc="创建标题栏">
 
     /**
-     * 创建标题栏
+     * 插入视图
+     *
+     * @param content
+     */
+    protected void attachView(FrameLayout content) {
+        int contentLayoutId = getContentLayoutId();
+        if (-1 == contentLayoutId)
+            Logs.toge("-1 == contentLayoutId");
+        LayoutInflater.from(this).inflate(contentLayoutId, content, true);
+
+        if (null != mHolder.getView(R.id.stub_content_orange))
+            throw new IllegalArgumentException("BaseActivity 再次attach content视图");
+    }
+
+    /**
+     * 根据占位类型插入占位视图（actbar，pull，content）
+     */
+    protected void attachStub() {
+        //actbar
+        attachActbar();
+
+//        //swippull
+//        stubLayout(R.id.stub_swiprefresh_orange, R.layout.stub_swiperefreshlayout);
+    }
+
+    /**
+     * 注入actbar布局到actbar占位，并初始化actbar
+     */
+    protected void attachActbar() {
+        //actbar占位
+        stubLayout(R.id.stub_actbar_orange, R.layout.stub_layout_actbar_common);
+        mActbar = new CommonActionBar(mHolder);
+    }
+
+    /**
+     * 布局文件注入到stub占位
+     *
+     * @param stubId
+     * @param stubLayoutId
+     */
+    protected void stubLayout(int stubId, int stubLayoutId) {
+        ViewStub stub = mHolder.getView(stubId);
+        if (!Preconditions.isNull(stub)) {
+            stub.setLayoutResource(stubLayoutId);
+            stub.inflate();
+        }
+    }
+
+    /**
+     * 初始化控件
+     */
+    protected void init() {
+        mActbar.setTitle(TAG);
+    }
+
+    /**
+     * onDestory生命周期调用
+     */
+    public void onActivityDestroy() {
+        mActivity = null;
+        isActivityAlive = false;
+        if (!Preconditions.isNull(mHolder))
+            mHolder.clear();
+    }
+
+    /**
+     * 获取布局文件
      *
      * @return
      */
-//    @Override
-//    public IActionBar buildActionBar() {
-//        return new CommonActionBar(mHolder);
-//    }
-    // </editor-fold>
+    protected abstract int getContentLayoutId();
 
-    // <editor-fold defaultstate="collapsed" desc="初始化（控件相关）">
-
-    /**
-     * 初始化（控件相关）
-     */
-    public void init() {
-
+    @Override
+    public void showMsg(CharSequence charSequence) {
+        Toasts.showMsg(charSequence);
     }
-    // </editor-fold>
+
+    @Override
+    public void showMsg(int stringId) {
+        Toasts.showMsg(getResources().getText(stringId));
+    }
 }

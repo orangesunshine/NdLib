@@ -3,7 +3,6 @@ package com.orange.thirdparty.image.glide;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.orange.lib.common.config.DefaultConfig;
 import com.orange.lib.common.globle.GlobleImpl;
 import com.orange.lib.common.image.IImage;
 
@@ -15,7 +14,7 @@ public class GlideImageImpl implements IImage {
 
     public static GlideImageImpl getInstance() {
         if (null == sInstance) {
-            synchronized (DefaultConfig.class) {
+            synchronized (GlideImageImpl.class) {
                 if (null == sInstance) {
                     sInstance = new GlideImageImpl();
                 }

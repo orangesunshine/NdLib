@@ -7,15 +7,11 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Shader;
 import android.os.Handler;
 import android.os.Looper;
-import android.text.SpannableString;
-import android.text.Spanned;
 import android.text.TextUtils;
-import android.text.style.ForegroundColorSpan;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.ImageView;
@@ -27,6 +23,7 @@ import androidx.annotation.StringRes;
 
 import com.orange.lib.R;
 import com.orange.lib.common.globle.GlobleImpl;
+import com.orange.lib.utils.base.Preconditions;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -42,7 +39,7 @@ public class Views {
      * @param stringRes
      */
     public static void setText(TextView tv, @StringRes int stringRes) {
-        if (null == tv) return;
+        if (Preconditions.isNull(tv)) return;
         tv.setText(stringRes);
     }
 
@@ -53,7 +50,7 @@ public class Views {
      * @param text
      */
     public static void setText(TextView tv, CharSequence text) {
-        if (null == tv) return;
+        if (Preconditions.isNull(tv)) return;
         if (null == text) text = "";
         tv.setText(text);
     }
@@ -65,7 +62,7 @@ public class Views {
      * @param size
      */
     public static void setTextSize(TextView tv, float size) {
-        if (null == tv) return;
+        if (Preconditions.isNull(tv)) return;
         if (size < 0) return;
         tv.setTextSize(size);
     }
@@ -77,7 +74,7 @@ public class Views {
      * @param color
      */
     public static void setTextColor(TextView tv, @ColorInt int color) {
-        if (null == tv) return;
+        if (Preconditions.isNull(tv)) return;
         tv.setTextColor(color);
     }
 
@@ -88,7 +85,7 @@ public class Views {
      * @param resId
      */
     public static void setImageResource(ImageView iv, int resId) {
-        if (null == iv) return;
+        if (Preconditions.isNull(iv)) return;
         if (resId <= 0) resId = R.drawable.shape_picture_placeholder;
         iv.setImageResource(resId);
     }
@@ -100,7 +97,7 @@ public class Views {
      * @param visible
      */
     public static void setVisible(View view, boolean visible) {
-        if (null == view) return;
+        if (Preconditions.isNull(view)) return;
         view.setVisibility(visible ? View.VISIBLE : View.GONE);
     }
 
@@ -111,7 +108,7 @@ public class Views {
      * @param selected
      */
     public static void setSelect(View view, boolean selected) {
-        if (null == view) return;
+        if (Preconditions.isNull(view)) return;
         view.setSelected(selected);
     }
 
@@ -121,7 +118,7 @@ public class Views {
      * @return
      */
     public static void setBackgroudColor(View view, @ColorInt int color) {
-        if (null == view) return;
+        if (Preconditions.isNull(view)) return;
         view.setBackgroundColor(color);
     }
 
@@ -131,22 +128,19 @@ public class Views {
      * @return
      */
     public static void setBackgroundResource(View view, @DrawableRes int resId) {
-        if (null == view) return;
+        if (Preconditions.isNull(view)) return;
         view.setBackgroundResource(resId);
     }
 
     public static void setOnClickListener(View view, View.OnClickListener listener) {
-        if (null == view) return;
+        if (Preconditions.isNull(view)) return;
         view.setOnClickListener(listener);
     }
 
-    public static void copy2Clipboard(Context context, TextView tv) {
-        if (null == tv) {
-//            ToastUtils.showShort("复制失败！");
-            return;
-        }
+    public static boolean copy2Clipboard(Context context, TextView tv) {
+        if (Preconditions.isNull(tv)) return false;
         String trim = tv.getText().toString().trim();
-        if (!TextUtils.isEmpty(trim)) {
+        if (!Preconditions.isEmpty(trim)) {
             //获取剪贴版
             ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
             //创建ClipData对象
@@ -155,70 +149,10 @@ public class Views {
             ClipData clip = ClipData.newPlainText(TAG_COPY, trim);
             //传入clipdata对象.
             clipboard.setPrimaryClip(clip);
-//            ToastUtils.showShort("复制成功");
-        } else {
-//            ToastUtils.showShort("复制内容为空");
+            return true;
         }
+        return false;
     }
-
-    /**
-     * 注单详情投注号码显示
-     *
-     * @param lotteryNum
-     */
-    public static CharSequence showNotWonNums(String lotteryNum, boolean isAbnormal) {
-        if (null == lotteryNum) lotteryNum = "";
-        String[] split = lotteryNum.split(",");
-        StringBuilder nums = new StringBuilder();
-        if (null != split && split.length > 0) {
-            int index = 0;
-            int[] selectedIndexs = new int[split.length];
-            for (int i = 0; i < split.length; i++) {
-                int offset = nums.length() - 1;
-                if (0 != i) nums.append(" |");
-                for (int i1 = 0; i1 < 10; i1++) {
-                    if (0 != i || i1 != 0) {
-                        index++;
-                        nums.append(" ");
-                    }
-                    index++;
-                    nums.append(i1);
-                    if (0 == index % 35) {
-                        index++;
-                        nums.append("\n");
-                    }
-                }
-                String cur = split[i];
-                if (cur.length() > 1)
-                    cur = cur.substring(cur.length() - 1);
-                selectedIndexs[i] = nums.indexOf(cur, offset);
-            }
-            if (isAbnormal)
-                return nums;
-            SpannableString span = new SpannableString(nums);
-            for (int item : selectedIndexs) {
-                if (item < 0) continue;
-                span.setSpan(new ForegroundColorSpan(Color.parseColor("#FA4529")), item, item + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            }
-            return span;
-        }
-        return "";
-    }
-
-    /**
-     * 验证Edit输入内容是否满足验证条件
-     */
-//    public static void verifyEditContent(EditText edtv, final VerifyCallback callback) {
-//        if (null == edtv) return;
-//        edtv.addTextChangedListener(new TextWatcherAdapter() {
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//                if (null != callback) {
-//                    callback.verify(callback.verify(s));
-//                }
-//            }
-//        });
-//    }
 
     /**
      * imageview设置圆形图片

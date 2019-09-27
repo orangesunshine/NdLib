@@ -8,7 +8,7 @@
         android:id="@+id/loading_id"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:inflatedId="@id/loading_id" />
+        android:inflatedId="@id/id_loading_orange" />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -29,18 +29,18 @@
             android:id="@+id/stub_loading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inflatedId="@id/loading_id" />
+            android:inflatedId="@id/id_loading_orange" />
 
         <ViewStub
             android:id="@+id/stub_empty"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inflatedId="@id/empty_id" />
+            android:inflatedId="@id/id_empty_orange" />
 
         <ViewStub
             android:id="@+id/stub_error"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inflatedId="@id/error_id" />
+            android:inflatedId="@id/id_error_orange" />
     </FrameLayout>
 </LinearLayout>

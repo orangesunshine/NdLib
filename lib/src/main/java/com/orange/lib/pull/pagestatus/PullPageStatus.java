@@ -18,7 +18,7 @@ public class PullPageStatus implements IPullPageStatus {
      * @param holder
      */
     public PullPageStatus(IHolder holder) {
-        this(holder.getView(R.id.loading_id), holder.getView(R.id.content_id), holder.getView(R.id.empty_id), holder.getView(R.id.error_id));
+        this(holder.getView(R.id.id_loading_orange), holder.getView(R.id.id_content_orange), holder.getView(R.id.id_empty_orange), holder.getView(R.id.id_error_orange));
     }
 
     /**

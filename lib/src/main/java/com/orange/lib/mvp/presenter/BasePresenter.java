@@ -1,8 +1,10 @@
 package com.orange.lib.mvp.presenter;
 
+import android.app.Activity;
+import android.os.Bundle;
 
 import com.orange.lib.mvp.presenter.ifc.IPresenter;
-import com.orange.lib.mvp.view.IView;
+import com.orange.lib.mvp.view.ifc.base.IView;
 
 public class BasePresenter<V extends IView> implements IPresenter<V> {
     //vars
@@ -11,12 +13,14 @@ public class BasePresenter<V extends IView> implements IPresenter<V> {
     @Override
     public void attachView(V view) {
         mView = view;
-        initVars();
     }
 
     /**
      * 初始化变量
      */
-    public void initVars() {
+    public void initVars(Bundle bundle) {
+    }
+
+    public void onActivityDestroy() {
     }
 }

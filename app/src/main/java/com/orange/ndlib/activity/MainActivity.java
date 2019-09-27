@@ -1,14 +1,11 @@
 package com.orange.ndlib.activity;
 
-import android.widget.FrameLayout;
-
-import com.orange.lib.activity.BaseActivity;
-import com.orange.lib.utils.ActivityUtils;
+import com.orange.lib.mvp.view.activity.base.BaseActivity;
+import com.orange.lib.utils.Activitys;
 import com.orange.ndlib.CocosWebActivity;
 import com.orange.ndlib.R;
 import com.orange.ndlib.activity.base.BaseActivityDemo;
 import com.orange.ndlib.activity.templete.TempleteDemoActivity;
-import com.orange.thirdparty.statusbar.StatusBarTranslucent;
 
 public class MainActivity extends BaseActivity {
     /**
@@ -22,17 +19,6 @@ public class MainActivity extends BaseActivity {
     }
 
     /**
-     * 插入视图
-     *
-     * @param content
-     */
-    @Override
-    protected void attachView(FrameLayout content) {
-        StatusBarTranslucent.getInstance().setStatusBar(this);
-        super.attachView(content);
-    }
-
-    /**
      * 初始化控件
      */
     @Override
@@ -41,13 +27,13 @@ public class MainActivity extends BaseActivity {
         mHolder.addOnItemChildClick(v -> {
             switch (v.getId()) {
                 case R.id.btn_base:
-                    ActivityUtils.launchActivity(mActivity, BaseActivityDemo.class);
+                    Activitys.launchActivity(mActivity, BaseActivityDemo.class);
                     break;
                 case R.id.btn_templete:
-                    ActivityUtils.launchActivity(mActivity, TempleteDemoActivity.class);
+                    Activitys.launchActivity(mActivity, TempleteDemoActivity.class);
                     break;
                 case R.id.btn_cocos:
-                    ActivityUtils.launchActivity(mActivity, CocosWebActivity.class);
+                    Activitys.launchActivity(mActivity, CocosWebActivity.class);
                     break;
             }
         }, R.id.btn_base, R.id.btn_templete, R.id.btn_cocos);

@@ -5,51 +5,81 @@
     android:orientation="vertical">
 
     <ViewStub
-        android:id="@+id/stub_actbar"
+        android:id="@+id/stub_actbar_orange"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_actbar"
-        android:inflatedId="@+id/actbar_id" />
+        android:inflatedId="@+id/id_actbar_orange" />
+
+    <LinearLayout
+        android:id="@+id/id_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="content" />
+
+        <Button
+            android:id="@+id/btn_loading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="loading" />
+
+        <Button
+            android:id="@+id/btn_empty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="empty" />
+
+        <Button
+            android:id="@+id/btn_error"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="error" />
+
+        <Button
+            android:id="@+id/btn_loading_convert"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="loading_convert" />
+
+        <Button
+            android:id="@+id/btn_loading_page"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="loading_page" />
+
+        <Button
+            android:id="@+id/btn_loading_page_convert"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="loading_page_convert" />
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:gravity="center" />
+    </LinearLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/content_id"
+        <ViewStub
+            android:id="@+id/stub_empty_orange"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <Button
-                android:id="@+id/btn_loading_convert"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="loading_convert" />
-
-            <Button
-                android:id="@+id/btn_loading_page"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="loading_page" />
-
-            <Button
-                android:id="@+id/btn_loading_page_convert"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="loading_page_convert" />
-
-            <TextView
-                android:id="@+id/tv_content"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="20dp"
-                android:gravity="center" />
-        </LinearLayout>
+            android:inflatedId="@+id/id_empty_orange" />
 
         <ViewStub
-            android:id="@+id/stub_error"
+            android:id="@+id/stub_error_orange"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:inflatedId="@+id/error_id" />
+            android:inflatedId="@+id/id_error_orange" />
     </FrameLayout>
 </LinearLayout>

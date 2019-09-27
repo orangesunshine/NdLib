@@ -8,7 +8,7 @@
         android:id="@+id/stub_actbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_actbar"
-        android:inflatedId="@id/actbar_id" />
+        android:inflatedId="@id/id_actbar_orange" />
 
     <Button
         android:id="@+id/btn_base"

@@ -3,9 +3,10 @@ package com.orange.lib.utils;
 import androidx.core.util.Preconditions;
 
 import com.orange.lib.loading.callback.INetCallback;
+import com.orange.lib.mvp.presenter.NetPresenter;
+import com.orange.lib.mvp.view.activity.NetActivity;
 import com.orange.lib.pull.request.IPageNetRequest;
 import com.orange.lib.mvp.presenter.BasePresenter;
-import com.orange.lib.mvp.view.activity.PresenterActivity;
 import com.orange.lib.utils.text.TextUtils;
 
 import java.lang.reflect.ParameterizedType;
@@ -35,18 +36,18 @@ public class ReflectionUtils {
     }
 
     /**
-     * 获取父类（PresenterActivity）泛型实参类型的实例
+     * 获取父类（NetActivity）泛型实参类型的实例
      *
-     * @param presenterActivity
+     * @param netActivity
      * @param <P>
      * @return
      */
-    public static <P extends BasePresenter> P getGenericActualTypeArgInstance(PresenterActivity<P> presenterActivity) {
-        Preconditions.checkNotNull(presenterActivity);
+    public static <P extends NetPresenter> P getGenericActualTypeArgInstance(NetActivity<P> netActivity) {
+        Preconditions.checkNotNull(netActivity);
         Type type = null;
-        type = presenterActivity.getClass().getGenericSuperclass();
+        type = netActivity.getClass().getGenericSuperclass();
         if (null == type || !(type instanceof ParameterizedType)) {
-            Type[] types = presenterActivity.getClass().getGenericInterfaces();
+            Type[] types = netActivity.getClass().getGenericInterfaces();
             if (null != types && types.length > 0)
                 type = types[0];
         }

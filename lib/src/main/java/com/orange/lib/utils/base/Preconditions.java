@@ -17,7 +17,7 @@ public class Preconditions {
     public static boolean isNull(Object ojb) {
         boolean ret = null == ojb;
         if (ret) Logs.logc(LOG_PREFIX + "obj is null");
-        return null == ojb;
+        return ret;
     }
 
     /**
@@ -30,7 +30,7 @@ public class Preconditions {
         boolean ret = isNull(ojbs);
         if (!ret) {
             for (Object ojb : ojbs) {
-                ret &= isNull(ojb);
+                ret |= isNull(ojb);
             }
         }
         return ret;
@@ -58,7 +58,7 @@ public class Preconditions {
         boolean ret = isNull(charSequences);
         if (!ret) {
             for (CharSequence charSequence : charSequences) {
-                ret &= isEmpty(charSequence);
+                ret |= isEmpty(charSequence);
             }
         }
         return ret;
@@ -72,7 +72,8 @@ public class Preconditions {
      */
     public static boolean isEmpty(Collection collection) {
         boolean ret = isNull(collection);
-        ret &= collection.isEmpty();
+        if (!ret)
+            ret |= collection.isEmpty();
         if (ret) Logs.logc(LOG_PREFIX + "collection is empty");
         return ret;
     }
@@ -85,7 +86,8 @@ public class Preconditions {
      */
     public static boolean isEmpty(Map map) {
         boolean ret = isNull(map);
-        ret &= map.isEmpty();
+        if (!ret)
+            ret |= map.isEmpty();
         if (ret) Logs.logc(LOG_PREFIX + "map is empty");
         return ret;
     }

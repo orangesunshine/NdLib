@@ -7,5 +7,5 @@ public interface IStatusBar {
      * 设置状态栏
      * @param activity
      */
-    void setStatusBar(Activity activity);
+    void setStatusBar(Activity activity, boolean translucent);
 }

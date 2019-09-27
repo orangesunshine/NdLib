@@ -1,11 +1,11 @@
 package com.orange.lib.component.toast;
 
+import android.content.Context;
 import android.view.View;
-
-import androidx.annotation.StringRes;
+import android.widget.Toast;
 
 public interface IToast {
-    void show();
+    void show(Context context, int duration);
 
     void cancel();
 
@@ -17,7 +17,5 @@ public interface IToast {
 
     void setGravity(int gravity, int xOffset, int yOffset);
 
-    void setText(@StringRes int resId);
-
-    void setText(CharSequence charSequence);
+    Toast getToast();
 }

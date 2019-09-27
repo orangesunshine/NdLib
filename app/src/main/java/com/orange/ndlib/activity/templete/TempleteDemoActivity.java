@@ -4,10 +4,10 @@ import android.widget.Toast;
 
 import com.orange.lib.activity.templete.TempleteActivity;
 import com.orange.lib.component.actbar.IActionBarCallback;
-import com.orange.lib.loading.pagestatus.IPageStatus;
 import com.orange.lib.loading.pagestatus.LoadingDialogPageStatus;
-import com.orange.lib.loading.pagestatus.LoadingPageStatus;
-import com.orange.lib.utils.ActivityUtils;
+import com.orange.lib.mvp.presenter.BasePresenter;
+import com.orange.lib.mvp.presenter.NetPresenter;
+import com.orange.lib.utils.Activitys;
 import com.orange.ndlib.R;
 import com.orange.ndlib.activity.base.BaseActivityLoadingDemo;
 import com.orange.ndlib.activity.base.BaseActivitySwipePullDemo;
@@ -33,16 +33,6 @@ public class TempleteDemoActivity extends TempleteActivity {
     @Override
     protected int getTempleteLayoutId() {
         return R.layout.template_activity_actbar;
-    }
-
-    /**
-     * 创建pagestatus
-     *
-     * @return
-     */
-    @Override
-    protected IPageStatus createPageStatus() {
-        return new LoadingPageStatus(mHolder);
     }
 
     /**
@@ -84,10 +74,10 @@ public class TempleteDemoActivity extends TempleteActivity {
                     }
                     break;
                 case R.id.btn_net_loading:
-                    ActivityUtils.launchActivity(mActivity, BaseActivityLoadingDemo.class);
+                    Activitys.launchActivity(mActivity, BaseActivityLoadingDemo.class);
                     break;
                 case R.id.btn_net_pull:
-                    ActivityUtils.launchActivity(mActivity, BaseActivitySwipePullDemo.class);
+                    Activitys.launchActivity(mActivity, BaseActivitySwipePullDemo.class);
                     break;
             }
         }, R.id.btn_content, R.id.btn_loading, R.id.btn_empty, R.id.btn_error, R.id.btn_actbar, R.id.btn_net_loading, R.id.btn_net_pull);
@@ -107,5 +97,10 @@ public class TempleteDemoActivity extends TempleteActivity {
                 Toast.makeText(mActivity, "onRight", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    protected NetPresenter getPresenter() {
+        return null;
     }
 }

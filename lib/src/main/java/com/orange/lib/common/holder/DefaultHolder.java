@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.ColorInt;
 import androidx.annotation.StringRes;
 
+import com.orange.lib.R;
 import com.orange.lib.utils.view.Views;
 
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class DefaultHolder implements IHolder {
     protected SparseArray<View> mViews;
     protected View itemView;
     //复用的View
-    protected Map<OnItemChildClickListener, List<Integer>> mOnItemChildClickListenerMpas;
+    protected Map<OnItemChildClickListener, List<Integer>> mOnItemChildClickListenerMaps;
     protected OnItemClickListener mOnItemClickListener;
 
     /**
@@ -46,7 +47,7 @@ public class DefaultHolder implements IHolder {
         this.itemView = itemView;
         mViews = new SparseArray<>();
         //构造方法中就指定布局
-        itemView.setTag(TAG_HOLDER, this);
+        itemView.setTag(R.id.id_holder_orange, this);
     }
 
     /**
@@ -342,12 +343,12 @@ public class DefaultHolder implements IHolder {
     @Override
     public IHolder addOnItemChildClick(OnItemChildClickListener listener, int... viewIds) {
         if (null == viewIds || viewIds.length == 0) return this;
-        if (null == mOnItemChildClickListenerMpas)
-            mOnItemChildClickListenerMpas = new HashMap<>();
-        List<Integer> idList = mOnItemChildClickListenerMpas.get(listener);
+        if (null == mOnItemChildClickListenerMaps)
+            mOnItemChildClickListenerMaps = new HashMap<>();
+        List<Integer> idList = mOnItemChildClickListenerMaps.get(listener);
         if (null == idList) {
             idList = new ArrayList<>();
-            mOnItemChildClickListenerMpas.put(listener, idList);
+            mOnItemChildClickListenerMaps.put(listener, idList);
         }
         for (int viewId : viewIds) {
             View view = getView(viewId);
@@ -380,8 +381,8 @@ public class DefaultHolder implements IHolder {
                 mOnItemClickListener.onItemClick(v);
             }
         } else {
-            if (null != mOnItemChildClickListenerMpas) {
-                Set<Map.Entry<OnItemChildClickListener, List<Integer>>> entries = mOnItemChildClickListenerMpas.entrySet();
+            if (null != mOnItemChildClickListenerMaps) {
+                Set<Map.Entry<OnItemChildClickListener, List<Integer>>> entries = mOnItemChildClickListenerMaps.entrySet();
                 if (null != entries && !entries.isEmpty()) {
                     for (Map.Entry<OnItemChildClickListener, List<Integer>> entry : entries) {
                         if (null != entry) {

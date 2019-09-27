@@ -8,5 +8,5 @@ import android.app.Activity;
  */
 public interface OnActivityDestroyListener {
     //activity销毁回调
-    void onActivityDestroy(Activity act);
+    void onActivityDestroy();
 }

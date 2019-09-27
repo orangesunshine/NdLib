@@ -10,6 +10,7 @@ public class LoadingPageStatus implements IPageStatus {
     private View mLoadView;//菊花
     private View mContentView;//content页面
     private View mErrorView;//错误页面
+    private View mEmtpyView;//空数据页面
 
     /**
      * 构造方法
@@ -17,7 +18,7 @@ public class LoadingPageStatus implements IPageStatus {
      * @param holder
      */
     public LoadingPageStatus(IHolder holder) {
-        this(holder.getView(R.id.loading_id), holder.getView(R.id.content_id), holder.getView(R.id.error_id));
+        this(holder.getView(R.id.id_loading_orange), holder.getView(R.id.id_content_orange), holder.getView(R.id.id_empty_orange), holder.getView(R.id.id_error_orange));
     }
 
     /**
@@ -27,9 +28,10 @@ public class LoadingPageStatus implements IPageStatus {
      * @param contentView content页面
      * @param errorView   错误页面
      */
-    public LoadingPageStatus(View loadView, View contentView, View errorView) {
+    public LoadingPageStatus(View loadView, View contentView, View emptyView, View errorView) {
         mLoadView = loadView;
         mContentView = contentView;
+        mEmtpyView = emptyView;
         mErrorView = errorView;
         showContent();
     }
@@ -41,6 +43,7 @@ public class LoadingPageStatus implements IPageStatus {
     public void showLoading() {
         Views.setVisible(mLoadView, true);
         Views.setVisible(mContentView, false);
+        Views.setVisible(mEmtpyView, false);
         Views.setVisible(mErrorView, false);
     }
 
@@ -51,6 +54,18 @@ public class LoadingPageStatus implements IPageStatus {
     public void showContent() {
         Views.setVisible(mLoadView, false);
         Views.setVisible(mContentView, true);
+        Views.setVisible(mEmtpyView, false);
+        Views.setVisible(mErrorView, false);
+    }
+
+    /**
+     * 显示error
+     */
+    @Override
+    public void showEmpty() {
+        Views.setVisible(mLoadView, false);
+        Views.setVisible(mContentView, false);
+        Views.setVisible(mEmtpyView, true);
         Views.setVisible(mErrorView, false);
     }
 
@@ -61,6 +76,7 @@ public class LoadingPageStatus implements IPageStatus {
     public void showError() {
         Views.setVisible(mLoadView, false);
         Views.setVisible(mContentView, false);
+        Views.setVisible(mEmtpyView, false);
         Views.setVisible(mErrorView, true);
     }
 }

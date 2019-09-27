@@ -1,12 +1,6 @@
 package com.orange.lib.app;
 
-import android.app.Activity;
 import android.app.Application;
-import android.content.Context;
-import android.os.Bundle;
-
-import com.orange.lib.activity.BaseActivity;
-import com.orange.lib.common.adapterpattern.ActivityLifecycleAdapt;
 
 public abstract class BaseApplication extends Application implements IApp {
     @Override
@@ -14,19 +8,5 @@ public abstract class BaseApplication extends Application implements IApp {
         super.onCreate();
         //初始化
         init(getApplicationContext());
-        //监控actvity生命周期，回调方法
-        registerActivityLifecycleCallbacks(new ActivityLifecycleAdapt() {
-            @Override
-            public void onActivityCreated(Activity activity, Bundle bundle) {
-                if (activity instanceof BaseActivity)
-                    ((BaseActivity) activity).onActivityCreate(bundle);
-            }
-
-            @Override
-            public void onActivityDestroyed(Activity activity) {
-                if (activity instanceof BaseActivity)
-                    ((BaseActivity) activity).onActivityDestroy();
-            }
-        });
     }
 }
