@@ -94,7 +94,7 @@ public class RetrofitPullPrefixSuffixApi implements IPullPrefixSuffixApi {
     @Override
     public <T extends PullData> INetCancel postPull(Map<String, String> headers, String prefix, String suffix, Map<String, String> params, Type type, IPullNetCallback<T> callback) {
         Preconditions.checkNotNull(mPullResponseBodyObserver);
-        Disposable subsribe = mPullResponseBodyObserver.subsribe(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApi.class).post(headers, prefix, suffix, params), type, callback);
+        Disposable subsribe = mPullResponseBodyObserver.subsribe(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApi.class).post(prefix, suffix, params, headers), type, callback);
         return new RetrofitNetCancel(subsribe);
     }
 }

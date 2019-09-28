@@ -60,7 +60,7 @@ public class RetrofitPullUrlApi implements IPullUrlApi {
     @Override
     public <T> INetCancel getPull(Map<String, String> headers, String url, Map<String, String> params, Type type, IPullNetCallback<T> callback) {
         Preconditions.checkNotNull(mPullResponseBodyObserver);
-        Disposable subsribe = mPullResponseBodyObserver.subsribe(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApi.class).get(headers, url, params), type, callback);
+        Disposable subsribe = mPullResponseBodyObserver.subsribe(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApi.class).get(url, params, headers), type, callback);
         return new RetrofitNetCancel(subsribe);
     }
 
@@ -88,7 +88,7 @@ public class RetrofitPullUrlApi implements IPullUrlApi {
     @Override
     public <T> INetCancel postPull(Map<String, String> headers, String url, Map<String, String> params, Type type, IPullNetCallback<T> callback) {
         Preconditions.checkNotNull(mPullResponseBodyObserver);
-        Disposable subsribe = mPullResponseBodyObserver.subsribe(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApi.class).post(headers, url, params), type, callback);
+        Disposable subsribe = mPullResponseBodyObserver.subsribe(RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApi.class).post(url, params, headers), type, callback);
         return new RetrofitNetCancel(subsribe);
     }
 }

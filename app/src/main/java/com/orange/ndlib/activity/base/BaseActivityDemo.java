@@ -5,6 +5,7 @@ import com.orange.lib.mvp.view.activity.base.BaseActivity;
 import com.orange.lib.utils.Activitys;
 import com.orange.lib.utils.toast.Toasts;
 import com.orange.ndlib.R;
+import com.orange.ndlib.activity.base.loading.BaseActivityLoadingDemo;
 
 import java.util.Random;
 

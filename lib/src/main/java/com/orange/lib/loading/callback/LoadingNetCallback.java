@@ -1,22 +1,22 @@
 package com.orange.lib.loading.callback;
 
 
-import com.orange.lib.component.pagestatus.loading.dialogfragment.ILoadingDialog;
+import com.orange.lib.mvp.view.ifc.ILoading;
 
 public class LoadingNetCallback<T> implements INetCallback<T> {
-    private ILoadingDialog loading;
-    private LogLoadingNetCallback mLogLoadingNetCallback = new LogLoadingNetCallback();
+    private ILoading loading;
+    private LogNetCallback mLogNetCallback = new LogNetCallback();
 
-    public LoadingNetCallback(ILoadingDialog loading) {
+    public LoadingNetCallback(ILoading loading) {
         this.loading = loading;
     }
 
     @Override
     public void onNetStart() {
-        if (null != mLogLoadingNetCallback)
-            mLogLoadingNetCallback.onNetStart();
+        if (null != mLogNetCallback)
+            mLogNetCallback.onNetStart();
         if (null != loading)
-            loading.showLoadingDialog();
+            loading.showLoading();
     }
 
     /**
@@ -26,16 +26,16 @@ public class LoadingNetCallback<T> implements INetCallback<T> {
      */
     @Override
     public void onSuccess(T t) {
-        if (null != mLogLoadingNetCallback)
-            mLogLoadingNetCallback.onSuccess(t);
+        if (null != mLogNetCallback)
+            mLogNetCallback.onSuccess(t);
     }
 
     @Override
     public void onComplete() {
-        if (null != mLogLoadingNetCallback)
-            mLogLoadingNetCallback.onComplete();
+        if (null != mLogNetCallback)
+            mLogNetCallback.onComplete();
         if (null != loading)
-            loading.dismissLoadingDialog();
+            loading.hideLoading();
     }
 
     /**
@@ -46,7 +46,7 @@ public class LoadingNetCallback<T> implements INetCallback<T> {
      */
     @Override
     public void onError(int code, Throwable error) {
-        if (null != mLogLoadingNetCallback)
-            mLogLoadingNetCallback.onError(code, error);
+        if (null != mLogNetCallback)
+            mLogNetCallback.onError(code, error);
     }
 }

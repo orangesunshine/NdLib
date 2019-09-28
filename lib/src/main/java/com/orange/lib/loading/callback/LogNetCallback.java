@@ -12,7 +12,7 @@ import static com.orange.lib.constance.IConst.LINE_SEPARATOR;
  *
  * @param <T>
  */
-public class LogLoadingNetCallback<T> implements INetCallback<T> {
+public class LogNetCallback<T> implements INetCallback<T> {
     private StringBuilder log = new StringBuilder();
     private String indentation = "\u3000\u3000";//缩进
     private long startTimeMills = 0;

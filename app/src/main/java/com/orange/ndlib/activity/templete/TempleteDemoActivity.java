@@ -5,11 +5,10 @@ import android.widget.Toast;
 import com.orange.lib.activity.templete.TempleteActivity;
 import com.orange.lib.component.actbar.IActionBarCallback;
 import com.orange.lib.loading.pagestatus.LoadingDialogPageStatus;
-import com.orange.lib.mvp.presenter.BasePresenter;
 import com.orange.lib.mvp.presenter.NetPresenter;
 import com.orange.lib.utils.Activitys;
 import com.orange.ndlib.R;
-import com.orange.ndlib.activity.base.BaseActivityLoadingDemo;
+import com.orange.ndlib.activity.base.loading.BaseActivityLoadingDemo;
 import com.orange.ndlib.activity.base.BaseActivitySwipePullDemo;
 
 import java.util.Random;

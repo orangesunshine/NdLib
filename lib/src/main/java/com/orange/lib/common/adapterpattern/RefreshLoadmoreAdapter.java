@@ -1,7 +1,5 @@
 package com.orange.lib.common.adapterpattern;
 
-import com.orange.lib.component.pull.IRefreshLoadmore;
-import com.orange.lib.component.pull.callback.IPullCallback;
 import com.orange.lib.mvp.model.net.common.netcancel.INetCancel;
 
 public class RefreshLoadmoreAdapter implements IRefreshLoadmore {

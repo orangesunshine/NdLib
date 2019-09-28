@@ -70,4 +70,5 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxandroid:${RXANDROID}"
     implementation "com.squareup.okhttp3:logging-interceptor:${LOGGINGINTERCEPTOR}"
     implementation 'org.aspectj:aspectjrt:1.8.9'
+    implementation 'com.github.florent37:viewanimator:1.1.0'
 }

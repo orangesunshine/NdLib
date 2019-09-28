@@ -1,37 +1,64 @@
 package com.orange.lib.utils;
 
-import androidx.core.util.Preconditions;
-
-import com.orange.lib.loading.callback.INetCallback;
 import com.orange.lib.mvp.presenter.NetPresenter;
 import com.orange.lib.mvp.view.activity.NetActivity;
 import com.orange.lib.pull.request.IPageNetRequest;
-import com.orange.lib.mvp.presenter.BasePresenter;
 import com.orange.lib.utils.text.TextUtils;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
 public class ReflectionUtils {
+    private static int COUNT_MAX_RECURSIVE = 3;
+
+    public static Type getGenericActualTypeArg(Class clazz) {
+        return null == getGenericInterfacesActualTypeArg(clazz) ? getGenericSuperclassActualTypeArg(clazz) : null;
+    }
+
     /**
-     * 获取父类（INetCallback）泛型实参类型
+     * 递归第一个接口
      *
-     * @param callback
-     * @param <T>
+     * @param clazz
      * @return
      */
-    public static <T> Type getGenericActualTypeArg(INetCallback<T> callback) {
-        Preconditions.checkNotNull(callback, "null == callback");
-        Type type = null;
-        Type[] types = callback.getClass().getGenericInterfaces();
-        if (null != types && types.length > 0)
-            type = types[0];
-        if (null == type || !(type instanceof ParameterizedType))
-            type = callback.getClass().getGenericSuperclass();
-        if (null == type || !(type instanceof ParameterizedType)) return null;
-        Type[] actualTypeArguments = ((ParameterizedType) type).getActualTypeArguments();
-        if (null != actualTypeArguments && actualTypeArguments.length > 0)
-            return actualTypeArguments[0];
+    public static Type getGenericInterfacesActualTypeArg(Class clazz) {
+        int count = COUNT_MAX_RECURSIVE;
+        while (null != clazz && count > 0) {
+            count--;
+            Type type = null;
+            Type[] types = clazz.getGenericInterfaces();
+            if (null != types && types.length > 0)
+                type = types[0];
+            if (null == type) return null;
+            if (type instanceof ParameterizedType) {
+                Type[] actualTypeArguments = ((ParameterizedType) type).getActualTypeArguments();
+                if (null != actualTypeArguments && actualTypeArguments.length > 0)
+                    return actualTypeArguments[0];
+            }
+            clazz = type.getClass();
+        }
+        return null;
+    }
+
+    /**
+     * 递归第一个接口
+     *
+     * @param clazz
+     * @return
+     */
+    public static Type getGenericSuperclassActualTypeArg(Class clazz) {
+        int count = COUNT_MAX_RECURSIVE;
+        while (null != clazz && count > 0) {
+            count--;
+            Type type = clazz.getGenericSuperclass();
+            if (null == type) return null;
+            if (type instanceof ParameterizedType) {
+                Type[] actualTypeArguments = ((ParameterizedType) type).getActualTypeArguments();
+                if (null != actualTypeArguments && actualTypeArguments.length > 0)
+                    return actualTypeArguments[0];
+            }
+            clazz = type.getClass();
+        }
         return null;
     }
 
@@ -43,7 +70,6 @@ public class ReflectionUtils {
      * @return
      */
     public static <P extends NetPresenter> P getGenericActualTypeArgInstance(NetActivity<P> netActivity) {
-        Preconditions.checkNotNull(netActivity);
         Type type = null;
         type = netActivity.getClass().getGenericSuperclass();
         if (null == type || !(type instanceof ParameterizedType)) {
@@ -88,7 +114,6 @@ public class ReflectionUtils {
      * @return
      */
     public static <T> Type pageNetRequestGenericType(IPageNetRequest<T> pageNetRequest) {
-        Preconditions.checkNotNull(pageNetRequest);
         Type type = null;
         if (null != pageNetRequest) {
             Type[] types = pageNetRequest.getClass().getGenericInterfaces();

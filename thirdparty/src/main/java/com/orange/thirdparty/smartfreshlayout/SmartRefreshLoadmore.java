@@ -3,8 +3,6 @@ package com.orange.thirdparty.smartfreshlayout;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.orange.lib.component.pull.IRefreshLoadmore;
-import com.orange.lib.component.pull.callback.IPullCallback;
 import com.orange.lib.mvp.model.net.common.netcancel.INetCancel;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;

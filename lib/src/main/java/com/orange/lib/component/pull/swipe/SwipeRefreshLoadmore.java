@@ -3,20 +3,16 @@ package com.orange.lib.component.pull.swipe;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.orange.lib.component.pull.IRefreshLoadmore;
-import com.orange.lib.component.pull.callback.IPullCallback;
-import com.orange.lib.mvp.model.net.common.netcancel.INetCancel;
-
-import java.util.concurrent.atomic.AtomicReference;
+import com.orange.lib.mvp.view.ifc.Ipull;
+import com.orange.lib.utils.base.Preconditions;
 
 /**
  * SwipeRefreshLayout实现IRefreshLoadmore
  */
-public class SwipeRefreshLoadmore implements IRefreshLoadmore {
+public class SwipeRefreshLoadmore implements Ipull {
     //    protected IFooter mFooter;
     protected SwipeRefreshLayout mRefreshLayout;
     protected RecyclerView mRecyclerView;
-    protected IPullCallback mPullCallback;
 
     /**
      * 构造方法
@@ -29,67 +25,31 @@ public class SwipeRefreshLoadmore implements IRefreshLoadmore {
         mRecyclerView = recyclerView;
     }
 
-    /**
-     * 构造方法
-     *
-     * @param refreshLayout
-     * @param recyclerView
-     * @param pullCallback  刷新、加载回调
-     */
-    public SwipeRefreshLoadmore(SwipeRefreshLayout refreshLayout, RecyclerView recyclerView, IPullCallback pullCallback) {
-        mRefreshLayout = refreshLayout;
-        mRecyclerView = recyclerView;
-        setPullCallback(pullCallback);
+    @Override
+    public void enableRefresh(boolean enable) {
+        if (!Preconditions.isNull(mRecyclerView))
+            mRefreshLayout.setEnabled(enable);
     }
 
-    /**
-     * 设置刷新、加载回调
-     *
-     * @param callback
-     */
     @Override
-    public INetCancel setPullCallback(IPullCallback callback) {
-        mPullCallback = callback;
-        AtomicReference<INetCancel> netCancel = new AtomicReference<>();
-        if (null != mRefreshLayout)
-            mRefreshLayout.setOnRefreshListener(() -> {
-                if (null != callback)
-                    netCancel.set(callback.onPullRefresh());
-            });
-        if (null != mRecyclerView)
-            mRecyclerView.addOnScrollListener(new RecyclerOnScrollListener(mRefreshLayout) {
-                @Override
-                public void onLoadMore() {
-                    if (null != callback)
-                        netCancel.set(callback.onPullLoadMore());
-                }
-            });
-        return netCancel.get();
+    public void enableLoadmore(boolean enable) {
+
     }
 
-    /**
-     * 刷新
-     */
     @Override
-    public void refresh() {
-        if (null != mRefreshLayout)
+    public void autoRefresh() {
+        if (!Preconditions.isNull(mRecyclerView))
             mRefreshLayout.setRefreshing(true);
     }
 
-    /**
-     * 加载
-     */
     @Override
-    public void loadmore() {
+    public void finishRefresh() {
+        if (!Preconditions.isNull(mRecyclerView))
+            mRefreshLayout.setRefreshing(false);
     }
 
-    /**
-     * 设置能否加载
-     *
-     * @param enable
-     * @return
-     */
     @Override
-    public void enableLoadMore(boolean enable) {
+    public void finishLoadmore() {
+        //nothing
     }
 }

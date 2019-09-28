@@ -12,7 +12,6 @@ import com.orange.lib.common.reponse.PullData;
 import com.orange.lib.component.recyclerview.IConvertRecyclerView;
 import com.orange.lib.constance.IConst;
 import com.orange.lib.mvp.model.net.common.netcancel.INetCancel;
-import com.orange.lib.mvp.presenter.BasePresenter;
 import com.orange.lib.mvp.presenter.PullPresenter;
 import com.orange.lib.mvp.view.activity.PullActivity;
 import com.orange.lib.pull.callback.IPullNetCallback;
@@ -27,8 +26,6 @@ import java.lang.reflect.Type;
 import java.util.HashMap;
 
 public class BaseActivitySwipePullDemo extends PullActivity {
-    private INetCancel mNetCancel;
-
     /**
      * 获取布局文件
      *
@@ -53,7 +50,7 @@ public class BaseActivitySwipePullDemo extends PullActivity {
             public void onItemChildClick(View v) {
                 switch (v.getId()) {
                     case R.id.btn_pull:
-                        mNetCancel = NetUtils.swipePullAdapterNetData(new IPageNetRequest<PullDemoData>() {
+                        NetUtils.swipePullAdapterNetData(new IPageNetRequest<PullDemoData>() {
                             @Override
                             public INetCancel request(int pageIndex, Type type, IPullNetCallback<PullDemoData> callback) {
                                 HashMap<String, String> params = new HashMap<>();
@@ -67,7 +64,7 @@ public class BaseActivitySwipePullDemo extends PullActivity {
                         });
                         break;
                     case R.id.btn_pull_convert:
-                        mNetCancel = NetUtils.swipePullAdapterNetData(new IPageNetRequest<PullDemoData>() {
+                        NetUtils.swipePullAdapterNetData(new IPageNetRequest<PullDemoData>() {
                             @Override
                             public INetCancel request(int pageIndex, Type type, IPullNetCallback<PullDemoData> callback) {
                                 HashMap<String, String> params = new HashMap<>();
@@ -83,7 +80,7 @@ public class BaseActivitySwipePullDemo extends PullActivity {
                         });
                         break;
                     case R.id.btn_pull_holder:
-                        mNetCancel = NetUtils.swipePullAdapterNetData(new IPageNetRequest<PullDemoData>() {
+                        NetUtils.swipePullAdapterNetData(new IPageNetRequest<PullDemoData>() {
                             @Override
                             public INetCancel request(int pageIndex, Type type, IPullNetCallback<PullDemoData> callback) {
                                 HashMap<String, String> params = new HashMap<>();
@@ -97,7 +94,7 @@ public class BaseActivitySwipePullDemo extends PullActivity {
                         });
                         break;
                     case R.id.btn_pull_holder_convert:
-                        mNetCancel = NetUtils.swipePullAdapterNetData(new IPageNetRequest<PullDemoData>() {
+                        NetUtils.swipePullAdapterNetData(new IPageNetRequest<PullDemoData>() {
                             @Override
                             public INetCancel request(int pageIndex, Type type, IPullNetCallback<PullDemoData> callback) {
                                 HashMap<String, String> params = new HashMap<>();
@@ -120,15 +117,5 @@ public class BaseActivitySwipePullDemo extends PullActivity {
     @Override
     protected PullPresenter getPresenter() {
         return null;
-    }
-
-    /**
-     * onDestory生命周期调用
-     */
-    @Override
-    public void onActivityDestroy() {
-        super.onActivityDestroy();
-        if (null != mNetCancel)
-            mNetCancel.cancel();
     }
 }

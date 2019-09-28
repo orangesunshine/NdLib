@@ -3,8 +3,9 @@ package com.orange.thirdparty.image.glide;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.orange.lib.common.globle.GlobleImpl;
 import com.orange.lib.common.image.IImage;
+import com.orange.lib.constance.IInitConst;
+import com.orange.lib.utils.base.Utils;
 
 public class GlideImageImpl implements IImage {
     private static volatile GlideImageImpl sInstance;
@@ -31,7 +32,7 @@ public class GlideImageImpl implements IImage {
      */
     @Override
     public void loadImgUrl(ImageView iv, String url) {
-        Glide.with(GlobleImpl.getInstance().getAppContext()).load(url).placeholder(GlobleImpl.getInstance().placeholder()).into(iv);
+        Glide.with(Utils.getApp()).load(url).placeholder(IInitConst.sPlaceholderDrawable).into(iv);
     }
 
     /**
@@ -42,6 +43,6 @@ public class GlideImageImpl implements IImage {
      */
     @Override
     public void loadImageResourceAsGif(ImageView iv, int resId) {
-        Glide.with(GlobleImpl.getInstance().getAppContext()).asGif().load(resId).into(iv);
+        Glide.with(Utils.getApp()).asGif().load(resId).into(iv);
     }
 }

@@ -22,7 +22,7 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.StringRes;
 
 import com.orange.lib.R;
-import com.orange.lib.common.globle.GlobleImpl;
+import com.orange.lib.constance.IInitConst;
 import com.orange.lib.utils.base.Preconditions;
 
 import java.io.InputStream;
@@ -178,7 +178,7 @@ public class Views {
     public static void setCircleImage(final ImageView ivImage, final Context context, final String urlString) {
         if (null == ivImage || null == context) return;
         if (TextUtils.isEmpty(urlString)) {
-            setCircleImage(ivImage, context, GlobleImpl.getInstance().placeholder());//placeholder
+            setCircleImage(ivImage, context, IInitConst.sPlaceholderDrawable);//placeholder
         } else if (Patterns.WEB_URL.matcher(urlString).matches()) {
             new Thread(new Runnable() {
                 @Override

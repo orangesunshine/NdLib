@@ -13,8 +13,6 @@ import com.orange.lib.common.convert.IPullConvert;
 import com.orange.lib.common.convert.PullConvert;
 import com.orange.lib.common.holder.IHolder;
 import com.orange.lib.common.reponse.PullData;
-import com.orange.lib.component.pagestatus.loading.dialogfragment.ILoadingDialog;
-import com.orange.lib.component.pull.IRefreshLoadmore;
 import com.orange.lib.component.pull.callback.DefaultPullCallback;
 import com.orange.lib.component.pull.swipe.SwipeRefreshLoadmore;
 import com.orange.lib.component.recyclerview.IConvertRecyclerView;
@@ -24,6 +22,7 @@ import com.orange.lib.loading.callback.PageStatusNetCallback;
 import com.orange.lib.loading.pagestatus.IPageStatus;
 import com.orange.lib.loading.request.INetRequest;
 import com.orange.lib.mvp.model.net.common.netcancel.INetCancel;
+import com.orange.lib.mvp.view.ifc.ILoading;
 import com.orange.lib.pull.callback.PageStatusPullNetCallback;
 import com.orange.lib.pull.callback.SwipePullNetCallback;
 import com.orange.lib.pull.pagestatus.IPullPageStatus;
@@ -41,7 +40,7 @@ public class NetUtils {
      * @param convert
      * @param <T>
      */
-    public static <T> INetCancel loadingNetData(INetRequest<T> netRequest, ILoadingDialog loading, IConvert<T> convert) {
+    public static <T> INetCancel loadingNetData(INetRequest<T> netRequest, ILoading loading, IConvert<T> convert) {
         Preconditions.checkNotNull(netRequest);
         return netRequest.request(new LoadingNetCallback<T>(loading) {
             @Override

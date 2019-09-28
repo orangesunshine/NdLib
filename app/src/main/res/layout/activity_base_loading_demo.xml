@@ -59,7 +59,14 @@
             android:text="loading_page_convert" />
 
         <TextView
-            android:id="@+id/tv_content"
+            android:id="@+id/tv_loding_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/tv_pull_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="20dp"

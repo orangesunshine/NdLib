@@ -5,6 +5,10 @@ import com.orange.lib.loading.callback.INetCallback;
 public class NetCallbackAdapter<T> implements INetCallback<T> {
     private INetCallback<T> mNetCallback;
 
+    public INetCallback<T> getNetCallback() {
+        return mNetCallback;
+    }
+
     public NetCallbackAdapter(INetCallback<T> netCallback) {
         mNetCallback = netCallback;
     }

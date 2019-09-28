@@ -10,27 +10,35 @@ import com.orange.lib.component.pagestatus.loading.dialogfragment.DefaultLoading
 import com.orange.lib.component.pagestatus.loading.dialogfragment.ILoadingDialog;
 import com.orange.lib.mvp.presenter.BasePresenter;
 import com.orange.lib.mvp.presenter.NetPresenter;
+import com.orange.lib.mvp.presenter.ifc.INetPresenter;
 import com.orange.lib.mvp.view.activity.base.BaseActivity;
 import com.orange.lib.mvp.view.ifc.base.INetView;
 import com.orange.lib.utils.base.Preconditions;
 
 import java.lang.reflect.Method;
 
-public abstract class NetActivity<P extends NetPresenter> extends BaseActivity implements INetView {
+public abstract class NetActivity<P extends INetPresenter> extends BaseActivity implements INetView {
     //vars
     protected ILoadingDialog mLoading;//loading
+    protected P mPresenter;
 
     @Override
     protected void initVars(Bundle bundle) {
         super.initVars(bundle);
         mLoading = new DefaultLoadingDialog(this);
-        if (!Preconditions.isNull(getPresenter()))
-            getPresenter().initVars(bundle);
+
+        //presenter关联视图
+        mPresenter = getPresenter();
+        if (!Preconditions.isNull(mPresenter)) {
+            mPresenter.attachView(this);
+            mPresenter.initVars(bundle);
+        }
     }
 
     @Override
     protected void init() {
         super.init();
+
         //网络错误点击刷新
         mHolder.addOnItemChildClick(new IHolder.OnItemChildClickListener() {
             @Override
@@ -59,9 +67,6 @@ public abstract class NetActivity<P extends NetPresenter> extends BaseActivity i
                 }
             }
         }, R.id.id_retry_orange);
-
-        if (!Preconditions.isNull(getPresenter()))
-            getPresenter().attachView(this);
     }
 
     /**
@@ -88,8 +93,8 @@ public abstract class NetActivity<P extends NetPresenter> extends BaseActivity i
         super.onActivityDestroy();
         if (!Preconditions.isNull(mLoading))
             mLoading.dismissLoadingDialog();
-        if (!Preconditions.isNull(getPresenter()))
-            getPresenter().onActivityDestroy();
+        if (!Preconditions.isNull(mPresenter))
+            mPresenter.onActivityDestroy();
     }
 
     /**
@@ -108,9 +113,7 @@ public abstract class NetActivity<P extends NetPresenter> extends BaseActivity i
      */
     @Override
     public void hideLoading() {
-        if (!Preconditions.isNull(mLoading))
-            mLoading = new DefaultLoadingDialog(mActivity);
-        if (isActivityAlive())
+        if (isActivityAlive() && !Preconditions.isNull(mLoading))
             mLoading.dismissLoadingDialog();
     }
 }

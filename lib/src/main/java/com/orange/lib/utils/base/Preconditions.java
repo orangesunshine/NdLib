@@ -3,6 +3,8 @@ package com.orange.lib.utils.base;
 import com.orange.lib.utils.log.Logs;
 
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 public class Preconditions {
@@ -21,18 +23,34 @@ public class Preconditions {
     }
 
     /**
-     * 判断多个对象是不是空
+     * 判断多个对象是不是null
      *
-     * @param ojbs
+     * @param objs
      * @return
      */
-    public static boolean isNulls(Object... ojbs) {
-        boolean ret = isNull(ojbs);
+    public static boolean isNulls(Object... objs) {
+        boolean ret = isEmpty(objs);
         if (!ret) {
-            for (Object ojb : ojbs) {
+            for (Object ojb : objs) {
                 ret |= isNull(ojb);
             }
         }
+        if (ret) Logs.logc(LOG_PREFIX + "objs is nulls");
+        return ret;
+    }
+
+    /**
+     * 判断多个对象是不是空
+     *
+     * @param objs
+     * @return
+     */
+    public static boolean isEmpty(Object... objs) {
+        boolean ret = isNull(objs);
+        if (!ret) {
+            ret |= 0 == objs.length;
+        }
+        if (ret) Logs.logc(LOG_PREFIX + "objs is empty");
         return ret;
     }
 
@@ -90,5 +108,19 @@ public class Preconditions {
             ret |= map.isEmpty();
         if (ret) Logs.logc(LOG_PREFIX + "map is empty");
         return ret;
+    }
+
+    /**
+     * 删除list中null元素
+     *
+     * @param oldList
+     * @param <T>
+     * @return
+     */
+    public static <T> List<T> removeNull(List<? extends T> oldList) {
+
+        // 你没有看错，真的是有 1 行代码就实现了
+        oldList.removeAll(Collections.singleton(null));
+        return (List<T>) oldList;
     }
 }

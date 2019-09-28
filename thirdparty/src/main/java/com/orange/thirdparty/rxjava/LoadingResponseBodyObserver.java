@@ -7,10 +7,12 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.orange.lib.common.adapterpattern.NetCallbackAdapter;
 import com.orange.lib.constance.IConst;
 import com.orange.lib.loading.callback.INetCallback;
 import com.orange.lib.utils.CommonUtils;
 import com.orange.lib.utils.ReflectionUtils;
+import com.orange.lib.utils.base.Preconditions;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -29,12 +31,12 @@ public class LoadingResponseBodyObserver {
         return new LoadingResponseBodyObserver();
     }
 
-    public <T> Disposable subsribe(Observable<ResponseBody> observable, INetCallback<T> netCallback) {
+    public <T> Disposable subscribe(Observable<ResponseBody> observable, INetCallback<T> netCallback) {
         return observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<ResponseBody>() {
                     @Override
-                    public void accept(ResponseBody responseBody) throws Exception {
+                    public void accept(ResponseBody responseBody) {
                         //响应数据onNext
                         if (null == responseBody) return;
                         T result = null;
@@ -61,8 +63,14 @@ public class LoadingResponseBodyObserver {
                                 responseMsg = msgElement.getAsString();
 
                             JsonElement data = jsonObject.get("data");
-                            if (null != data)
-                                result = mGson.fromJson(data, ReflectionUtils.getGenericActualTypeArg(netCallback));
+                            if (null != data && !Preconditions.isNull(netCallback)) {
+                                Class clazz = netCallback.getClass();
+                                if (netCallback instanceof NetCallbackAdapter) {
+                                    INetCallback<T> callback = ((NetCallbackAdapter<T>) netCallback).getNetCallback();
+                                    if (null != callback) clazz = callback.getClass();
+                                }
+                                result = mGson.fromJson(data, ReflectionUtils.getGenericActualTypeArg(clazz));
+                            }
                         } catch (Exception e) {
                             if (null != e) {
                                 errorMsg.append(e.getMessage());

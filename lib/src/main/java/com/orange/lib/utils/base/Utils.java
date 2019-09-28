@@ -29,7 +29,6 @@ public class Utils {
     }
 
     public static void init(Context context) {
-        System.out.println("Utils.init.context");
         if (Preconditions.isNull(context)) {
             init(getAppByReflect());
             return;
@@ -43,7 +42,6 @@ public class Utils {
      * @param app
      */
     public static void init(Application app) {
-        System.out.println("Utils.init.app");
         if (!Preconditions.isNull(app)) {
             if (Preconditions.isNull(sApplication)) {
                 sApplication = app;

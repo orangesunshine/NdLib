@@ -1,6 +1,5 @@
 package com.orange.lib.mvp.presenter;
 
-import android.app.Activity;
 import android.os.Bundle;
 
 import com.orange.lib.mvp.presenter.ifc.IPresenter;
@@ -22,5 +21,6 @@ public class BasePresenter<V extends IView> implements IPresenter<V> {
     }
 
     public void onActivityDestroy() {
+        mView = null;
     }
 }

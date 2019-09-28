@@ -5,7 +5,6 @@ import android.view.View;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.orange.lib.common.holder.IHolder;
-import com.orange.lib.component.pull.IRefreshLoadmore;
 import com.orange.lib.component.pull.callback.DefaultPullCallback;
 import com.orange.lib.component.recyclerview.IConvertRecyclerView;
 import com.orange.lib.mvp.model.net.common.netcancel.INetCancel;

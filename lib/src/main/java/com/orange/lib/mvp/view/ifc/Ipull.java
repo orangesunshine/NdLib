@@ -18,4 +18,19 @@ public interface Ipull {
      * @param enable
      */
     void enableLoadmore(boolean enable);
+
+    /**
+     * 自动刷新
+     */
+    void autoRefresh();
+
+    /**
+     * 关闭刷新
+     */
+    void finishRefresh();
+
+    /**
+     * 关闭加载更多
+     */
+    void finishLoadmore();
 }

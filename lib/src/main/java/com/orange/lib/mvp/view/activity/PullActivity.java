@@ -14,4 +14,19 @@ public abstract class PullActivity<P extends PullPresenter> extends NetActivity<
     public void enableLoadmore(boolean enable) {
 
     }
+
+    @Override
+    public void autoRefresh() {
+
+    }
+
+    @Override
+    public void finishRefresh() {
+
+    }
+
+    @Override
+    public void finishLoadmore() {
+
+    }
 }
