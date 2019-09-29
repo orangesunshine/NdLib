@@ -12,7 +12,7 @@ public class ReflectionUtils {
     private static int COUNT_MAX_RECURSIVE = 3;
 
     public static Type getGenericActualTypeArg(Class clazz) {
-        return null == getGenericInterfacesActualTypeArg(clazz) ? getGenericSuperclassActualTypeArg(clazz) : null;
+        return getGenericSuperclassActualTypeArg(clazz);
     }
 
     /**

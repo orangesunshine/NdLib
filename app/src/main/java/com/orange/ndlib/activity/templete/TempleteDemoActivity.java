@@ -8,8 +8,8 @@ import com.orange.lib.loading.pagestatus.LoadingDialogPageStatus;
 import com.orange.lib.mvp.presenter.NetPresenter;
 import com.orange.lib.utils.Activitys;
 import com.orange.ndlib.R;
-import com.orange.ndlib.activity.base.loading.BaseActivityLoadingDemo;
-import com.orange.ndlib.activity.base.BaseActivitySwipePullDemo;
+import com.orange.ndlib.activity.base.loading.LoadingDemoActivity;
+import com.orange.ndlib.activity.base.swip.SwipePullDemoActivity;
 
 import java.util.Random;
 
@@ -21,7 +21,7 @@ public class TempleteDemoActivity extends TempleteActivity {
      */
     @Override
     protected int getContentLayoutId() {
-        return R.layout.activity_templete_demo_content;
+        return R.layout.activity_templete_demo;
     }
 
     /**
@@ -68,15 +68,15 @@ public class TempleteDemoActivity extends TempleteActivity {
                             mActbar.setRightImg(R.drawable.ic_image_white);
                             break;
                         case 4:
-                            mActbar.setTitle("BaseActivityDemo");
+                            mActbar.setTitle("DemoActivity");
                             break;
                     }
                     break;
                 case R.id.btn_net_loading:
-                    Activitys.launchActivity(mActivity, BaseActivityLoadingDemo.class);
+                    Activitys.launchActivity(mActivity, LoadingDemoActivity.class);
                     break;
                 case R.id.btn_net_pull:
-                    Activitys.launchActivity(mActivity, BaseActivitySwipePullDemo.class);
+                    Activitys.launchActivity(mActivity, SwipePullDemoActivity.class);
                     break;
             }
         }, R.id.btn_content, R.id.btn_loading, R.id.btn_empty, R.id.btn_error, R.id.btn_actbar, R.id.btn_net_loading, R.id.btn_net_pull);

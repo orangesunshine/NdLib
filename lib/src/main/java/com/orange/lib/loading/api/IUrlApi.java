@@ -17,8 +17,8 @@ public interface IUrlApi {
     /**
      * 网络请求
      *
-     * @param netRequest 网络请求封装
+     * @param netRequests 网络请求封装
      * @return 返回取消网络请求回调
      */
-    <T extends NetRequest<K>, K> INetCancel request(T... netRequest);
+    <T extends NetRequest<K>, K> INetCancel request(T... netRequests);
 }

@@ -4,6 +4,7 @@ import com.orange.lib.loading.pagestatus.IPageStatus;
 
 public class PageStatusNetCallback<T> implements INetCallback<T> {
     private IPageStatus mPageStatus;
+    private LogNetCallback mLogNetCallback = new LogNetCallback();
 
     public PageStatusNetCallback(IPageStatus pageStatus) {
         mPageStatus = pageStatus;
@@ -14,6 +15,8 @@ public class PageStatusNetCallback<T> implements INetCallback<T> {
      */
     @Override
     public void onNetStart() {
+        if (null != mLogNetCallback)
+            mLogNetCallback.onNetStart();
         if (null != mPageStatus)
             mPageStatus.showLoading();
     }
@@ -25,6 +28,8 @@ public class PageStatusNetCallback<T> implements INetCallback<T> {
      */
     @Override
     public void onSuccess(T t) {
+        if (null != mLogNetCallback)
+            mLogNetCallback.onSuccess(t);
         if (null != mPageStatus)
             mPageStatus.showContent();
     }
@@ -37,6 +42,8 @@ public class PageStatusNetCallback<T> implements INetCallback<T> {
      */
     @Override
     public void onError(int code, Throwable error) {
+        if (null != mLogNetCallback)
+            mLogNetCallback.onError(code, error);
         if (null != mPageStatus)
             mPageStatus.showError();
     }
@@ -46,6 +53,7 @@ public class PageStatusNetCallback<T> implements INetCallback<T> {
      */
     @Override
     public void onComplete() {
-
+        if (null != mLogNetCallback)
+            mLogNetCallback.onComplete();
     }
 }

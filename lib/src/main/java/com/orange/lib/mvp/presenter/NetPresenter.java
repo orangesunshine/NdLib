@@ -31,11 +31,15 @@ public class NetPresenter<V extends INetView> extends BasePresenter<V> implement
 
     @Override
     public <T> INetCancel singleRequest(NetRequest<T> netRequest) {
-        return mUrlApi.singleRequest(netRequest);
+        INetCancel iNetCancel = mUrlApi.singleRequest(netRequest);
+        mNetCancels.add(iNetCancel);
+        return iNetCancel;
     }
 
     @Override
-    public INetCancel request(NetRequest... netRequest) {
-        return mUrlApi.request(netRequest);
+    public INetCancel request(NetRequest... netRequests) {
+        INetCancel iNetCancel = mUrlApi.request(netRequests);
+        mNetCancels.add(iNetCancel);
+        return iNetCancel;
     }
 }

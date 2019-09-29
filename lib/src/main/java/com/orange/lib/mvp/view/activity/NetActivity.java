@@ -8,8 +8,6 @@ import com.orange.lib.activity.Retry;
 import com.orange.lib.common.holder.IHolder;
 import com.orange.lib.component.pagestatus.loading.dialogfragment.DefaultLoadingDialog;
 import com.orange.lib.component.pagestatus.loading.dialogfragment.ILoadingDialog;
-import com.orange.lib.mvp.presenter.BasePresenter;
-import com.orange.lib.mvp.presenter.NetPresenter;
 import com.orange.lib.mvp.presenter.ifc.INetPresenter;
 import com.orange.lib.mvp.view.activity.base.BaseActivity;
 import com.orange.lib.mvp.view.ifc.base.INetView;
@@ -25,7 +23,9 @@ public abstract class NetActivity<P extends INetPresenter> extends BaseActivity 
     @Override
     protected void initVars(Bundle bundle) {
         super.initVars(bundle);
-        mLoading = new DefaultLoadingDialog(this);
+        mLoading = buildLoadingDialog();
+        if (null == mLoading)
+            mLoading = new DefaultLoadingDialog(this);
 
         //presenter关联视图
         mPresenter = getPresenter();
@@ -33,6 +33,15 @@ public abstract class NetActivity<P extends INetPresenter> extends BaseActivity 
             mPresenter.attachView(this);
             mPresenter.initVars(bundle);
         }
+    }
+
+    /**
+     * 自定义实现loading
+     *
+     * @return
+     */
+    protected ILoadingDialog buildLoadingDialog() {
+        return null;
     }
 
     @Override

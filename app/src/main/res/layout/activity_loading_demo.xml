@@ -5,27 +5,33 @@
     android:orientation="vertical">
 
     <ViewStub
-        android:id="@+id/stub_actbar"
+        android:id="@+id/stub_actbar_orange"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_actbar"
-        android:inflatedId="@id/id_actbar_orange" />
+        android:inflatedId="@+id/id_actbar_orange" />
 
     <Button
-        android:id="@+id/btn_base"
+        android:id="@+id/btn_show_loading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="base" />
+        android:text="show_loading" />
 
     <Button
-        android:id="@+id/btn_loading"
+        android:id="@+id/btn_hide_loading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="loading" />
+        android:text="hide_loading" />
 
     <Button
-        android:id="@+id/btn_loading_page"
+        android:id="@+id/btn_data"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="loading_page" />
+        android:text="data" />
 
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:gravity="center" />
 </LinearLayout>

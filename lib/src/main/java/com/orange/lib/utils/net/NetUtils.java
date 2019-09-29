@@ -13,8 +13,6 @@ import com.orange.lib.common.convert.IPullConvert;
 import com.orange.lib.common.convert.PullConvert;
 import com.orange.lib.common.holder.IHolder;
 import com.orange.lib.common.reponse.PullData;
-import com.orange.lib.component.pull.callback.DefaultPullCallback;
-import com.orange.lib.component.pull.swipe.SwipeRefreshLoadmore;
 import com.orange.lib.component.recyclerview.IConvertRecyclerView;
 import com.orange.lib.loading.callback.INetCallback;
 import com.orange.lib.loading.callback.LoadingNetCallback;
@@ -23,8 +21,6 @@ import com.orange.lib.loading.pagestatus.IPageStatus;
 import com.orange.lib.loading.request.INetRequest;
 import com.orange.lib.mvp.model.net.common.netcancel.INetCancel;
 import com.orange.lib.mvp.view.ifc.ILoading;
-import com.orange.lib.pull.callback.PageStatusPullNetCallback;
-import com.orange.lib.pull.callback.SwipePullNetCallback;
 import com.orange.lib.pull.pagestatus.IPullPageStatus;
 import com.orange.lib.pull.request.IPageNetRequest;
 
@@ -99,8 +95,9 @@ public class NetUtils {
 
     public static <ITEM> INetCancel swipePullPageAdapterNetData(IPageNetRequest<? extends PullData<ITEM>> pageNetRequest, IPullPageStatus pageStatus, SwipeRefreshLayout refreshLayout, RecyclerView recyclerView, IPullConvert<ITEM> pullConvert) {
         Preconditions.checkNotNull(pageNetRequest);
-        IRefreshLoadmore refreshLoadmore = new SwipeRefreshLoadmore(refreshLayout, recyclerView);
-        return refreshLoadmore.setPullCallback(new DefaultPullCallback(pageNetRequest, refreshLayout, new PageStatusPullNetCallback(pageStatus, pullConvert)));
+//        IRefreshLoadmore refreshLoadmore = new SwipeRefreshLoadmore(refreshLayout, recyclerView);
+//        return refreshLoadmore.setPullCallback(new DefaultPullCallback(pageNetRequest, refreshLayout, new PageStatusPullNetCallback(pageStatus, pullConvert)));
+        return null;
     }
 
     /**
@@ -159,7 +156,8 @@ public class NetUtils {
      */
     public static <ITEM> INetCancel swipePullAdapterNetData(IPageNetRequest<? extends PullData<ITEM>> pageNetRequest, SwipeRefreshLayout refreshLayout, RecyclerView recyclerView, IPullConvert<ITEM> pullConvert) {
         Preconditions.checkNotNull(pageNetRequest);
-        IRefreshLoadmore refreshLoadmore = new SwipeRefreshLoadmore(refreshLayout, recyclerView);
-        return refreshLoadmore.setPullCallback(new DefaultPullCallback(pageNetRequest, refreshLayout, new SwipePullNetCallback(refreshLayout, pullConvert)));
+//        IRefreshLoadmore refreshLoadmore = new SwipeRefreshLoadmore(refreshLayout, recyclerView);
+//        return refreshLoadmore.setPullCallback(new DefaultPullCallback(pageNetRequest, refreshLayout, new SwipePullNetCallback(refreshLayout, pullConvert)));
+        return null;
     }
 }

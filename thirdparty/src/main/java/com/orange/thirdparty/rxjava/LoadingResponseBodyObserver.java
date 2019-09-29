@@ -14,6 +14,9 @@ import com.orange.lib.utils.CommonUtils;
 import com.orange.lib.utils.ReflectionUtils;
 import com.orange.lib.utils.base.Preconditions;
 
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -64,12 +67,23 @@ public class LoadingResponseBodyObserver {
 
                             JsonElement data = jsonObject.get("data");
                             if (null != data && !Preconditions.isNull(netCallback)) {
-                                Class clazz = netCallback.getClass();
-                                if (netCallback instanceof NetCallbackAdapter) {
-                                    INetCallback<T> callback = ((NetCallbackAdapter<T>) netCallback).getNetCallback();
-                                    if (null != callback) clazz = callback.getClass();
+                                Type type = null;
+                                if (netCallback instanceof ParameterizedType) {
+
+                                    Type[] types = ((ParameterizedType) netCallback).getActualTypeArguments();
+                                    if (null != types && types.length > 0) {
+                                        type = types[0];
+                                    }
                                 }
-                                result = mGson.fromJson(data, ReflectionUtils.getGenericActualTypeArg(clazz));
+                                if (null == type) {
+                                    Class clazz = netCallback.getClass();
+                                    if (netCallback instanceof NetCallbackAdapter) {
+                                        INetCallback<T> callback = ((NetCallbackAdapter<T>) netCallback).getNetCallback();
+                                        if (null != callback) clazz = callback.getClass();
+                                    }
+                                    type = ReflectionUtils.getGenericActualTypeArg(clazz);
+                                }
+                                result = mGson.fromJson(data, type);
                             }
                         } catch (Exception e) {
                             if (null != e) {

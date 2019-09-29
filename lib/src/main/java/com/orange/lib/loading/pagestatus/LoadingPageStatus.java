@@ -48,6 +48,14 @@ public class LoadingPageStatus implements IPageStatus {
     }
 
     /**
+     * 关闭loading
+     */
+    @Override
+    public void hideLoading() {
+        Views.setVisible(mLoadView, false);
+    }
+
+    /**
      * 显示content
      */
     @Override

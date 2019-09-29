@@ -1,14 +1,11 @@
 package com.orange.lib.loading.pagestatus;
 
+import com.orange.lib.mvp.view.ifc.ILoading;
+
 /**
  * 页面状态：loading、content、empty、error
  */
-public interface IPageStatus {
-    /**
-     * 显示loading
-     */
-    void showLoading();
-
+public interface IPageStatus extends ILoading {
     /**
      * 显示content
      */

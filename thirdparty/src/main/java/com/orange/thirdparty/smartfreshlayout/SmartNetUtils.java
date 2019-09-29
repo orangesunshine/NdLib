@@ -5,7 +5,6 @@ import android.view.View;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.orange.lib.common.holder.IHolder;
-import com.orange.lib.component.pull.callback.DefaultPullCallback;
 import com.orange.lib.component.recyclerview.IConvertRecyclerView;
 import com.orange.lib.mvp.model.net.common.netcancel.INetCancel;
 import com.orange.lib.pull.request.IPageNetRequest;
@@ -33,7 +32,8 @@ public class SmartNetUtils {
      * @param <T>
      */
     public static <T> INetCancel smartPullAdapterNetData(SmartRefreshLayout refreshLayout, RecyclerView recyclerView, View emptyView, int itemLayoutId, IPageNetRequest<T> pageNetRequest, IConvertRecyclerView<T> convertRecyclerView) {
-        IRefreshLoadmore refreshLoadmore = new SmartRefreshLoadmore(refreshLayout, recyclerView);
-        return refreshLoadmore.setPullCallback(new DefaultPullCallback(pageNetRequest, refreshLayout, new SmartRefreshNetCallback(refreshLayout, recyclerView, emptyView, itemLayoutId, convertRecyclerView)));
+//        IRefreshLoadmore refreshLoadmore = new SmartRefreshLoadmore(refreshLayout, recyclerView);
+//        return refreshLoadmore.setPullCallback(new DefaultPullCallback(pageNetRequest, refreshLayout, new SmartRefreshNetCallback(refreshLayout, recyclerView, emptyView, itemLayoutId, convertRecyclerView)));
+        return null;
     }
 }

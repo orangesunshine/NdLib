@@ -17,60 +17,42 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/btn_content"
+            android:id="@+id/btn_show_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="content" />
+            android:text="show_content" />
 
         <Button
-            android:id="@+id/btn_loading"
+            android:id="@+id/btn_show_loading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="loading" />
+            android:text="show_loading" />
 
         <Button
-            android:id="@+id/btn_empty"
+            android:id="@+id/btn_show_empty"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="empty" />
+            android:text="show_empty" />
 
         <Button
-            android:id="@+id/btn_error"
+            android:id="@+id/btn_show_error"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="error" />
+            android:text="show_error" />
 
         <Button
-            android:id="@+id/btn_loading_convert"
+            android:id="@+id/btn_data"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="loading_convert" />
-
-        <Button
-            android:id="@+id/btn_loading_page"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="loading_page" />
-
-        <Button
-            android:id="@+id/btn_loading_page_convert"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="loading_page_convert" />
+            android:text="data" />
 
         <TextView
-            android:id="@+id/tv_loding_content"
+            android:id="@+id/tv_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="20dp"
             android:gravity="center" />
 
-        <TextView
-            android:id="@+id/tv_pull_content"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="20dp"
-            android:gravity="center" />
     </LinearLayout>
 
     <FrameLayout

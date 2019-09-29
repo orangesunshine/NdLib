@@ -5,11 +5,13 @@ import com.orange.lib.mvp.view.activity.base.BaseActivity;
 import com.orange.lib.utils.Activitys;
 import com.orange.lib.utils.toast.Toasts;
 import com.orange.ndlib.R;
-import com.orange.ndlib.activity.base.loading.BaseActivityLoadingDemo;
+import com.orange.ndlib.activity.base.loading.LoadingDemoActivity;
+import com.orange.ndlib.activity.base.swip.SwipePullDemoActivity;
+import com.orange.ndlib.activity.base.swip.SwipePullPageDemoActivity;
 
 import java.util.Random;
 
-public class BaseActivityDemo extends BaseActivity {
+public class DemoActivity extends BaseActivity {
     /**
      * 获取布局文件
      *
@@ -17,7 +19,7 @@ public class BaseActivityDemo extends BaseActivity {
      */
     @Override
     protected int getContentLayoutId() {
-        return R.layout.activity_base_demo;
+        return R.layout.activity_demo;
     }
 
     /**
@@ -44,18 +46,18 @@ public class BaseActivityDemo extends BaseActivity {
                             mActbar.setRightImg(R.drawable.ic_image_white);
                             break;
                         case 4:
-                            mActbar.setTitle("BaseActivityDemo");
+                            mActbar.setTitle("DemoActivity");
                             break;
                     }
                     break;
                 case R.id.btn_net_loading:
-                    Activitys.launchActivity(mActivity, BaseActivityLoadingDemo.class);
+                    Activitys.launchActivity(mActivity, LoadingDemoActivity.class);
                     break;
                 case R.id.btn_net_pull:
-                    Activitys.launchActivity(mActivity, BaseActivitySwipePullDemo.class);
+                    Activitys.launchActivity(mActivity, SwipePullDemoActivity.class);
                     break;
                 case R.id.btn_net_pull_page:
-                    Activitys.launchActivity(mActivity, BaseActivitySwipePullPageDemo.class);
+                    Activitys.launchActivity(mActivity, SwipePullPageDemoActivity.class);
                     break;
             }
         }, R.id.btn_content, R.id.btn_loading, R.id.btn_empty, R.id.btn_error, R.id.btn_actbar, R.id.btn_net_loading, R.id.btn_net_pull, R.id.btn_net_pull_page);

@@ -54,12 +54,20 @@ public class LoadingDialogPageStatus implements IPageStatus {
     }
 
     /**
+     * 关闭loading
+     */
+    @Override
+    public void hideLoading() {
+        if (null != mLoadingDialog)
+            mLoadingDialog.dismissLoadingDialog();
+    }
+
+    /**
      * 显示content
      */
     @Override
     public void showContent() {
-        if (null != mLoadingDialog)
-            mLoadingDialog.dismissLoadingDialog();
+        hideLoading();
         Views.setVisible(mContentView, true);
         Views.setVisible(mEmtpyView, false);
         Views.setVisible(mErrorView, false);
@@ -70,8 +78,7 @@ public class LoadingDialogPageStatus implements IPageStatus {
      */
     @Override
     public void showEmpty() {
-        if (null != mLoadingDialog)
-            mLoadingDialog.dismissLoadingDialog();
+        hideLoading();
         Views.setVisible(mContentView, false);
         Views.setVisible(mEmtpyView, true);
         Views.setVisible(mErrorView, false);
@@ -82,8 +89,7 @@ public class LoadingDialogPageStatus implements IPageStatus {
      */
     @Override
     public void showError() {
-        if (null != mLoadingDialog)
-            mLoadingDialog.dismissLoadingDialog();
+        hideLoading();
         Views.setVisible(mContentView, false);
         Views.setVisible(mEmtpyView, false);
         Views.setVisible(mErrorView, true);

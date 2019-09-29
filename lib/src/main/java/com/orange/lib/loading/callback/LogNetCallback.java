@@ -4,6 +4,8 @@ import android.os.SystemClock;
 
 
 import com.orange.lib.constance.IInitConst;
+import com.orange.lib.utils.log.Logs;
+import com.orange.lib.utils.toast.Toasts;
 
 import static com.orange.lib.constance.IConst.LINE_SEPARATOR;
 
@@ -52,7 +54,7 @@ public class LogNetCallback<T> implements INetCallback<T> {
         if (IInitConst.sRecordNetLogSwitch) {
             log.append("onComplete: ");
             log.append(LINE_SEPARATOR).append(indentation).append("period: ").append(SystemClock.elapsedRealtime() - startTimeMills).append("ms");
-//            LogUtils.e(log.toString());
+            Logs.logi(log.toString());
         }
     }
 
@@ -72,8 +74,8 @@ public class LogNetCallback<T> implements INetCallback<T> {
                 Throwable cause = error.getCause();
                 if (null != cause)
                     errorMsg.append(cause.getMessage());
-//                if (errorMsg.length() > 0)
-//                    ToastUtils.showShort(errorMsg);
+                if (errorMsg.length() > 0)
+                    Toasts.showMsg(errorMsg);
             }
             log.append(errorMsg).append(LINE_SEPARATOR);
         }

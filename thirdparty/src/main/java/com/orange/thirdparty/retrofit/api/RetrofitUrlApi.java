@@ -35,13 +35,9 @@ public class RetrofitUrlApi implements IUrlApi {
         mLoadingResponseBodyObserver = LoadingResponseBodyObserver.newInstance();
     }
 
-    /**
-     * 网络请求
-     *
-     * @param netRequest 网络请求封装
-     * @param <T>
-     * @return
-     */
+    ///////////////////////////////////////////////////////////////////////////
+    // 网络请求实现
+    ///////////////////////////////////////////////////////////////////////////
     @Override
     public <T> INetCancel singleRequest(NetRequest<T> netRequest) {
         if (Preconditions.isNull(netRequest)) return null;
@@ -56,20 +52,14 @@ public class RetrofitUrlApi implements IUrlApi {
         return post(url, params, headers, netCallback);
     }
 
-    /**
-     * 网络请求
-     *
-     * @param netRequest 网络请求封装
-     * @return
-     */
     @Override
-    public <T extends NetRequest<K>, K> INetCancel request(T... netRequest) {
-        if (Preconditions.isNulls(netRequest)) return null;
+    public <T extends NetRequest<K>, K> INetCancel request(T... netRequests) {
+        if (Preconditions.isNulls(netRequests)) return null;
         mAlreadyStart = new AtomicBoolean(false);
-        int len = netRequest.length;
+        int len = netRequests.length;
         mCompleteCountDown = new CountDownLatch(len);
         List<INetCancel> netCancels = new ArrayList<>();
-        for (NetRequest<K> request : netRequest) {
+        for (NetRequest<K> request : netRequests) {
             if (Preconditions.isNull(request)) {
                 if (!Preconditions.isNull(mCompleteCountDown))
                     mCompleteCountDown.countDown();
@@ -81,6 +71,9 @@ public class RetrofitUrlApi implements IUrlApi {
         return wrapNetCancel(netCancels);
     }
 
+    ///////////////////////////////////////////////////////////////////////////
+    // 工具方法
+    ///////////////////////////////////////////////////////////////////////////
     private INetCancel wrapNetCancel(List<INetCancel> netCancels) {
         if (Preconditions.isEmpty(netCancels)) return null;
         return new INetCancel() {
