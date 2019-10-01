@@ -1,12 +1,17 @@
 package com.orange.lib.utils;
 
+import androidx.annotation.Nullable;
+
 import com.orange.lib.mvp.presenter.NetPresenter;
 import com.orange.lib.mvp.view.activity.NetActivity;
 import com.orange.lib.pull.request.IPageNetRequest;
 import com.orange.lib.utils.text.TextUtils;
 
+import java.lang.reflect.GenericArrayType;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.lang.reflect.TypeVariable;
+import java.lang.reflect.WildcardType;
 
 public class ReflectionUtils {
     private static int COUNT_MAX_RECURSIVE = 3;
@@ -127,5 +132,32 @@ public class ReflectionUtils {
                 return actualTypeArguments[0];
         }
         return type;
+    }
+
+    public static boolean hasUnresolvableType(@Nullable Type type) {
+        if (type instanceof Class<?>) {
+            return false;
+        }
+        if (type instanceof ParameterizedType) {
+            ParameterizedType parameterizedType = (ParameterizedType) type;
+            for (Type typeArgument : parameterizedType.getActualTypeArguments()) {
+                if (hasUnresolvableType(typeArgument)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        if (type instanceof GenericArrayType) {
+            return hasUnresolvableType(((GenericArrayType) type).getGenericComponentType());
+        }
+        if (type instanceof TypeVariable) {
+            return true;
+        }
+        if (type instanceof WildcardType) {
+            return true;
+        }
+        String className = type == null ? "null" : type.getClass().getName();
+        throw new IllegalArgumentException("Expected a Class, ParameterizedType, or "
+                + "GenericArrayType, but <" + type + "> is of type " + className);
     }
 }
