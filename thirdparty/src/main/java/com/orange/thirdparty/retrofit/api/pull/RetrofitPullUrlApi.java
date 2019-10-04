@@ -2,7 +2,7 @@ package com.orange.thirdparty.retrofit.api.pull;
 
 import androidx.core.util.Preconditions;
 
-import com.orange.lib.mvp.model.net.common.netcancel.INetCancel;
+import com.orange.lib.mvp.model.net.netcancel.INetCancel;
 import com.orange.lib.pull.callback.IPullNetCallback;
 import com.orange.lib.pull.api.IPullUrlApi;
 import com.orange.thirdparty.retrofit.IRetrofitCommonApi;

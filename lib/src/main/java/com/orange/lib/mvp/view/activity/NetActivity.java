@@ -6,26 +6,26 @@ import android.view.View;
 import com.orange.lib.R;
 import com.orange.lib.activity.Retry;
 import com.orange.lib.common.holder.IHolder;
-import com.orange.lib.component.pagestatus.loading.dialogfragment.DefaultLoadingDialog;
-import com.orange.lib.component.pagestatus.loading.dialogfragment.ILoadingDialog;
-import com.orange.lib.mvp.presenter.ifc.INetPresenter;
+import com.orange.lib.loading.api.IUrlApi;
+import com.orange.lib.mvp.presenter.ifc.IPresenter;
 import com.orange.lib.mvp.view.activity.base.BaseActivity;
-import com.orange.lib.mvp.view.ifc.base.INetView;
+import com.orange.lib.mvp.view.ifc.ILoading;
+import com.orange.lib.mvp.view.impl.Loading;
 import com.orange.lib.utils.base.Preconditions;
 
 import java.lang.reflect.Method;
 
-public abstract class NetActivity<P extends INetPresenter> extends BaseActivity implements INetView {
+public abstract class NetActivity<P extends IPresenter & IUrlApi> extends BaseActivity implements ILoading {
     //vars
-    protected ILoadingDialog mLoading;//loading
+    protected ILoading mLoading;//loading
     protected P mPresenter;
 
     @Override
     protected void initVars(Bundle bundle) {
         super.initVars(bundle);
-        mLoading = buildLoadingDialog();
+        mLoading = getLoading();
         if (null == mLoading)
-            mLoading = new DefaultLoadingDialog(this);
+            mLoading = new Loading(mActivity);
 
         //presenter关联视图
         mPresenter = getPresenter();
@@ -40,7 +40,7 @@ public abstract class NetActivity<P extends INetPresenter> extends BaseActivity 
      *
      * @return
      */
-    protected ILoadingDialog buildLoadingDialog() {
+    protected ILoading getLoading() {
         return null;
     }
 
@@ -101,7 +101,7 @@ public abstract class NetActivity<P extends INetPresenter> extends BaseActivity 
     public void onActivityDestroy() {
         super.onActivityDestroy();
         if (!Preconditions.isNull(mLoading))
-            mLoading.dismissLoadingDialog();
+            mLoading.hideLoading();
         if (!Preconditions.isNull(mPresenter))
             mPresenter.onActivityDestroy();
     }
@@ -111,10 +111,10 @@ public abstract class NetActivity<P extends INetPresenter> extends BaseActivity 
      */
     @Override
     public void showLoading() {
-        if (!Preconditions.isNull(mLoading))
-            mLoading = new DefaultLoadingDialog(mActivity);
+        if (Preconditions.isNull(mLoading))
+            mLoading = new Loading(mActivity);
         if (isActivityAlive())
-            mLoading.showLoadingDialog();
+            mLoading.showLoading();
     }
 
     /**
@@ -123,6 +123,6 @@ public abstract class NetActivity<P extends INetPresenter> extends BaseActivity 
     @Override
     public void hideLoading() {
         if (isActivityAlive() && !Preconditions.isNull(mLoading))
-            mLoading.dismissLoadingDialog();
+            mLoading.hideLoading();
     }
 }

@@ -3,7 +3,7 @@ package com.orange.thirdparty.retrofit.api;
 
 import androidx.core.util.Preconditions;
 
-import com.orange.lib.mvp.model.net.common.netcancel.INetCancel;
+import com.orange.lib.mvp.model.net.netcancel.INetCancel;
 import com.orange.lib.loading.callback.INetCallback;
 import com.orange.lib.loading.api.IPrefixSuffixApi;
 import com.orange.thirdparty.retrofit.IRetrofitCommonApi;

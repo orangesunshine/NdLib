@@ -2,7 +2,7 @@ package com.orange.lib.loading.api;
 
 
 import com.orange.lib.loading.request.NetRequest;
-import com.orange.lib.mvp.model.net.common.netcancel.INetCancel;
+import com.orange.lib.mvp.model.net.netcancel.INetCancel;
 
 public interface IUrlApi {
 

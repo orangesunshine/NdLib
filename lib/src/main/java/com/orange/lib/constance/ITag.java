@@ -6,5 +6,8 @@ package com.orange.lib.constance;
  */
 public interface ITag {
     int TAG_HOLDER = 0x001;//设置DefaultHolder contentview的tag
-    String TAG_COPY = "tag_copy";//复制功能tag
+    int TAG_LOADMORE_RECYCLERVIEW = 0x002;
+
+    //label
+    // String LABEL_COPY = "label_copy";//复制功能label
 }

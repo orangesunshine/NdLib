@@ -1,6 +1,6 @@
 package com.orange.lib.loading.api;
 
-import com.orange.lib.mvp.model.net.common.netcancel.INetCancel;
+import com.orange.lib.mvp.model.net.netcancel.INetCancel;
 import com.orange.lib.loading.callback.INetCallback;
 
 import java.util.Map;

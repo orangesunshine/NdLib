@@ -11,7 +11,7 @@ import com.orange.lib.common.holder.IHolder;
 import com.orange.lib.common.reponse.PullData;
 import com.orange.lib.component.recyclerview.IConvertRecyclerView;
 import com.orange.lib.constance.IConst;
-import com.orange.lib.mvp.model.net.common.netcancel.INetCancel;
+import com.orange.lib.mvp.model.net.netcancel.INetCancel;
 import com.orange.lib.mvp.presenter.PullPresenter;
 import com.orange.lib.mvp.view.activity.PullActivity;
 import com.orange.lib.pull.callback.IPullNetCallback;

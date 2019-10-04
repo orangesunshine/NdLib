@@ -19,7 +19,7 @@ import com.orange.lib.loading.callback.LoadingNetCallback;
 import com.orange.lib.loading.callback.PageStatusNetCallback;
 import com.orange.lib.loading.pagestatus.IPageStatus;
 import com.orange.lib.loading.request.INetRequest;
-import com.orange.lib.mvp.model.net.common.netcancel.INetCancel;
+import com.orange.lib.mvp.model.net.netcancel.INetCancel;
 import com.orange.lib.mvp.view.ifc.ILoading;
 import com.orange.lib.pull.pagestatus.IPullPageStatus;
 import com.orange.lib.pull.request.IPageNetRequest;

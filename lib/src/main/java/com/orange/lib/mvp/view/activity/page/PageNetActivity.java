@@ -1,13 +1,11 @@
-package com.orange.lib.mvp.view.activity.base;
+package com.orange.lib.mvp.view.activity.page;
 
 import com.orange.lib.loading.pagestatus.IPageStatus;
 import com.orange.lib.loading.pagestatus.LoadingDialogPageStatus;
-import com.orange.lib.mvp.presenter.ifc.INetPresenter;
 import com.orange.lib.mvp.view.activity.NetActivity;
-import com.orange.lib.mvp.view.ifc.base.IPageNetView;
 import com.orange.lib.utils.base.Preconditions;
 
-public abstract class PageNetActivity<P extends INetPresenter> extends NetActivity<P> implements IPageNetView {
+public abstract class PageNetActivity<P extends com.orange.lib.mvp.presenter.ifc.IPresenter & com.orange.lib.loading.api.IUrlApi> extends NetActivity<P> implements IPageStatus {
     protected IPageStatus mPageStatus;
 
     @Override
@@ -27,7 +25,7 @@ public abstract class PageNetActivity<P extends INetPresenter> extends NetActivi
      */
     @Override
     public void showContent() {
-        if(!Preconditions.isNull(mPageStatus))
+        if (!Preconditions.isNull(mPageStatus))
             mPageStatus.showContent();
     }
 
@@ -36,7 +34,7 @@ public abstract class PageNetActivity<P extends INetPresenter> extends NetActivi
      */
     @Override
     public void showEmpty() {
-        if(!Preconditions.isNull(mPageStatus))
+        if (!Preconditions.isNull(mPageStatus))
             mPageStatus.showEmpty();
     }
 
@@ -45,7 +43,7 @@ public abstract class PageNetActivity<P extends INetPresenter> extends NetActivi
      */
     @Override
     public void showError() {
-        if(!Preconditions.isNull(mPageStatus))
+        if (!Preconditions.isNull(mPageStatus))
             mPageStatus.showError();
     }
 }

@@ -4,7 +4,7 @@ import com.orange.lib.common.adapterpattern.NetCallbackAdapter;
 import com.orange.lib.loading.api.IUrlApi;
 import com.orange.lib.loading.callback.INetCallback;
 import com.orange.lib.loading.request.NetRequest;
-import com.orange.lib.mvp.model.net.common.netcancel.INetCancel;
+import com.orange.lib.mvp.model.net.netcancel.INetCancel;
 import com.orange.lib.utils.ReflectionUtils;
 import com.orange.lib.utils.base.Preconditions;
 import com.orange.thirdparty.retrofit.IRetrofitCommonApi;
@@ -127,7 +127,7 @@ public class RetrofitUrlApi implements IUrlApi {
         IRetrofitCommonApi api = RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApi.class);
         if (Preconditions.isEmpty(headers) && Preconditions.isEmpty(params)) {
             observable = api.post(url);
-        } else if (Preconditions.isEmpty(params)) {
+        } else if (Preconditions.isEmpty(headers)) {
             observable = api.post(url, params);
         } else {
             observable = api.post(url, params, headers);
@@ -149,7 +149,7 @@ public class RetrofitUrlApi implements IUrlApi {
         IRetrofitCommonApi api = RetrofitClient.getRetrofitInstance().create(IRetrofitCommonApi.class);
         if (Preconditions.isEmpty(headers) && Preconditions.isEmpty(params)) {
             observable = api.get(url);
-        } else if (Preconditions.isEmpty(params)) {
+        } else if (Preconditions.isEmpty(headers)) {
             observable = api.get(url, params);
         } else {
             observable = api.get(url, params, headers);

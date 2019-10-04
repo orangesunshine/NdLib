@@ -29,9 +29,12 @@ public class LoadingDemoActivity extends NetActivity<ILoadingDemoContact.Present
                     case R.id.btn_data:
                         mPresenter.getLoadingData();
                         break;
+                    case R.id.btn_multi:
+                        mPresenter.getMultiDatas();
+                        break;
                 }
             }
-        }, R.id.btn_show_loading, R.id.btn_hide_loading, R.id.btn_data);
+        }, R.id.btn_show_loading, R.id.btn_hide_loading, R.id.btn_data, R.id.btn_multi);
     }
 
     @Override
@@ -47,5 +50,10 @@ public class LoadingDemoActivity extends NetActivity<ILoadingDemoContact.Present
     @Override
     public void setLoadingData(String data) {
         mHolder.setText(R.id.tv_content, data);
+    }
+
+    @Override
+    public void setLoading2Data(String data) {
+        mHolder.setText(R.id.tv_multi, data);
     }
 }

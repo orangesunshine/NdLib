@@ -1,21 +1,22 @@
-package com.orange.lib.component.pagestatus.loading.dialogfragment;
+package com.orange.lib.mvp.view.impl;
 
-import com.orange.lib.mvp.view.activity.base.BaseActivity;
 import com.orange.lib.component.dialog.LoadingDialog;
+import com.orange.lib.mvp.view.activity.base.BaseActivity;
+import com.orange.lib.mvp.view.ifc.ILoading;
 
 import java.lang.ref.WeakReference;
 
-public class DefaultLoadingDialog implements ILoadingDialog {
+public class Loading implements ILoading {
     private WeakReference<BaseActivity> mReference;
-    private ILoadingDialogFragment mFragment;
+    private LoadingDialog mFragment;
 
-    public DefaultLoadingDialog(BaseActivity activity) {
+    public Loading(BaseActivity activity) {
         mReference = new WeakReference<>(activity);
         mFragment = new LoadingDialog();
     }
 
     @Override
-    public void showLoadingDialog() {
+    public void showLoading() {
         if (null != mReference && null != mFragment) {
             BaseActivity baseActivity = mReference.get();
             if (null != baseActivity && baseActivity.isActivityAlive()) {
@@ -25,7 +26,7 @@ public class DefaultLoadingDialog implements ILoadingDialog {
     }
 
     @Override
-    public void dismissLoadingDialog() {
+    public void hideLoading() {
         if (null != mReference && null != mFragment) {
             BaseActivity baseActivity = mReference.get();
             if (null != baseActivity && baseActivity.isActivityAlive()) {

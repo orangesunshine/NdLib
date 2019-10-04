@@ -85,6 +85,7 @@ public interface IRetrofitCommonApi {
      * @param params 参数
      * @return
      */
+    @FormUrlEncoded
     @POST("/{prefix}/{suffix}")
     Observable<ResponseBody> post(@Path("prefix") String prefix, @Path("suffix") String suffix, @FieldMap Map<String, String> params);
 
@@ -97,6 +98,7 @@ public interface IRetrofitCommonApi {
      * @param headers 请求头
      * @return
      */
+    @FormUrlEncoded
     @POST("/{prefix}/{suffix}")
     Observable<ResponseBody> post(@Path("prefix") String prefix, @Path("suffix") String suffix, @FieldMap Map<String, String> params, @HeaderMap Map<String, String> headers);
     // </editor-fold>
@@ -119,6 +121,7 @@ public interface IRetrofitCommonApi {
      * @param params
      * @return
      */
+    @FormUrlEncoded
     @POST()
     Observable<ResponseBody> post(@Url String url, @FieldMap Map<String, String> params);
 
@@ -130,6 +133,7 @@ public interface IRetrofitCommonApi {
      * @param headers
      * @return
      */
+    @FormUrlEncoded
     @POST()
     Observable<ResponseBody> post(@Url String url, @FieldMap Map<String, String> params, @HeaderMap Map<String, String> headers);
     // </editor-fold>

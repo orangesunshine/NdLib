@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.orange.lib.common.holder.IHolder;
 import com.orange.lib.component.recyclerview.IConvertRecyclerView;
-import com.orange.lib.mvp.model.net.common.netcancel.INetCancel;
+import com.orange.lib.mvp.model.net.netcancel.INetCancel;
 import com.orange.lib.pull.request.IPageNetRequest;
 import com.orange.thirdparty.R;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;

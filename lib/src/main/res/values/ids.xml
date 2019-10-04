@@ -11,7 +11,7 @@
     <!-- stub -->
     <item name="stub_content_orange" type="id" />
     <item name="stub_actbar_orange" type="id" />
-    <item name="stub_swiprefresh_orange" type="id" />
+    <item name="stub_swiperefresh_orange" type="id" />
     <item name="stub_loading_orange" type="id" />
     <item name="stub_empty_orange" type="id" />
     <item name="stub_error_orange" type="id" />

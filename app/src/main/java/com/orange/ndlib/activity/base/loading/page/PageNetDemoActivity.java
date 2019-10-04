@@ -3,7 +3,7 @@ package com.orange.ndlib.activity.base.loading.page;
 import android.view.View;
 
 import com.orange.lib.common.holder.IHolder;
-import com.orange.lib.mvp.view.activity.base.PageNetActivity;
+import com.orange.lib.mvp.view.activity.page.PageNetActivity;
 import com.orange.ndlib.R;
 
 public class PageNetDemoActivity extends PageNetActivity<IPageDemoContact.Presenter> implements IPageDemoContact.View {
@@ -22,6 +22,7 @@ public class PageNetDemoActivity extends PageNetActivity<IPageDemoContact.Presen
                         break;
                     case R.id.btn_show_empty:
                         showEmpty();
+                        break;
                     case R.id.btn_show_error:
                         showError();
                         break;

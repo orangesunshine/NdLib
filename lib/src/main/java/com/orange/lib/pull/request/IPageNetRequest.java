@@ -1,7 +1,7 @@
 package com.orange.lib.pull.request;
 
 
-import com.orange.lib.mvp.model.net.common.netcancel.INetCancel;
+import com.orange.lib.mvp.model.net.netcancel.INetCancel;
 import com.orange.lib.pull.callback.IPullNetCallback;
 
 import java.lang.reflect.Type;
