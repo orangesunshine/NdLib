@@ -12,9 +12,9 @@ public class LoadingNetCallback<T> implements INetCallback<T> {
     }
 
     @Override
-    public void onNetStart() {
+    public void onStart() {
         if (null != mLogNetCallback)
-            mLogNetCallback.onNetStart();
+            mLogNetCallback.onStart();
         if (null != loading)
             loading.showLoading();
     }

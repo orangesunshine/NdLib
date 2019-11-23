@@ -25,6 +25,20 @@ public interface Ipull {
     void autoRefresh();
 
     /**
+     * 是否正在刷新
+     *
+     * @return
+     */
+    boolean isRefreshing();
+
+    /**
+     * 是否正在加载更多
+     *
+     * @return
+     */
+    boolean isLoadmore();
+
+    /**
      * 关闭刷新
      */
     void finishRefresh();

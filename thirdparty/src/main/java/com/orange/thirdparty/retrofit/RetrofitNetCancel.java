@@ -6,16 +6,13 @@ import io.reactivex.disposables.Disposable;
 
 public class RetrofitNetCancel implements INetCancel {
     private Disposable mDisposable;
-    private String mUrl;
 
-    public RetrofitNetCancel(Disposable disposable, String url) {
+    public RetrofitNetCancel(Disposable disposable) {
         mDisposable = disposable;
-        mUrl = url;
     }
 
     @Override
-    public void cancel(String url) {
-        
+    public void cancel() {
         if (null != mDisposable && !mDisposable.isDisposed())
             mDisposable.dispose();
     }

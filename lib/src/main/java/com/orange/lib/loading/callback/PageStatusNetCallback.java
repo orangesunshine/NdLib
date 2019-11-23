@@ -14,9 +14,9 @@ public class PageStatusNetCallback<T> implements INetCallback<T> {
      * 网络请求开始
      */
     @Override
-    public void onNetStart() {
+    public void onStart() {
         if (null != mLogNetCallback)
-            mLogNetCallback.onNetStart();
+            mLogNetCallback.onStart();
         if (null != mPageStatus)
             mPageStatus.showLoading();
     }

@@ -23,9 +23,9 @@ public class LogNetCallback<T> implements INetCallback<T> {
      * 网络请求开始
      */
     @Override
-    public void onNetStart() {
+    public void onStart() {
         if (IInitConst.sRecordNetLogSwitch) {
-            log.append("onNetStart: ").append(LINE_SEPARATOR);
+            log.append("onStart: ").append(LINE_SEPARATOR);
             startTimeMills = SystemClock.elapsedRealtime();
         }
     }

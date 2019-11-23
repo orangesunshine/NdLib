@@ -17,9 +17,9 @@ public class NetCallbackAdapter<T> implements INetCallback<T> {
      * 网络请求开始
      */
     @Override
-    public void onNetStart() {
+    public void onStart() {
         if (null != mNetCallback)
-            mNetCallback.onNetStart();
+            mNetCallback.onStart();
     }
 
     /**

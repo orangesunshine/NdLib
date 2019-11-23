@@ -95,9 +95,9 @@ public class RetrofitUrlApi implements IUrlApi {
         }
         INetCallback<T> callback = new NetCallbackAdapter(netCallback) {
             @Override
-            public void onNetStart() {
+            public void onStart() {
                 if (Preconditions.isNull(mAlreadyStart) || mAlreadyStart.compareAndSet(false, true))
-                    super.onNetStart();
+                    super.onStart();
             }
 
             @Override

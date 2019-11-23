@@ -9,7 +9,7 @@ public interface INetCallback<T> {
     /**
      * 网络请求开始
      */
-    void onNetStart();
+    void onStart();
 
     /**
      * 成功

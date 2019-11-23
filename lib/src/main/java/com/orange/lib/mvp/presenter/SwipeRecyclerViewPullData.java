@@ -1,8 +1,8 @@
 package com.orange.lib.mvp.presenter;
 
 import com.orange.lib.common.config.Config;
+import com.orange.lib.constance.IConst;
 import com.orange.lib.loading.api.IUrlApi;
-import com.orange.lib.loading.request.NetRequest;
 import com.orange.lib.mvp.model.net.netcancel.INetCancel;
 import com.orange.lib.mvp.view.ifc.Ipull;
 
@@ -19,13 +19,11 @@ public class SwipeRecyclerViewPullData implements IPullData {
     private int mPageIndex;
 
     public void pullDatas(int pageIndex, Ipull pull) {
-        pullDatas(pageIndex, COUNT_ONCE_LOAD, pull);
+        pullDatas(pageIndex, IConst.PULL_ITEM_COUNT, pull);
     }
 
     @Override
     public void pullDatas(int pageIndex, int count, Ipull pull) {
         mPageIndex = pageIndex;
-        new NetRequest<>();
-        mUrlApi.singleRequest()
     }
 }
