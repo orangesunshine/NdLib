@@ -35,7 +35,7 @@ public class LoadingNetCallback<T> implements INetCallback<T> {
         if (null != mLogNetCallback)
             mLogNetCallback.onComplete();
         if (null != loading)
-            loading.hideLoading();
+            loading.dismissLoading();
     }
 
     /**

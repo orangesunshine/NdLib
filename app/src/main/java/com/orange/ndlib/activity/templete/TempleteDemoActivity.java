@@ -4,12 +4,12 @@ import android.widget.Toast;
 
 import com.orange.lib.activity.templete.TempleteActivity;
 import com.orange.lib.component.actbar.IActionBarCallback;
-import com.orange.lib.loading.pagestatus.LoadingDialogPageStatus;
+import com.orange.lib.loading.pagestatus.LoadingDialogPage;
 import com.orange.lib.mvp.presenter.NetPresenter;
 import com.orange.lib.utils.Activitys;
 import com.orange.ndlib.R;
-import com.orange.ndlib.activity.base.loading.LoadingDemoActivity;
-import com.orange.ndlib.activity.base.swip.SwipePullDemoActivity;
+import com.orange.ndlib.activity.demo.loading.NetDemoActivity;
+import com.orange.ndlib.activity.demo.swip.SwipePullDemoActivity;
 
 import java.util.Random;
 
@@ -40,7 +40,7 @@ public class TempleteDemoActivity extends TempleteActivity {
     @Override
     protected void init() {
         super.init();
-        LoadingDialogPageStatus pageStatus = new LoadingDialogPageStatus(mLoading, mHolder);
+        LoadingDialogPage pageStatus = new LoadingDialogPage(mLoading, mHolder);
         mHolder.addOnItemChildClick(v -> {
             switch (v.getId()) {
                 case R.id.btn_content:
@@ -68,12 +68,12 @@ public class TempleteDemoActivity extends TempleteActivity {
                             mActbar.setRightImg(R.drawable.ic_image_white);
                             break;
                         case 4:
-                            mActbar.setTitle("DemoActivity");
+                            mActbar.setTitle("BaseDemoActivity");
                             break;
                     }
                     break;
                 case R.id.btn_net_loading:
-                    Activitys.launchActivity(mActivity, LoadingDemoActivity.class);
+                    Activitys.launchActivity(mActivity, NetDemoActivity.class);
                     break;
                 case R.id.btn_net_pull:
                     Activitys.launchActivity(mActivity, SwipePullDemoActivity.class);

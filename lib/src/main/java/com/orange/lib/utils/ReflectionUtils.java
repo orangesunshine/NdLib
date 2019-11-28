@@ -2,7 +2,7 @@ package com.orange.lib.utils;
 
 import androidx.annotation.Nullable;
 
-import com.orange.lib.mvp.presenter.NetPresenter;
+import com.orange.lib.mvp.contact.INetContact;
 import com.orange.lib.mvp.view.activity.NetActivity;
 import com.orange.lib.pull.request.IPageNetRequest;
 import com.orange.lib.utils.text.TextUtils;
@@ -74,7 +74,7 @@ public class ReflectionUtils {
      * @param <P>
      * @return
      */
-    public static <P extends NetPresenter> P getGenericActualTypeArgInstance(NetActivity<P> netActivity) {
+    public static <P extends INetContact.Presenter> P getGenericActualTypeArgInstance(NetActivity<P> netActivity) {
         Type type = null;
         type = netActivity.getClass().getGenericSuperclass();
         if (null == type || !(type instanceof ParameterizedType)) {

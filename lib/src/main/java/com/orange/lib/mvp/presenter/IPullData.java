@@ -1,7 +1,7 @@
 package com.orange.lib.mvp.presenter;
 
 import com.orange.lib.loading.request.PullnetRequest;
-import com.orange.lib.mvp.view.ifc.Ipull;
+import com.orange.lib.mvp.view.ifc.IPull;
 
 /**
  * @Author: orange
@@ -15,7 +15,7 @@ public interface IPullData {
      * @param count     加载数量
      * @param pull      加载样式
      */
-    void pullDatas(int pageIndex, int count, Ipull pull);
+    void pullDatas(int pageIndex, int count, IPull pull);
 
     <T> void OnRefresh(PullnetRequest<T> pullnetRequest);
 

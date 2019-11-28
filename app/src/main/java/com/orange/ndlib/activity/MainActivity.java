@@ -3,9 +3,8 @@ package com.orange.ndlib.activity;
 import com.orange.lib.mvp.view.activity.base.BaseActivity;
 import com.orange.lib.utils.Activitys;
 import com.orange.ndlib.R;
-import com.orange.ndlib.activity.base.DemoActivity;
-import com.orange.ndlib.activity.base.loading.LoadingDemoActivity;
-import com.orange.ndlib.activity.base.loading.page.PageNetDemoActivity;
+import com.orange.ndlib.activity.demo.base.BaseDemoActivity;
+import com.orange.ndlib.activity.demo.loading.NetDemoActivity;
 
 public class MainActivity extends BaseActivity {
     /**
@@ -27,13 +26,12 @@ public class MainActivity extends BaseActivity {
         mHolder.addOnItemChildClick(v -> {
             switch (v.getId()) {
                 case R.id.btn_base:
-                    Activitys.launchActivity(mActivity, DemoActivity.class);
+                    Activitys.launchActivity(mActivity, BaseDemoActivity.class);
                     break;
                 case R.id.btn_loading:
-                    Activitys.launchActivity(mActivity, LoadingDemoActivity.class);
+                    Activitys.launchActivity(mActivity, NetDemoActivity.class);
                     break;
                 case R.id.btn_loading_page:
-                    Activitys.launchActivity(mActivity, PageNetDemoActivity.class);
                     break;
             }
         }, R.id.btn_base, R.id.btn_loading, R.id.btn_loading_page);

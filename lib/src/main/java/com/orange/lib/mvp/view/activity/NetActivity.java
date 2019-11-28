@@ -1,81 +1,25 @@
 package com.orange.lib.mvp.view.activity;
 
-import android.os.Bundle;
-import android.view.View;
-
 import com.orange.lib.R;
-import com.orange.lib.activity.Retry;
-import com.orange.lib.common.holder.IHolder;
-import com.orange.lib.loading.api.IUrlApi;
-import com.orange.lib.mvp.presenter.ifc.IPresenter;
-import com.orange.lib.mvp.view.activity.base.BaseActivity;
-import com.orange.lib.mvp.view.ifc.ILoading;
-import com.orange.lib.mvp.view.impl.Loading;
+import com.orange.lib.activity.retry.RetryListener;
+import com.orange.lib.loading.pagestatus.IPage;
+import com.orange.lib.loading.pagestatus.LoadingDialogPage;
+import com.orange.lib.mvp.contact.INetContact;
 import com.orange.lib.utils.base.Preconditions;
+import com.orange.lib.utils.view.Views;
 
-import java.lang.reflect.Method;
-
-public abstract class NetActivity<P extends IPresenter & IUrlApi> extends BaseActivity implements ILoading {
-    //vars
-    protected ILoading mLoading;//loading
-    protected P mPresenter;
-
-    @Override
-    protected void initVars(Bundle bundle) {
-        super.initVars(bundle);
-        mLoading = getLoading();
-        if (null == mLoading)
-            mLoading = new Loading(mActivity);
-
-        //presenter关联视图
-        mPresenter = getPresenter();
-        if (!Preconditions.isNull(mPresenter)) {
-            mPresenter.attachView(this);
-            mPresenter.initVars(bundle);
-        }
-    }
-
-    /**
-     * 自定义实现loading
-     *
-     * @return
-     */
-    protected ILoading getLoading() {
-        return null;
-    }
+public abstract class NetActivity<P extends INetContact.Presenter> extends PresenterActivity<P> implements IPage {
+    protected IPage mPage;//空、错误、正常页面
 
     @Override
     protected void init() {
         super.init();
 
         //网络错误点击刷新
-        mHolder.addOnItemChildClick(new IHolder.OnItemChildClickListener() {
-            @Override
-            public void onItemChildClick(View v) {
-                Class clazz = getClass();
-                while (null != clazz) {
-                    String name = clazz.getName();
-                    if (name.startsWith("java.") || name.startsWith("javax.") || name.startsWith("android.")) {
-                        break;
-                    }
-                    Method[] declaredMethods = clazz.getDeclaredMethods();
-                    if (null != declaredMethods && declaredMethods.length > 0) {
-                        for (Method declaredMethod : declaredMethods) {
-                            if (null != declaredMethod) {
-                                Retry retry = declaredMethod.getAnnotation(Retry.class);
-                                if (null != retry) {
-                                    try {
-                                        declaredMethod.invoke(this);
-                                    } catch (Exception e) {
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    clazz = clazz.getSuperclass();
-                }
-            }
-        }, R.id.id_retry_orange);
+        mHolder.addOnItemChildClick(new RetryListener(getClass()), R.id.id_retry_orange);
+        mPage = getPage();
+        if (null == mPage)
+            mPage = new LoadingDialogPage(mLoading, mHolder);
     }
 
     /**
@@ -86,43 +30,48 @@ public abstract class NetActivity<P extends IPresenter & IUrlApi> extends BaseAc
         super.attachStub();//actbar
 
         //loading
-        stubLayout(R.id.stub_loading_orange, R.layout.stub_layout_loading);
+        Views.attachStub(mHolder.getView(R.id.id_stub_loading_orange), R.layout.stub_layout_loading);
 
         //empty
-        stubLayout(R.id.stub_empty_orange, R.layout.stub_layout_empty);
+        Views.attachStub(mHolder.getView(R.id.id_stub_empty_orange), R.layout.stub_layout_empty);
 
         //error
-        stubLayout(R.id.stub_error_orange, R.layout.stub_layout_error);
-    }
-
-    protected abstract P getPresenter();
-
-    @Override
-    public void onActivityDestroy() {
-        super.onActivityDestroy();
-        if (!Preconditions.isNull(mLoading))
-            mLoading.hideLoading();
-        if (!Preconditions.isNull(mPresenter))
-            mPresenter.onActivityDestroy();
+        Views.attachStub(mHolder.getView(R.id.id_stub_error_orange), R.layout.stub_layout_error);
     }
 
     /**
-     * 显示loading
+     * 显示content
      */
     @Override
-    public void showLoading() {
-        if (Preconditions.isNull(mLoading))
-            mLoading = new Loading(mActivity);
-        if (isActivityAlive())
-            mLoading.showLoading();
+    public void showContent() {
+        if (!Preconditions.isNull(mPage))
+            mPage.showContent();
     }
 
     /**
-     * 隐藏
+     * 显示空数据
      */
     @Override
-    public void hideLoading() {
-        if (isActivityAlive() && !Preconditions.isNull(mLoading))
-            mLoading.hideLoading();
+    public void showEmpty() {
+        if (!Preconditions.isNull(mPage))
+            mPage.showEmpty();
+    }
+
+    /**
+     * 显示error
+     */
+    @Override
+    public void showError() {
+        if (!Preconditions.isNull(mPage))
+            mPage.showError();
+    }
+
+    /**
+     * 自定义空、错误、正常页面实现
+     *
+     * @return
+     */
+    protected IPage getPage() {
+        return null;
     }
 }

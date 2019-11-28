@@ -13,5 +13,5 @@ public interface ILoading {
     /**
      * 关闭loading
      */
-    void hideLoading();
+    void dismissLoading();
 }

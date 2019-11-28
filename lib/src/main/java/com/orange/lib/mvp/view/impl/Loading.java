@@ -26,7 +26,7 @@ public class Loading implements ILoading {
     }
 
     @Override
-    public void hideLoading() {
+    public void dismissLoading() {
         if (null != mReference && null != mFragment) {
             BaseActivity baseActivity = mReference.get();
             if (null != baseActivity && baseActivity.isActivityAlive()) {

@@ -3,7 +3,6 @@ package com.orange.lib.mvp.view.activity.base;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.ViewStub;
 import android.widget.FrameLayout;
 
 import androidx.fragment.app.FragmentActivity;
@@ -14,10 +13,9 @@ import com.orange.lib.common.holder.IHolder;
 import com.orange.lib.component.actbar.CommonActionBar;
 import com.orange.lib.component.actbar.IActionBar;
 import com.orange.lib.component.statusbar.IStatusBar;
-import com.orange.lib.mvp.view.ifc.base.IView;
 import com.orange.lib.utils.base.Preconditions;
 import com.orange.lib.utils.log.Logs;
-import com.orange.lib.utils.toast.Toasts;
+import com.orange.lib.utils.view.Views;
 
 /**
  * 基础activity：actbar、statusbar
@@ -25,13 +23,18 @@ import com.orange.lib.utils.toast.Toasts;
  *
  * @method onActivityCreate、onActivityDestroy application->lifecycle回调
  */
-public abstract class BaseActivity extends FragmentActivity implements IView {
+public abstract class BaseActivity extends FragmentActivity {
+    //final
     protected final String TAG = getClass().getSimpleName();
-    protected BaseActivity mActivity;//activity引用
-    protected boolean isActivityAlive;//判断activity是不是活的
+
+    //views
     protected IHolder mHolder;//view容器
     protected IActionBar mActbar;//标题栏
     protected IStatusBar mStatusBar;//状态栏
+
+    //vars
+    protected BaseActivity mActivity;//activity引用
+    protected boolean isActivityAlive;//判断activity是不是活的
 
     /**
      * onCreate生命周期调用
@@ -52,6 +55,11 @@ public abstract class BaseActivity extends FragmentActivity implements IView {
         init();//初始化
     }
 
+    /**
+     * 初始化变量
+     *
+     * @param bundle from OnCreate
+     */
     protected void initVars(Bundle bundle) {
         mActivity = this;
         isActivityAlive = true;
@@ -90,7 +98,7 @@ public abstract class BaseActivity extends FragmentActivity implements IView {
             Logs.toge("-1 == contentLayoutId");
         LayoutInflater.from(this).inflate(contentLayoutId, content, true);
 
-        if (null != mHolder.getView(R.id.stub_content_orange))
+        if (null != mHolder.getView(R.id.id_stub_content_orange))
             throw new IllegalArgumentException("BaseActivity 再次attach content视图");
     }
 
@@ -110,22 +118,8 @@ public abstract class BaseActivity extends FragmentActivity implements IView {
      */
     protected void attachActbar() {
         //actbar占位
-        stubLayout(R.id.stub_actbar_orange, R.layout.stub_layout_actbar_common);
+        Views.attachStub(mHolder.getView(R.id.id_stub_actbar_orange), R.layout.stub_layout_actbar_common);
         mActbar = new CommonActionBar(mHolder);
-    }
-
-    /**
-     * 布局文件注入到stub占位
-     *
-     * @param stubId
-     * @param stubLayoutId
-     */
-    protected void stubLayout(int stubId, int stubLayoutId) {
-        ViewStub stub = mHolder.getView(stubId);
-        if (!Preconditions.isNull(stub)) {
-            stub.setLayoutResource(stubLayoutId);
-            stub.inflate();
-        }
     }
 
     /**
@@ -152,13 +146,4 @@ public abstract class BaseActivity extends FragmentActivity implements IView {
      */
     protected abstract int getContentLayoutId();
 
-    @Override
-    public void showMsg(CharSequence charSequence) {
-        Toasts.showMsg(charSequence);
-    }
-
-    @Override
-    public void showMsg(int stringId) {
-        Toasts.showMsg(getResources().getText(stringId));
-    }
 }

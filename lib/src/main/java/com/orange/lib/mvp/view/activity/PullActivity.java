@@ -1,12 +1,21 @@
 package com.orange.lib.mvp.view.activity;
 
-import com.orange.lib.loading.api.IUrlApi;
-import com.orange.lib.mvp.presenter.IPullData;
-import com.orange.lib.mvp.presenter.ifc.IPresenter;
-import com.orange.lib.mvp.view.ifc.Ipull;
+import com.orange.lib.mvp.contact.IPullContact;
+import com.orange.lib.mvp.view.ifc.IPull;
+import com.orange.lib.mvp.view.impl.SwipeRecyclerViewPull;
 
-public abstract class PullActivity<P extends IPresenter & IUrlApi & IPullData> extends NetActivity<P> implements Ipull {
-    protected Ipull mPull;
+public abstract class PullActivity<P extends IPullContact.Presenter> extends NetActivity<P> implements IPull {
+    protected IPull mPull;
+
+    @Override
+    protected void init() {
+        super.init();
+
+        mPull = getPull();
+        if (null != mPull) {
+            mPull = new SwipeRecyclerViewPull(mHolder);
+        }
+    }
 
     @Override
     public void enableRefresh(boolean enable) {
@@ -38,7 +47,7 @@ public abstract class PullActivity<P extends IPresenter & IUrlApi & IPullData> e
             mPull.finishLoadmore();
     }
 
-    protected Ipull getPull() {
+    protected IPull getPull() {
         return null;
     }
 }

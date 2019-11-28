@@ -19,8 +19,8 @@ public class SmartNetUtils {
      * @param <T>
      */
     public static <T> INetCancel smartPullAdapterNetData(IHolder holder, int itemLayoutId, IPageNetRequest<T> pageNetRequest, IConvertRecyclerView<T> convertRecyclerView) {
-        SmartRefreshLayout refreshLayout = holder.getView(R.id.refreshlayout_orange);
-        RecyclerView recyclerView = holder.getView(R.id.recyclerview_orange);
+        SmartRefreshLayout refreshLayout = holder.getView(R.id.id_refreshlayout_orange);
+        RecyclerView recyclerView = holder.getView(R.id.id_recyclerview_orange);
         View emptyView = holder.getView(R.id.id_empty_orange);
         return smartPullAdapterNetData(refreshLayout, recyclerView, emptyView, itemLayoutId, pageNetRequest, convertRecyclerView);
     }

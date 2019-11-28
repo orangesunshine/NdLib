@@ -29,11 +29,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.base.DemoActivity"></activity>
-        <activity android:name=".activity.base.loading.LoadingDemoActivity"></activity>
-        <activity android:name=".activity.base.loading.page.PageNetDemoActivity"></activity>
-        <activity android:name=".activity.base.swip.SwipePullDemoActivity"></activity>
-        <activity android:name=".activity.base.swip.SwipePullPageDemoActivity"></activity>
+        <activity android:name=".activity.demo.base.BaseDemoActivity"></activity>
+        <activity android:name=".activity.demo.loading.NetDemoActivity"></activity>
+        <activity android:name=".activity.demo.loading.page.PageNetDemoActivity"></activity>
+        <activity android:name=".activity.demo.swip.SwipePullDemoActivity"></activity>
+        <activity android:name=".activity.demo.swip.SwipePullPageDemoActivity"></activity>
         <activity android:name=".CocosWebActivity"></activity>
         <activity android:name=".activity.templete.TempleteDemoActivity" />
     </application>

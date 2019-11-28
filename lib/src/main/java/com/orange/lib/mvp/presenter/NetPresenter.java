@@ -1,24 +1,21 @@
 package com.orange.lib.mvp.presenter;
 
 import com.orange.lib.common.config.Config;
-import com.orange.lib.loading.api.IUrlApi;
+import com.orange.lib.loading.api.IApi;
 import com.orange.lib.loading.request.NetRequest;
+import com.orange.lib.mvp.contact.INetContact;
 import com.orange.lib.mvp.model.net.netcancel.INetCancel;
-import com.orange.lib.mvp.view.ifc.ILoading;
-import com.orange.lib.mvp.view.ifc.base.IView;
 import com.orange.lib.utils.base.Preconditions;
 
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
 /**
  * @Author: orange
  * @CreateDate: 2019/9/27 16:54
  */
-public class NetPresenter<V extends IView & ILoading> extends BasePresenter<V> implements IUrlApi {
-    protected IUrlApi mUrlApi = Config.getInstance().getNet();
+public class NetPresenter<V extends INetContact.View> extends BasePresenter<V> implements IApi {
+    protected IApi mUrlApi = Config.getInstance().getNet();
     protected Map<String, INetCancel> cancelMap = new HashMap<>();//缓存网络请求接口，用于取消
 
     @Override
@@ -34,9 +31,9 @@ public class NetPresenter<V extends IView & ILoading> extends BasePresenter<V> i
     }
 
     @Override
-    public <T> INetCancel singleRequest(NetRequest<T> netRequest) {
+    public <T> INetCancel single(NetRequest<T> netRequest) {
         if (Preconditions.isNull(netRequest)) return null;
-        INetCancel iNetCancel = mUrlApi.singleRequest(netRequest);
+        INetCancel iNetCancel = mUrlApi.single(netRequest);
         String url = netRequest.getUrl();
         if (!Preconditions.isEmpty(url))
             cancelMap.put(url, iNetCancel);
@@ -44,8 +41,8 @@ public class NetPresenter<V extends IView & ILoading> extends BasePresenter<V> i
     }
 
     @Override
-    public INetCancel request(NetRequest... netRequests) {
-        INetCancel iNetCancel = mUrlApi.request(netRequests);
+    public INetCancel multiply(NetRequest... netRequests) {
+        INetCancel iNetCancel = mUrlApi.multiply(netRequests);
         String url = multiRequestUrl(netRequests);
         if (!Preconditions.isEmpty(url))
             cancelMap.put(url, iNetCancel);

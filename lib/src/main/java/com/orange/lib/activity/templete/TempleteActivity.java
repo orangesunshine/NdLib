@@ -4,9 +4,9 @@ import android.view.LayoutInflater;
 import android.widget.FrameLayout;
 
 import com.orange.lib.R;
-import com.orange.lib.common.holder.IHolder;
 import com.orange.lib.mvp.view.activity.NetActivity;
 import com.orange.lib.utils.base.Preconditions;
+import com.orange.lib.utils.view.Views;
 
 public abstract class TempleteActivity extends NetActivity {
 
@@ -26,13 +26,13 @@ public abstract class TempleteActivity extends NetActivity {
         super.attachStub();
 
         //content占位
-        attachContent(mHolder);
+        attachContent();
     }
 
-    protected void attachContent(IHolder holder) {
+    protected void attachContent() {
         //content占位
-        if (!Preconditions.isNull(holder)) {
-            stubLayout(R.id.stub_content_orange, getContentLayoutId());
+        if (!Preconditions.isNull(mHolder)) {
+            Views.attachStub(mHolder.getView(R.id.id_stub_content_orange), getContentLayoutId());
         }
     }
 

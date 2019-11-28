@@ -5,9 +5,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.orange.lib.R;
-import com.orange.lib.common.holder.CommonHolder;
+import com.orange.lib.common.holder.IHolder;
 import com.orange.lib.constance.ITag;
-import com.orange.lib.mvp.view.ifc.Ipull;
+import com.orange.lib.mvp.view.ifc.IPull;
 import com.orange.lib.utils.base.Preconditions;
 import com.orange.lib.utils.recyclerview.RecyclerViews;
 
@@ -15,12 +15,12 @@ import com.orange.lib.utils.recyclerview.RecyclerViews;
  * @Author: orange
  * @CreateDate: 2019/10/4 10:53
  */
-public class SwipeRecyclerViewPull implements Ipull {
+public class SwipeRecyclerViewPull implements IPull {
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
 
-    public SwipeRecyclerViewPull(CommonHolder commonHolder) {
-        this(commonHolder.getView(R.id.refreshlayout_orange), commonHolder.getView(R.id.recyclerview_orange));
+    public SwipeRecyclerViewPull(IHolder commonHolder) {
+        this(commonHolder.getView(R.id.id_refreshlayout_orange), commonHolder.getView(R.id.id_recyclerview_orange));
     }
 
     public SwipeRecyclerViewPull(SwipeRefreshLayout swipeRefreshLayout, RecyclerView recyclerView) {
@@ -46,6 +46,16 @@ public class SwipeRecyclerViewPull implements Ipull {
     public void autoRefresh() {
         if (Preconditions.isNull(mSwipeRefreshLayout)) return;
         mSwipeRefreshLayout.setRefreshing(true);
+    }
+
+    @Override
+    public boolean isRefreshing() {
+        return false;
+    }
+
+    @Override
+    public boolean isLoadmore() {
+        return false;
     }
 
     @Override

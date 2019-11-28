@@ -381,6 +381,7 @@ public class CommonToast<T> {
             mView = null;
             mWM = null;
             mToast = null;
+            mInstance = null;
         }
     }
 }

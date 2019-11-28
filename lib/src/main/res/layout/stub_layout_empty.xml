@@ -8,14 +8,14 @@
     android:paddingBottom="30dp">
 
     <ImageView
-        android:id="@id/empty_image_orange"
+        android:id="@id/id_empty_image_orange"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:adjustViewBounds="true" />
 
     <TextView
-        android:id="@id/empty_text_orange"
+        android:id="@id/id_empty_text_orange"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

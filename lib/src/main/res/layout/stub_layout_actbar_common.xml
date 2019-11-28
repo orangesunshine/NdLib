@@ -3,16 +3,16 @@
     style="@style/ll_actbar_root">
 
     <FrameLayout
-        android:id="@id/fl_left_actbar_orange"
+        android:id="@id/id_fl_left_actbar_orange"
         android:layout_width="64dp"
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@id/iv_left_actbar_orange"
+            android:id="@id/id_iv_left_actbar_orange"
             style="@style/wrap_content_layout_gravity_center" />
 
         <TextView
-            android:id="@id/tv_left_actbar_orange"
+            android:id="@id/id_tv_left_actbar_orange"
             style="@style/tv_actbar_sub_text" />
     </FrameLayout>
 
@@ -24,21 +24,21 @@
         android:layout_weight="1">
 
         <TextView
-            android:id="@id/tv_title_actbar_orange"
+            android:id="@id/id_tv_title_actbar_orange"
             style="@style/tv_actbar_title_text" />
     </FrameLayout>
 
     <FrameLayout
-        android:id="@id/fl_right_actbar_orange"
+        android:id="@id/id_fl_right_actbar_orange"
         android:layout_width="64dp"
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@id/iv_right_actbar_orange"
+            android:id="@id/id_iv_right_actbar_orange"
             style="@style/wrap_content_layout_gravity_center" />
 
         <TextView
-            android:id="@id/tv_right_actbar_orange"
+            android:id="@id/id_tv_right_actbar_orange"
             style="@style/tv_actbar_sub_text" />
     </FrameLayout>
 </LinearLayout>

@@ -1,12 +1,12 @@
 package com.orange.lib.loading.callback;
 
-import com.orange.lib.loading.pagestatus.IPageStatus;
+import com.orange.lib.loading.pagestatus.IPage;
 
 public class PageStatusNetCallback<T> implements INetCallback<T> {
-    private IPageStatus mPageStatus;
+    private IPage mPageStatus;
     private LogNetCallback mLogNetCallback = new LogNetCallback();
 
-    public PageStatusNetCallback(IPageStatus pageStatus) {
+    public PageStatusNetCallback(IPage pageStatus) {
         mPageStatus = pageStatus;
     }
 
