@@ -1,6 +1,6 @@
 package com.orange.ndlib.activity;
 
-import com.orange.lib.mvp.view.activity.base.BaseActivity;
+import com.orange.lib.mvp.contact.view.BaseActivity;
 import com.orange.lib.utils.Activitys;
 import com.orange.ndlib.R;
 import com.orange.ndlib.activity.demo.base.BaseDemoActivity;

@@ -1,7 +1,7 @@
 package com.orange.lib.mvp.contact;
 
-import com.orange.lib.mvp.view.ifc.ILoading;
-import com.orange.lib.mvp.view.ifc.IMsg;
+import com.orange.lib.mvp.view.loading.ILoading;
+import com.orange.lib.mvp.view.IMsg;
 
 /**
  * @Author: orange

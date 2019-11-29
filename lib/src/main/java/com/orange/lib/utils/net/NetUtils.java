@@ -14,15 +14,15 @@ import com.orange.lib.common.convert.PullConvert;
 import com.orange.lib.common.holder.IHolder;
 import com.orange.lib.common.reponse.PullData;
 import com.orange.lib.component.recyclerview.IConvertRecyclerView;
-import com.orange.lib.loading.callback.INetCallback;
-import com.orange.lib.loading.callback.LoadingNetCallback;
-import com.orange.lib.loading.callback.PageStatusNetCallback;
-import com.orange.lib.loading.pagestatus.IPage;
-import com.orange.lib.loading.request.INetRequest;
+import com.orange.lib.mvp.model.net.callback.loading.INetCallback;
+import com.orange.lib.mvp.model.net.callback.loading.LoadingNetCallback;
+import com.orange.lib.mvp.model.net.callback.loading.PageNetCallback;
+import com.orange.lib.mvp.view.page.loading.IPage;
+import com.orange.lib.mvp.model.net.request.request.INetRequest;
 import com.orange.lib.mvp.model.net.netcancel.INetCancel;
-import com.orange.lib.mvp.view.ifc.ILoading;
-import com.orange.lib.pull.pagestatus.IPullPageStatus;
-import com.orange.lib.pull.request.IPageNetRequest;
+import com.orange.lib.mvp.view.loading.ILoading;
+import com.orange.lib.mvp.view.page.pull.IPullPage;
+import com.orange.lib.mvp.model.net.request.IPageNetRequest;
 
 public class NetUtils {
 
@@ -70,7 +70,7 @@ public class NetUtils {
      */
     public static <T> INetCancel loadingNetData(INetRequest<T> netRequest, IPage pageStatus, IConvert<T> convert) {
         Preconditions.checkNotNull(netRequest);
-        return netRequest.request(new PageStatusNetCallback<T>(pageStatus) {
+        return netRequest.request(new PageNetCallback<T>(pageStatus) {
             @Override
             public void onSuccess(T t) {
                 super.onSuccess(t);
@@ -81,22 +81,22 @@ public class NetUtils {
     }
     // </editor-fold>
 
-    public static <ITEM> INetCancel swipePullPageAdapterNetData(IPageNetRequest<? extends PullData<ITEM>> pageNetRequest, IPullPageStatus pageStatus, IHolder holder, int itemLayoutId, IConvertRecyclerView<ITEM> convertRecyclerView) {
+    public static <ITEM> INetCancel swipePullPageAdapterNetData(IPageNetRequest<? extends PullData<ITEM>> pageNetRequest, IPullPage pageStatus, IHolder holder, int itemLayoutId, IConvertRecyclerView<ITEM> convertRecyclerView) {
         return swipePullPageAdapterNetData(pageNetRequest, pageStatus, holder.getView(R.id.id_refreshlayout_orange), holder.getView(R.id.id_recyclerview_orange), holder.getView(R.id.id_empty_orange), itemLayoutId, convertRecyclerView);
     }
 
-    public static <ITEM> INetCancel swipePullPageAdapterNetData(IPageNetRequest<? extends PullData<ITEM>> pageNetRequest, IPullPageStatus pageStatus, IHolder holder, IPullConvert<ITEM> pullConvert) {
+    public static <ITEM> INetCancel swipePullPageAdapterNetData(IPageNetRequest<? extends PullData<ITEM>> pageNetRequest, IPullPage pageStatus, IHolder holder, IPullConvert<ITEM> pullConvert) {
         return swipePullPageAdapterNetData(pageNetRequest, pageStatus, holder.getView(R.id.id_refreshlayout_orange), holder.getView(R.id.id_recyclerview_orange), pullConvert);
     }
 
-    public static <ITEM> INetCancel swipePullPageAdapterNetData(IPageNetRequest<? extends PullData<ITEM>> pageNetRequest, IPullPageStatus pageStatus, SwipeRefreshLayout refreshLayout, RecyclerView recyclerView, View emptyView, int itemLayoutId, IConvertRecyclerView<ITEM> convertRecyclerView) {
+    public static <ITEM> INetCancel swipePullPageAdapterNetData(IPageNetRequest<? extends PullData<ITEM>> pageNetRequest, IPullPage pageStatus, SwipeRefreshLayout refreshLayout, RecyclerView recyclerView, View emptyView, int itemLayoutId, IConvertRecyclerView<ITEM> convertRecyclerView) {
         return swipePullPageAdapterNetData(pageNetRequest, pageStatus, refreshLayout, recyclerView, new PullConvert(refreshLayout, recyclerView, emptyView, itemLayoutId, convertRecyclerView));
     }
 
-    public static <ITEM> INetCancel swipePullPageAdapterNetData(IPageNetRequest<? extends PullData<ITEM>> pageNetRequest, IPullPageStatus pageStatus, SwipeRefreshLayout refreshLayout, RecyclerView recyclerView, IPullConvert<ITEM> pullConvert) {
+    public static <ITEM> INetCancel swipePullPageAdapterNetData(IPageNetRequest<? extends PullData<ITEM>> pageNetRequest, IPullPage pageStatus, SwipeRefreshLayout refreshLayout, RecyclerView recyclerView, IPullConvert<ITEM> pullConvert) {
         Preconditions.checkNotNull(pageNetRequest);
 //        IRefreshLoadmore refreshLoadmore = new SwipeRefreshLoadmore(refreshLayout, recyclerView);
-//        return refreshLoadmore.setPullCallback(new DefaultPullCallback(pageNetRequest, refreshLayout, new PageStatusPullNetCallback(pageStatus, pullConvert)));
+//        return refreshLoadmore.setPullCallback(new DefaultPullCallback(pageNetRequest, refreshLayout, new PagePullNetCallback(pageStatus, pullConvert)));
         return null;
     }
 

@@ -20,8 +20,7 @@ import android.widget.LinearLayout;
 import androidx.appcompat.app.AlertDialog;
 
 import com.orange.lib.R;
-import com.orange.lib.mvp.contact.IContact;
-import com.orange.lib.mvp.view.activity.base.BaseActivity;
+import com.orange.lib.mvp.contact.view.BaseActivity;
 
 import static android.view.KeyEvent.KEYCODE_BACK;
 

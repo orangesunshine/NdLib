@@ -1,7 +1,7 @@
 package com.orange.ndlib.activity.demo.base;
 
 import com.orange.lib.component.actbar.IActionBarCallback;
-import com.orange.lib.mvp.view.activity.base.BaseActivity;
+import com.orange.lib.mvp.contact.view.BaseActivity;
 import com.orange.lib.utils.toast.Toasts;
 import com.orange.ndlib.R;
 

@@ -4,8 +4,8 @@ import android.widget.Toast;
 
 import com.orange.lib.activity.templete.TempleteActivity;
 import com.orange.lib.component.actbar.IActionBarCallback;
-import com.orange.lib.loading.pagestatus.LoadingDialogPage;
-import com.orange.lib.mvp.presenter.NetPresenter;
+import com.orange.lib.mvp.view.page.loading.LoadingDialogPage;
+import com.orange.lib.mvp.contact.presenter.NetPresenter;
 import com.orange.lib.utils.Activitys;
 import com.orange.ndlib.R;
 import com.orange.ndlib.activity.demo.loading.NetDemoActivity;

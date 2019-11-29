@@ -1,7 +1,7 @@
 package com.orange.ndlib.activity.demo.pull;
 
 import com.orange.lib.mvp.model.net.netcancel.INetCancel;
-import com.orange.lib.mvp.presenter.PullPresenter;
+import com.orange.lib.mvp.contact.presenter.PullPresenter;
 
 /**
  * @Author: orange

@@ -1,9 +1,7 @@
 package com.orange.lib.mvp.contact;
 
-import com.orange.lib.loading.api.IApi;
-import com.orange.lib.loading.pagestatus.IPage;
-import com.orange.lib.mvp.view.ifc.ILoading;
-import com.orange.lib.mvp.view.ifc.IMsg;
+import com.orange.lib.mvp.model.net.request.IRequest;
+import com.orange.lib.mvp.view.page.loading.IPage;
 
 /**
  * @Author: orange
@@ -13,6 +11,6 @@ public interface INetContact {
     interface View extends IContact.View, IPage {
     }
 
-    interface Presenter<V extends View> extends IContact.Presenter<V>, IApi {
+    interface Presenter<V extends View> extends IContact.Presenter<V>, IRequest {
     }
 }

@@ -9,7 +9,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.orange.lib.common.adapterpattern.NetCallbackAdapter;
 import com.orange.lib.constance.IConst;
-import com.orange.lib.loading.callback.INetCallback;
+import com.orange.lib.mvp.model.net.callback.loading.INetCallback;
 import com.orange.lib.utils.CommonUtils;
 import com.orange.lib.utils.ReflectionUtils;
 import com.orange.lib.utils.base.Preconditions;

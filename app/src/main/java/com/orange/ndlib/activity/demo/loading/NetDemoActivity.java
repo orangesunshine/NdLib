@@ -4,7 +4,7 @@ import android.view.View;
 
 import com.orange.lib.activity.retry.Retry;
 import com.orange.lib.common.holder.IHolder;
-import com.orange.lib.mvp.view.activity.NetActivity;
+import com.orange.lib.mvp.contact.view.NetActivity;
 import com.orange.ndlib.R;
 
 public class NetDemoActivity extends NetActivity<ILoadingDemoContact.Presenter> implements ILoadingDemoContact.View {

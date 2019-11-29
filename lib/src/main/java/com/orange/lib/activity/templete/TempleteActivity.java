@@ -4,7 +4,7 @@ import android.view.LayoutInflater;
 import android.widget.FrameLayout;
 
 import com.orange.lib.R;
-import com.orange.lib.mvp.view.activity.NetActivity;
+import com.orange.lib.mvp.contact.view.NetActivity;
 import com.orange.lib.utils.base.Preconditions;
 import com.orange.lib.utils.view.Views;
 

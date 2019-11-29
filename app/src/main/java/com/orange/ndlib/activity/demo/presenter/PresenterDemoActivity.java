@@ -1,7 +1,7 @@
 package com.orange.ndlib.activity.demo.presenter;
 
 import com.orange.lib.mvp.contact.IContact;
-import com.orange.lib.mvp.view.activity.PresenterActivity;
+import com.orange.lib.mvp.contact.view.PresenterActivity;
 
 /**
  * @Author: orange

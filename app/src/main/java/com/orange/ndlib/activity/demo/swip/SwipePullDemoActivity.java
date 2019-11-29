@@ -12,15 +12,15 @@ import com.orange.lib.common.reponse.PullData;
 import com.orange.lib.component.recyclerview.IConvertRecyclerView;
 import com.orange.lib.constance.IConst;
 import com.orange.lib.mvp.model.net.netcancel.INetCancel;
-import com.orange.lib.mvp.presenter.PullPresenter;
-import com.orange.lib.mvp.view.activity.PullActivity;
-import com.orange.lib.pull.callback.IPullNetCallback;
-import com.orange.lib.pull.pagestatus.LoadingDialogPullPageStatus;
-import com.orange.lib.pull.request.IPageNetRequest;
+import com.orange.lib.mvp.contact.presenter.PullPresenter;
+import com.orange.lib.mvp.contact.view.PullActivity;
+import com.orange.lib.mvp.model.net.callback.pull.IPullNetCallback;
+import com.orange.lib.mvp.view.page.pull.LoadingDialogPullPage;
+import com.orange.lib.mvp.model.net.request.IPageNetRequest;
 import com.orange.lib.utils.net.NetUtils;
 import com.orange.ndlib.R;
 import com.orange.ndlib.response.PullDemoData;
-import com.orange.thirdparty.retrofit.api.pull.RetrofitPullUrlApi;
+import com.orange.thirdparty.retrofit.api.pull.RetrofitPullApi;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -34,7 +34,7 @@ public class SwipePullDemoActivity extends PullActivity {
     @Override
     protected void init() {
         super.init();
-        new LoadingDialogPullPageStatus(mLoading, mHolder);
+        new LoadingDialogPullPage(mLoading, mHolder);
         RecyclerView recyclerView = mHolder.getView(R.id.id_recyclerview_orange);
         recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
         mHolder.addOnItemChildClick(new IHolder.OnItemChildClickListener() {
@@ -48,7 +48,7 @@ public class SwipePullDemoActivity extends PullActivity {
                                 HashMap<String, String> params = new HashMap<>();
                                 params.put("count", "30");
                                 params.put("pageIndex", String.valueOf(pageIndex));
-                                return RetrofitPullUrlApi.getInstance().postPull(IConst.sBaseUrl + "/ifc/pull", params, type, callback);
+                                return RetrofitPullApi.getInstance().post(IConst.sBaseUrl + "/ifc/pull", params, type, callback);
                             }
                         }, mHolder.getView(R.id.id_refreshlayout_orange), mHolder.getView(R.id.id_recyclerview_orange), mHolder.getView(R.id.id_empty_orange), android.R.layout.activity_list_item, (IConvertRecyclerView<String>) (holder, item, selected) -> {
                             holder.setImageResource(android.R.id.icon, R.drawable.ic_launcher_background);
@@ -62,7 +62,7 @@ public class SwipePullDemoActivity extends PullActivity {
                                 HashMap<String, String> params = new HashMap<>();
                                 params.put("count", "30");
                                 params.put("pageIndex", String.valueOf(pageIndex));
-                                return RetrofitPullUrlApi.getInstance().postPull(IConst.sBaseUrl + "/ifc/pull", params, type, callback);
+                                return RetrofitPullApi.getInstance().post(IConst.sBaseUrl + "/ifc/pull", params, type, callback);
                             }
                         }, mHolder.getView(R.id.id_refreshlayout_orange), mHolder.getView(R.id.id_recyclerview_orange), new IPullConvert<String>() {
                             @Override
@@ -78,7 +78,7 @@ public class SwipePullDemoActivity extends PullActivity {
                                 HashMap<String, String> params = new HashMap<>();
                                 params.put("count", "30");
                                 params.put("pageIndex", String.valueOf(pageIndex));
-                                return RetrofitPullUrlApi.getInstance().postPull(IConst.sBaseUrl + "/ifc/pull", params, type, callback);
+                                return RetrofitPullApi.getInstance().post(IConst.sBaseUrl + "/ifc/pull", params, type, callback);
                             }
                         }, mHolder, android.R.layout.activity_list_item, (IConvertRecyclerView<String>) (holder, item, selected) -> {
                             holder.setImageResource(android.R.id.icon, R.drawable.ic_launcher_background);
@@ -92,7 +92,7 @@ public class SwipePullDemoActivity extends PullActivity {
                                 HashMap<String, String> params = new HashMap<>();
                                 params.put("count", "30");
                                 params.put("pageIndex", String.valueOf(pageIndex));
-                                return RetrofitPullUrlApi.getInstance().postPull(IConst.sBaseUrl + "/ifc/pull", params, type, callback);
+                                return RetrofitPullApi.getInstance().post(IConst.sBaseUrl + "/ifc/pull", params, type, callback);
                             }
                         }, mHolder, new IPullConvert<String>() {
                             @Override

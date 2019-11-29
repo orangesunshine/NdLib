@@ -1,7 +1,7 @@
 package com.orange.lib.mvp.contact;
 
-import com.orange.lib.mvp.presenter.IPullData;
-import com.orange.lib.mvp.view.ifc.IPull;
+import com.orange.lib.mvp.model.net.request.IPullData;
+import com.orange.lib.mvp.view.pull.IPull;
 
 /**
  * @Author: orange

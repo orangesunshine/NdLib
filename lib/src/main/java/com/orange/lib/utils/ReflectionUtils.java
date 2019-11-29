@@ -3,8 +3,8 @@ package com.orange.lib.utils;
 import androidx.annotation.Nullable;
 
 import com.orange.lib.mvp.contact.INetContact;
-import com.orange.lib.mvp.view.activity.NetActivity;
-import com.orange.lib.pull.request.IPageNetRequest;
+import com.orange.lib.mvp.contact.view.NetActivity;
+import com.orange.lib.mvp.model.net.request.IPageNetRequest;
 import com.orange.lib.utils.text.TextUtils;
 
 import java.lang.reflect.GenericArrayType;

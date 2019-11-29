@@ -1,6 +1,6 @@
 package com.orange.ndlib.activity.demo.pull;
 
-import com.orange.lib.mvp.view.activity.PullActivity;
+import com.orange.lib.mvp.contact.view.PullActivity;
 import com.orange.ndlib.R;
 
 /**
