@@ -1,7 +1,7 @@
 package com.orange.lib.mvp.model.net.api;
 
 import com.orange.lib.mvp.model.net.netcancel.INetCancel;
-import com.orange.lib.mvp.model.net.callback.loading.INetCallback;
+import com.orange.lib.mvp.model.net.callback.loading.ICallback;
 
 import java.util.Map;
 
@@ -15,7 +15,7 @@ public interface IPrefixSuffixApi {
      * @param callback 回调
      * @param <T>      网络返回实体
      */
-    <T> INetCancel get(String prefix, String suffix, Map<String, String> params, INetCallback<T> callback);
+    <T> INetCancel get(String prefix, String suffix, Map<String, String> params, ICallback<T> callback);
 
     /**
      * loading方式get网络请求，带请求头
@@ -27,7 +27,7 @@ public interface IPrefixSuffixApi {
      * @param callback 回调
      * @param <T>      网络返回实体
      */
-    <T> INetCancel get(Map<String, String> headers, String prefix, String suffix, Map<String, String> params, INetCallback<T> callback);
+    <T> INetCancel get(Map<String, String> headers, String prefix, String suffix, Map<String, String> params, ICallback<T> callback);
 
     /**
      * loading方式post网络请求
@@ -38,7 +38,7 @@ public interface IPrefixSuffixApi {
      * @param callback 回调
      * @param <T>      网络返回实体
      */
-    <T> INetCancel post(String prefix, String suffix, Map<String, String> params, INetCallback<T> callback);
+    <T> INetCancel post(String prefix, String suffix, Map<String, String> params, ICallback<T> callback);
 
     /**
      * loading方式post网络请求，带请求头
@@ -50,5 +50,5 @@ public interface IPrefixSuffixApi {
      * @param callback 回调
      * @param <T>      网络返回实体
      */
-    <T> INetCancel post(Map<String, String> headers, String prefix, String suffix, Map<String, String> params, INetCallback<T> callback);
+    <T> INetCancel post(Map<String, String> headers, String prefix, String suffix, Map<String, String> params, ICallback<T> callback);
 }

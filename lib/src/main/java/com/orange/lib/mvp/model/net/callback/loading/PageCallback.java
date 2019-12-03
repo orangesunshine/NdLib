@@ -2,11 +2,11 @@ package com.orange.lib.mvp.model.net.callback.loading;
 
 import com.orange.lib.mvp.view.page.loading.IPage;
 
-public class PageNetCallback<T> implements INetCallback<T> {
+public class PageCallback<T> implements ICallback<T> {
     private IPage mPageStatus;
-    private LogNetCallback mLogNetCallback = new LogNetCallback();
+    private LogCallback mLogNetCallback = new LogCallback();
 
-    public PageNetCallback(IPage pageStatus) {
+    public PageCallback(IPage pageStatus) {
         mPageStatus = pageStatus;
     }
 

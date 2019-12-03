@@ -1,15 +1,15 @@
 package com.orange.lib.common.adapterpattern;
 
-import com.orange.lib.mvp.model.net.callback.loading.INetCallback;
+import com.orange.lib.mvp.model.net.callback.loading.ICallback;
 
-public class NetCallbackAdapter<T> implements INetCallback<T> {
-    private INetCallback<T> mNetCallback;
+public class CallbackAdapter<T> implements ICallback<T> {
+    private ICallback<T> mNetCallback;
 
-    public INetCallback<T> getNetCallback() {
+    public ICallback<T> getNetCallback() {
         return mNetCallback;
     }
 
-    public NetCallbackAdapter(INetCallback<T> netCallback) {
+    public CallbackAdapter(ICallback<T> netCallback) {
         mNetCallback = netCallback;
     }
 

@@ -14,9 +14,9 @@ import com.orange.lib.common.convert.PullConvert;
 import com.orange.lib.common.holder.IHolder;
 import com.orange.lib.common.reponse.PullData;
 import com.orange.lib.component.recyclerview.IConvertRecyclerView;
-import com.orange.lib.mvp.model.net.callback.loading.INetCallback;
-import com.orange.lib.mvp.model.net.callback.loading.LoadingNetCallback;
-import com.orange.lib.mvp.model.net.callback.loading.PageNetCallback;
+import com.orange.lib.mvp.model.net.callback.loading.ICallback;
+import com.orange.lib.mvp.model.net.callback.loading.LoadingCallback;
+import com.orange.lib.mvp.model.net.callback.loading.PageCallback;
 import com.orange.lib.mvp.view.page.loading.IPage;
 import com.orange.lib.mvp.model.net.request.request.INetRequest;
 import com.orange.lib.mvp.model.net.netcancel.INetCancel;
@@ -38,7 +38,7 @@ public class NetUtils {
      */
     public static <T> INetCancel loadingNetData(INetRequest<T> netRequest, ILoading loading, IConvert<T> convert) {
         Preconditions.checkNotNull(netRequest);
-        return netRequest.request(new LoadingNetCallback<T>(loading) {
+        return netRequest.request(new LoadingCallback<T>(loading) {
             @Override
             public void onSuccess(T t) {
                 super.onSuccess(t);
@@ -55,7 +55,7 @@ public class NetUtils {
      * @param netRequest
      * @param <T>
      */
-    public static <T> INetCancel loadingNetData(INetRequest<T> netRequest, INetCallback<T> netCallback) {
+    public static <T> INetCancel loadingNetData(INetRequest<T> netRequest, ICallback<T> netCallback) {
         Preconditions.checkNotNull(netRequest);
         return netRequest.request(netCallback);
     }
@@ -70,7 +70,7 @@ public class NetUtils {
      */
     public static <T> INetCancel loadingNetData(INetRequest<T> netRequest, IPage pageStatus, IConvert<T> convert) {
         Preconditions.checkNotNull(netRequest);
-        return netRequest.request(new PageNetCallback<T>(pageStatus) {
+        return netRequest.request(new PageCallback<T>(pageStatus) {
             @Override
             public void onSuccess(T t) {
                 super.onSuccess(t);

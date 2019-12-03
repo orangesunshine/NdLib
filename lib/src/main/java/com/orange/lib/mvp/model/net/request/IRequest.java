@@ -1,11 +1,7 @@
 package com.orange.lib.mvp.model.net.request;
 
-import com.orange.lib.mvp.model.net.callback.loading.INetCallback;
 import com.orange.lib.mvp.model.net.netcancel.INetCancel;
 import com.orange.lib.mvp.model.net.request.request.NetRequestParams;
-
-import java.util.LinkedList;
-import java.util.List;
 
 public interface IRequest {
     /**

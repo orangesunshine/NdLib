@@ -7,9 +7,9 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.orange.lib.common.adapterpattern.NetCallbackAdapter;
+import com.orange.lib.common.adapterpattern.CallbackAdapter;
 import com.orange.lib.constance.IConst;
-import com.orange.lib.mvp.model.net.callback.loading.INetCallback;
+import com.orange.lib.mvp.model.net.callback.loading.ICallback;
 import com.orange.lib.utils.CommonUtils;
 import com.orange.lib.utils.ReflectionUtils;
 import com.orange.lib.utils.base.Preconditions;
@@ -18,10 +18,12 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
 import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.ResponseBody;
 
@@ -34,7 +36,7 @@ public class LoadingResponseBodyObserver {
         return new LoadingResponseBodyObserver();
     }
 
-    public <T> Disposable subscribe(Observable<ResponseBody> observable, INetCallback<T> netCallback) {
+    public <T> Disposable subscribe(Observable<ResponseBody> observable, ICallback<T> netCallback) {
         return observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<ResponseBody>() {
@@ -77,8 +79,8 @@ public class LoadingResponseBodyObserver {
                                 }
                                 if (null == type) {
                                     Class clazz = netCallback.getClass();
-                                    if (netCallback instanceof NetCallbackAdapter) {
-                                        INetCallback<T> callback = ((NetCallbackAdapter<T>) netCallback).getNetCallback();
+                                    if (netCallback instanceof CallbackAdapter) {
+                                        ICallback<T> callback = ((CallbackAdapter<T>) netCallback).getNetCallback();
                                         if (null != callback) clazz = callback.getClass();
                                     }
                                     type = ReflectionUtils.getGenericActualTypeArg(clazz);

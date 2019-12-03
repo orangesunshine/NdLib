@@ -1,4 +1,4 @@
-package com.orange.ndlib.activity.demo.loading;
+package com.orange.ndlib.activity.demo.net;
 
 import android.view.View;
 

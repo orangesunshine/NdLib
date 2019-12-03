@@ -1,4 +1,4 @@
-package com.orange.ndlib.activity.demo.loading;
+package com.orange.ndlib.activity.demo.net;
 
 import com.orange.lib.mvp.contact.INetContact;
 import com.orange.lib.mvp.model.net.netcancel.INetCancel;

@@ -5,11 +5,11 @@ package com.orange.lib.mvp.model.net.callback.loading;
  *
  * @param <T>
  */
-public interface INetCallback<T> {
+public interface ICallback<T> {
     /**
      * 网络请求开始
      */
-    void onStart();
+    <T1> void onStart(T1... t);
 
     /**
      * 成功

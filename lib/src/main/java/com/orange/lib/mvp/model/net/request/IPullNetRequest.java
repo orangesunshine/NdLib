@@ -3,7 +3,7 @@ package com.orange.lib.mvp.model.net.request;
 import androidx.annotation.IntDef;
 
 
-import com.orange.lib.mvp.model.net.callback.loading.INetCallback;
+import com.orange.lib.mvp.model.net.callback.loading.ICallback;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -18,7 +18,7 @@ public interface IPullNetRequest<T> extends IPageNetRequest<T> {
      * @param type
      * @param callback
      */
-    void pullReqeust(@PullType int type, INetCallback<T> callback);
+    void pullReqeust(@PullType int type, ICallback<T> callback);
 
     @IntDef({TYPE_REFRESH, TYPE_LOADMORE})
     @Retention(RetentionPolicy.SOURCE)

@@ -3,11 +3,11 @@ package com.orange.lib.mvp.model.net.callback.loading;
 
 import com.orange.lib.mvp.view.loading.ILoading;
 
-public class LoadingNetCallback<T> implements INetCallback<T> {
+public class LoadingCallback<T> implements ICallback<T> {
     private ILoading loading;
-    private LogNetCallback mLogNetCallback = new LogNetCallback();
+    private LogCallback mLogNetCallback = new LogCallback();
 
-    public LoadingNetCallback(ILoading loading) {
+    public LoadingCallback(ILoading loading) {
         this.loading = loading;
     }
 

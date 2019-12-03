@@ -4,7 +4,7 @@ import com.orange.lib.mvp.contact.view.BaseActivity;
 import com.orange.lib.utils.Activitys;
 import com.orange.ndlib.R;
 import com.orange.ndlib.activity.demo.base.BaseDemoActivity;
-import com.orange.ndlib.activity.demo.loading.NetDemoActivity;
+import com.orange.ndlib.activity.demo.net.NetDemoActivity;
 
 public class MainActivity extends BaseActivity {
     /**

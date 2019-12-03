@@ -1,6 +1,6 @@
 package com.orange.lib.mvp.model.net.request.request;
 
-import com.orange.lib.mvp.model.net.callback.loading.INetCallback;
+import com.orange.lib.mvp.model.net.callback.loading.ICallback;
 
 import java.lang.reflect.Type;
 import java.util.Map;
@@ -11,9 +11,9 @@ public class NetRequestParams<T> {
     private Map<String, String> mHeaders;//请求头
     private Method mMethod;//请求方式
     private Type mType;//解析泛型
-    private INetCallback<T> mNetCallback;//网络请求回调
+    private ICallback<T> mNetCallback;//网络请求回调
 
-    public void setNetCallback(INetCallback<T> netCallback) {
+    public void setNetCallback(ICallback<T> netCallback) {
         mNetCallback = netCallback;
     }
 
@@ -46,7 +46,7 @@ public class NetRequestParams<T> {
         return mType;
     }
 
-    public INetCallback<T> getNetCallback() {
+    public ICallback<T> getNetCallback() {
         return mNetCallback;
     }
 
@@ -60,7 +60,7 @@ public class NetRequestParams<T> {
         private Map<String, String> mHeaders;//请求头
         private Method mMethod;//请求方式
         private Type mType;//解析泛型
-        private INetCallback<T> mNetCallback;//网络请求回调
+        private ICallback<T> mNetCallback;//网络请求回调
 
         public static NetRequestParamsBuilder builder() {
             return new NetRequestParamsBuilder();
@@ -86,7 +86,7 @@ public class NetRequestParams<T> {
             return this;
         }
 
-        public NetRequestParamsBuilder callback(INetCallback<T> netCallback) {
+        public NetRequestParamsBuilder callback(ICallback<T> netCallback) {
             mNetCallback = netCallback;
             return this;
         }

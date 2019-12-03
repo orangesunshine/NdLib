@@ -8,7 +8,7 @@ import com.orange.lib.mvp.view.page.loading.LoadingDialogPage;
 import com.orange.lib.mvp.contact.presenter.NetPresenter;
 import com.orange.lib.utils.Activitys;
 import com.orange.ndlib.R;
-import com.orange.ndlib.activity.demo.loading.NetDemoActivity;
+import com.orange.ndlib.activity.demo.net.NetDemoActivity;
 import com.orange.ndlib.activity.demo.swip.SwipePullDemoActivity;
 
 import java.util.Random;

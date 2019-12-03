@@ -30,8 +30,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.demo.base.BaseDemoActivity"></activity>
-        <activity android:name=".activity.demo.loading.NetDemoActivity"></activity>
-        <activity android:name=".activity.demo.loading.page.PageNetDemoActivity"></activity>
+        <activity android:name=".activity.demo.net.NetDemoActivity"></activity>
+        <activity android:name=".activity.demo.net.page.PageNetDemoActivity"></activity>
         <activity android:name=".activity.demo.swip.SwipePullDemoActivity"></activity>
         <activity android:name=".activity.demo.swip.SwipePullPageDemoActivity"></activity>
         <activity android:name=".CocosWebActivity"></activity>

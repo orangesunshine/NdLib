@@ -1,8 +1,8 @@
 package com.orange.thirdparty.retrofit.api;
 
-import com.orange.lib.common.adapterpattern.NetCallbackAdapter;
+import com.orange.lib.common.adapterpattern.CallbackAdapter;
 import com.orange.lib.mvp.model.net.request.IRequest;
-import com.orange.lib.mvp.model.net.callback.loading.INetCallback;
+import com.orange.lib.mvp.model.net.callback.loading.ICallback;
 import com.orange.lib.mvp.model.net.request.request.NetRequestParams;
 import com.orange.lib.mvp.model.net.netcancel.INetCancel;
 import com.orange.lib.utils.ReflectionUtils;
@@ -13,6 +13,8 @@ import com.orange.thirdparty.retrofit.RetrofitNetCancel;
 import com.orange.thirdparty.rxjava.LoadingResponseBodyObserver;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
@@ -46,15 +48,29 @@ public class RetrofitRequest implements IRequest {
         String url = netRequestParams.getUrl();
         Map<String, String> params = netRequestParams.getParams();
         Map<String, String> headers = netRequestParams.getHeaders();
-        INetCallback<T> netCallback = netRequestParams.getNetCallback();
+        ICallback<T> netCallback = netRequestParams.getNetCallback();
         if (NetRequestParams.Method.GET == method)
             return get(url, params, headers, netCallback);
         return post(url, params, headers, netCallback);
     }
 
     @Override
-    public <T extends NetRequestParams<K>, K> INetCancel parallel(T... netRequestParams) {
-        return null;
+    public <T extends NetRequestParams<K>, K> INetCancel parallel(T... netRequests) {
+        if (Preconditions.isNulls(netRequests)) return null;
+        mAlreadyStart = new AtomicBoolean(false);
+        int len = netRequests.length;
+        mCompleteCountDown = new CountDownLatch(len);
+        List<INetCancel> netCancels = new ArrayList<>();
+        for (NetRequestParams<K> request : netRequests) {
+            if (Preconditions.isNull(request)) {
+                if (!Preconditions.isNull(mCompleteCountDown))
+                    mCompleteCountDown.countDown();
+                continue;
+            }
+            request.setNetCallback(wrapNetCallback(request.getNetCallback()));
+            netCancels.add(request(request));
+        }
+        return wrapNetCancel(netCancels);
     }
 
     @Override
@@ -63,7 +79,15 @@ public class RetrofitRequest implements IRequest {
         mAlreadyStart = new AtomicBoolean(false);
         int len = netRequests.length;
         mCompleteCountDown = new CountDownLatch(len);
-        List<INetCancel> netCancels = new ArrayList<>();
+        LinkedList<T> netCancels = new LinkedList<T>(Arrays.asList(netRequests));
+        T request = netCancels.pop();
+        if (Preconditions.isNull(request)) {
+            if (!Preconditions.isNull(mCompleteCountDown))
+                mCompleteCountDown.countDown();
+            continue;
+        }
+        request.setNetCallback(wrapNetCallback(request.getNetCallback()));
+        netCancels.add(request(request));
         for (NetRequestParams<K> request : netRequests) {
             if (Preconditions.isNull(request)) {
                 if (!Preconditions.isNull(mCompleteCountDown))
@@ -92,13 +116,13 @@ public class RetrofitRequest implements IRequest {
         };
     }
 
-    private <T> INetCallback<T> wrapNetCallback(INetCallback<T> netCallback) {
+    private <T> ICallback<T> wrapNetCallback(ICallback<T> netCallback) {
         if (Preconditions.isNull(netCallback)) {
             if (!Preconditions.isNull(mCompleteCountDown))
                 mCompleteCountDown.countDown();
             return null;
         }
-        INetCallback<T> callback = new NetCallbackAdapter(netCallback) {
+        ICallback<T> callback = new CallbackAdapter(netCallback) {
             @Override
             public void onStart() {
                 if (Preconditions.isNull(mAlreadyStart) || mAlreadyStart.compareAndSet(false, true))
@@ -126,7 +150,7 @@ public class RetrofitRequest implements IRequest {
      * @param headers  请求头
      * @param callback 回调
      */
-    public <T> INetCancel post(String url, Map<String, String> params, Map<String, String> headers, INetCallback<T> callback) {
+    public <T> INetCancel post(String url, Map<String, String> params, Map<String, String> headers, ICallback<T> callback) {
         if (Preconditions.isNull(mLoadingResponseBodyObserver)) return null;
         Observable<ResponseBody> observable = null;
         IRetrofitApi api = RetrofitClient.getRetrofitInstance().create(IRetrofitApi.class);
@@ -148,7 +172,7 @@ public class RetrofitRequest implements IRequest {
      * @param params   参数
      * @param callback 回调
      */
-    public <T> INetCancel get(String url, Map<String, String> params, Map<String, String> headers, INetCallback<T> callback) {
+    public <T> INetCancel get(String url, Map<String, String> params, Map<String, String> headers, ICallback<T> callback) {
         if (Preconditions.isNull(mLoadingResponseBodyObserver)) return null;
         Observable<ResponseBody> observable = null;
         IRetrofitApi api = RetrofitClient.getRetrofitInstance().create(IRetrofitApi.class);
