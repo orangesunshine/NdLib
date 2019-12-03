@@ -27,7 +27,7 @@ public class LoadingDemoPresenter extends NetPresenter<ILoadingDemoContact.View>
     public INetCancel getMultiDatas() {
         HashMap<String, String> params = new HashMap<>();
         params.put("params", "Hello Yesterday");
-        return Serial(NetRequestParams.NetRequestParamsBuilder.builder().url("http://localhost:8080/ifc/loading1").callback(new LoadingCallback<String>(mView) {
+        return serial(NetRequestParams.NetRequestParamsBuilder.builder().url("http://localhost:8080/ifc/loading1").callback(new LoadingCallback<String>(mView) {
             @Override
             public void onSuccess(String data) {
                 super.onSuccess(data);

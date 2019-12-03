@@ -6,7 +6,6 @@
     <item name="id_empty_orange" type="id" />
     <item name="id_loading_orange" type="id" />
     <item name="id_error_orange" type="id" />
-
     <item name="id_fl_content_orange" type="id" />
     <!-- stub -->
     <item name="id_stub_content_orange" type="id" />
@@ -16,13 +15,8 @@
     <item name="id_stub_empty_orange" type="id" />
     <item name="id_stub_error_orange" type="id" />
 
-    <!-- refreshlayout -->
-    <item name="id_refreshlayout_orange" type="id" />
-    <item name="id_refreshlayout_header_orange" type="id" />
-    <item name="id_refreshlayout_footer_orange" type="id" />
-
-    <!-- recyclerview -->
-    <item name="id_recyclerview_orange" type="id" />
+    <!-- statusbar -->
+    <item name="id_statusbar_orange" type="id" />
 
     <!-- actbar -->
     <item name="id_layout_actbar_orange" type="id" />
@@ -50,4 +44,12 @@
 
     <!-- holder -->
     <item name="id_holder_orange" type="id" />
+
+    <!-- refreshlayout -->
+    <item name="id_refreshlayout_orange" type="id" />
+    <item name="id_refreshlayout_header_orange" type="id" />
+    <item name="id_refreshlayout_footer_orange" type="id" />
+
+    <!-- recyclerview -->
+    <item name="id_recyclerview_orange" type="id" />
 </resources>

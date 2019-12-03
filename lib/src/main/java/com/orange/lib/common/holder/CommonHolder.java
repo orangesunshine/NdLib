@@ -109,8 +109,7 @@ public class CommonHolder implements IHolder {
      */
     @Override
     public IHolder setText(int viewId, CharSequence text) {
-        TextView tv = getView(viewId);
-        return setText(tv, text);
+        return setText(getView(viewId), text);
     }
 
     /**
@@ -134,8 +133,7 @@ public class CommonHolder implements IHolder {
      */
     @Override
     public IHolder setText(int viewId, int stringRes) {
-        TextView tv = getView(viewId);
-        return setText(tv, stringRes);
+        return setText(getView(viewId), stringRes);
     }
 
     /**
@@ -159,8 +157,7 @@ public class CommonHolder implements IHolder {
      */
     @Override
     public IHolder setTextSize(int viewId, float size) {
-        TextView tv = getView(viewId);
-        return setTextSize(tv, size);
+        return setTextSize(getView(viewId), size);
     }
 
     /**
@@ -185,8 +182,7 @@ public class CommonHolder implements IHolder {
      */
     @Override
     public IHolder setTextColor(int viewId, @ColorInt int color) {
-        TextView tv = getView(viewId);
-        return setTextColor(tv, color);
+        return setTextColor(getView(viewId), color);
     }
 
     /**
@@ -211,8 +207,7 @@ public class CommonHolder implements IHolder {
      */
     @Override
     public IHolder setImageResource(int viewId, int resId) {
-        ImageView iv = getView(viewId);
-        return setImageResource(iv, resId);
+        return setImageResource(getView(viewId), resId);
     }
 
     /**
@@ -237,8 +232,7 @@ public class CommonHolder implements IHolder {
      */
     @Override
     public IHolder setBackgroundResource(int viewId, int resId) {
-        View view = getView(viewId);
-        return setBackgroundResource(view, resId);
+        return setBackgroundResource(getView(viewId), resId);
     }
 
     /**
@@ -263,8 +257,7 @@ public class CommonHolder implements IHolder {
      */
     @Override
     public IHolder loadImageResourceAsGif(int viewId, int resId) {
-        ImageView iv = getView(viewId);
-        return loadImageResourceAsGif(iv, resId);
+        return loadImageResourceAsGif(getView(viewId), resId);
     }
 
     /**
@@ -288,8 +281,7 @@ public class CommonHolder implements IHolder {
      */
     @Override
     public IHolder setVisible(int viewId, boolean visible) {
-        View view = getView(viewId);
-        return setVisible(view, visible);
+        return setVisible(getView(viewId), visible);
     }
 
     /**
@@ -314,8 +306,7 @@ public class CommonHolder implements IHolder {
      */
     @Override
     public IHolder setSelect(int viewId, boolean selected) {
-        View view = getView(viewId);
-        return setSelect(view, selected);
+        return setSelect(getView(viewId), selected);
     }
 
     /**
@@ -328,6 +319,28 @@ public class CommonHolder implements IHolder {
     @Override
     public IHolder setSelect(View view, boolean selected) {
         Views.setSelect(view, selected);
+        return this;
+    }
+
+    @Override
+    public IHolder setHeight(int viewId, int height) {
+        return setHeight(getView(viewId), height);
+    }
+
+    @Override
+    public IHolder setHeight(View view, int height) {
+        Views.setHeight(view,height);
+        return this;
+    }
+
+    @Override
+    public IHolder setWidth(int viewId, int width) {
+        return setWidth(getView(viewId), width);
+    }
+
+    @Override
+    public IHolder setWidth(View view, int width) {
+        Views.setWidth(view,width);
         return this;
     }
 

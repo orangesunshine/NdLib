@@ -9,7 +9,7 @@ public interface ICallback<T> {
     /**
      * 网络请求开始
      */
-    <T1> void onStart(T1... t);
+    <T1> void onStart();
 
     /**
      * 成功

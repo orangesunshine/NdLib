@@ -14,6 +14,7 @@ import android.os.Looper;
 import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -26,7 +27,10 @@ import com.orange.lib.R;
 import com.orange.lib.common.convert.IHolderConvert;
 import com.orange.lib.common.holder.CommonHolder;
 import com.orange.lib.constance.IInitConst;
+import com.orange.lib.constance.IViewConst;
 import com.orange.lib.utils.base.Preconditions;
+import com.orange.lib.utils.size.Screens.Screens;
+import com.orange.lib.utils.size.Sizes;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -160,6 +164,32 @@ public class Views {
     }
 
     /**
+     * 动态设置控件高度
+     *
+     * @param view
+     * @param height
+     */
+    public static void setHeight(View view, int height) {
+        if (Preconditions.isNull(view)) return;
+        ViewGroup.LayoutParams lp = view.getLayoutParams();
+        lp.height = Sizes.dp2px(height);
+        view.setLayoutParams(lp);
+    }
+
+    /**
+     * 动态设置控件宽度
+     *
+     * @param view
+     * @param width
+     */
+    public static void setWidth(View view, int width) {
+        if (Preconditions.isNull(view)) return;
+        ViewGroup.LayoutParams lp = view.getLayoutParams();
+        lp.width = width;
+        view.setLayoutParams(lp);
+    }
+
+    /**
      * @param view
      * @param color
      * @return
@@ -177,6 +207,25 @@ public class Views {
     public static void setBackgroundResource(View view, @DrawableRes int resId) {
         if (Preconditions.isNull(view)) return;
         view.setBackgroundResource(resId);
+    }
+
+    /**
+     * 设置状态栏高度
+     *
+     * @param statusBar
+     */
+    public static void setStatusBarHeight(View statusBar) {
+        setStatusBarHeight(statusBar, IViewConst.HEIGHT_STATUSBAR);
+    }
+
+    /**
+     * 设置状态栏高度
+     *
+     * @param statusBar
+     * @param height
+     */
+    public static void setStatusBarHeight(View statusBar, int height) {
+        setHeight(statusBar, height);
     }
 
     public static void setOnClickListener(View view, View.OnClickListener listener) {

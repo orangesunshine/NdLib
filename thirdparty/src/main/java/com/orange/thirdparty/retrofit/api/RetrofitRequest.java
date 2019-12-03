@@ -79,15 +79,7 @@ public class RetrofitRequest implements IRequest {
         mAlreadyStart = new AtomicBoolean(false);
         int len = netRequests.length;
         mCompleteCountDown = new CountDownLatch(len);
-        LinkedList<T> netCancels = new LinkedList<T>(Arrays.asList(netRequests));
-        T request = netCancels.pop();
-        if (Preconditions.isNull(request)) {
-            if (!Preconditions.isNull(mCompleteCountDown))
-                mCompleteCountDown.countDown();
-            continue;
-        }
-        request.setNetCallback(wrapNetCallback(request.getNetCallback()));
-        netCancels.add(request(request));
+        List<INetCancel> netCancels = new ArrayList<>();
         for (NetRequestParams<K> request : netRequests) {
             if (Preconditions.isNull(request)) {
                 if (!Preconditions.isNull(mCompleteCountDown))
