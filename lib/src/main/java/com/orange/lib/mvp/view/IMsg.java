@@ -12,12 +12,12 @@ public interface IMsg {
      *
      * @param charSequence 字符串
      */
-    void showMsg(CharSequence charSequence);
+    void msg(CharSequence charSequence);
 
     /**
      * 提示消息
      *
      * @param stringId 字符串资源id
      */
-    void showMsg(@StringRes int stringId);
+    void msg(@StringRes int stringId);
 }

@@ -3,7 +3,7 @@ package com.orange.lib.utils;
 
 import com.orange.lib.constance.IConst;
 
-public class CommonUtils {
+public class Commons {
     /**
      * 判断网络code==200，true：成功|false：失败
      *

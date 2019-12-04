@@ -31,6 +31,7 @@ import com.orange.lib.constance.IViewConst;
 import com.orange.lib.utils.base.Preconditions;
 import com.orange.lib.utils.size.Screens.Screens;
 import com.orange.lib.utils.size.Sizes;
+import com.orange.utils.common.Bars;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -172,7 +173,7 @@ public class Views {
     public static void setHeight(View view, int height) {
         if (Preconditions.isNull(view)) return;
         ViewGroup.LayoutParams lp = view.getLayoutParams();
-        lp.height = Sizes.dp2px(height);
+        lp.height = Bars.getStatusBarHeight();
         view.setLayoutParams(lp);
     }
 

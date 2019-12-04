@@ -26,59 +26,68 @@ public class Toasts {
         });
     }
 
-    /**
-     * 提示信息
-     */
-    public static void showMsg(CharSequence charSequence) {
-        convertToast(R.drawable.ic_photo_gray, charSequence).show();
+    // <editor-fold defaultstate="collapsed" desc="提示信息">
+    public static void showNotice(CharSequence charSequence) {
+        if (null == charSequence || charSequence.length() == 0) return;
+        convertToast(R.drawable.toast_notice, charSequence).show();
     }
 
-    /**
-     * 提示信息
-     */
-    public static void showMsg(CharSequence charSequence, int duration) {
-        convertToast(R.drawable.ic_photo_gray, charSequence).show(duration);
+    public static void showNotice(CharSequence charSequence, int duration) {
+        if (null == charSequence || charSequence.length() == 0) return;
+        convertToast(R.drawable.toast_notice, charSequence).show(duration);
     }
 
-    /**
-     * 提示信息
-     */
-    public static void showMsg(Context context, CharSequence charSequence) {
-        convertToast(context, R.drawable.ic_photo_gray, charSequence).show(context);
+    public static void showNotice(Context context, CharSequence charSequence) {
+        if (null == charSequence || charSequence.length() == 0) return;
+        convertToast(context, R.drawable.toast_notice, charSequence).show(context);
     }
 
-    /**
-     * 提示信息
-     */
-    public static void showMsg(Context context, CharSequence charSequence, int duration) {
-        convertToast(context, R.drawable.ic_photo_gray, charSequence).show(context, duration);
+    public static void showNotice(Context context, CharSequence charSequence, int duration) {
+        if (null == charSequence || charSequence.length() == 0) return;
+        convertToast(context, R.drawable.toast_notice, charSequence).show(context, duration);
     }
 
-    /**
-     * 显示错误信息
-     */
+    // <editor-fold defaultstate="collapsed" desc="成功信息">
+    public static void showSuccess(CharSequence charSequence) {
+        if (null == charSequence || charSequence.length() == 0) return;
+        convertToast(R.drawable.toast_success, charSequence).show();
+    }
+
+    public static void showSuccess(CharSequence charSequence, int duration) {
+        if (null == charSequence || charSequence.length() == 0) return;
+        convertToast(R.drawable.toast_success, charSequence).show(duration);
+    }
+
+    public static void showSuccess(Context context, CharSequence charSequence) {
+        if (null == charSequence || charSequence.length() == 0) return;
+        convertToast(context, R.drawable.toast_success, charSequence).show(context);
+    }
+
+    public static void showSuccess(Context context, CharSequence charSequence, int duration) {
+        if (null == charSequence || charSequence.length() == 0) return;
+        convertToast(context, R.drawable.toast_success, charSequence).show(context, duration);
+    }
+// </editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="错误信息">
     public static void showError(CharSequence charSequence) {
-        convertToast(R.drawable.ic_photo_gray, charSequence).show();
+        if (null == charSequence || charSequence.length() == 0) return;
+        convertToast(R.drawable.toast_net_erro, charSequence).show();
     }
 
-    /**
-     * 显示错误信息
-     */
     public static void showError(CharSequence charSequence, int duration) {
-        convertToast(R.drawable.ic_photo_gray, charSequence).show(duration);
+        if (null == charSequence || charSequence.length() == 0) return;
+        convertToast(R.drawable.toast_net_erro, charSequence).show(duration);
     }
 
-    /**
-     * 显示错误信息
-     */
     public static void showError(Context context, CharSequence charSequence) {
-        convertToast(context, R.drawable.ic_photo_gray, charSequence).show(context);
+        if (null == charSequence || charSequence.length() == 0) return;
+        convertToast(context, R.drawable.toast_net_erro, charSequence).show(context);
     }
 
-    /**
-     * 显示错误信息
-     */
     public static void showError(Context context, CharSequence charSequence, int duration) {
-        convertToast(context, R.drawable.ic_photo_gray, charSequence).show(context, duration);
+        if (null == charSequence || charSequence.length() == 0) return;
+        convertToast(context, R.drawable.toast_net_erro, charSequence).show(context, duration);
     }
+// </editor-fold>
 }

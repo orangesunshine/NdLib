@@ -44,7 +44,7 @@ public class NetDemoActivity extends NetActivity<ILoadingDemoContact.Presenter> 
 
     @Retry
     public void test() {
-        showMsg("test");
+        msg("test");
     }
 
     @Override

@@ -43,7 +43,7 @@ public class LogPullNetCallback<T> implements IPullNetCallback<T> {
             log.append("onComplete: ");
             log.append("successs: ").append(successs).append("noData: ").append(noData).append("empty: ").append(empty);
             log.append(LINE_SEPARATOR).append(indentation).append("period: ").append(SystemClock.elapsedRealtime() - startTimeMills).append("ms");
-//            LogUtils.e(log.toString());
+//            LogUtils.error(log.toString());
         }
     }
 

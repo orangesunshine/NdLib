@@ -2,8 +2,11 @@ package com.orange.ndlib.activity.demo.base;
 
 import com.orange.lib.component.actbar.IActionBarCallback;
 import com.orange.lib.mvp.contact.view.BaseActivity;
+import com.orange.lib.utils.Activitys;
 import com.orange.lib.utils.toast.Toasts;
 import com.orange.ndlib.R;
+import com.orange.ndlib.activity.demo.base.status.AndroidUtilCodeImlActivity;
+import com.orange.ndlib.activity.demo.base.status.RxJavaSampleImpActivity;
 
 import java.util.Random;
 
@@ -46,22 +49,28 @@ public class BaseDemoActivity extends BaseActivity {
                             break;
                     }
                     break;
+                case R.id.btn_statusbar_implby_androidutilcode:
+                    Activitys.launchActivity(mActivity, AndroidUtilCodeImlActivity.class);
+                    break;
+                case R.id.btn_statusbar_implby_rxjavasample:
+                    Activitys.launchActivity(mActivity, RxJavaSampleImpActivity.class);
+                    break;
             }
-        }, R.id.btn_actbar);
+        }, R.id.btn_actbar, R.id.btn_statusbar_implby_androidutilcode, R.id.btn_statusbar_implby_rxjavasample);
         mActbar.setActionBarCallback(new IActionBarCallback() {
             @Override
             public void onLeft() {
-                Toasts.showMsg("onLeft", 5000);
+                Toasts.showNotice("onLeft", 5000);
             }
 
             @Override
             public void onTitle() {
-                Toasts.showMsg("onTitle", 10000);
+                Toasts.showNotice("onTitle", 10000);
             }
 
             @Override
             public void onRight() {
-                Toasts.showMsg("onRight", 1000);
+                Toasts.showNotice("onRight", 1000);
             }
         });
     }

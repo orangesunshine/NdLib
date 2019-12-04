@@ -34,11 +34,11 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "androidx.appcompat:appcompat:${ANDROIDX}"
     implementation "com.google.android.material:material:${MATERIAL}"
     implementation "androidx.constraintlayout:constraintlayout:${CONSTRAINTLAYOUT}"
     testImplementation 'junit:junit:4.13-beta-3'
     androidTestImplementation "androidx.test:runner:${RUNNER}"
     androidTestImplementation "androidx.test.espresso:espresso-core:${ESPRESSOCORE}"
+    api project(path: ':utils')
 }

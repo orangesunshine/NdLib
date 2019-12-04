@@ -40,7 +40,7 @@ import static android.Manifest.permission.EXPAND_STATUS_BAR;
  *     desc  : utils about bar
  * </pre>
  */
-public final class BarUtils {
+public final class Bars {
 
     ///////////////////////////////////////////////////////////////////////////
     // status bar
@@ -50,7 +50,7 @@ public final class BarUtils {
     private static final String TAG_OFFSET = "TAG_OFFSET";
     private static final int KEY_OFFSET = -123;
 
-    private BarUtils() {
+    private Bars() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
@@ -623,7 +623,7 @@ public final class BarUtils {
             }
             context = ((ContextWrapper) context).getBaseContext();
         }
-        Log.e("BarUtils", "the view's Context is not an Activity.");
+        Log.e("Bars", "the view's Context is not an Activity.");
         return null;
     }
 }

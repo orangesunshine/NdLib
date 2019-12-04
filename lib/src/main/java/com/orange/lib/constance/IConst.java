@@ -22,7 +22,7 @@ public interface IConst {
     ///////////////////////////////////////////////////////////////////////////
     //duration
     int DURATION_TOAST_DEFAULT = Toast.LENGTH_SHORT;
-    int CUSTOM_DURATION_TOAST_DEFAULT = 2000;
+    int CUSTOM_DURATION_TOAST_DEFAULT = 3000;
     int CUSTOM_DURATION_TOAST_LONG = 5000;
 
     ///////////////////////////////////////////////////////////////////////////

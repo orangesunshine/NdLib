@@ -29,7 +29,7 @@ import java.util.List;
  *     desc  : utils about fragment
  * </pre>
  */
-public final class FragmentUtils {
+public final class Fragments {
 
     private static final int TYPE_ADD_FRAGMENT       = 0x01;
     private static final int TYPE_SHOW_FRAGMENT      = 0x01 << 1;
@@ -44,7 +44,7 @@ public final class FragmentUtils {
     private static final String ARGS_IS_ADD_STACK = "args_is_add_stack";
     private static final String ARGS_TAG          = "args_tag";
 
-    private FragmentUtils() {
+    private Fragments() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
@@ -1430,7 +1430,7 @@ public final class FragmentUtils {
                                 final Fragment src,
                                 final Fragment... dest) {
         if (src != null && src.isRemoving()) {
-            Log.e("FragmentUtils", src.getClass().getName() + " is isRemoving");
+            Log.e("Fragments", src.getClass().getName() + " is isRemoving");
             return;
         }
         String name;

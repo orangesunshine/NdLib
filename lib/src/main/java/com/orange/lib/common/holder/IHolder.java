@@ -7,9 +7,14 @@ import android.widget.TextView;
 import androidx.annotation.ColorRes;
 import androidx.annotation.StringRes;
 
-import com.orange.lib.utils.view.Views;
-
 public interface IHolder extends View.OnClickListener {
+
+    /**
+     * 获取根控件
+     *
+     * @return
+     */
+    View getRootView();
 
     /**
      * 根据viewId获取控件

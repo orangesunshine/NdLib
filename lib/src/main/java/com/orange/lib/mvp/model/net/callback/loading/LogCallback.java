@@ -2,7 +2,6 @@ package com.orange.lib.mvp.model.net.callback.loading;
 
 import android.os.SystemClock;
 
-
 import com.orange.lib.constance.IInitConst;
 import com.orange.lib.utils.log.Logs;
 import com.orange.lib.utils.toast.Toasts;
@@ -54,7 +53,7 @@ public class LogCallback<T> implements ICallback<T> {
         if (IInitConst.sRecordNetLogSwitch) {
             log.append("onComplete: ");
             log.append(LINE_SEPARATOR).append(indentation).append("period: ").append(SystemClock.elapsedRealtime() - startTimeMills).append("ms");
-            Logs.logi(log.toString());
+            Logs.i(log.toString());
         }
     }
 
@@ -75,7 +74,7 @@ public class LogCallback<T> implements ICallback<T> {
                 if (null != cause)
                     errorMsg.append(cause.getMessage());
                 if (errorMsg.length() > 0)
-                    Toasts.showMsg(errorMsg);
+                    Toasts.showNotice(errorMsg);
             }
             log.append(errorMsg).append(LINE_SEPARATOR);
         }

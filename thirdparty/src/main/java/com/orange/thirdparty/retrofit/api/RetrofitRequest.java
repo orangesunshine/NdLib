@@ -1,20 +1,18 @@
 package com.orange.thirdparty.retrofit.api;
 
 import com.orange.lib.common.adapterpattern.CallbackAdapter;
-import com.orange.lib.mvp.model.net.request.IRequest;
 import com.orange.lib.mvp.model.net.callback.loading.ICallback;
-import com.orange.lib.mvp.model.net.request.request.NetRequestParams;
 import com.orange.lib.mvp.model.net.netcancel.INetCancel;
-import com.orange.lib.utils.ReflectionUtils;
+import com.orange.lib.mvp.model.net.request.IRequest;
+import com.orange.lib.mvp.model.net.request.request.NetRequestParams;
+import com.orange.lib.utils.Reflections;
 import com.orange.lib.utils.base.Preconditions;
 import com.orange.thirdparty.retrofit.IRetrofitApi;
 import com.orange.thirdparty.retrofit.RetrofitClient;
 import com.orange.thirdparty.retrofit.RetrofitNetCancel;
-import com.orange.thirdparty.rxjava.LoadingResponseBodyObserver;
+import com.orange.thirdparty.rxjava.NetObserver;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
@@ -31,10 +29,10 @@ public class RetrofitRequest implements IRequest {
         return new RetrofitRequest();
     }
 
-    private LoadingResponseBodyObserver mLoadingResponseBodyObserver;
+    private NetObserver mObserver;
 
     private RetrofitRequest() {
-        mLoadingResponseBodyObserver = LoadingResponseBodyObserver.newInstance();
+        mObserver = NetObserver.newInstance();
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -49,9 +47,15 @@ public class RetrofitRequest implements IRequest {
         Map<String, String> params = netRequestParams.getParams();
         Map<String, String> headers = netRequestParams.getHeaders();
         ICallback<T> netCallback = netRequestParams.getNetCallback();
-        if (NetRequestParams.Method.GET == method)
-            return get(url, params, headers, netCallback);
-        return post(url, params, headers, netCallback);
+        Observable<ResponseBody> observable;
+        if (NetRequestParams.Method.GET == method) {
+            observable = get(url, params, headers, netCallback);
+        } else if (NetRequestParams.Method.POST == method) {
+            observable = post(url, params, headers, netCallback);
+        } else {
+            throw new IllegalArgumentException();
+        }
+        return new RetrofitNetCancel(mObserver.single(observable, netCallback));
     }
 
     @Override
@@ -130,7 +134,7 @@ public class RetrofitRequest implements IRequest {
                     super.onComplete();
             }
         };
-        ReflectionUtils.getGenericSuperclassActualTypeArg(callback.getClass());
+        Reflections.getGenericSuperclassActualTypeArg(callback.getClass());
         return callback;
     }
 
@@ -142,9 +146,8 @@ public class RetrofitRequest implements IRequest {
      * @param headers  请求头
      * @param callback 回调
      */
-    public <T> INetCancel post(String url, Map<String, String> params, Map<String, String> headers, ICallback<T> callback) {
-        if (Preconditions.isNull(mLoadingResponseBodyObserver)) return null;
-        Observable<ResponseBody> observable = null;
+    public <T> Observable<ResponseBody> post(String url, Map<String, String> params, Map<String, String> headers, ICallback<T> callback) {
+        Observable<ResponseBody> observable;
         IRetrofitApi api = RetrofitClient.getRetrofitInstance().create(IRetrofitApi.class);
         if (Preconditions.isEmpty(headers) && Preconditions.isEmpty(params)) {
             observable = api.post(url);
@@ -153,7 +156,7 @@ public class RetrofitRequest implements IRequest {
         } else {
             observable = api.post(url, params, headers);
         }
-        return new RetrofitNetCancel(mLoadingResponseBodyObserver.subscribe(observable, callback));
+        return observable;
     }
 
     /**
@@ -164,9 +167,8 @@ public class RetrofitRequest implements IRequest {
      * @param params   参数
      * @param callback 回调
      */
-    public <T> INetCancel get(String url, Map<String, String> params, Map<String, String> headers, ICallback<T> callback) {
-        if (Preconditions.isNull(mLoadingResponseBodyObserver)) return null;
-        Observable<ResponseBody> observable = null;
+    public <T> Observable<ResponseBody> get(String url, Map<String, String> params, Map<String, String> headers, ICallback<T> callback) {
+        Observable<ResponseBody> observable;
         IRetrofitApi api = RetrofitClient.getRetrofitInstance().create(IRetrofitApi.class);
         if (Preconditions.isEmpty(headers) && Preconditions.isEmpty(params)) {
             observable = api.get(url);
@@ -175,6 +177,6 @@ public class RetrofitRequest implements IRequest {
         } else {
             observable = api.get(url, params, headers);
         }
-        return new RetrofitNetCancel(mLoadingResponseBodyObserver.subscribe(observable, callback));
+        return observable;
     }
 }

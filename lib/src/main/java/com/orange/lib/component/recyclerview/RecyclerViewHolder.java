@@ -36,6 +36,11 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder implements IHold
         mHolder = new CommonHolder(itemView);
     }
 
+    @Override
+    public View getRootView() {
+        return mHolder.getRootView();
+    }
+
     /**
      * 通过ViewId获取控件
      *
@@ -290,7 +295,7 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder implements IHold
 
     @Override
     public IHolder setHeight(View view, int height) {
-        Views.setHeight(view,height);
+        Views.setHeight(view, height);
         return this;
     }
 
@@ -301,7 +306,7 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder implements IHold
 
     @Override
     public IHolder setWidth(View view, int width) {
-        Views.setWidth(view,width);
+        Views.setWidth(view, width);
         return this;
     }
 

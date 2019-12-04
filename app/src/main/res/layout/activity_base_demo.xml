@@ -21,5 +21,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="actbar" />
+
+        <Button
+            android:id="@+id/btn_statusbar_implby_androidutilcode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="statusbar_implby_androidutilcode" />
+
+        <Button
+            android:id="@+id/btn_statusbar_implby_rxjavasample"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="statusbar_implby_rxjavasample" />
     </LinearLayout>
 </LinearLayout>

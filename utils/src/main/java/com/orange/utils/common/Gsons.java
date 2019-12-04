@@ -19,13 +19,13 @@ import java.util.Set;
  *     desc  : utils about gson
  * </pre>
  */
-public final class GsonUtils {
+public final class Gsons {
 
     private static final Gson GSON = createGson(true);
 
     private static final Gson GSON_NO_NULLS = createGson(false);
 
-    private GsonUtils() {
+    private Gsons() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 

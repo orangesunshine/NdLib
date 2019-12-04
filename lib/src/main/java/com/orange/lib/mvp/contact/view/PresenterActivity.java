@@ -34,13 +34,13 @@ public abstract class PresenterActivity<P extends IContact.Presenter> extends Ba
     protected abstract P getPresenter();
 
     @Override
-    public void showMsg(CharSequence charSequence) {
-        Toasts.showMsg(charSequence);
+    public void msg(CharSequence charSequence) {
+        Toasts.showNotice(charSequence);
     }
 
     @Override
-    public void showMsg(int stringId) {
-        Toasts.showMsg(getResources().getText(stringId));
+    public void msg(int stringId) {
+        Toasts.showNotice(getResources().getText(stringId));
     }
 
     /**

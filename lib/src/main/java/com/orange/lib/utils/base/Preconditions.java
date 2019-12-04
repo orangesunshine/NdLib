@@ -18,7 +18,7 @@ public class Preconditions {
      */
     public static boolean isNull(Object ojb) {
         boolean ret = null == ojb;
-        if (ret) Logs.logc(LOG_PREFIX + "obj is null");
+        if (ret) Logs.c(LOG_PREFIX + "obj is null");
         return ret;
     }
 
@@ -35,7 +35,7 @@ public class Preconditions {
                 ret |= isNull(ojb);
             }
         }
-        if (ret) Logs.logc(LOG_PREFIX + "objs is nulls");
+        if (ret) Logs.c(LOG_PREFIX + "objs is nulls");
         return ret;
     }
 
@@ -50,7 +50,7 @@ public class Preconditions {
         if (!ret) {
             ret |= 0 == objs.length;
         }
-        if (ret) Logs.logc(LOG_PREFIX + "objs is empty");
+        if (ret) Logs.c(LOG_PREFIX + "objs is empty");
         return ret;
     }
 
@@ -62,7 +62,7 @@ public class Preconditions {
      */
     public static boolean isEmpty(CharSequence charSequence) {
         boolean ret = null == charSequence || 0 == charSequence.length();
-        if (ret) Logs.logc(LOG_PREFIX + "charSequence is empty");
+        if (ret) Logs.c(LOG_PREFIX + "charSequence is empty");
         return ret;
     }
 
@@ -92,7 +92,7 @@ public class Preconditions {
         boolean ret = isNull(collection);
         if (!ret)
             ret |= collection.isEmpty();
-        if (ret) Logs.logc(LOG_PREFIX + "collection is empty");
+        if (ret) Logs.c(LOG_PREFIX + "collection is empty");
         return ret;
     }
 
@@ -106,7 +106,7 @@ public class Preconditions {
         boolean ret = isNull(map);
         if (!ret)
             ret |= map.isEmpty();
-        if (ret) Logs.logc(LOG_PREFIX + "map is empty");
+        if (ret) Logs.c(LOG_PREFIX + "map is empty");
         return ret;
     }
 

@@ -62,6 +62,11 @@ public class CommonHolder implements IHolder {
         itemView.setTag(R.id.id_holder_orange, this);
     }
 
+    @Override
+    public View getRootView() {
+        return itemView;
+    }
+
     /**
      * 通过ViewId获取控件
      *
