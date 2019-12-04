@@ -116,7 +116,7 @@ public class Utils {
             Class<?> activityThread = Class.forName("android.app.ActivityThread");
             Object thread = activityThread.getMethod("currentActivityThread").invoke(null);
             Object app = activityThread.getMethod("getApplication").invoke(thread);
-            if (app == null) Logs.logc("u should init first");
+            if (app == null) Logs.c("u should init first");
             return (Application) app;
         } catch (NoSuchMethodException e) {
             e.printStackTrace();

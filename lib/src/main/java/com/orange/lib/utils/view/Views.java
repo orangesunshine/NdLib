@@ -14,6 +14,8 @@ import android.os.Looper;
 import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewStub;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,16 +24,66 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.StringRes;
 
 import com.orange.lib.R;
+import com.orange.lib.common.convert.IHolderConvert;
+import com.orange.lib.common.holder.CommonHolder;
 import com.orange.lib.constance.IInitConst;
+import com.orange.lib.constance.IViewConst;
 import com.orange.lib.utils.base.Preconditions;
+import com.orange.lib.utils.size.Screens.Screens;
+import com.orange.lib.utils.size.Sizes;
+import com.orange.utils.common.Bars;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import static com.orange.lib.constance.ITag.TAG_COPY;
+import static com.orange.lib.constance.ITag.LABEL_COPY;
+
 
 public class Views {
+    /**
+     * ViewStub占位 动态添加布局文件
+     *
+     * @param stub
+     * @param layoutId
+     */
+    public static View attachStub(ViewStub stub, int layoutId) {
+        if (!Preconditions.isNull(stub)) {
+            stub.setLayoutResource(layoutId);
+            return stub.inflate();
+        }
+        return null;
+    }
+
+    /**
+     * 数据填充到StubView
+     *
+     * @param stub
+     * @param layoutId
+     * @param data
+     * @param holderConvert
+     * @param <T>
+     */
+    public static <T> CommonHolder convertData2StubView(ViewStub stub, int layoutId, T data, IHolderConvert<T> holderConvert) {
+        return convertData2View(attachStub(stub, layoutId), data, holderConvert);
+    }
+
+    /**
+     * 数据填充到view
+     *
+     * @param holderConvert
+     * @param data
+     * @param <T>
+     */
+    public static <T> CommonHolder convertData2View(View view, T data, IHolderConvert<T> holderConvert) {
+        if (!Preconditions.isNulls(holderConvert, view, data)) {
+            CommonHolder commonHolder = new CommonHolder(view);
+            holderConvert.convert(commonHolder, data);
+            return commonHolder;
+        }
+        return null;
+    }
+
     /**
      * 设置文本
      *
@@ -113,6 +165,32 @@ public class Views {
     }
 
     /**
+     * 动态设置控件高度
+     *
+     * @param view
+     * @param height
+     */
+    public static void setHeight(View view, int height) {
+        if (Preconditions.isNull(view)) return;
+        ViewGroup.LayoutParams lp = view.getLayoutParams();
+        lp.height = Bars.getStatusBarHeight();
+        view.setLayoutParams(lp);
+    }
+
+    /**
+     * 动态设置控件宽度
+     *
+     * @param view
+     * @param width
+     */
+    public static void setWidth(View view, int width) {
+        if (Preconditions.isNull(view)) return;
+        ViewGroup.LayoutParams lp = view.getLayoutParams();
+        lp.width = width;
+        view.setLayoutParams(lp);
+    }
+
+    /**
      * @param view
      * @param color
      * @return
@@ -132,6 +210,25 @@ public class Views {
         view.setBackgroundResource(resId);
     }
 
+    /**
+     * 设置状态栏高度
+     *
+     * @param statusBar
+     */
+    public static void setStatusBarHeight(View statusBar) {
+        setStatusBarHeight(statusBar, IViewConst.HEIGHT_STATUSBAR);
+    }
+
+    /**
+     * 设置状态栏高度
+     *
+     * @param statusBar
+     * @param height
+     */
+    public static void setStatusBarHeight(View statusBar, int height) {
+        setHeight(statusBar, height);
+    }
+
     public static void setOnClickListener(View view, View.OnClickListener listener) {
         if (Preconditions.isNull(view)) return;
         view.setOnClickListener(listener);
@@ -146,7 +243,7 @@ public class Views {
             //创建ClipData对象
             //第一个参数只是一个标记，随便传入。
             //第二个参数是要复制到剪贴版的内容
-            ClipData clip = ClipData.newPlainText(TAG_COPY, trim);
+            ClipData clip = ClipData.newPlainText(LABEL_COPY, trim);
             //传入clipdata对象.
             clipboard.setPrimaryClip(clip);
             return true;

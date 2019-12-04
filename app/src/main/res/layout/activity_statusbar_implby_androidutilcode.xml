@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/ll_root"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ViewStub
+        android:id="@+id/id_stub_actbar_orange"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_actbar"
+        android:inflatedId="@+id/id_actbar_orange" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="我是androidUtilsCode实现statusbar\n1.设置透明；\n2.设置自定义颜色；\n3.支持fragment；\n4.支持drawerlayout；\n5.自定义statusbar样式。"
+        android:textSize="@dimen/font_16" />
+
+    <Button
+        android:id="@+id/btn_color"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="randomcolor" />
+
+    <TextView
+        android:id="@+id/tv_alpha_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:text="alpha: 0" />
+
+    <SeekBar
+        android:id="@+id/sk_progress_alpha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:max="255" />
+</LinearLayout>

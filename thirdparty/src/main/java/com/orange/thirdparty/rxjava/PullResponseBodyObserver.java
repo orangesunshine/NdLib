@@ -11,8 +11,8 @@ import com.google.gson.TypeAdapter;
 import com.google.gson.reflect.TypeToken;
 import com.orange.lib.common.reponse.PullData;
 import com.orange.lib.constance.IConst;
-import com.orange.lib.pull.callback.IPullNetCallback;
-import com.orange.lib.utils.CommonUtils;
+import com.orange.lib.mvp.model.net.callback.pull.IPullNetCallback;
+import com.orange.lib.utils.Commons;
 
 import java.lang.reflect.Type;
 
@@ -85,7 +85,7 @@ public class PullResponseBodyObserver {
                                 mNoData = ((PullData) result).noMoreData();
                             }
                             if (null != netCallback) {
-                                if (null != result && CommonUtils.checkCodeSuccess(code)) {
+                                if (null != result && Commons.checkCodeSuccess(code)) {
                                     if (!TextUtils.isEmpty(responseMsg) && TextUtils.isEmpty(errorMsg))
 //                        ToastUtils.showShort(responseMsg);
                                         netCallback.onSuccess(result);

@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.orange.lib.common.reponse.PullData;
 import com.orange.lib.component.recyclerview.CommonAdapter;
 import com.orange.lib.component.recyclerview.IConvertRecyclerView;
-import com.orange.lib.pull.callback.IPullNetCallback;
+import com.orange.lib.mvp.model.net.callback.pull.IPullNetCallback;
 import com.orange.lib.utils.pull.PageUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 

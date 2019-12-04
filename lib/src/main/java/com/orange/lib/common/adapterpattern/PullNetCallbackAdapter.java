@@ -1,6 +1,6 @@
 package com.orange.lib.common.adapterpattern;
 
-import com.orange.lib.pull.callback.IPullNetCallback;
+import com.orange.lib.mvp.model.net.callback.pull.IPullNetCallback;
 
 public class PullNetCallbackAdapter<T> implements IPullNetCallback<T> {
     private IPullNetCallback<T> mNetCallback;

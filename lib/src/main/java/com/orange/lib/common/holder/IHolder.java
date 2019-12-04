@@ -10,6 +10,13 @@ import androidx.annotation.StringRes;
 public interface IHolder extends View.OnClickListener {
 
     /**
+     * 获取根控件
+     *
+     * @return
+     */
+    View getRootView();
+
+    /**
      * 根据viewId获取控件
      *
      * @param viewId
@@ -193,6 +200,42 @@ public interface IHolder extends View.OnClickListener {
      * @return
      */
     IHolder setSelect(View view, boolean selected);
+
+    /**
+     * 动态设置控件高度
+     *
+     * @param viewId
+     * @param height
+     * @return
+     */
+    IHolder setHeight(int viewId, int height);
+
+    /**
+     * 动态设置控件高度
+     *
+     * @param view
+     * @param height
+     * @return
+     */
+    IHolder setHeight(View view, int height);
+
+    /**
+     * 动态设置控件宽度
+     *
+     * @param viewId
+     * @param width
+     * @return
+     */
+    IHolder setWidth(int viewId, int width);
+
+    /**
+     * 动态设置控件宽度
+     *
+     * @param view
+     * @param width
+     * @return
+     */
+    IHolder setWidth(View view, int width);
 
     /**
      * 设置项点击事件

@@ -9,5 +9,5 @@ public interface ITag {
     int TAG_LOADMORE_RECYCLERVIEW = 0x002;
 
     //label
-    // String LABEL_COPY = "label_copy";//复制功能label
+     String LABEL_COPY = "label_copy";//复制功能label
 }

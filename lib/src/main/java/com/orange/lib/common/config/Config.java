@@ -1,7 +1,7 @@
 package com.orange.lib.common.config;
 
 import com.orange.lib.common.image.IImage;
-import com.orange.lib.loading.api.IUrlApi;
+import com.orange.lib.mvp.model.net.request.IRequest;
 import com.orange.lib.utils.base.Preconditions;
 
 /**
@@ -11,7 +11,7 @@ import com.orange.lib.utils.base.Preconditions;
 public class Config {
     //static&final
     private static volatile Config ourInstance = null;
-    private IUrlApi mUrlApi;//网络请求
+    private IRequest mUrlApi;//网络请求
     private IImage mIImage;//图片
 
     public static Config getInstance() {
@@ -32,7 +32,7 @@ public class Config {
     /**
      * 配置网络请求实现
      */
-    public void configNet(IUrlApi urlApi) {
+    public void configNet(IRequest urlApi) {
         mUrlApi = urlApi;
     }
 
@@ -41,7 +41,7 @@ public class Config {
      *
      * @return
      */
-    public IUrlApi getNet() {
+    public IRequest getNet() {
         if (Preconditions.isNull(mUrlApi))
             mUrlApi = null;
         return mUrlApi;

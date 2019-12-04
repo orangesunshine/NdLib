@@ -13,8 +13,8 @@ public class Logs {
      *
      * @param logs
      */
-    public static final void logi(String... logs) {
-        togi(TAG_DEFAULT, logs);
+    public static final void i(String... logs) {
+        info(TAG_DEFAULT, logs);
     }
 
     /**
@@ -23,9 +23,9 @@ public class Logs {
      * @param tag
      * @param logs
      */
-    public static final void togi(String tag, String... logs) {
+    public static final void info(String tag, String... logs) {
         //ToDo
-        System.out.println("Logs.togi.tag = " + tag);
+        System.out.println("Logs.info.tag = " + tag);
     }
 
     /**
@@ -33,8 +33,8 @@ public class Logs {
      *
      * @param logs
      */
-    public static final void loge(String... logs) {
-        toge(TAG_DEFAULT, logs);
+    public static final void e(String... logs) {
+        error(TAG_DEFAULT, logs);
     }
 
     /**
@@ -43,9 +43,9 @@ public class Logs {
      * @param tag
      * @param logs
      */
-    public static final void toge(String tag, String... logs) {
+    public static final void error(String tag, String... logs) {
         //ToDo
-        System.out.println("Logs.toge.tag = " + tag);
+        System.out.println("Logs.error.tag = " + tag);
     }
 
     /**
@@ -53,8 +53,8 @@ public class Logs {
      *
      * @param logs
      */
-    public static final void logc(String... logs) {
-        toge(TAG_DEFAULT, logs);
+    public static final void c(String... logs) {
+        error(TAG_DEFAULT, logs);
     }
 
     /**
@@ -63,8 +63,8 @@ public class Logs {
      * @param tag
      * @param logs
      */
-    public static final void togc(String tag, String... logs) {
+    public static final void condition(String tag, String... logs) {
         //ToDo
-        System.out.println("Logs.togc.tag = " + tag);
+        System.out.println("Logs.condition.tag = " + tag);
     }
 }

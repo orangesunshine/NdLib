@@ -22,7 +22,7 @@ public interface IConst {
     ///////////////////////////////////////////////////////////////////////////
     //duration
     int DURATION_TOAST_DEFAULT = Toast.LENGTH_SHORT;
-    int CUSTOM_DURATION_TOAST_DEFAULT = 2000;
+    int CUSTOM_DURATION_TOAST_DEFAULT = 3000;
     int CUSTOM_DURATION_TOAST_LONG = 5000;
 
     ///////////////////////////////////////////////////////////////////////////
@@ -30,6 +30,9 @@ public interface IConst {
     ///////////////////////////////////////////////////////////////////////////
     int REQUEST_BY_GET = 0x001;
     int REQUEST_BY_POST = 0x002;
+
+    int TYPE_PARALLEL = 0x003;
+    int TYPE_SERIAL = 0x004;
 
     //网络请求结果code
     int CODE_SUCCESS = 200;

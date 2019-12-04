@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.orange.lib.common.holder.CommonHolder;
 import com.orange.lib.common.holder.IHolder;
+import com.orange.lib.utils.view.Views;
 
 
 public class RecyclerViewHolder extends RecyclerView.ViewHolder implements IHolder, View.OnClickListener {
@@ -33,6 +34,11 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder implements IHold
     public RecyclerViewHolder(View itemView) {
         super(itemView);
         mHolder = new CommonHolder(itemView);
+    }
+
+    @Override
+    public View getRootView() {
+        return mHolder.getRootView();
     }
 
     /**
@@ -280,6 +286,28 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder implements IHold
     @Override
     public IHolder setSelect(View view, boolean selected) {
         return null == mHolder ? null : mHolder.setSelect(view, selected);
+    }
+
+    @Override
+    public IHolder setHeight(int viewId, int height) {
+        return setHeight(getView(viewId), height);
+    }
+
+    @Override
+    public IHolder setHeight(View view, int height) {
+        Views.setHeight(view, height);
+        return this;
+    }
+
+    @Override
+    public IHolder setWidth(int viewId, int width) {
+        return setWidth(getView(viewId), width);
+    }
+
+    @Override
+    public IHolder setWidth(View view, int width) {
+        Views.setWidth(view, width);
+        return this;
     }
 
     /**

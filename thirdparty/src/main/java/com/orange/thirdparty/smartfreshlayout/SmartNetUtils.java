@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.orange.lib.common.holder.IHolder;
 import com.orange.lib.component.recyclerview.IConvertRecyclerView;
 import com.orange.lib.mvp.model.net.netcancel.INetCancel;
-import com.orange.lib.pull.request.IPageNetRequest;
+import com.orange.lib.mvp.model.net.request.IPageNetRequest;
 import com.orange.thirdparty.R;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
@@ -19,8 +19,8 @@ public class SmartNetUtils {
      * @param <T>
      */
     public static <T> INetCancel smartPullAdapterNetData(IHolder holder, int itemLayoutId, IPageNetRequest<T> pageNetRequest, IConvertRecyclerView<T> convertRecyclerView) {
-        SmartRefreshLayout refreshLayout = holder.getView(R.id.refreshlayout_orange);
-        RecyclerView recyclerView = holder.getView(R.id.recyclerview_orange);
+        SmartRefreshLayout refreshLayout = holder.getView(R.id.id_refreshlayout_orange);
+        RecyclerView recyclerView = holder.getView(R.id.id_recyclerview_orange);
         View emptyView = holder.getView(R.id.id_empty_orange);
         return smartPullAdapterNetData(refreshLayout, recyclerView, emptyView, itemLayoutId, pageNetRequest, convertRecyclerView);
     }

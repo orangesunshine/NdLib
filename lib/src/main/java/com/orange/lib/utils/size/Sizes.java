@@ -92,7 +92,7 @@ public class Sizes {
 
     /**
      * Force get the size of view.
-     * <p>e.g.</p>
+     * <p>error.g.</p>
      * <pre>
      * SizeUtils.forceGetViewSize(view, new SizeUtils.onGetSizeListener() {
      *     Override

@@ -39,11 +39,11 @@ public final class SingleClickUtils {
         long time = SystemClock.elapsedRealtime();
         long timeInterval = Math.abs(time - mLastClickTime);
         if (timeInterval > DEFAULT_MIN_INTERVAL && timeInterval < intervalMillis) {
-            Logs.logi("SingleClickUtils.isFastDoubleClick.true： " + intervalMillis);
+            Logs.i("SingleClickUtils.isFastDoubleClick.true： " + intervalMillis);
             return true;
         } else {
             mLastClickTime = time;
-            Logs.logi("SingleClickUtils.isFastDoubleClick.false： " + intervalMillis);
+            Logs.i("SingleClickUtils.isFastDoubleClick.false： " + intervalMillis);
             return false;
         }
     }
@@ -82,11 +82,11 @@ public final class SingleClickUtils {
             fastClick &= viewId == mLastClickViewId;
 
         if (fastClick) {
-            Logs.logi("SingleClickUtils.isFastDoubleClick.true： " + intervalMillis);
+            Logs.i("SingleClickUtils.isFastDoubleClick.true： " + intervalMillis);
         } else {
             mLastClickTime = time;
             mLastClickViewId = viewId;
-            Logs.logi("SingleClickUtils.isFastDoubleClick.false： " + intervalMillis);
+            Logs.i("SingleClickUtils.isFastDoubleClick.false： " + intervalMillis);
         }
         return fastClick;
     }

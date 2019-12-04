@@ -6,48 +6,50 @@
     <item name="id_empty_orange" type="id" />
     <item name="id_loading_orange" type="id" />
     <item name="id_error_orange" type="id" />
-
-    <item name="fl_content_orange" type="id" />
+    <item name="id_fl_content_orange" type="id" />
     <!-- stub -->
-    <item name="stub_content_orange" type="id" />
-    <item name="stub_actbar_orange" type="id" />
-    <item name="stub_swiperefresh_orange" type="id" />
-    <item name="stub_loading_orange" type="id" />
-    <item name="stub_empty_orange" type="id" />
-    <item name="stub_error_orange" type="id" />
+    <item name="id_stub_content_orange" type="id" />
+    <item name="id_stub_actbar_orange" type="id" />
+    <item name="id_stub_swiperefresh_orange" type="id" />
+    <item name="id_stub_loading_orange" type="id" />
+    <item name="id_stub_empty_orange" type="id" />
+    <item name="id_stub_error_orange" type="id" />
 
-    <!-- refreshlayout -->
-    <item name="refreshlayout_orange" type="id" />
-    <item name="refreshlayout_header_orange" type="id" />
-    <item name="refreshlayout_footer_orange" type="id" />
-
-    <!-- recyclerview -->
-    <item name="recyclerview_orange" type="id" />
+    <!-- statusbar -->
+    <item name="id_statusbar_orange" type="id" />
 
     <!-- actbar -->
-    <item name="layout_actbar_orange" type="id" />
-    <item name="fl_left_actbar_orange" type="id" />
-    <item name="iv_left_actbar_orange" type="id" />
-    <item name="tv_left_actbar_orange" type="id" />
+    <item name="id_layout_actbar_orange" type="id" />
+    <item name="id_fl_left_actbar_orange" type="id" />
+    <item name="id_iv_left_actbar_orange" type="id" />
+    <item name="id_tv_left_actbar_orange" type="id" />
 
-    <item name="fl_title_actbar_orange" type="id" />
-    <item name="tv_title_actbar_orange" type="id" />
+    <item name="id_fl_title_actbar_orange" type="id" />
+    <item name="id_tv_title_actbar_orange" type="id" />
 
-    <item name="fl_right_actbar_orange" type="id" />
-    <item name="iv_right_actbar_orange" type="id" />
-    <item name="tv_right_actbar_orange" type="id" />
+    <item name="id_fl_right_actbar_orange" type="id" />
+    <item name="id_iv_right_actbar_orange" type="id" />
+    <item name="id_tv_right_actbar_orange" type="id" />
 
     <!-- empty -->
-    <item name="empty_image_orange" type="id" />
-    <item name="empty_text_orange" type="id" />
+    <item name="id_empty_image_orange" type="id" />
+    <item name="id_empty_text_orange" type="id" />
 
     <!-- error -->
-    <item name="error_image_orange" type="id" />
-    <item name="error_text_orange" type="id" />
+    <item name="id_error_image_orange" type="id" />
+    <item name="id_error_text_orange" type="id" />
 
     <!-- retry -->
     <item name="id_retry_orange" type="id" />
 
     <!-- holder -->
     <item name="id_holder_orange" type="id" />
+
+    <!-- refreshlayout -->
+    <item name="id_refreshlayout_orange" type="id" />
+    <item name="id_refreshlayout_header_orange" type="id" />
+    <item name="id_refreshlayout_footer_orange" type="id" />
+
+    <!-- recyclerview -->
+    <item name="id_recyclerview_orange" type="id" />
 </resources>

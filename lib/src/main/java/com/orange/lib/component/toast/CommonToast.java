@@ -48,17 +48,16 @@ public class CommonToast<T> {
     public static <T> CommonToast getInstance(Context context, int layoutId, T data, IHolderConvert<T> convert) {
         if (Preconditions.isNull(context))
             context = Utils.getTopActivityOrApp();
-        if (null == mInstance) {
-            synchronized (CommonToast.class) {
-                if (mInstance == null)
-                    mInstance = new CommonToast(context, layoutId, data, convert);
-            }
+        if (isNull()) {
+            mInstance = new CommonToast(context, layoutId, data, convert);
         } else {
-            synchronized (CommonToast.class) {
-                mInstance.convertContent(context, layoutId, data, convert);
-            }
+            mInstance.convertContent(context, layoutId, data, convert);
         }
         return mInstance;
+    }
+
+    private static boolean isNull() {
+        return null == mInstance || null == mInstance.mIToast || null == mInstance.mIToast.getToast();
     }
 
     public IToast getIToast() {
@@ -66,12 +65,11 @@ public class CommonToast<T> {
     }
 
     /**
-     * 判断是不是当前layout
-     *
-     * @return
+     * 点击屏幕取消toast
      */
-    public boolean isCurLayout(int layoutId) {
-        return layoutId > 0 && layoutId == mLayoutId;
+    public static void cancelToasts4Touch() {
+        if (null != mInstance)
+            mInstance.cancel();
     }
 
     /**
@@ -289,7 +287,7 @@ public class CommonToast<T> {
                 }
                 Activity activity = (Activity) context;
                 if (activity.isFinishing() || activity.isDestroyed()) {
-                    Logs.toge("CommonToast", activity + " is useless");
+                    Logs.e("CommonToast", activity + " is useless");
                     return;
                 }
                 mWM = activity.getWindowManager();
@@ -381,6 +379,7 @@ public class CommonToast<T> {
             mView = null;
             mWM = null;
             mToast = null;
+            mInstance = null;
         }
     }
 }
