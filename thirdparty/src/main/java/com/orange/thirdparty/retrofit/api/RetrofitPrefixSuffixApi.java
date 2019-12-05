@@ -45,7 +45,7 @@ public class RetrofitPrefixSuffixApi implements IPrefixSuffixApi {
     @Override
     public <T> INetCancel get(String prefix, String suffix, Map<String, String> params, ICallback<T> callback) {
         Preconditions.checkNotNull(mNetObserver);
-        Disposable subsribe = mNetObserver.single(RetrofitClient.getRetrofitInstance().create(IRetrofitApi.class).get(prefix, suffix, params), callback);
+        Disposable subsribe = mNetObserver.subResponseBody(RetrofitClient.getRetrofitInstance().create(IRetrofitApi.class).get(prefix, suffix, params), callback);
         return new RetrofitNetCancel(subsribe);
     }
 
@@ -61,7 +61,7 @@ public class RetrofitPrefixSuffixApi implements IPrefixSuffixApi {
     @Override
     public <T> INetCancel get(Map<String, String> headers, String prefix, String suffix, Map<String, String> params, ICallback<T> callback) {
         Preconditions.checkNotNull(mNetObserver);
-        Disposable subsribe = mNetObserver.single(RetrofitClient.getRetrofitInstance().create(IRetrofitApi.class).get(headers, prefix, suffix, params), callback);
+        Disposable subsribe = mNetObserver.subResponseBody(RetrofitClient.getRetrofitInstance().create(IRetrofitApi.class).get(headers, prefix, suffix, params), callback);
         return new RetrofitNetCancel(subsribe);
     }
 
@@ -76,7 +76,7 @@ public class RetrofitPrefixSuffixApi implements IPrefixSuffixApi {
     @Override
     public <T> INetCancel post(String prefix, String suffix, Map<String, String> params, ICallback<T> callback) {
         Preconditions.checkNotNull(mNetObserver);
-        Disposable subsribe = mNetObserver.single(RetrofitClient.getRetrofitInstance().create(IRetrofitApi.class).post(prefix, suffix, params), callback);
+        Disposable subsribe = mNetObserver.subResponseBody(RetrofitClient.getRetrofitInstance().create(IRetrofitApi.class).post(prefix, suffix, params), callback);
         return new RetrofitNetCancel(subsribe);
     }
 
@@ -92,7 +92,7 @@ public class RetrofitPrefixSuffixApi implements IPrefixSuffixApi {
     @Override
     public <T> INetCancel post(Map<String, String> headers, String prefix, String suffix, Map<String, String> params, ICallback<T> callback) {
         Preconditions.checkNotNull(mNetObserver);
-        Disposable subsribe = mNetObserver.single(RetrofitClient.getRetrofitInstance().create(IRetrofitApi.class).post(prefix, suffix, params, headers), callback);
+        Disposable subsribe = mNetObserver.subResponseBody(RetrofitClient.getRetrofitInstance().create(IRetrofitApi.class).post(prefix, suffix, params, headers), callback);
         return new RetrofitNetCancel(subsribe);
     }
 }

@@ -30,4 +30,16 @@ public interface ICallback<T> {
      * @param error
      */
     void onError(int code, Throwable error);
+
+    /**
+     * 新增OnCompleteListener
+     *
+     * @param listener
+     */
+    void setOnComplteListener(OnCompleteListener listener);
+
+    /**
+     * 删除OnCompleteListener
+     */
+    void removeOnCompleteListener();
 }

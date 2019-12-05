@@ -1,11 +1,9 @@
 package com.orange.lib.mvp.contact.presenter;
 
 import com.orange.lib.constance.IConst;
-import com.orange.lib.mvp.model.net.request.request.NetRequestParams;
-import com.orange.lib.mvp.model.net.request.request.PullRequestParams;
 import com.orange.lib.mvp.contact.IPullContact;
-import com.orange.lib.mvp.model.net.netcancel.INetCancel;
 import com.orange.lib.mvp.model.net.request.IPullData;
+import com.orange.lib.mvp.model.net.request.request.PullParams;
 import com.orange.lib.mvp.view.pull.IPull;
 
 /**
@@ -23,22 +21,12 @@ public class PullPresenter<V extends IPullContact.View> extends NetPresenter<V> 
     }
 
     @Override
-    public <T> void OnRefresh(PullRequestParams<T> pullnetRequest) {
+    public void OnRefresh(PullParams pullnetRequest) {
 
     }
 
     @Override
     public void onLoadmore() {
 
-    }
-
-    @Override
-    public <T> INetCancel request(NetRequestParams<T> netRequestParams) {
-        return super.request(netRequestParams);
-    }
-
-    @Override
-    public INetCancel serial(NetRequestParams... netRequestParams) {
-        return super.serial(netRequestParams);
     }
 }

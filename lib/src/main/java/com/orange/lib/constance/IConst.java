@@ -28,9 +28,18 @@ public interface IConst {
     ///////////////////////////////////////////////////////////////////////////
     // 网络
     ///////////////////////////////////////////////////////////////////////////
+    //请求方式
     int REQUEST_BY_GET = 0x001;
     int REQUEST_BY_POST = 0x002;
 
+    //请求阶段
+    int STATE_NONE = 0x001;//初始状态
+    int STATE_BUILD = 0x002;//创建完成
+    int STATE_START = 0x003;//正在请求
+    int STATE_ERROR = 0x004;//错误
+    int STATE_SUCCESS = 0x005;//成功
+
+    //串行、并行
     int TYPE_PARALLEL = 0x003;
     int TYPE_SERIAL = 0x004;
 

@@ -6,30 +6,30 @@ import static com.orange.lib.constance.IConst.PULL_ITEM_COUNT;
  * @Author: orange
  * @CreateDate: 2019/10/7 10:53
  */
-public class PullRequestParams<T> extends NetRequestParams<T> {
+public class PullParams extends Params {
     protected int mPageIndex;
     protected int mRequestCount;
 
-    public PullRequestParams(PullnetRequestRequestParamsBuilder build) {
+    public PullParams(PullnetRequestRequestParamsBuilder build) {
         super(build);
         mPageIndex = build.mPageIndex;
         mRequestCount = build.mRequestCount;
     }
 
-    public static class PullnetRequestRequestParamsBuilder<T> extends NetRequestParamsBuilder<T> {
+    public static class PullnetRequestRequestParamsBuilder extends Builder {
         protected int mPageIndex;
         protected int mRequestCount = PULL_ITEM_COUNT;
 
-        public static NetRequestParamsBuilder builder() {
+        public static Builder builder() {
             return new PullnetRequestRequestParamsBuilder();
         }
 
-        public NetRequestParamsBuilder index(int pageIndex) {
+        public Builder index(int pageIndex) {
             mPageIndex = pageIndex;
             return this;
         }
 
-        public NetRequestParamsBuilder count(int count) {
+        public Builder count(int count) {
             mRequestCount = count;
             return this;
         }

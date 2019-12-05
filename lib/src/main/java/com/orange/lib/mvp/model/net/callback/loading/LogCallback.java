@@ -13,7 +13,7 @@ import static com.orange.lib.constance.IConst.LINE_SEPARATOR;
  *
  * @param <T>
  */
-public class LogCallback<T> implements ICallback<T> {
+public class LogCallback<T> extends AbsCallback<T> {
     private StringBuilder log = new StringBuilder();
     private String indentation = "\u3000\u3000";//缩进
     private long startTimeMills = 0;
@@ -50,6 +50,7 @@ public class LogCallback<T> implements ICallback<T> {
      */
     @Override
     public void onComplete() {
+        super.onComplete();
         if (IInitConst.sRecordNetLogSwitch) {
             log.append("onComplete: ");
             log.append(LINE_SEPARATOR).append(indentation).append("period: ").append(SystemClock.elapsedRealtime() - startTimeMills).append("ms");

@@ -1,30 +1,18 @@
 package com.orange.thirdparty.retrofit.api;
 
-import com.orange.lib.common.adapterpattern.CallbackAdapter;
-import com.orange.lib.mvp.model.net.callback.loading.ICallback;
 import com.orange.lib.mvp.model.net.netcancel.INetCancel;
 import com.orange.lib.mvp.model.net.request.IRequest;
-import com.orange.lib.mvp.model.net.request.request.NetRequestParams;
-import com.orange.lib.utils.Reflections;
 import com.orange.lib.utils.base.Preconditions;
-import com.orange.thirdparty.retrofit.IRetrofitApi;
-import com.orange.thirdparty.retrofit.RetrofitClient;
 import com.orange.thirdparty.retrofit.RetrofitNetCancel;
+import com.orange.thirdparty.retrofit.RetrofitWrapper;
 import com.orange.thirdparty.rxjava.NetObserver;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import io.reactivex.Observable;
 import okhttp3.ResponseBody;
 
-public class RetrofitRequest implements IRequest {
-    private AtomicBoolean mAlreadyStart;//网络请求开始
-    private CountDownLatch mCompleteCountDown;//网络请求结束
-
+public class RetrofitRequest implements IRequest<RetrofitWrapper> {
     public static RetrofitRequest netInstance() {
         return new RetrofitRequest();
     }
@@ -38,68 +26,33 @@ public class RetrofitRequest implements IRequest {
     ///////////////////////////////////////////////////////////////////////////
     // 网络请求实现
     ///////////////////////////////////////////////////////////////////////////
+
     @Override
-    public <T> INetCancel request(NetRequestParams<T> netRequestParams) {
-        if (Preconditions.isNull(netRequestParams)) return null;
-        NetRequestParams.Method method = netRequestParams.getMethod();
-        if (Preconditions.isNull(method)) method = NetRequestParams.Method.POST;
-        String url = netRequestParams.getUrl();
-        Map<String, String> params = netRequestParams.getParams();
-        Map<String, String> headers = netRequestParams.getHeaders();
-        ICallback<T> netCallback = netRequestParams.getNetCallback();
-        Observable<ResponseBody> observable;
-        if (NetRequestParams.Method.GET == method) {
-            observable = get(url, params, headers, netCallback);
-        } else if (NetRequestParams.Method.POST == method) {
-            observable = post(url, params, headers, netCallback);
-        } else {
-            throw new IllegalArgumentException();
-        }
-        return new RetrofitNetCancel(mObserver.single(observable, netCallback));
+    public INetCancel single(RetrofitWrapper wrapper) {
+        if (Preconditions.isNull(wrapper)) return null;
+        Observable<ResponseBody> observable = wrapper.observable();
+        return new RetrofitNetCancel(mObserver.subResponseBody(observable, wrapper.getCallback()));
     }
 
     @Override
-    public <T extends NetRequestParams<K>, K> INetCancel parallel(T... netRequests) {
-        if (Preconditions.isNulls(netRequests)) return null;
-        mAlreadyStart = new AtomicBoolean(false);
-        int len = netRequests.length;
-        mCompleteCountDown = new CountDownLatch(len);
-        List<INetCancel> netCancels = new ArrayList<>();
-        for (NetRequestParams<K> request : netRequests) {
-            if (Preconditions.isNull(request)) {
-                if (!Preconditions.isNull(mCompleteCountDown))
-                    mCompleteCountDown.countDown();
-                continue;
-            }
-            request.setNetCallback(wrapNetCallback(request.getNetCallback()));
-            netCancels.add(request(request));
-        }
-        return wrapNetCancel(netCancels);
+    public INetCancel parallel(RetrofitWrapper wrapper) {
+        if (Preconditions.isNull(wrapper)) return null;
+        Observable<ResponseBody> observable = wrapper.observable();
+//        return new RetrofitNetCancel(mObserver.parallel(observable, wrapper.getCallback()));
+        return null;
     }
 
     @Override
-    public <T extends NetRequestParams<K>, K> INetCancel serial(T... netRequests) {
-        if (Preconditions.isNulls(netRequests)) return null;
-        mAlreadyStart = new AtomicBoolean(false);
-        int len = netRequests.length;
-        mCompleteCountDown = new CountDownLatch(len);
-        List<INetCancel> netCancels = new ArrayList<>();
-        for (NetRequestParams<K> request : netRequests) {
-            if (Preconditions.isNull(request)) {
-                if (!Preconditions.isNull(mCompleteCountDown))
-                    mCompleteCountDown.countDown();
-                continue;
-            }
-            request.setNetCallback(wrapNetCallback(request.getNetCallback()));
-            netCancels.add(request(request));
-        }
-        return wrapNetCancel(netCancels);
+    public INetCancel serial(RetrofitWrapper wrapper) {
+        if (Preconditions.isNull(wrapper)) return null;
+        return new RetrofitNetCancel(mObserver.subResponseBody(wrapper.serialObservable(), wrapper.getCallback()));
     }
 
     ///////////////////////////////////////////////////////////////////////////
     // 工具方法
     ///////////////////////////////////////////////////////////////////////////
-    private INetCancel wrapNetCancel(List<INetCancel> netCancels) {
+
+    private INetCancel cancelNetList(List<INetCancel> netCancels) {
         if (Preconditions.isEmpty(netCancels)) return null;
         return new INetCancel() {
             @Override
@@ -110,73 +63,5 @@ public class RetrofitRequest implements IRequest {
                 }
             }
         };
-    }
-
-    private <T> ICallback<T> wrapNetCallback(ICallback<T> netCallback) {
-        if (Preconditions.isNull(netCallback)) {
-            if (!Preconditions.isNull(mCompleteCountDown))
-                mCompleteCountDown.countDown();
-            return null;
-        }
-        ICallback<T> callback = new CallbackAdapter(netCallback) {
-            @Override
-            public void onStart() {
-                if (Preconditions.isNull(mAlreadyStart) || mAlreadyStart.compareAndSet(false, true))
-                    super.onStart();
-            }
-
-            @Override
-            public void onComplete() {
-                if (Preconditions.isNull(mCompleteCountDown))
-                    super.onComplete();
-                mCompleteCountDown.countDown();
-                if (0 == mCompleteCountDown.getCount())
-                    super.onComplete();
-            }
-        };
-        Reflections.getGenericSuperclassActualTypeArg(callback.getClass());
-        return callback;
-    }
-
-    /**
-     * loading方式post网络请求
-     *
-     * @param url      全路径
-     * @param params   参数
-     * @param headers  请求头
-     * @param callback 回调
-     */
-    public <T> Observable<ResponseBody> post(String url, Map<String, String> params, Map<String, String> headers, ICallback<T> callback) {
-        Observable<ResponseBody> observable;
-        IRetrofitApi api = RetrofitClient.getRetrofitInstance().create(IRetrofitApi.class);
-        if (Preconditions.isEmpty(headers) && Preconditions.isEmpty(params)) {
-            observable = api.post(url);
-        } else if (Preconditions.isEmpty(headers)) {
-            observable = api.post(url, params);
-        } else {
-            observable = api.post(url, params, headers);
-        }
-        return observable;
-    }
-
-    /**
-     * loading方式get网络请求，带请求头
-     *
-     * @param headers  请求头
-     * @param url      全路径
-     * @param params   参数
-     * @param callback 回调
-     */
-    public <T> Observable<ResponseBody> get(String url, Map<String, String> params, Map<String, String> headers, ICallback<T> callback) {
-        Observable<ResponseBody> observable;
-        IRetrofitApi api = RetrofitClient.getRetrofitInstance().create(IRetrofitApi.class);
-        if (Preconditions.isEmpty(headers) && Preconditions.isEmpty(params)) {
-            observable = api.get(url);
-        } else if (Preconditions.isEmpty(headers)) {
-            observable = api.get(url, params);
-        } else {
-            observable = api.get(url, params, headers);
-        }
-        return observable;
     }
 }
