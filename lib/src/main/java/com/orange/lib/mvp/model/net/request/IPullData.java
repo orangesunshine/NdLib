@@ -1,6 +1,6 @@
 package com.orange.lib.mvp.model.net.request;
 
-import com.orange.lib.mvp.model.net.request.request.PullRequestParams;
+import com.orange.lib.mvp.model.net.request.request.PullParams;
 import com.orange.lib.mvp.view.pull.IPull;
 
 /**
@@ -17,7 +17,7 @@ public interface IPullData {
      */
     void pullDatas(int pageIndex, int count, IPull pull);
 
-    <T> void OnRefresh(PullRequestParams<T> pullnetRequest);
+    void OnRefresh(PullParams pullnetRequest);
 
     void onLoadmore();
 }

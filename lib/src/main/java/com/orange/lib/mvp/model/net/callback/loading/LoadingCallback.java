@@ -3,7 +3,7 @@ package com.orange.lib.mvp.model.net.callback.loading;
 
 import com.orange.lib.mvp.view.loading.ILoading;
 
-public class LoadingCallback<T> implements ICallback<T> {
+public class LoadingCallback<T> extends AbsCallback<T> {
     private ILoading loading;
     private LogCallback mLogNetCallback = new LogCallback();
 
@@ -32,6 +32,7 @@ public class LoadingCallback<T> implements ICallback<T> {
 
     @Override
     public void onComplete() {
+        super.onComplete();
         if (null != mLogNetCallback)
             mLogNetCallback.onComplete();
         if (null != loading)

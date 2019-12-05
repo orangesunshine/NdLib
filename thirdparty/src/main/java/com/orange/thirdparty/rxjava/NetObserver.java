@@ -25,19 +25,15 @@ public class NetObserver {
 
     public <T> Disposable parallel(Observable<ResponseBody> observable1, Observable<ResponseBody> observable2, ICallback<T> netCallback, BiFunction<ResponseBody, ResponseBody, T> biFunction) {
         Type type = Reflections.getGenericActualTypeArg(netCallback.getClass());
-        return zipSubscribe(Observable.zip(observable1, observable2, biFunction), netCallback, type);
+        return subscribe(Observable.zip(observable1, observable2, biFunction), netCallback, type);
     }
 
-    public <T> Disposable single(Observable<ResponseBody> observable, ICallback<T> netCallback) {
+    public <T> Disposable subResponseBody(Observable<ResponseBody> observable, ICallback<T> netCallback) {
         Type type = Reflections.getGenericActualTypeArg(netCallback.getClass());
-        return single(observable, netCallback, type);
+        return subResponseBody(observable, netCallback, type);
     }
 
-    public <T> Disposable single(Observable<ResponseBody> observable, ICallback<T> netCallback, Type type) {
-        return subscribe(observable, netCallback, type);
-    }
-
-    private <T> Disposable subscribe(Observable<ResponseBody> observable, ICallback<T> netCallback, Type type) {
+    private <T> Disposable subResponseBody(Observable<ResponseBody> observable, ICallback<T> netCallback, Type type) {
         return observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(nextConsumer(netCallback, type),
@@ -46,16 +42,16 @@ public class NetObserver {
                         onSubcribe(netCallback));
     }
 
-    private <T> Disposable zipSubscribe(Observable<T> observable, ICallback<T> netCallback, Type type) {
+    private <T> Disposable subscribe(Observable<T> observable, ICallback<T> netCallback, Type type) {
         return observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(zipNextConsumer(netCallback, type),
+                .subscribe(zipNextConsumer(netCallback),
                         errorConsumer(netCallback),
                         completeConsumer(netCallback),
                         onSubcribe(netCallback));
     }
 
-    private <T> Consumer zipNextConsumer(ICallback<T> netCallback, Type type) {
+    private <T> Consumer zipNextConsumer(ICallback<T> netCallback) {
         return new Consumer<BaseResponse<T>>() {
             @Override
             public void accept(BaseResponse<T> result) {

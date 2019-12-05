@@ -63,7 +63,7 @@ dependencies {
     annotationProcessor "com.github.bumptech.glide:compiler:${GLIDE}"
 
     //retrofit
-    implementation "com.squareup.retrofit2:retrofit:${RETROFIT}"
+    api "com.squareup.retrofit2:retrofit:${RETROFIT}"
     implementation "com.squareup.retrofit2:converter-gson:${RETROFIT}"
     implementation "com.squareup.retrofit2:adapter-rxjava2:${RETROFIT}"
     implementation "io.reactivex.rxjava2:rxandroid:${RXANDROID}"

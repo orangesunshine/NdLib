@@ -1,8 +1,9 @@
 package com.orange.lib.common.adapterpattern;
 
+import com.orange.lib.mvp.model.net.callback.loading.AbsCallback;
 import com.orange.lib.mvp.model.net.callback.loading.ICallback;
 
-public class CallbackAdapter<T> implements ICallback<T> {
+public class CallbackAdapter<T> extends AbsCallback<T> {
     private ICallback<T> mNetCallback;
 
     public ICallback<T> getNetCallback() {
@@ -38,6 +39,7 @@ public class CallbackAdapter<T> implements ICallback<T> {
      */
     @Override
     public void onComplete() {
+        super.onComplete();
         if (null != mNetCallback)
             mNetCallback.onComplete();
     }

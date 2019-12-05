@@ -2,7 +2,7 @@ package com.orange.lib.mvp.model.net.request;
 
 import com.orange.lib.common.config.Config;
 import com.orange.lib.constance.IConst;
-import com.orange.lib.mvp.model.net.request.request.PullRequestParams;
+import com.orange.lib.mvp.model.net.request.request.PullParams;
 import com.orange.lib.mvp.model.net.netcancel.INetCancel;
 import com.orange.lib.mvp.view.pull.IPull;
 
@@ -28,7 +28,7 @@ public class SwipeRecyclerViewPullData implements IPullData {
     }
 
     @Override
-    public <T> void OnRefresh(PullRequestParams<T> pullnetRequest) {
+    public void OnRefresh(PullParams pullnetRequest) {
 
     }
 

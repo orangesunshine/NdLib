@@ -2,7 +2,7 @@ package com.orange.lib.mvp.model.net.callback.loading;
 
 import com.orange.lib.mvp.view.page.loading.IPage;
 
-public class PageCallback<T> implements ICallback<T> {
+public class PageCallback<T> extends AbsCallback<T> {
     private IPage mPageStatus;
     private LogCallback mLogNetCallback = new LogCallback();
 
@@ -53,6 +53,7 @@ public class PageCallback<T> implements ICallback<T> {
      */
     @Override
     public void onComplete() {
+        super.onComplete();
         if (null != mLogNetCallback)
             mLogNetCallback.onComplete();
     }
