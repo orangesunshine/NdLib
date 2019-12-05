@@ -16,12 +16,12 @@ import com.orange.thirdparty.rxjava.parse.FlatMapConvert;
 public class LoadingDemoPresenter extends NetPresenter<ILoadingDemoContact.View> implements ILoadingDemoContact.Presenter {
     @Override
     public INetCancel getLoadingData() {
-        return single(RetrofitWrapper.Builder.builder()
-                .params(RetrofitParams.Builder.builder().url("http://localhost:8080/ifc/loading1").build())
+        return serial(RetrofitWrapper.Builder.builder()
+                .params(RetrofitParams.Builder.builder().type(String.class).url("http://localhost:8080/ifc/loading1").build())
                 .params(RetrofitParams.Builder.builder().convert(new FlatMapConvert<String>() {
                     @Override
                     public void convert(BaseResponse<String> response, Params params) {
-                        params.addParams("params", response.data);
+                        params.addParams("count", String.valueOf(response.data.length()));
                     }
                 }).url("http://localhost:8080/ifc/loading2").build())
                 .callback(new LoadingCallback<String>(mView) {

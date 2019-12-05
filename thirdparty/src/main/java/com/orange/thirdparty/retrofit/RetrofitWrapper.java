@@ -1,15 +1,19 @@
 package com.orange.thirdparty.retrofit;
 
+import com.orange.lib.common.reponse.BaseResponse;
 import com.orange.lib.mvp.model.net.callback.loading.ICallback;
 import com.orange.lib.mvp.model.net.request.request.Params;
 import com.orange.lib.mvp.model.net.request.request.Wrapper;
+import com.orange.lib.utils.base.Preconditions;
 import com.orange.lib.utils.text.TextUtils;
+import com.orange.thirdparty.rxjava.parse.ResponseBodyParser;
 import com.orange.utils.common.Collections;
 
 import java.util.LinkedList;
 import java.util.List;
 
 import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
 import okhttp3.ResponseBody;
 
 public class RetrofitWrapper<T> extends Wrapper<T, RetrofitParams> {
@@ -30,10 +34,37 @@ public class RetrofitWrapper<T> extends Wrapper<T, RetrofitParams> {
         List<? extends RetrofitParams> params = getParams();
         if (Collections.isEmpty(params)) return null;
         LinkedList<? extends RetrofitParams> list = new LinkedList<>(params);
-        Observable<ResponseBody> observable = null;
-        RetrofitParams element = list.poll();
-        if (null != element) element.serial(list);
-        return observable;
+        if (Preconditions.isEmpty(list)) return null;
+        try {
+            return serial(list);
+        } catch (IllegalAccessException e) {
+            System.out.println("error: " + e.getMessage());
+        }
+        return null;
+    }
+
+    /**
+     * 串行
+     *
+     * @param <T>
+     * @return
+     */
+    public <T> Observable<ResponseBody> serial(LinkedList<? extends RetrofitParams> paramsList) throws IllegalAccessException {
+        if (Preconditions.isNull(paramsList)) return null;
+        if (paramsList.size() < 2) throw new IllegalAccessException("paramsList.size()<2");
+        RetrofitParams poll = paramsList.poll();
+        return poll.observable().flatMap(new io.reactivex.functions.Function<ResponseBody, ObservableSource<ResponseBody>>() {
+            @Override
+            public ObservableSource<ResponseBody> apply(ResponseBody responseBody) throws Exception {
+                RetrofitParams tempParams = paramsList.peek();
+                ResponseBodyParser responseBodyParser = new ResponseBodyParser(responseBody, poll.getType());
+                BaseResponse response = responseBodyParser.parseResponse();
+                if (null != tempParams)
+                    tempParams.flatMapConvert(response);
+                if (paramsList.size() < 2) return tempParams.observable();
+                return serial(paramsList);
+            }
+        });
     }
 // </editor-fold>
 

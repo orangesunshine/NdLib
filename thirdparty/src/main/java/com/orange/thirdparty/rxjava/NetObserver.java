@@ -5,6 +5,7 @@ import com.orange.lib.constance.IConst;
 import com.orange.lib.mvp.model.net.callback.loading.ICallback;
 import com.orange.lib.utils.Commons;
 import com.orange.lib.utils.Reflections;
+import com.orange.lib.utils.base.Preconditions;
 import com.orange.thirdparty.rxjava.parse.ResponseBodyParser;
 
 import java.lang.reflect.Type;
@@ -34,6 +35,7 @@ public class NetObserver {
     }
 
     private <T> Disposable subResponseBody(Observable<ResponseBody> observable, ICallback<T> netCallback, Type type) {
+        if(Preconditions.isNull(observable))return null;
         return observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(nextConsumer(netCallback, type),
@@ -43,6 +45,7 @@ public class NetObserver {
     }
 
     private <T> Disposable subscribe(Observable<T> observable, ICallback<T> netCallback, Type type) {
+        if(Preconditions.isNull(observable))return null;
         return observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(zipNextConsumer(netCallback),

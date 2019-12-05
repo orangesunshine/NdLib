@@ -4,14 +4,11 @@ import com.orange.lib.common.reponse.BaseResponse;
 import com.orange.lib.mvp.model.net.request.request.Params;
 import com.orange.lib.utils.base.Preconditions;
 import com.orange.thirdparty.rxjava.parse.FlatMapConvert;
-import com.orange.thirdparty.rxjava.parse.ResponseBodyParser;
 
 import java.lang.reflect.Type;
-import java.util.LinkedList;
 import java.util.Map;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
 import okhttp3.ResponseBody;
 
 public class RetrofitParams extends Params {
@@ -41,27 +38,6 @@ public class RetrofitParams extends Params {
             throw new IllegalArgumentException();
         }
         return observable;
-    }
-
-    /**
-     * 串行
-     *
-     * @param params
-     * @param <T>
-     * @return
-     */
-    public <T> Observable<ResponseBody> serial(LinkedList<? extends RetrofitParams> params) {
-        return observable().flatMap(new io.reactivex.functions.Function<ResponseBody, ObservableSource<ResponseBody>>() {
-            @Override
-            public ObservableSource<ResponseBody> apply(ResponseBody responseBody) throws Exception {
-                RetrofitParams tempParams = params.poll();
-                ResponseBodyParser responseBodyParser = new ResponseBodyParser(responseBody, tempParams.getType());
-                BaseResponse response = responseBodyParser.parseResponse();
-                if (null != tempParams)
-                    tempParams.flatMapConvert(response);
-                return tempParams.serial(params);
-            }
-        });
     }
 
     public void flatMapConvert(BaseResponse response) {

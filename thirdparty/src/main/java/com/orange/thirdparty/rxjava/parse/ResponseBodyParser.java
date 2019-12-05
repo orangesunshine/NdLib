@@ -39,6 +39,8 @@ public class ResponseBodyParser {
             String body;
             if (null == mResponseBody || TextUtils.isEmpty(body = mResponseBody.string()))
                 return new BaseResponse<>("body is empty!");
+            Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();
+            int len = actualTypeArguments.length;
             result = new GsonBuilder().create().fromJson(body, parameterizedType);
         } catch (Exception e) {
             if (null == result) result = new BaseResponse<>();
