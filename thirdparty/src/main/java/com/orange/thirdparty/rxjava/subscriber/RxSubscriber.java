@@ -1,4 +1,4 @@
-package com.orange.thirdparty.rxjava;
+package com.orange.thirdparty.rxjava.subscriber;
 
 import com.orange.lib.common.reponse.BaseResponse;
 import com.orange.lib.constance.IConst;
@@ -18,9 +18,16 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.ResponseBody;
 
-public class RetrofitObserver {
-    public static RetrofitObserver newInstance() {
-        return new RetrofitObserver();
+public class RxSubscriber {
+    private static RxSubscriber sInstance;
+
+    public static RxSubscriber getInstance() {
+        if (null == sInstance)
+            sInstance = new RxSubscriber();
+        return sInstance;
+    }
+
+    private RxSubscriber() {
     }
 
     public <T> Disposable subscribe(Observable<ResponseBody> observable, ICallback<T> netCallback) {

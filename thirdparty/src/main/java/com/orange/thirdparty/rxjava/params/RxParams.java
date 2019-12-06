@@ -1,19 +1,70 @@
-package com.orange.thirdparty.retrofit.params;
+package com.orange.thirdparty.rxjava.params;
 
 import com.orange.lib.mvp.model.net.request.request.Params;
 import com.orange.lib.utils.base.Preconditions;
-import com.orange.thirdparty.retrofit.generate.IGenerate;
-import com.orange.thirdparty.retrofit.api.IRetrofitApi;
 import com.orange.thirdparty.retrofit.RetrofitClient;
+import com.orange.thirdparty.retrofit.api.IRetrofitApi;
 
+import java.lang.reflect.Type;
 import java.util.Map;
 
 import io.reactivex.Observable;
 import okhttp3.ResponseBody;
 
-public class RetrofitParams extends Params implements IGenerate<ResponseBody> {
+public class RxParams extends Params {
+    public RxParams(Builder builder) {
+        super(builder);
+    }
 
-    @Override
+    public static class Builder extends Params.Builder {
+        public static Builder builder() {
+            return new Builder();
+        }
+
+        @Override
+        public Builder url(String url) {
+            mUrl = url;
+            return this;
+        }
+
+        @Override
+        public Builder params(Map<String, String> params) {
+            if (Preconditions.isEmpty(params)) return this;
+            mParams.clear();
+            mParams.putAll(params);
+            return this;
+        }
+
+        @Override
+        public Builder addParams(String key, String value) {
+            mParams.put(key, value);
+            return this;
+        }
+
+        @Override
+        public Builder headers(Map<String, String> headers) {
+            mHeaders = headers;
+            return this;
+        }
+
+        @Override
+        public Builder method(Method method) {
+            mMethod = method;
+            return this;
+        }
+
+        @Override
+        public Builder type(Type type) {
+            mType = type;
+            return this;
+        }
+
+        @Override
+        public RxParams build() {
+            return new RxParams(this);
+        }
+    }
+
     public Observable<ResponseBody> generateObservable() {
         Params.Method method = getMethod();
         if (Preconditions.isNull(method)) method = Params.Method.POST;

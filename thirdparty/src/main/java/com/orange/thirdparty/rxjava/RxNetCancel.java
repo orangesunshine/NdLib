@@ -1,13 +1,13 @@
-package com.orange.thirdparty.retrofit;
+package com.orange.thirdparty.rxjava;
 
 import com.orange.lib.mvp.model.net.netcancel.INetCancel;
 
 import io.reactivex.disposables.Disposable;
 
-public class RetrofitNetCancel implements INetCancel {
+public class RxNetCancel implements INetCancel {
     private Disposable mDisposable;
 
-    public RetrofitNetCancel(Disposable disposable) {
+    public RxNetCancel(Disposable disposable) {
         mDisposable = disposable;
     }
 

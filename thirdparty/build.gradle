@@ -65,7 +65,7 @@ dependencies {
     //retrofit
     api "com.squareup.retrofit2:retrofit:${RETROFIT}"
     implementation "com.squareup.retrofit2:converter-gson:${RETROFIT}"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:${RETROFIT}"
+    api "com.squareup.retrofit2:adapter-rxjava2:${RETROFIT}"
     implementation "io.reactivex.rxjava2:rxandroid:${RXANDROID}"
     implementation "com.squareup.okhttp3:logging-interceptor:${LOGGINGINTERCEPTOR}"
     implementation 'org.aspectj:aspectjrt:1.8.9'

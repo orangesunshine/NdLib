@@ -1,4 +1,4 @@
-package com.orange.thirdparty.rxjava;
+package com.orange.thirdparty.rxjava.subscriber;
 
 import android.text.TextUtils;
 
@@ -24,13 +24,13 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.ResponseBody;
 
-public class PullResponseBodyObserver {
+public class RxPullSubscriber {
     private boolean mNoData = false;
     private boolean mEmpty = true;
     private Gson gson = new Gson();
 
-    public static PullResponseBodyObserver newInstance() {
-        return new PullResponseBodyObserver();
+    public static RxPullSubscriber newInstance() {
+        return new RxPullSubscriber();
     }
 
     public <T> Disposable subsribe(Observable<ResponseBody> observable, Type type, IPullNetCallback<T> netCallback) {

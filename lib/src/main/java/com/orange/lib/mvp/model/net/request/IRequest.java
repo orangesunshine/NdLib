@@ -1,7 +1,8 @@
 package com.orange.lib.mvp.model.net.request;
 
 import com.orange.lib.mvp.model.net.netcancel.INetCancel;
-import com.orange.lib.mvp.model.net.request.request.Wrapper;
+
+import java.sql.Wrapper;
 
 public interface IRequest<N extends Wrapper> {
     /**

@@ -1,7 +1,5 @@
 package com.orange.lib.mvp.contact;
 
-import com.orange.lib.mvp.model.net.request.IRequest;
-import com.orange.lib.mvp.model.net.request.request.Wrapper;
 import com.orange.lib.mvp.view.page.loading.IPage;
 
 /**
@@ -12,6 +10,6 @@ public interface INetContact {
     interface View extends IContact.View, IPage {
     }
 
-    interface Presenter<V extends View,N extends Wrapper> extends IContact.Presenter<V>, IRequest<N> {
+    interface Presenter<V extends View> extends IContact.Presenter<V>{
     }
 }

@@ -1,4 +1,4 @@
-package com.orange.thirdparty.retrofit.params;
+package com.orange.thirdparty.rxjava.params;
 
 import com.orange.lib.common.reponse.BaseResponse;
 import com.orange.thirdparty.rxjava.parse.FlatMapConvert;
@@ -6,10 +6,11 @@ import com.orange.thirdparty.rxjava.parse.FlatMapConvert;
 import java.lang.reflect.Type;
 import java.util.Map;
 
-public class SerialRetrofitParams extends RetrofitParams {
+public class SerialRxParams extends RxParams {
     protected FlatMapConvert mFlatMapConvert;
 
-    public SerialRetrofitParams(Builder builder) {
+    public SerialRxParams(Builder builder) {
+        super(builder);
         mFlatMapConvert = builder.mFlatMapConvert;
     }
 
@@ -24,7 +25,7 @@ public class SerialRetrofitParams extends RetrofitParams {
     }
 
 
-    public static class Builder extends RetrofitParams.Builder {
+    public static class Builder extends RxParams.Builder {
         protected FlatMapConvert mFlatMapConvert;
 
         public Builder convert(FlatMapConvert convert) {
@@ -62,8 +63,8 @@ public class SerialRetrofitParams extends RetrofitParams {
         }
 
         @Override
-        public SerialRetrofitParams build() {
-            return new SerialRetrofitParams(this);
+        public SerialRxParams build() {
+            return new SerialRxParams(this);
         }
     }
 }
