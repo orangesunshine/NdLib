@@ -5,7 +5,7 @@ import androidx.core.util.Preconditions;
 import com.orange.lib.mvp.model.net.netcancel.INetCancel;
 import com.orange.lib.mvp.model.net.callback.pull.IPullNetCallback;
 import com.orange.lib.mvp.model.net.api.pull.IPullApi;
-import com.orange.thirdparty.retrofit.IRetrofitApi;
+import com.orange.thirdparty.retrofit.api.IRetrofitApi;
 import com.orange.thirdparty.retrofit.RetrofitClient;
 import com.orange.thirdparty.retrofit.RetrofitNetCancel;
 import com.orange.thirdparty.rxjava.PullResponseBodyObserver;

@@ -1,29 +1,20 @@
-package com.orange.thirdparty.retrofit;
+package com.orange.thirdparty.retrofit.params;
 
-import com.orange.lib.common.reponse.BaseResponse;
 import com.orange.lib.mvp.model.net.request.request.Params;
 import com.orange.lib.utils.base.Preconditions;
-import com.orange.thirdparty.rxjava.parse.FlatMapConvert;
+import com.orange.thirdparty.retrofit.generate.IGenerate;
+import com.orange.thirdparty.retrofit.api.IRetrofitApi;
+import com.orange.thirdparty.retrofit.RetrofitClient;
 
-import java.lang.reflect.Type;
 import java.util.Map;
 
 import io.reactivex.Observable;
 import okhttp3.ResponseBody;
 
-public class RetrofitParams extends Params {
-    public RetrofitParams(Builder builder) {
-        super(builder);
-        mFlatMapConvert = builder.mFlatMapConvert;
-    }
+public class RetrofitParams extends Params implements IGenerate<ResponseBody> {
 
-    private FlatMapConvert mFlatMapConvert;
-
-    public void setFlatMapConvert(FlatMapConvert flatMapConvert) {
-        mFlatMapConvert = flatMapConvert;
-    }
-
-    public Observable<ResponseBody> observable() {
+    @Override
+    public Observable<ResponseBody> generateObservable() {
         Params.Method method = getMethod();
         if (Preconditions.isNull(method)) method = Params.Method.POST;
         String url = getUrl();
@@ -38,12 +29,6 @@ public class RetrofitParams extends Params {
             throw new IllegalArgumentException();
         }
         return observable;
-    }
-
-    public void flatMapConvert(BaseResponse response) {
-        if (null != mFlatMapConvert) {
-            mFlatMapConvert.convert(response, this);
-        }
     }
 
     /**
@@ -84,48 +69,5 @@ public class RetrofitParams extends Params {
             observable = api.get(url, params, headers);
         }
         return observable;
-    }
-
-    public static class Builder extends Params.Builder {
-        private FlatMapConvert mFlatMapConvert;
-
-        public Builder convert(FlatMapConvert convert) {
-            mFlatMapConvert = convert;
-            return this;
-        }
-
-        public static Builder builder() {
-            return new Builder();
-        }
-
-        public Builder url(String url) {
-            mUrl = url;
-            return this;
-        }
-
-        public Builder params(Map<String, String> params) {
-            mParams = params;
-            return this;
-        }
-
-        public Builder headers(Map<String, String> headers) {
-            mHeaders = headers;
-            return this;
-        }
-
-        public Builder method(Method method) {
-            mMethod = method;
-            return this;
-        }
-
-        public Builder type(Type type) {
-            mType = type;
-            return this;
-        }
-
-        @Override
-        public RetrofitParams build() {
-            return new RetrofitParams(this);
-        }
     }
 }

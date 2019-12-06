@@ -1,4 +1,4 @@
-package com.orange.thirdparty.retrofit;
+package com.orange.thirdparty.retrofit.api;
 
 import java.util.Map;
 

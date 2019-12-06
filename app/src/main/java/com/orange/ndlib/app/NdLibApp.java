@@ -11,6 +11,6 @@ public class NdLibApp extends BaseApplication {
     @Override
     public void init(Context context) {
         Utils.init(context);
-        Config.getInstance().configNet(RetrofitRequest.netInstance());
+        Config.getInstance().configNet(RetrofitRequest.newInstance());
     }
 }

@@ -1,6 +1,7 @@
 package com.orange.lib.mvp.contact;
 
 import com.orange.lib.mvp.model.net.request.IPullData;
+import com.orange.lib.mvp.model.net.request.request.Wrapper;
 import com.orange.lib.mvp.view.pull.IPull;
 
 /**
@@ -11,6 +12,6 @@ public interface IPullContact {
     interface View extends INetContact.View, IPull {
     }
 
-    interface Presenter<V extends IPullContact.View> extends INetContact.Presenter<V>, IPullData {
+    interface Presenter<V extends IPullContact.View, N extends Wrapper> extends INetContact.Presenter<V, N>, IPullData {
     }
 }

@@ -14,61 +14,28 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
-import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.ResponseBody;
 
-public class NetObserver {
-    public static NetObserver newInstance() {
-        return new NetObserver();
+public class RetrofitObserver {
+    public static RetrofitObserver newInstance() {
+        return new RetrofitObserver();
     }
 
-    public <T> Disposable parallel(Observable<ResponseBody> observable1, Observable<ResponseBody> observable2, ICallback<T> netCallback, BiFunction<ResponseBody, ResponseBody, T> biFunction) {
+    public <T> Disposable subscribe(Observable<ResponseBody> observable, ICallback<T> netCallback) {
         Type type = Reflections.getGenericActualTypeArg(netCallback.getClass());
-        return subscribe(Observable.zip(observable1, observable2, biFunction), netCallback, type);
+        return subscribe(observable, netCallback, type);
     }
 
-    public <T> Disposable subResponseBody(Observable<ResponseBody> observable, ICallback<T> netCallback) {
-        Type type = Reflections.getGenericActualTypeArg(netCallback.getClass());
-        return subResponseBody(observable, netCallback, type);
-    }
-
-    private <T> Disposable subResponseBody(Observable<ResponseBody> observable, ICallback<T> netCallback, Type type) {
-        if(Preconditions.isNull(observable))return null;
+    private <T> Disposable subscribe(Observable<ResponseBody> observable, ICallback<T> netCallback, Type type) {
+        if (Preconditions.isNull(observable)) return null;
         return observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(nextConsumer(netCallback, type),
                         errorConsumer(netCallback),
                         completeConsumer(netCallback),
                         onSubcribe(netCallback));
-    }
-
-    private <T> Disposable subscribe(Observable<T> observable, ICallback<T> netCallback, Type type) {
-        if(Preconditions.isNull(observable))return null;
-        return observable.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(zipNextConsumer(netCallback),
-                        errorConsumer(netCallback),
-                        completeConsumer(netCallback),
-                        onSubcribe(netCallback));
-    }
-
-    private <T> Consumer zipNextConsumer(ICallback<T> netCallback) {
-        return new Consumer<BaseResponse<T>>() {
-            @Override
-            public void accept(BaseResponse<T> result) {
-                if (null == result) return;
-                if (null != netCallback) {
-                    int code = result.code;
-                    if (Commons.checkCodeSuccess(code)) {
-                        netCallback.onSuccess(result.data);
-                    } else {
-                        netCallback.onError(code, new Throwable(result.msg));
-                    }
-                }
-            }
-        };
     }
 
     private <T> Consumer nextConsumer(ICallback<T> netCallback, Type type) {

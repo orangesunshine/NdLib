@@ -2,25 +2,18 @@ package com.orange.lib.mvp.model.net.request.request;
 
 import com.orange.lib.constance.IConst;
 import com.orange.lib.mvp.model.net.callback.loading.ICallback;
-import com.orange.lib.utils.text.TextUtils;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 网络请求类
- *
- * @param <T>
  */
-public class Wrapper<T, N extends Params> {
-    protected List<N> mParams = new ArrayList<>();
+public class Wrapper<N extends Params> {
+    protected N mParams;
     protected int mState = IConst.STATE_NONE;
-    protected ICallback<T> mCallback;
+    protected ICallback mCallback;
 
-    protected Wrapper(Builder builder) {
+    protected Wrapper(Builder<N> builder) {
         mState = IConst.STATE_BUILD;
-        mParams.clear();
-        mParams.addAll(builder.mParams);
+        mParams = builder.mParams;
         mCallback = builder.mCallback;
     }
 
@@ -32,7 +25,7 @@ public class Wrapper<T, N extends Params> {
         mState = state;
     }
 
-    public List<N> getParams() {
+    public N getParams() {
         return mParams;
     }
 
@@ -40,13 +33,13 @@ public class Wrapper<T, N extends Params> {
         return mState;
     }
 
-    public ICallback<T> getCallback() {
+    public ICallback getCallback() {
         return mCallback;
     }
 
-    public static class Builder<T> {
-        protected List<Params> mParams = new ArrayList<>();
-        protected ICallback<T> mCallback;
+    public static class Builder<N extends Params> {
+        protected N mParams;
+        protected ICallback mCallback;
 
         public static Builder builder() {
             return new Builder();
@@ -56,39 +49,22 @@ public class Wrapper<T, N extends Params> {
             return new Wrapper(this);
         }
 
-        public Builder<T> params(Params params) {
+        public Builder params(N params) {
             if (null == params) return this;
-            deduplication(params);
-            mParams.add(params);
+            mParams = params;
             return this;
         }
 
-        public Builder<T> callback(ICallback<T> callback) {
+        public Builder callback(ICallback callback) {
             mCallback = callback;
             return this;
         }
 
-        protected void deduplication(Params params) {
-            if (null == params) return;
-            String url = params.getUrl();
-            if (TextUtils.isEmpty(url)) return;
-            for (Params param : mParams) {
-                if (null == param) {
-                    mParams.remove(param);
-                    continue;
-                }
-                if (url.equals(param.getUrl())) {
-                    mParams.remove(param);
-                    break;
-                }
-            }
-        }
-
-        public List<Params> getParams() {
+        public N getParams() {
             return mParams;
         }
 
-        public ICallback<T> getCallback() {
+        public ICallback getCallback() {
             return mCallback;
         }
     }

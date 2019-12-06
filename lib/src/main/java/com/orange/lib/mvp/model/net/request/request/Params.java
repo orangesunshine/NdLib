@@ -3,14 +3,18 @@ package com.orange.lib.mvp.model.net.request.request;
 import com.orange.lib.utils.base.Preconditions;
 
 import java.lang.reflect.Type;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Params {
-    private String mUrl;//网络请求地址
-    private Map<String, String> mParams;//请求参数
-    private Map<String, String> mHeaders;//请求头
-    private Method mMethod;//请求方式
-    private Type mType;//解析泛型
+    protected String mUrl;//网络请求地址
+    protected Map<String, String> mParams = new HashMap<>();//请求参数
+    protected Map<String, String> mHeaders = new HashMap<>();//请求头
+    protected Method mMethod = Method.POST;//请求方式
+    protected Type mType;//解析泛型
+
+    protected Params() {
+    }
 
     protected Params(Builder builder) {
         mUrl = builder.mUrl;
@@ -63,8 +67,8 @@ public class Params {
 
     public static class Builder {
         protected String mUrl;//网络请求地址
-        protected Map<String, String> mParams;//请求参数
-        protected Map<String, String> mHeaders;//请求头
+        protected Map<String, String> mParams = new HashMap<>();//请求参数
+        protected Map<String, String> mHeaders = new HashMap<>();//请求头
         protected Method mMethod;//请求方式
         protected Type mType;//解析泛型
 
@@ -78,7 +82,14 @@ public class Params {
         }
 
         public Builder params(Map<String, String> params) {
-            mParams = params;
+            if (Preconditions.isEmpty(params)) return this;
+            mParams.clear();
+            mParams.putAll(params);
+            return this;
+        }
+
+        public Builder addParams(String key, String value) {
+            mParams.put(key, value);
             return this;
         }
 

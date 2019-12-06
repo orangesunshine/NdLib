@@ -123,4 +123,15 @@ public class Preconditions {
         oldList.removeAll(Collections.singleton(null));
         return (List<T>) oldList;
     }
+
+    /**
+     * 判断list是不是空
+     *
+     * @param condition
+     * @return
+     */
+    public static boolean condition(boolean condition) {
+        if (condition) Logs.c(LOG_PREFIX + "map is empty");
+        return condition;
+    }
 }

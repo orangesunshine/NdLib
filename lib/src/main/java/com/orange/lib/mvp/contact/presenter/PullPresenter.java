@@ -4,13 +4,14 @@ import com.orange.lib.constance.IConst;
 import com.orange.lib.mvp.contact.IPullContact;
 import com.orange.lib.mvp.model.net.request.IPullData;
 import com.orange.lib.mvp.model.net.request.request.PullParams;
+import com.orange.lib.mvp.model.net.request.request.Wrapper;
 import com.orange.lib.mvp.view.pull.IPull;
 
 /**
  * @Author: orange
  * @CreateDate: 2019/9/27 16:58
  */
-public class PullPresenter<V extends IPullContact.View> extends NetPresenter<V> implements IPullData {
+public class PullPresenter<V extends IPullContact.View, N extends Wrapper> extends NetPresenter<V, N> implements IPullData {
     public void pullDatas(int pageIndex, IPull pull) {
         pullDatas(pageIndex, IConst.PULL_ITEM_COUNT, pull);
     }
