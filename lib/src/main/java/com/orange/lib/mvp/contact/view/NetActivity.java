@@ -1,12 +1,17 @@
 package com.orange.lib.mvp.contact.view;
 
+import android.view.View;
+
 import com.orange.lib.R;
-import com.orange.lib.activity.retry.RetryListener;
+import com.orange.lib.activity.retry.Retry;
+import com.orange.lib.common.holder.IHolder;
+import com.orange.lib.mvp.contact.INetContact;
 import com.orange.lib.mvp.view.page.loading.IPage;
 import com.orange.lib.mvp.view.page.loading.LoadingDialogPage;
-import com.orange.lib.mvp.contact.INetContact;
 import com.orange.lib.utils.base.Preconditions;
 import com.orange.lib.utils.view.Views;
+
+import java.lang.reflect.Method;
 
 public abstract class NetActivity<P extends INetContact.Presenter> extends PresenterActivity<P> implements IPage {
     protected IPage mPage;//空、错误、正常页面
@@ -16,7 +21,37 @@ public abstract class NetActivity<P extends INetContact.Presenter> extends Prese
         super.init();
 
         //网络错误点击刷新
-        mHolder.addOnItemChildClick(new RetryListener(getClass()), R.id.id_retry_orange);
+        mHolder.addOnItemChildClick(new IHolder.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(View v) {
+                Class aClass = NetActivity.this.getClass();
+                while (null != aClass) {
+                    boolean stop = false;
+                    String name = aClass.getName();
+                    if (name.startsWith("java.") || name.startsWith("javax.") || name.startsWith("android.")) {
+                        break;
+                    }
+                    Method[] declaredMethods = aClass.getDeclaredMethods();
+                    if (null != declaredMethods && declaredMethods.length > 0) {
+                        for (Method declaredMethod : declaredMethods) {
+                            if (null != declaredMethod) {
+                                Retry retry = declaredMethod.getAnnotation(Retry.class);
+                                if (null != retry) {
+                                    try {
+                                        declaredMethod.invoke(mActivity);
+                                    } catch (Exception e) {
+                                    }
+                                    stop = true;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    if (stop) break;
+                    aClass = aClass.getSuperclass();
+                }
+            }
+        }, R.id.id_retry_orange);
         mPage = getPage();
         if (null == mPage)
             mPage = new LoadingDialogPage(mLoading, mHolder);

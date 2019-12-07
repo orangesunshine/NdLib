@@ -54,9 +54,9 @@ public class RxParams extends Params {
         }
 
         @Override
-        public Builder type(Type type) {
+        public RxParams build(Type type) {
             mType = type;
-            return this;
+            return new RxParams(this);
         }
 
         @Override

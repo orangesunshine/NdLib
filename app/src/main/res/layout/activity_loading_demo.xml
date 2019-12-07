@@ -5,46 +5,88 @@
     android:orientation="vertical">
 
     <ViewStub
-        android:id="@+id/stub_actbar_orange"
+        android:id="@+id/id_stub_actbar_orange"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_actbar"
         android:inflatedId="@+id/id_actbar_orange" />
 
-    <Button
-        android:id="@+id/btn_show_loading"
+    <LinearLayout
+        android:id="@+id/id_content_orange"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="show_loading" />
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btn_hide_loading"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="hide_loading" />
+        <Button
+            android:id="@+id/btn_show_loading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="show_loading" />
 
-    <Button
-        android:id="@+id/btn_data"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="data" />
+        <Button
+            android:id="@+id/btn_show_dialog_loading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="show_dialog_loading" />
 
-    <Button
-        android:id="@+id/btn_multi"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="multi" />
+        <Button
+            android:id="@+id/btn_hide_loading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="hide_loading" />
 
-    <TextView
-        android:id="@+id/tv_content"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:gravity="center" />
+        <Button
+            android:id="@+id/btn_show_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="show_content" />
 
-    <TextView
-        android:id="@+id/tv_multi"
+        <Button
+            android:id="@+id/btn_show_error"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="show_error" />
+
+        <Button
+            android:id="@+id/btn_serial"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="serial" />
+
+        <Button
+            android:id="@+id/btn_parallel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="parallel" />
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/tv_multi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center" />
+    </LinearLayout>
+
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:gravity="center" />
+        android:layout_height="match_parent">
+
+        <ViewStub
+            android:id="@+id/id_stub_empty_orange"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inflatedId="@+id/id_empty_orange" />
+
+        <ViewStub
+            android:id="@+id/id_stub_error_orange"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inflatedId="@+id/id_error_orange" />
+    </FrameLayout>
 </LinearLayout>

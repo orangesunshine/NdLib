@@ -19,7 +19,7 @@ public class SwipeRecyclerViewPullData implements IPullData {
     private int mPageIndex;
 
     public void pullDatas(int pageIndex, IPull pull) {
-        pullDatas(pageIndex, IConst.PULL_ITEM_COUNT, pull);
+        pullDatas(pageIndex, IConst.PAGE_SIZE, pull);
     }
 
     @Override

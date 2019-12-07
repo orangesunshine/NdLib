@@ -22,7 +22,7 @@ public interface IConst {
     ///////////////////////////////////////////////////////////////////////////
     //duration
     int DURATION_TOAST_DEFAULT = Toast.LENGTH_SHORT;
-    int CUSTOM_DURATION_TOAST_DEFAULT = 3000;
+    int CUSTOM_DURATION_TOAST_DEFAULT = 5000;
     int CUSTOM_DURATION_TOAST_LONG = 5000;
 
     ///////////////////////////////////////////////////////////////////////////
@@ -44,7 +44,7 @@ public interface IConst {
     int CODE_ERROR = -1;
 
     //pull每次请求数据条数
-    int PULL_ITEM_COUNT = 10;
+    int PAGE_SIZE = 10;
 
     //刷新|加载
     int TYPE_REFRESH = 0x001;

@@ -12,7 +12,7 @@ import com.orange.lib.mvp.view.pull.IPull;
  */
 public class PullPresenter<V extends IPullContact.View> extends NetPresenter<V> implements IPullData {
     public void pullDatas(int pageIndex, IPull pull) {
-        pullDatas(pageIndex, IConst.PULL_ITEM_COUNT, pull);
+        pullDatas(pageIndex, IConst.PAGE_SIZE, pull);
     }
 
     @Override

@@ -1,9 +1,7 @@
 package com.orange.lib.mvp.model.net.netcancel;
 
-import com.orange.lib.utils.base.Preconditions;
-
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Author: orange
@@ -11,7 +9,7 @@ import java.util.Map;
  */
 public class NetCancelManager {
     private static NetCancelManager mInstance;
-    private Map<String, INetCancel> netCancelMap = new HashMap<>();//网络请求url、取消操作映射表
+    private List<INetCancel> mNetCancels = new ArrayList<>();//网络请求url、取消操作映射表
 
     private NetCancelManager() {
     }
@@ -31,26 +29,13 @@ public class NetCancelManager {
         return mInstance;
     }
 
-    /**
-     * 通知取消
-     *
-     * @param url
-     */
-    public void notifyNetCancel(String url) {
-        if (Preconditions.isEmpty(netCancelMap)) return;
-        if (netCancelMap.containsKey(url)) {
-            INetCancel iNetCancel = netCancelMap.get(url);
-            if (!Preconditions.isNull(iNetCancel)) {
-                iNetCancel.cancel();
-                netCancelMap.remove(url);
-            }
-        }
+    public void registerNetCancel(INetCancel netCancel) {
+        if (null != netCancel && !mNetCancels.contains(netCancel))
+            mNetCancels.add(netCancel);
     }
 
-    public void notifyNetCancel(INetCancel netCancel) {
-
-    }
-
-    private void removeNetCancel(INetCancel netCancel) {
+    public void unregisterNetCancel(INetCancel netCancel) {
+        if (null != netCancel && mNetCancels.contains(netCancel))
+            mNetCancels.remove(netCancel);
     }
 }

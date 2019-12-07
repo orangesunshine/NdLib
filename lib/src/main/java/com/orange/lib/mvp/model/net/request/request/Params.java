@@ -103,9 +103,9 @@ public class Params {
             return this;
         }
 
-        public Builder type(Type type) {
+        public Params build(Type type) {
             mType = type;
-            return this;
+            return new Params(this);
         }
 
         public Params build() {

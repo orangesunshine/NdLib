@@ -10,6 +10,6 @@ public interface INetContact {
     interface View extends IContact.View, IPage {
     }
 
-    interface Presenter<V extends View> extends IContact.Presenter<V>{
+    interface Presenter<V extends View> extends IContact.Presenter<V> {
     }
 }

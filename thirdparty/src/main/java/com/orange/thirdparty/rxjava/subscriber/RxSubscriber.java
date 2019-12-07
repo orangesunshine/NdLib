@@ -6,7 +6,7 @@ import com.orange.lib.mvp.model.net.callback.loading.ICallback;
 import com.orange.lib.utils.Commons;
 import com.orange.lib.utils.Reflections;
 import com.orange.lib.utils.base.Preconditions;
-import com.orange.thirdparty.rxjava.parse.ResponseBodyParser;
+import com.orange.thirdparty.rxjava.parse.RxParser;
 
 import java.lang.reflect.Type;
 
@@ -45,13 +45,23 @@ public class RxSubscriber {
                         onSubcribe(netCallback));
     }
 
+    public <T> Disposable zipSubscribe(Observable<T> observable, ICallback<T> netCallback) {
+        if (Preconditions.isNull(observable)) return null;
+        return observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(zipNextConsumer(netCallback),
+                        errorConsumer(netCallback),
+                        completeConsumer(netCallback),
+                        onSubcribe(netCallback));
+    }
+
     private <T> Consumer nextConsumer(ICallback<T> netCallback, Type type) {
         return new Consumer<ResponseBody>() {
             @Override
             public void accept(ResponseBody responseBody) {
-                BaseResponse<T> result = new ResponseBodyParser(responseBody, type).parseResponse();
+                BaseResponse<T> result = RxParser.parse(responseBody, type);
                 if (null == result)
-                    result = new ResponseBodyParser(responseBody, netCallback).parseResponse();
+                    result = RxParser.parse(responseBody, netCallback);
                 if (null == result) return;
                 if (null != netCallback) {
                     int code = result.code;
@@ -61,6 +71,16 @@ public class RxSubscriber {
                         netCallback.onError(code, new Throwable(result.msg));
                     }
                 }
+            }
+        };
+    }
+
+    private <T> Consumer zipNextConsumer(ICallback<T> netCallback) {
+        return new Consumer<T>() {
+            @Override
+            public void accept(T response) {
+                if (null != netCallback)
+                    netCallback.onSuccess(response);
             }
         };
     }

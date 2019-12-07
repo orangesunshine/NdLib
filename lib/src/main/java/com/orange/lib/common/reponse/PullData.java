@@ -2,6 +2,7 @@ package com.orange.lib.common.reponse;
 
 
 import com.orange.lib.constance.IConst;
+import com.orange.lib.utils.base.Preconditions;
 
 import java.util.List;
 
@@ -22,8 +23,8 @@ public interface PullData<ITEM> {
     default boolean noMoreData() {
         boolean noMoreData = true;
         List<ITEM> list = getList();
-        if (null == list) return noMoreData;
-        if (list.size() > IConst.PULL_ITEM_COUNT)
+        if (Preconditions.isEmpty(list)) return noMoreData;
+        if (list.size() > IConst.PAGE_SIZE)
             noMoreData = false;
         return noMoreData;
     }
@@ -34,6 +35,6 @@ public interface PullData<ITEM> {
      * @return
      */
     default boolean empty() {
-        return null == getList() || getList().isEmpty();
+        return Preconditions.isEmpty(getList());
     }
 }

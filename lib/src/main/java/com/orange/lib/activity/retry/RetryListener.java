@@ -11,20 +11,21 @@ import java.lang.reflect.Method;
  * @CreateDate: 2019/11/28 11:50
  */
 public class RetryListener implements IHolder.OnItemChildClickListener {
-    Class clazz;
+    Class mClazz;
 
     public RetryListener(Class clazz) {
-        this.clazz = clazz;
+        this.mClazz = clazz;
     }
 
     @Override
     public void onItemChildClick(View v) {
-        while (null != clazz) {
-            String name = clazz.getName();
+        while (null != mClazz) {
+            boolean stop = false;
+            String name = mClazz.getName();
             if (name.startsWith("java.") || name.startsWith("javax.") || name.startsWith("android.")) {
                 break;
             }
-            Method[] declaredMethods = clazz.getDeclaredMethods();
+            Method[] declaredMethods = mClazz.getDeclaredMethods();
             if (null != declaredMethods && declaredMethods.length > 0) {
                 for (Method declaredMethod : declaredMethods) {
                     if (null != declaredMethod) {
@@ -34,11 +35,14 @@ public class RetryListener implements IHolder.OnItemChildClickListener {
                                 declaredMethod.invoke(this);
                             } catch (Exception e) {
                             }
+                            stop = true;
+                            break;
                         }
                     }
                 }
             }
-            clazz = clazz.getSuperclass();
+            if (stop) break;
+            mClazz = mClazz.getSuperclass();
         }
     }
 }

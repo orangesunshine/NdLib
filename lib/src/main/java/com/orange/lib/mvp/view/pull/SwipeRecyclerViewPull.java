@@ -7,7 +7,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.orange.lib.R;
 import com.orange.lib.common.holder.IHolder;
 import com.orange.lib.constance.ITag;
-import com.orange.lib.mvp.view.pull.IPull;
 import com.orange.lib.utils.base.Preconditions;
 import com.orange.lib.utils.recyclerview.RecyclerViews;
 
@@ -50,7 +49,7 @@ public class SwipeRecyclerViewPull implements IPull {
 
     @Override
     public boolean isRefreshing() {
-        return false;
+        return mSwipeRefreshLayout.isRefreshing();
     }
 
     @Override

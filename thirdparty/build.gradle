@@ -66,7 +66,7 @@ dependencies {
     api "com.squareup.retrofit2:retrofit:${RETROFIT}"
     implementation "com.squareup.retrofit2:converter-gson:${RETROFIT}"
     api "com.squareup.retrofit2:adapter-rxjava2:${RETROFIT}"
-    implementation "io.reactivex.rxjava2:rxandroid:${RXANDROID}"
+    api "io.reactivex.rxjava2:rxandroid:${RXANDROID}"
     implementation "com.squareup.okhttp3:logging-interceptor:${LOGGINGINTERCEPTOR}"
     implementation 'org.aspectj:aspectjrt:1.8.9'
     implementation 'com.github.florent37:viewanimator:1.1.0'

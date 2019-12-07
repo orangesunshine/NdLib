@@ -40,5 +40,6 @@
         <activity android:name=".activity.templete.TempleteDemoActivity" />
         <activity android:name=".activity.demo.base.status.RxJavaSampleImpActivity" />
         <activity android:name=".activity.demo.base.status.AndroidUtilCodeImlActivity" />
+        <activity android:name=".activity.demo.presenter.PresenterDemoActivity" />
     </application>
 </manifest>

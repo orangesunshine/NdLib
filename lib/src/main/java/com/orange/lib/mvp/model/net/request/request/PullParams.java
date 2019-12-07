@@ -1,6 +1,6 @@
 package com.orange.lib.mvp.model.net.request.request;
 
-import static com.orange.lib.constance.IConst.PULL_ITEM_COUNT;
+import static com.orange.lib.constance.IConst.PAGE_SIZE;
 
 /**
  * @Author: orange
@@ -18,7 +18,7 @@ public class PullParams extends Params {
 
     public static class PullnetRequestRequestParamsBuilder extends Builder {
         protected int mPageIndex;
-        protected int mRequestCount = PULL_ITEM_COUNT;
+        protected int mRequestCount = PAGE_SIZE;
 
         public static Builder builder() {
             return new PullnetRequestRequestParamsBuilder();

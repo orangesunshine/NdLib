@@ -7,6 +7,7 @@ import com.orange.lib.common.reponse.BaseResponse;
 import com.orange.lib.mvp.model.net.callback.loading.ICallback;
 import com.orange.lib.utils.Commons;
 import com.orange.lib.utils.Reflections;
+import com.orange.thirdparty.rxjava.params.RxParams;
 
 import java.lang.reflect.Type;
 
@@ -14,23 +15,36 @@ import okhttp3.ResponseBody;
 
 import static com.orange.lib.constance.IConst.LINE_SEPARATOR;
 
-public class ResponseBodyParser {
+public class RxParser {
     private ParameterizedTypeImpl parameterizedType;
     private ResponseBody mResponseBody;
 
-    public ResponseBodyParser(ResponseBody mResponseBody, Type type) {
-        parameterizedType = new ParameterizedTypeImpl(BaseResponse.class, new Type[]{type});
-        this.mResponseBody = mResponseBody;
+    public static <T> BaseResponse<T> parse(ResponseBody responseBody, RxParams params) {
+        if (null == params) throw new NullPointerException("null == params");
+        return new RxParser(responseBody, params.getType()).parseResponse();
     }
 
-    public <T> ResponseBodyParser(ResponseBody mResponseBody, ICallback<T> callback) {
+    public static <T> BaseResponse<T> parse(ResponseBody responseBody, Type type) {
+        return new RxParser(responseBody, type).parseResponse();
+    }
+
+    public static <T> BaseResponse<T> parse(ResponseBody responseBody, ICallback<T> callback) {
+        return new RxParser(responseBody, callback).parseResponse();
+    }
+
+    public RxParser(ResponseBody responseBody, Type type) {
+        parameterizedType = new ParameterizedTypeImpl(BaseResponse.class, new Type[]{type});
+        mResponseBody = responseBody;
+    }
+
+    public <T> RxParser(ResponseBody responseBody, ICallback<T> callback) {
         if (ICallback.class == callback.getClass())
             throw new IllegalArgumentException("parse not support ICallback primary, please use subclass or special class!");
         Type type = Reflections.getGenericActualTypeArg(callback.getClass());
         if (null == type)
             throw new IllegalArgumentException("please special " + callback.getClass() + " GenericInterfaces");
         parameterizedType = new ParameterizedTypeImpl(BaseResponse.class, new Type[]{type});
-        this.mResponseBody = mResponseBody;
+        mResponseBody = responseBody;
     }
 
     public <T> BaseResponse<T> parseResponse() {

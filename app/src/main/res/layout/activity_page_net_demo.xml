@@ -11,7 +11,7 @@
         android:inflatedId="@+id/id_actbar_orange" />
 
     <LinearLayout
-        android:id="@+id/id_content"
+        android:id="@+id/id_content_orange"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -41,7 +41,7 @@
             android:text="show_error" />
 
         <Button
-            android:id="@+id/btn_data"
+            android:id="@+id/btn_serial"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="data" />

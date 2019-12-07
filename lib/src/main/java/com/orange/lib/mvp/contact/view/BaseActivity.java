@@ -57,9 +57,9 @@ public abstract class BaseActivity extends FragmentActivity {
 
         attachView(content);//视图
 
+        mHolder.setVisible(R.id.id_statusbar_orange, translucentStatusBar());
         statusBar();//状态栏
 
-        mHolder.setVisible(R.id.id_statusbar_orange, translucentStatusBar());
         attachStub();//占位
 
         init();//初始化

@@ -1,6 +1,5 @@
 package com.orange.lib.mvp.model.net.callback.loading;
 
-
 import com.orange.lib.mvp.view.loading.ILoading;
 
 public class LoadingCallback<T> extends AbsCallback<T> {

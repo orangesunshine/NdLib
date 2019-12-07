@@ -5,6 +5,7 @@ import com.orange.lib.utils.Activitys;
 import com.orange.ndlib.R;
 import com.orange.ndlib.activity.demo.base.BaseDemoActivity;
 import com.orange.ndlib.activity.demo.net.NetDemoActivity;
+import com.orange.ndlib.activity.demo.presenter.PresenterDemoActivity;
 
 public class MainActivity extends BaseActivity {
     /**
@@ -28,12 +29,15 @@ public class MainActivity extends BaseActivity {
                 case R.id.btn_base:
                     Activitys.launchActivity(mActivity, BaseDemoActivity.class);
                     break;
+                case R.id.btn_presenter:
+                    Activitys.launchActivity(mActivity, PresenterDemoActivity.class);
+                    break;
                 case R.id.btn_loading:
                     Activitys.launchActivity(mActivity, NetDemoActivity.class);
                     break;
                 case R.id.btn_loading_page:
                     break;
             }
-        }, R.id.btn_base, R.id.btn_loading, R.id.btn_loading_page);
+        }, R.id.btn_base, R.id.btn_presenter, R.id.btn_loading, R.id.btn_loading_page);
     }
 }

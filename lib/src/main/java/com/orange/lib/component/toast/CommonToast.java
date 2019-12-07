@@ -136,7 +136,12 @@ public class CommonToast<T> {
      */
     public void show(Context context, int duration) {
         if (!Preconditions.isNull(mIToast)) {
-            mIToast.show(context, duration);
+            HANDLER.post(new Runnable() {
+                @Override
+                public void run() {
+                    mIToast.show(context, duration);
+                }
+            });
         }
     }
 
@@ -245,7 +250,7 @@ public class CommonToast<T> {
     // base
     ///////////////////////////////////////////////////////////////////////////
 
-    class ToastWithoutNotification extends AbsToast {
+    class ToastWithoutNotification extends AbsToast implements Runnable {
         private View mView;
         private WindowManager mWM;
 
@@ -380,6 +385,11 @@ public class CommonToast<T> {
             mWM = null;
             mToast = null;
             mInstance = null;
+        }
+
+        @Override
+        public void run() {
+
         }
     }
 }

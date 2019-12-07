@@ -1,21 +1,19 @@
 package com.orange.lib.mvp.model.net.callback.loading;
 
+import com.orange.lib.mvp.model.net.netcancel.INetCancel;
+import com.orange.lib.mvp.model.net.netcancel.NetCancelManager;
+
 public abstract class AbsCallback<T> implements ICallback<T> {
-    private OnCompleteListener mOnCompleteListener;
+    private INetCancel mINetCancel;
 
     @Override
-    public void setOnComplteListener(OnCompleteListener listener) {
-        mOnCompleteListener = listener;
-    }
-
-    @Override
-    public void removeOnCompleteListener() {
-        mOnCompleteListener = null;
+    public void setINetCancel(INetCancel INetCancel) {
+        mINetCancel = INetCancel;
     }
 
     @Override
     public void onComplete() {
-        if (null != mOnCompleteListener)
-            mOnCompleteListener.onComplete();
+        if (null != mINetCancel)
+            NetCancelManager.getInstance().unregisterNetCancel(mINetCancel);
     }
 }

@@ -1,5 +1,7 @@
 package com.orange.lib.mvp.model.net.callback.loading;
 
+import com.orange.lib.mvp.model.net.netcancel.INetCancel;
+
 /**
  * 网络回调抽象层
  *
@@ -31,15 +33,6 @@ public interface ICallback<T> {
      */
     void onError(int code, Throwable error);
 
-    /**
-     * 新增OnCompleteListener
-     *
-     * @param listener
-     */
-    void setOnComplteListener(OnCompleteListener listener);
 
-    /**
-     * 删除OnCompleteListener
-     */
-    void removeOnCompleteListener();
+    void setINetCancel(INetCancel INetCancel);
 }
