@@ -28,9 +28,7 @@ import com.orange.lib.common.convert.IHolderConvert;
 import com.orange.lib.common.holder.CommonHolder;
 import com.orange.lib.constance.IInitConst;
 import com.orange.lib.constance.IViewConst;
-import com.orange.lib.utils.base.Preconditions;
-import com.orange.lib.utils.size.Screens.Screens;
-import com.orange.lib.utils.size.Sizes;
+import com.orange.lib.utils.Preconditions;
 import com.orange.utils.common.Bars;
 
 import java.io.InputStream;

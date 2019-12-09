@@ -2,7 +2,7 @@ package com.orange.lib.mvp.contact.presenter;
 
 import com.orange.lib.mvp.contact.INetContact;
 import com.orange.lib.mvp.model.net.netcancel.INetCancel;
-import com.orange.lib.utils.base.Preconditions;
+import com.orange.lib.utils.Preconditions;
 
 import java.util.ArrayList;
 import java.util.List;

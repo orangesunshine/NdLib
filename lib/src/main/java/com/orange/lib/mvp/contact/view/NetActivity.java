@@ -8,7 +8,7 @@ import com.orange.lib.common.holder.IHolder;
 import com.orange.lib.mvp.contact.INetContact;
 import com.orange.lib.mvp.view.page.loading.IPage;
 import com.orange.lib.mvp.view.page.loading.LoadingDialogPage;
-import com.orange.lib.utils.base.Preconditions;
+import com.orange.lib.utils.Preconditions;
 import com.orange.lib.utils.view.Views;
 
 import java.lang.reflect.Method;

@@ -1,16 +1,19 @@
-package com.orange.lib.utils.antishake;
+package com.orange.utils.common.antishake;
 
 import android.os.SystemClock;
 import android.view.View;
 
-import com.orange.lib.utils.base.Preconditions;
-import com.orange.lib.utils.log.Logs;
+import androidx.annotation.IntRange;
+import androidx.annotation.NonNull;
 
 /**
  * @Author: orange
  * @CreateDate: 2019/9/17 10:00
  */
-public final class SingleClickUtils {
+public final class AntiShakes {
+    private static final long DEFAULT_DURATION = 200;
+    private static final int TAG_KEY = 0x7EFFFFFF;
+
     private static final long DEFAULT_MIN_INTERVAL = 10;//防止方法递归调用
     public static final long DEFAULT_INTERVAL_MILLS = 200;//默认抖动间隔200毫秒
     public static final long MIDDLE_INTERVAL_MILLS = 500;
@@ -19,6 +22,10 @@ public final class SingleClickUtils {
      * 最近一次点击的时间
      */
     private static long mLastClickTime;
+    /**
+     * 最近一次点击的控件ID
+     */
+    private static int mLastClickViewId;
 
     /**
      * 重载是否是快速点击
@@ -39,19 +46,12 @@ public final class SingleClickUtils {
         long time = SystemClock.elapsedRealtime();
         long timeInterval = Math.abs(time - mLastClickTime);
         if (timeInterval > DEFAULT_MIN_INTERVAL && timeInterval < intervalMillis) {
-            Logs.i("SingleClickUtils.isFastDoubleClick.true： " + intervalMillis);
             return true;
         } else {
             mLastClickTime = time;
-            Logs.i("SingleClickUtils.isFastDoubleClick.false： " + intervalMillis);
             return false;
         }
     }
-
-    /**
-     * 最近一次点击的控件ID
-     */
-    private static int mLastClickViewId;
 
     /**
      * 是否是快速点击
@@ -73,7 +73,7 @@ public final class SingleClickUtils {
      * @return true:是，false:不是
      */
     public static boolean isFastDoubleClick(View view, long intervalMillis, boolean supportsame) {
-        if (Preconditions.isNull(view)) return true;
+        if (null == view) return false;
         int viewId = view.getId();
         long time = SystemClock.elapsedRealtime();
         long timeInterval = time - mLastClickTime;
@@ -81,13 +81,28 @@ public final class SingleClickUtils {
         if (supportsame)
             fastClick &= viewId == mLastClickViewId;
 
-        if (fastClick) {
-            Logs.i("SingleClickUtils.isFastDoubleClick.true： " + intervalMillis);
-        } else {
-            mLastClickTime = time;
-            mLastClickViewId = viewId;
-            Logs.i("SingleClickUtils.isFastDoubleClick.false： " + intervalMillis);
-        }
+        mLastClickTime = time;
+        mLastClickViewId = viewId;
         return fastClick;
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // impl by tag
+    ///////////////////////////////////////////////////////////////////////////
+    public static boolean isValid(@NonNull View view) {
+        return isValid(view, DEFAULT_DURATION);
+    }
+
+    public static boolean isValid(@NonNull View view, @IntRange(from = 0) long duration) {
+        long curTime = System.currentTimeMillis();
+        Object tag = view.getTag(TAG_KEY);
+        if (!(tag instanceof Long)) {
+            view.setTag(TAG_KEY, curTime);
+            return true;
+        }
+        long preTime = (Long) tag;
+        if (curTime - preTime <= duration) return false;
+        view.setTag(TAG_KEY, curTime);
+        return true;
     }
 }

@@ -1,10 +1,8 @@
-package com.orange.lib.utils.base;
+package com.orange.lib.utils;
 
-import com.orange.lib.utils.log.Logs;
+import com.orange.lib.common.config.Config;
 
 import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 
 public class Preconditions {
@@ -18,7 +16,7 @@ public class Preconditions {
      */
     public static boolean isNull(Object ojb) {
         boolean ret = null == ojb;
-        if (ret) Logs.c(LOG_PREFIX + "obj is null");
+        if (ret) Config.getInstance().getLog().d(LOG_PREFIX + "obj is null");
         return ret;
     }
 
@@ -35,7 +33,7 @@ public class Preconditions {
                 ret |= isNull(ojb);
             }
         }
-        if (ret) Logs.c(LOG_PREFIX + "objs is nulls");
+        if (ret) Config.getInstance().getLog().d(LOG_PREFIX + "objs is nulls");
         return ret;
     }
 
@@ -50,7 +48,7 @@ public class Preconditions {
         if (!ret) {
             ret |= 0 == objs.length;
         }
-        if (ret) Logs.c(LOG_PREFIX + "objs is empty");
+        if (ret) Config.getInstance().getLog().d(LOG_PREFIX + "objs is empty");
         return ret;
     }
 
@@ -62,7 +60,7 @@ public class Preconditions {
      */
     public static boolean isEmpty(CharSequence charSequence) {
         boolean ret = null == charSequence || 0 == charSequence.length();
-        if (ret) Logs.c(LOG_PREFIX + "charSequence is empty");
+        if (ret) Config.getInstance().getLog().d(LOG_PREFIX + "charSequence is empty");
         return ret;
     }
 
@@ -92,7 +90,7 @@ public class Preconditions {
         boolean ret = isNull(collection);
         if (!ret)
             ret |= collection.isEmpty();
-        if (ret) Logs.c(LOG_PREFIX + "collection is empty");
+        if (ret) Config.getInstance().getLog().d(LOG_PREFIX + "collection is empty");
         return ret;
     }
 
@@ -106,22 +104,8 @@ public class Preconditions {
         boolean ret = isNull(map);
         if (!ret)
             ret |= map.isEmpty();
-        if (ret) Logs.c(LOG_PREFIX + "map is empty");
+        if (ret) Config.getInstance().getLog().d(LOG_PREFIX + "map is empty");
         return ret;
-    }
-
-    /**
-     * 删除list中null元素
-     *
-     * @param oldList
-     * @param <T>
-     * @return
-     */
-    public static <T> List<T> removeNull(List<? extends T> oldList) {
-
-        // 你没有看错，真的是有 1 行代码就实现了
-        oldList.removeAll(Collections.singleton(null));
-        return (List<T>) oldList;
     }
 
     /**
@@ -131,7 +115,24 @@ public class Preconditions {
      * @return
      */
     public static boolean condition(boolean condition) {
-        if (condition) Logs.c(LOG_PREFIX + "map is empty");
+        if (condition) Config.getInstance().getLog().d(LOG_PREFIX + "map is empty");
         return condition;
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // 新方法
+    ///////////////////////////////////////////////////////////////////////////
+
+    /**
+     * @param reference
+     * @param <T>
+     * @return
+     */
+    public static <T> T needNotNull(T reference) {
+        if (null == reference) {
+            Config.getInstance().getLog().e("null == reference");
+            throw new NullPointerException();
+        }
+        return reference;
     }
 }

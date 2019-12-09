@@ -14,6 +14,7 @@ import androidx.annotation.ColorInt;
 import androidx.fragment.app.FragmentActivity;
 
 import com.orange.lib.R;
+import com.orange.lib.common.config.Config;
 import com.orange.lib.common.holder.CommonHolder;
 import com.orange.lib.common.holder.IHolder;
 import com.orange.lib.component.actbar.CommonActionBar;
@@ -21,8 +22,7 @@ import com.orange.lib.component.actbar.IActionBar;
 import com.orange.lib.component.statusbar.IStatusBar;
 import com.orange.lib.component.statusbar.SystemBarTintManager;
 import com.orange.lib.component.toast.CommonToast;
-import com.orange.lib.utils.base.Preconditions;
-import com.orange.lib.utils.log.Logs;
+import com.orange.lib.utils.Preconditions;
 import com.orange.lib.utils.view.Views;
 import com.orange.utils.common.Colors;
 
@@ -145,7 +145,7 @@ public abstract class BaseActivity extends FragmentActivity {
     protected void attachView(FrameLayout content) {
         int contentLayoutId = getContentLayoutId();
         if (-1 == contentLayoutId)
-            Logs.e("-1 == contentLayoutId");
+            Config.getInstance().getLog().e("-1 == contentLayoutId");
         LayoutInflater.from(this).inflate(contentLayoutId, content, true);
 
         if (null != mHolder.getView(R.id.id_stub_content_orange))

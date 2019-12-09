@@ -2,7 +2,8 @@ package com.orange.lib.common.config;
 
 import com.orange.lib.common.image.IImage;
 import com.orange.lib.mvp.model.net.request.IRequest;
-import com.orange.lib.utils.base.Preconditions;
+import com.orange.lib.utils.Preconditions;
+import com.orange.lib.utils.log.ILog;
 
 /**
  * @Author: orange
@@ -11,8 +12,9 @@ import com.orange.lib.utils.base.Preconditions;
 public class Config {
     //static&final
     private static volatile Config ourInstance = null;
-    private IRequest mUrlApi;//网络请求
-    private IImage mIImage;//图片
+    private IRequest mNetRequest;//网络请求
+    private IImage mImage;//图片
+    private ILog mLog;
 
     public static Config getInstance() {
         if (null == ourInstance) {
@@ -33,7 +35,7 @@ public class Config {
      * 配置网络请求实现
      */
     public void configNet(IRequest urlApi) {
-        mUrlApi = urlApi;
+        mNetRequest = urlApi;
     }
 
     /**
@@ -42,16 +44,14 @@ public class Config {
      * @return
      */
     public IRequest getNet() {
-        if (Preconditions.isNull(mUrlApi))
-            mUrlApi = null;
-        return mUrlApi;
+        return mNetRequest;
     }
 
     /**
      * 配置图片实现
      */
     public void configImage(IImage iImage) {
-        mIImage = iImage;
+        mImage = Preconditions.needNotNull(iImage);
     }
 
     /**
@@ -60,8 +60,14 @@ public class Config {
      * @return
      */
     public IImage getImage() {
-        if (Preconditions.isNull(mIImage))
-            mIImage = null;
-        return mIImage;
+        return mImage;
+    }
+
+    public void configLog(ILog iLog) {
+        mLog = Preconditions.needNotNull(iLog);
+    }
+
+    public ILog getLog() {
+        return mLog;
     }
 }

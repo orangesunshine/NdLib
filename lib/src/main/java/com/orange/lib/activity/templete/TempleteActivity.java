@@ -5,7 +5,7 @@ import android.widget.FrameLayout;
 
 import com.orange.lib.R;
 import com.orange.lib.mvp.contact.view.NetActivity;
-import com.orange.lib.utils.base.Preconditions;
+import com.orange.lib.utils.Preconditions;
 import com.orange.lib.utils.view.Views;
 
 public abstract class TempleteActivity extends NetActivity {

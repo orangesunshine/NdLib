@@ -1,7 +1,5 @@
-package com.orange.lib.utils;
+package com.orange.utils.common;
 
-
-import com.orange.lib.constance.IConst;
 
 public class Commons {
     /**
@@ -11,6 +9,6 @@ public class Commons {
      * @return
      */
     public static boolean checkCodeSuccess(int code) {
-        return IConst.CODE_SUCCESS == code;
+        return 200 == code;
     }
 }

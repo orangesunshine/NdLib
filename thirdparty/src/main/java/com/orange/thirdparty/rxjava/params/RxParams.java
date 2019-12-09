@@ -1,7 +1,7 @@
 package com.orange.thirdparty.rxjava.params;
 
 import com.orange.lib.mvp.model.net.request.request.Params;
-import com.orange.lib.utils.base.Preconditions;
+import com.orange.lib.utils.Preconditions;
 import com.orange.thirdparty.retrofit.RetrofitClient;
 import com.orange.thirdparty.retrofit.api.IRetrofitApi;
 
@@ -12,6 +12,8 @@ import io.reactivex.Observable;
 import okhttp3.ResponseBody;
 
 public class RxParams extends Params {
+
+
     public RxParams(Builder builder) {
         super(builder);
     }

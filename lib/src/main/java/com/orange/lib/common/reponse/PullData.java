@@ -2,7 +2,7 @@ package com.orange.lib.common.reponse;
 
 
 import com.orange.lib.constance.IConst;
-import com.orange.lib.utils.base.Preconditions;
+import com.orange.lib.utils.Preconditions;
 
 import java.util.List;
 

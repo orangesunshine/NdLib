@@ -3,9 +3,9 @@ package com.orange.thirdparty.rxjava.subscriber;
 import com.orange.lib.common.reponse.BaseResponse;
 import com.orange.lib.constance.IConst;
 import com.orange.lib.mvp.model.net.callback.loading.ICallback;
-import com.orange.lib.utils.Commons;
+import com.orange.utils.common.Commons;
 import com.orange.lib.utils.Reflections;
-import com.orange.lib.utils.base.Preconditions;
+import com.orange.lib.utils.Preconditions;
 import com.orange.thirdparty.rxjava.parse.RxParser;
 
 import java.lang.reflect.Type;

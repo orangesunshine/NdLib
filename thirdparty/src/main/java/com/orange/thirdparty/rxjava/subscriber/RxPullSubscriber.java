@@ -12,7 +12,7 @@ import com.google.gson.reflect.TypeToken;
 import com.orange.lib.common.reponse.PullData;
 import com.orange.lib.constance.IConst;
 import com.orange.lib.mvp.model.net.callback.pull.IPullNetCallback;
-import com.orange.lib.utils.Commons;
+import com.orange.utils.common.Commons;
 
 import java.lang.reflect.Type;
 

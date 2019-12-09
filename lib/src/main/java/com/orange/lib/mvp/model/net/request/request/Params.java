@@ -1,6 +1,6 @@
 package com.orange.lib.mvp.model.net.request.request;
 
-import com.orange.lib.utils.base.Preconditions;
+import com.orange.lib.utils.Preconditions;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;

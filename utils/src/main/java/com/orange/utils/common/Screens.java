@@ -1,4 +1,4 @@
-package com.orange.lib.utils.size.Screens;
+package com.orange.utils.common;
 
 import android.app.Activity;
 import android.app.KeyguardManager;
@@ -18,8 +18,7 @@ import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresPermission;
-
-import com.orange.lib.utils.base.Utils;
+import com.orange.utils.base.Utils;
 
 import static android.Manifest.permission.WRITE_SETTINGS;
 

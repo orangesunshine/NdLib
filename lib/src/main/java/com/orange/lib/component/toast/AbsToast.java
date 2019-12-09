@@ -3,7 +3,7 @@ package com.orange.lib.component.toast;
 import android.view.View;
 import android.widget.Toast;
 
-import com.orange.lib.utils.base.Preconditions;
+import com.orange.lib.utils.Preconditions;
 
 /**
  * @Author: orange

@@ -28,11 +28,11 @@ import javax.net.ssl.HttpsURLConnection;
  *     desc  : utils about file
  * </pre>
  */
-public final class FileUtils {
+public final class Files {
 
     private static final String LINE_SEP = System.getProperty("line.separator");
 
-    private FileUtils() {
+    private Files() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 

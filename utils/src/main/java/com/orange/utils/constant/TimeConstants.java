@@ -13,13 +13,13 @@ import java.lang.annotation.RetentionPolicy;
  *     desc  : constants of time
  * </pre>
  */
-public final class TimeConstants {
+public interface TimeConstants {
 
-    public static final int MSEC = 1;
-    public static final int SEC  = 1000;
-    public static final int MIN  = 60000;
-    public static final int HOUR = 3600000;
-    public static final int DAY  = 86400000;
+    int MSEC = 1;
+    int SEC = 1000;
+    int MIN = 60000;
+    int HOUR = 3600000;
+    int DAY = 86400000;
 
     @IntDef({MSEC, SEC, MIN, HOUR, DAY})
     @Retention(RetentionPolicy.SOURCE)

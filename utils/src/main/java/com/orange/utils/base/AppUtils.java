@@ -15,9 +15,9 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.orange.utils.common.Texts;
-import com.orange.utils.file.FileUtils;
+import com.orange.utils.file.Files;
 import com.orange.utils.selected.DeviceUtils;
-import com.orange.utils.common.IntentUtils;
+import com.orange.utils.common.Intents;
 import com.orange.utils.selected.ShellUtils;
 import com.orange.utils.selected.ConvertUtils;
 import com.orange.utils.selected.EncryptUtils;
@@ -69,7 +69,7 @@ public final class AppUtils {
      * @param filePath The path of file.
      */
     public static void installApp(final String filePath) {
-        installApp(FileUtils.getFileByPath(filePath));
+        installApp(Files.getFileByPath(filePath));
     }
 
     /**
@@ -80,8 +80,8 @@ public final class AppUtils {
      * @param file The file.
      */
     public static void installApp(final File file) {
-        if (!FileUtils.isFileExists(file)) return;
-        Utils.getApp().startActivity(IntentUtils.getInstallAppIntent(file, true));
+        if (!Files.isFileExists(file)) return;
+        Utils.getApp().startActivity(Intents.getInstallAppIntent(file, true));
     }
 
     /**
@@ -97,7 +97,7 @@ public final class AppUtils {
     public static void installApp(final Activity activity,
                                   final String filePath,
                                   final int requestCode) {
-        installApp(activity, FileUtils.getFileByPath(filePath), requestCode);
+        installApp(activity, Files.getFileByPath(filePath), requestCode);
     }
 
     /**
@@ -113,8 +113,8 @@ public final class AppUtils {
     public static void installApp(final Activity activity,
                                   final File file,
                                   final int requestCode) {
-        if (!FileUtils.isFileExists(file)) return;
-        activity.startActivityForResult(IntentUtils.getInstallAppIntent(file), requestCode);
+        if (!Files.isFileExists(file)) return;
+        activity.startActivityForResult(Intents.getInstallAppIntent(file), requestCode);
     }
 
     /**
@@ -127,7 +127,7 @@ public final class AppUtils {
      * @return {@code true}: success<br>{@code false}: fail
      */
     public static boolean installAppSilent(final String filePath) {
-        return installAppSilent(FileUtils.getFileByPath(filePath), null);
+        return installAppSilent(Files.getFileByPath(filePath), null);
     }
 
     /**
@@ -155,7 +155,7 @@ public final class AppUtils {
      * @return {@code true}: success<br>{@code false}: fail
      */
     public static boolean installAppSilent(final String filePath, final String params) {
-        return installAppSilent(FileUtils.getFileByPath(filePath), params);
+        return installAppSilent(Files.getFileByPath(filePath), params);
     }
 
     /**
@@ -186,7 +186,7 @@ public final class AppUtils {
     public static boolean installAppSilent(final File file,
                                            final String params,
                                            final boolean isRooted) {
-        if (!FileUtils.isFileExists(file)) return false;
+        if (!Files.isFileExists(file)) return false;
         String filePath = '"' + file.getAbsolutePath() + '"';
         String command = "LD_LIBRARY_PATH=/vendor/lib*:/system/lib* pm install " +
                 (params == null ? "" : params + " ")
@@ -209,7 +209,7 @@ public final class AppUtils {
      */
     public static void uninstallApp(final String packageName) {
         if (Texts.isSpace(packageName)) return;
-        Utils.getApp().startActivity(IntentUtils.getUninstallAppIntent(packageName, true));
+        Utils.getApp().startActivity(Intents.getUninstallAppIntent(packageName, true));
     }
 
     /**
@@ -224,7 +224,7 @@ public final class AppUtils {
                                     final String packageName,
                                     final int requestCode) {
         if (Texts.isSpace(packageName)) return;
-        activity.startActivityForResult(IntentUtils.getUninstallAppIntent(packageName), requestCode);
+        activity.startActivityForResult(Intents.getUninstallAppIntent(packageName), requestCode);
     }
 
     /**
@@ -395,7 +395,7 @@ public final class AppUtils {
      */
     public static void launchApp(final String packageName) {
         if (Texts.isSpace(packageName)) return;
-        Utils.getApp().startActivity(IntentUtils.getLaunchAppIntent(packageName, true));
+        Utils.getApp().startActivity(Intents.getLaunchAppIntent(packageName, true));
     }
 
     /**
@@ -410,7 +410,7 @@ public final class AppUtils {
                                  final String packageName,
                                  final int requestCode) {
         if (Texts.isSpace(packageName)) return;
-        activity.startActivityForResult(IntentUtils.getLaunchAppIntent(packageName), requestCode);
+        activity.startActivityForResult(Intents.getLaunchAppIntent(packageName), requestCode);
     }
 
     /**

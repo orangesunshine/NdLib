@@ -5,7 +5,6 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.orange.lib.common.image.IImage;
 import com.orange.lib.constance.IInitConst;
-import com.orange.lib.utils.base.Utils;
 
 public class GlideImageImpl implements IImage {
     private static volatile GlideImageImpl sInstance;

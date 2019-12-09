@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 
-import com.orange.lib.utils.antishake.SingleClickUtils;
+import com.orange.utils.common.antishake.SingleClickUtils;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -14,9 +14,9 @@ import org.aspectj.lang.annotation.Pointcut;
 
 import java.lang.ref.WeakReference;
 
-import static com.orange.lib.utils.antishake.SingleClickUtils.DEFAULT_INTERVAL_MILLS;
-import static com.orange.lib.utils.antishake.SingleClickUtils.MAX_INTERVAL_MILLS;
-import static com.orange.lib.utils.antishake.SingleClickUtils.MIDDLE_INTERVAL_MILLS;
+import static com.orange.utils.common.antishake.SingleClickUtils.DEFAULT_INTERVAL_MILLS;
+import static com.orange.utils.common.antishake.SingleClickUtils.MAX_INTERVAL_MILLS;
+import static com.orange.utils.common.antishake.SingleClickUtils.MIDDLE_INTERVAL_MILLS;
 
 /**
  * @Author: orange

@@ -16,16 +16,8 @@ import com.orange.utils.common.Intents;
 import com.orange.utils.common.Texts;
 
 /**
- * @ProjectName: NdLib
- * @Package: com.orange.utils.base
- * @ClassName: Activitys
- * @Description:
  * @Author: orange
  * @CreateDate: 2019/7/31 9:20
- * @UpdateUser:
- * @UpdateDate: 2019/7/31 9:20
- * @UpdateRemark:
- * @Version: 1.0
  */
 public class Activitys {
 
@@ -111,7 +103,7 @@ public class Activitys {
             intent.putExtras(extra);
         if (!(context instanceof Activity))
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        if (!Intents.intentAvailable(context, intent)) return false;
+        if (!Intents.isIntentAvailable(intent)) return false;
         context.startActivity(intent, opt);
         return true;
     }
@@ -166,7 +158,7 @@ public class Activitys {
         if (null == context) return false;
         if (!(context instanceof Activity))
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        if (!Intents.intentAvailable(context, intent)) return false;
+        if (!Intents.isIntentAvailable(intent)) return false;
         context.startActivity(intent);
         return true;
     }
@@ -206,7 +198,7 @@ public class Activitys {
             intent.putExtras(extra);
         if (!(context instanceof Activity))
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        if (!Intents.intentAvailable(context, intent)) return false;
+        if (!Intents.isIntentAvailable(intent)) return false;
         if (0 == enterAnim || 0 == exitAnim) {
             context.startActivity(intent);
             return true;
@@ -240,7 +232,7 @@ public class Activitys {
     }
 
     public static boolean startActivityOrForResult(Context context, Intent intent, int enterAnim, int exitAnim, int requestCode) {
-        if (!Intents.intentAvailable(context, intent)) return false;
+        if (!Intents.isIntentAvailable(intent)) return false;
         if (0 == enterAnim || 0 == exitAnim) {
             if (-1 != requestCode && context instanceof Activity) {
                 ((Activity) context).startActivityForResult(intent, requestCode);

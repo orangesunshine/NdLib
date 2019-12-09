@@ -7,7 +7,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.orange.lib.R;
 import com.orange.lib.common.holder.IHolder;
 import com.orange.lib.constance.ITag;
-import com.orange.lib.utils.base.Preconditions;
+import com.orange.lib.utils.Preconditions;
 import com.orange.lib.utils.recyclerview.RecyclerViews;
 
 /**

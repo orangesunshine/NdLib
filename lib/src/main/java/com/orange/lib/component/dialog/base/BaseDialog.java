@@ -17,8 +17,8 @@ import androidx.annotation.StyleRes;
 import androidx.fragment.app.DialogFragment;
 
 import com.orange.lib.R;
-import com.orange.lib.utils.size.Screens.Screens;
-import com.orange.lib.utils.size.Sizes;
+import com.orange.utils.common.Screens;
+import com.orange.utils.common.Sizes;
 
 /**
  * Dialog通用样式

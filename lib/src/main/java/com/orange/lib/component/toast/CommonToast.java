@@ -16,13 +16,11 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.orange.lib.common.config.Config;
 import com.orange.lib.common.convert.IHolderConvert;
 import com.orange.lib.common.holder.CommonHolder;
 import com.orange.lib.common.holder.IHolder;
-import com.orange.lib.utils.base.OnActivityDestroyListener;
-import com.orange.lib.utils.base.Preconditions;
-import com.orange.lib.utils.base.Utils;
-import com.orange.lib.utils.log.Logs;
+import com.orange.lib.utils.Preconditions;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -292,7 +290,7 @@ public class CommonToast<T> {
                 }
                 Activity activity = (Activity) context;
                 if (activity.isFinishing() || activity.isDestroyed()) {
-                    Logs.e("CommonToast", activity + " is useless");
+                    Config.getInstance().getLog().d("CommonToast", activity + " is useless");
                     return;
                 }
                 mWM = activity.getWindowManager();

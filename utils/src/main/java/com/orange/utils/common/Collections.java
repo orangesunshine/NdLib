@@ -58,7 +58,9 @@ public final class Collections {
 
     @SafeVarargs
     public static <E> ArrayList<E> newArrayList(E... array) {
+        com.orange.utils.common.Arrays.asArrayList(array);
         ArrayList<E> list = new ArrayList<>();
+        list.addAll(com.orange.utils.common.Arrays.asList(array));
         if (array == null || array.length == 0) return list;
         for (E e : array) {
             list.add(e);
@@ -910,6 +912,19 @@ public final class Collections {
             }
         }
         return list;
+    }
+
+    /**
+     * 删除list中null元素
+     *
+     * @param oldList
+     * @param <T>
+     * @return
+     */
+    public static <T> List<T> removeNull(List<? extends T> oldList) {
+        // 你没有看错，真的是有 1 行代码就实现了
+        oldList.removeAll(java.util.Collections.singleton(null));
+        return (List<T>) oldList;
     }
 
     /**

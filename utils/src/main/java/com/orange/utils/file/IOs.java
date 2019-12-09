@@ -29,11 +29,11 @@ import java.util.List;
  *     desc  : utils about file io
  * </pre>
  */
-public final class FileIOUtils {
+public final class IOs {
 
     private static int sBufferSize = 8192;
 
-    private FileIOUtils() {
+    private IOs() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 

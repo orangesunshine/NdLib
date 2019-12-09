@@ -5,7 +5,7 @@ import android.text.TextUtils;
 import com.google.gson.GsonBuilder;
 import com.orange.lib.common.reponse.BaseResponse;
 import com.orange.lib.mvp.model.net.callback.loading.ICallback;
-import com.orange.lib.utils.Commons;
+import com.orange.utils.common.Commons;
 import com.orange.lib.utils.Reflections;
 import com.orange.thirdparty.rxjava.params.RxParams;
 

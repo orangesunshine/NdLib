@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import com.orange.lib.utils.base.Preconditions;
+import com.orange.lib.utils.Preconditions;
 
 /**
  * @Author: orange

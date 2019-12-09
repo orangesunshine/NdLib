@@ -1,6 +1,6 @@
 package com.orange.thirdparty.rxjava.params.pull;
 
-import com.orange.lib.utils.base.Preconditions;
+import com.orange.lib.utils.Preconditions;
 import com.orange.thirdparty.rxjava.params.RxParams;
 
 import java.lang.reflect.Type;
