@@ -45,9 +45,7 @@ public class Preconditions {
      */
     public static boolean isEmpty(Object... objs) {
         boolean ret = isNull(objs);
-        if (!ret) {
-            ret |= 0 == objs.length;
-        }
+        if (!ret) ret |= 0 == objs.length;
         if (ret) Config.getInstance().getLog().d(LOG_PREFIX + "objs is empty");
         return ret;
     }
@@ -77,6 +75,7 @@ public class Preconditions {
                 ret |= isEmpty(charSequence);
             }
         }
+        if (ret) Config.getInstance().getLog().d(LOG_PREFIX + "charSequences is isEmptys");
         return ret;
     }
 
@@ -88,8 +87,7 @@ public class Preconditions {
      */
     public static boolean isEmpty(Collection collection) {
         boolean ret = isNull(collection);
-        if (!ret)
-            ret |= collection.isEmpty();
+        if (!ret) ret |= collection.isEmpty();
         if (ret) Config.getInstance().getLog().d(LOG_PREFIX + "collection is empty");
         return ret;
     }
@@ -102,8 +100,7 @@ public class Preconditions {
      */
     public static boolean isEmpty(Map map) {
         boolean ret = isNull(map);
-        if (!ret)
-            ret |= map.isEmpty();
+        if (!ret) ret |= map.isEmpty();
         if (ret) Config.getInstance().getLog().d(LOG_PREFIX + "map is empty");
         return ret;
     }
@@ -115,7 +112,7 @@ public class Preconditions {
      * @return
      */
     public static boolean condition(boolean condition) {
-        if (condition) Config.getInstance().getLog().d(LOG_PREFIX + "map is empty");
+        if (condition) Config.getInstance().getLog().d(LOG_PREFIX + "condition: " + condition);
         return condition;
     }
 
@@ -128,7 +125,7 @@ public class Preconditions {
      * @param <T>
      * @return
      */
-    public static <T> T needNotNull(T reference) {
+    public static <T,R> T needNotNull(T reference) {
         if (null == reference) {
             Config.getInstance().getLog().e("null == reference");
             throw new NullPointerException();

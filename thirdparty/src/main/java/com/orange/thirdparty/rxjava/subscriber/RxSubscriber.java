@@ -3,10 +3,10 @@ package com.orange.thirdparty.rxjava.subscriber;
 import com.orange.lib.common.reponse.BaseResponse;
 import com.orange.lib.constance.IConst;
 import com.orange.lib.mvp.model.net.callback.loading.ICallback;
-import com.orange.utils.common.Commons;
-import com.orange.lib.utils.Reflections;
 import com.orange.lib.utils.Preconditions;
+import com.orange.lib.utils.Reflections;
 import com.orange.thirdparty.rxjava.parse.RxParser;
+import com.orange.utils.common.Commons;
 
 import java.lang.reflect.Type;
 
@@ -30,12 +30,12 @@ public class RxSubscriber {
     private RxSubscriber() {
     }
 
-    public <T> Disposable subscribe(Observable<ResponseBody> observable, ICallback<T> netCallback) {
+    public <T> Disposable subscribe(Observable<T> observable, ICallback<T> netCallback) {
         Type type = Reflections.getGenericActualTypeArg(netCallback.getClass());
         return subscribe(observable, netCallback, type);
     }
 
-    private <T> Disposable subscribe(Observable<ResponseBody> observable, ICallback<T> netCallback, Type type) {
+    private <T> Disposable subscribe(Observable<T> observable, ICallback<T> netCallback, Type type) {
         if (Preconditions.isNull(observable)) return null;
         return observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

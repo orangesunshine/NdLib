@@ -1,7 +1,5 @@
 package com.orange.lib.mvp.model.net.callback.loading;
 
-import com.orange.lib.mvp.model.net.netcancel.INetCancel;
-
 /**
  * 网络回调抽象层
  *
@@ -32,7 +30,4 @@ public interface ICallback<T> {
      * @param error
      */
     void onError(int code, Throwable error);
-
-
-    void setINetCancel(INetCancel INetCancel);
 }
