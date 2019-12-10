@@ -56,9 +56,12 @@ public class Preconditions {
      * @param charSequence
      * @return
      */
-    public static boolean isEmpty(CharSequence charSequence) {
+    public static boolean isSpace(CharSequence charSequence) {
         boolean ret = null == charSequence || 0 == charSequence.length();
-        if (ret) Config.getInstance().getLog().d(LOG_PREFIX + "charSequence is empty");
+        for (int i = 0, len = charSequence.length(); i < len; i++) {
+            if (!Character.isWhitespace(charSequence.charAt(i))) return false;
+        }
+        if (ret) Config.getInstance().getLog().d(LOG_PREFIX + "charSequence is isSpace");
         return ret;
     }
 
@@ -68,11 +71,11 @@ public class Preconditions {
      * @param charSequences
      * @return
      */
-    public static boolean isEmptys(CharSequence... charSequences) {
+    public static boolean isSpaces(CharSequence... charSequences) {
         boolean ret = isNull(charSequences);
         if (!ret) {
             for (CharSequence charSequence : charSequences) {
-                ret |= isEmpty(charSequence);
+                ret |= isSpace(charSequence);
             }
         }
         if (ret) Config.getInstance().getLog().d(LOG_PREFIX + "charSequences is isEmptys");
@@ -125,11 +128,44 @@ public class Preconditions {
      * @param <T>
      * @return
      */
-    public static <T,R> T needNotNull(T reference) {
+    public static <T, R> T needNotNull(T reference) {
+        return needNotNull(reference, "null == reference");
+    }
+
+    /**
+     * @param reference
+     * @param <T>
+     * @return
+     */
+    public static <T, R> T needNotNull(T reference, CharSequence charSequence) {
         if (null == reference) {
-            Config.getInstance().getLog().e("null == reference");
+            Config.getInstance().getLog().e(isSpace(charSequence) ? "null == reference" : String.valueOf(charSequence));
             throw new NullPointerException();
         }
         return reference;
+    }
+
+    /**
+     * @param references
+     * @param <T>
+     * @return
+     */
+    public static <T> void needNotNull(T... references) {
+        needNotNull("references has null", references);
+    }
+
+    /**
+     * @param references
+     * @param <T>
+     * @return
+     */
+    public static <T> void needNotNull(CharSequence charSequence, T... references) {
+        if (null == references) {
+            Config.getInstance().getLog().e(isSpace(charSequence) ? "references has null" : String.valueOf(charSequence));
+            throw new NullPointerException();
+        }
+        for (T reference : references) {
+            needNotNull(reference);
+        }
     }
 }

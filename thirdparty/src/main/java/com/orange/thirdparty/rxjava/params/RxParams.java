@@ -4,6 +4,7 @@ import com.orange.lib.mvp.model.net.request.request.Params;
 import com.orange.lib.utils.Preconditions;
 import com.orange.thirdparty.retrofit.RetrofitClient;
 import com.orange.thirdparty.retrofit.api.IRetrofitApi;
+import com.orange.thirdparty.rxjava.params.generate.IGenerateObservable;
 
 import java.lang.reflect.Type;
 import java.util.Map;
@@ -11,9 +12,7 @@ import java.util.Map;
 import io.reactivex.Observable;
 import okhttp3.ResponseBody;
 
-public class RxParams extends Params {
-
-
+public class RxParams extends Params implements IGenerateObservable<ResponseBody> {
     public RxParams(Builder builder) {
         super(builder);
     }
@@ -67,7 +66,16 @@ public class RxParams extends Params {
         }
     }
 
-    public Observable<ResponseBody> generateObservable() {
+    @Override
+    public RxParams addParams(String key, String value) {
+        if (Preconditions.isNull(mParams)) return this;
+        mParams.put(key, value);
+        return this;
+    }
+
+    @Override
+    public Observable<ResponseBody> getObservable() {
+        Preconditions.needNotNull(getType());
         Params.Method method = getMethod();
         if (Preconditions.isNull(method)) method = Params.Method.POST;
         String url = getUrl();
@@ -82,6 +90,12 @@ public class RxParams extends Params {
             throw new IllegalArgumentException();
         }
         return observable;
+    }
+
+    @Override
+    public Observable<ResponseBody> getObservable(Type type) {
+        mType = Preconditions.needNotNull(type);
+        return getObservable();
     }
 
     /**

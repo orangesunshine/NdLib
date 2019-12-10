@@ -14,6 +14,8 @@ public interface ILog {
 
     void e(@NonNull String message, @Nullable Object... args);
 
+    void e(@Nullable Throwable throwable);
+
     void e(@Nullable Throwable throwable, @NonNull String message, @Nullable Object... args);
 
     void w(@NonNull String message, @Nullable Object... args);

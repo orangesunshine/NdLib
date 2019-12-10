@@ -30,4 +30,7 @@ public interface ICallback<T> {
      * @param error
      */
     void onError(int code, Throwable error);
+
+    void setOnCompleteListener(OnCompleteListener listener);
 }
+

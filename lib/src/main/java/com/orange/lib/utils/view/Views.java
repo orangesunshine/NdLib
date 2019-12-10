@@ -235,7 +235,7 @@ public class Views {
     public static boolean copy2Clipboard(Context context, TextView tv) {
         if (Preconditions.isNull(tv)) return false;
         String trim = tv.getText().toString().trim();
-        if (!Preconditions.isEmpty(trim)) {
+        if (!Preconditions.isSpace(trim)) {
             //获取剪贴版
             ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
             //创建ClipData对象

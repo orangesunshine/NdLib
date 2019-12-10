@@ -34,6 +34,11 @@ public class LoggerImpl implements ILog {
     }
 
     @Override
+    public void e(@Nullable Throwable throwable) {
+        e(throwable, "");
+    }
+
+    @Override
     public void e(@Nullable Throwable throwable, @NonNull String message, @Nullable Object... args) {
         Logger.e(throwable, message, args);
     }

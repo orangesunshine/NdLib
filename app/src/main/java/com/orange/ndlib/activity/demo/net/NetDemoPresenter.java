@@ -6,6 +6,7 @@ import com.orange.lib.mvp.model.net.callback.loading.PageCallback;
 import com.orange.lib.mvp.model.net.netcancel.INetCancel;
 import com.orange.thirdparty.rxjava.RxRequest;
 import com.orange.thirdparty.rxjava.params.RxParams;
+import com.orange.thirdparty.rxjava.params.RxSerialParams;
 import com.orange.thirdparty.rxjava.parse.FlatMapConvert;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -21,7 +22,7 @@ public class NetDemoPresenter extends NetPresenter<INetDemoContact.View> impleme
         return RxRequest.newInstance(RxParams.Builder.builder()
                 .url("http://localhost:8080/ifc/loading1")
                 .build(String.class))
-                .serialResponseBody(RxParams.Builder.builder().url("http://localhost:8080/ifc/loading2").build(),
+                .serial(RxSerialParams.Builder.builder().url("http://localhost:8080/ifc/loading2").build(),
                         new FlatMapConvert<BaseResponse<String>>() {
                             @Override
                             public void convert(BaseResponse<String> response, RxParams params) {

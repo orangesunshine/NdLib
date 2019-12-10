@@ -1,6 +1,5 @@
 package com.orange.thirdparty.rxjava.wrapper;
 
-
 import io.reactivex.Observable;
 
 public class RxWrapper<T> {
