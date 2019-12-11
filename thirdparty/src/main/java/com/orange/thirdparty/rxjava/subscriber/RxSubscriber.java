@@ -5,6 +5,7 @@ import com.orange.lib.constance.IConst;
 import com.orange.lib.mvp.model.net.callback.loading.ICallback;
 import com.orange.lib.utils.Preconditions;
 import com.orange.lib.utils.Reflections;
+import com.orange.thirdparty.retrofit.RetrofitSubscriber;
 import com.orange.thirdparty.rxjava.parse.RxParser;
 import com.orange.utils.common.Commons;
 
@@ -18,16 +19,9 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.ResponseBody;
 
-public class RxSubscriber {
-    private static RxSubscriber sInstance;
-
-    public static RxSubscriber getInstance() {
-        if (null == sInstance)
-            sInstance = new RxSubscriber();
-        return sInstance;
-    }
-
-    private RxSubscriber() {
+public class RxSubscriber extends RetrofitSubscriber {
+    public static RxSubscriber newInstance() {
+        return new RxSubscriber();
     }
 
     public <T> Disposable subscribe(Observable<T> observable, ICallback<T> netCallback) {

@@ -2,7 +2,7 @@ package com.orange.thirdparty.rxjava.params;
 
 import com.orange.lib.common.reponse.BaseResponse;
 import com.orange.lib.utils.Preconditions;
-import com.orange.thirdparty.rxjava.parse.FlatMapConvert;
+import com.orange.thirdparty.rxjava.parse.RxConvert;
 import com.orange.thirdparty.rxjava.parse.RxParser;
 
 import java.lang.reflect.Type;
@@ -10,42 +10,50 @@ import java.util.Map;
 
 import okhttp3.ResponseBody;
 
-/**
- * @param <T> 上一个请求返回类型
- */
-public class RxSerialParams<T> extends RxParams {
-    protected FlatMapConvert mFlatMapConvert;
+public class RxSerialParams extends RxParams {
+    protected RxConvert mRxConvert;
 
     public RxSerialParams(Builder builder) {
         super(builder);
-        mFlatMapConvert = builder.mFlatMapConvert;
+        mRxConvert = builder.mRxConvert;
     }
 
+    /**
+     * 上一个请求返回ResponseBody
+     *
+     * @param responseBody
+     */
     public void flatMapConvert(ResponseBody responseBody) {
-        if (null != mFlatMapConvert) mFlatMapConvert.convert(parse(responseBody), this);
+        if (null != mRxConvert) mRxConvert.convert(parse(responseBody), this);
     }
 
+    /**
+     * 上一个请求返回T
+     *
+     * @param response
+     * @param <T>
+     */
     public <T> void flatMapConvert(T response) {
-        if (null != mFlatMapConvert) mFlatMapConvert.convert(response, this);
+        if (null != mRxConvert) mRxConvert.convert(response, this);
     }
 
     public BaseResponse parse(ResponseBody responseBody) {
         return RxParser.parse(responseBody, mType);
     }
 
-    public FlatMapConvert<BaseResponse<T>> getFlatMapConvert() {
-        return mFlatMapConvert;
+    public RxConvert getRxConvert() {
+        return mRxConvert;
     }
 
     public static class Builder<T> extends RxParams.Builder {
-        protected FlatMapConvert<T> mFlatMapConvert;
+        protected RxConvert<T> mRxConvert;
 
         public static Builder builder() {
             return new Builder();
         }
 
-        public Builder flatMapConvert(FlatMapConvert<T> flatMapConvert) {
-            mFlatMapConvert = flatMapConvert;
+        public Builder flatMapConvert(RxConvert<T> rxConvert) {
+            mRxConvert = rxConvert;
             return this;
         }
 

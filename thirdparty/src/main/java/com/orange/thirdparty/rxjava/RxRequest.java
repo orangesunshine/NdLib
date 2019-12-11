@@ -1,21 +1,14 @@
 package com.orange.thirdparty.rxjava;
 
 
-import com.orange.lib.common.reponse.BaseResponse;
 import com.orange.lib.mvp.model.net.callback.loading.ICallback;
-import com.orange.lib.mvp.model.net.callback.loading.OnCompleteListener;
-import com.orange.lib.mvp.model.net.netcancel.INetCancel;
 import com.orange.lib.utils.Preconditions;
+import com.orange.thirdparty.retrofit.RetrofitRequest;
 import com.orange.thirdparty.rxjava.params.RxParams;
 import com.orange.thirdparty.rxjava.params.RxSerialParams;
-import com.orange.thirdparty.rxjava.parse.FlatMapConvert;
-import com.orange.thirdparty.rxjava.subscriber.RxSubscriber;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.orange.thirdparty.rxjava.parse.RxConvert;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
 import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Function3;
 import io.reactivex.functions.Function4;
@@ -25,12 +18,10 @@ import okhttp3.ResponseBody;
 /**
  * 单个、串行、并行（2,3,4）网络请求
  */
-public class RxRequest {
-    private List<INetCancel> mNetCancels = new ArrayList<>();
-    private Observable mObservable;
+public class RxRequest extends RetrofitRequest {
 
-    private RxRequest(Observable observable) {
-        mObservable = Preconditions.needNotNull(observable);
+    public RxRequest(Observable observable) {
+        super(observable);
     }
 
     /**
@@ -52,16 +43,28 @@ public class RxRequest {
     }
 
     /**
+     * 串行访问网络，上一个接口返回ResponseBody
+     *
+     * @param params 用于动态添加参数，生成Observable
+     * @return
+     */
+    public RxRequest serial(RxSerialParams params) {
+        Preconditions.needNotNull(params, params.getRxConvert());
+        mRetrofitRequest.serial(params, params.getRxConvert());
+        return this;
+    }
+
+    /**
      * 串行访问网络
      *
      * @param params 用于动态添加参数，生成Observable
      * @return
      */
     public RxRequest serial(RxSerialParams<ResponseBody> params) {
-        if (Preconditions.isNulls(mObservable, params, params.getFlatMapConvert())) return this;
-        mObservable = serial(mObservable, params, new FlatMapConvert<ResponseBody>() {
+        Preconditions.needNotNull(mObservable, params, params.getRxConvert());
+        mObservable = mRetrofitRequest.serial(mObservable, params, new RxConvert<ResponseBody>() {
             @Override
-            public void convert(ResponseBody response, RxParams rxSerialParams) {
+            public void convert(ResponseBody response, RxParams rxParams) {
                 if (null != params) params.flatMapConvert(response);
             }
         });
@@ -80,8 +83,8 @@ public class RxRequest {
      * @<code>mObservable</code> 网络1
      */
     public <T1, T2, R> RxRequest parallel(Observable<T2> observable, BiFunction<T1, T2, R> biFunction) {
-        if (Preconditions.isNulls(mObservable, observable, biFunction)) return this;
-        mObservable = Observable.zip(mObservable.subscribeOn(Schedulers.io()), observable.subscribeOn(Schedulers.io()), biFunction);
+        Preconditions.needNotNull(mObservable, observable, biFunction);
+        mObservable = mRetrofitRequest.parallel(mObservable, observable, biFunction);
         return this;
     }
 
@@ -99,8 +102,8 @@ public class RxRequest {
      * @<code>mObservable</code> 网络1
      */
     public <T1, T2, T3, R> RxRequest parallel(Observable<T2> observable2, Observable<T3> observable3, Function3<T1, T2, T3, R> function3) {
-        if (Preconditions.isNulls(mObservable, observable2, observable3, function3)) return this;
-        mObservable = Observable.zip(mObservable.subscribeOn(Schedulers.io()), observable2.subscribeOn(Schedulers.io()), observable3.subscribeOn(Schedulers.io()), function3);
+        Preconditions.needNotNull(mObservable, observable2, observable3, function3);
+        mObservable = mRetrofitRequest.parallel(mObservable, observable2, observable3, function3);
         return this;
     }
 
@@ -120,8 +123,7 @@ public class RxRequest {
      * @<code>mObservable</code> 网络1
      */
     public <T1, T2, T3, T4, R> RxRequest parallel(Observable<T2> observable2, Observable<T3> observable3, Observable<T4> observable4, Function4<T1, T2, T3, T4, R> function4) {
-        if (Preconditions.isNulls(mObservable, observable2, observable3, observable4, function4))
-            return this;
+        Preconditions.needNotNull(mObservable, observable2, observable3, observable4, function4);
         mObservable = Observable.zip(mObservable.subscribeOn(Schedulers.io()), observable2.subscribeOn(Schedulers.io()), observable3.subscribeOn(Schedulers.io()), observable4.subscribeOn(Schedulers.io()), function4);
         return this;
     }
@@ -134,40 +136,24 @@ public class RxRequest {
      * @return
      */
     public <T> RxNetCancel subcribe(ICallback<T> callback) {
-        RxNetCancel rxNetCancel = new RxNetCancel(RxSubscriber.getInstance().subscribe(mObservable, callback));
-        mNetCancels.add(rxNetCancel);
-        if (null != callback)
-            callback.setOnCompleteListener(new OnCompleteListener() {
-                @Override
-                public void onComplete() {
-                    if (!Preconditions.isEmpty(mNetCancels))
-                        mNetCancels.remove(rxNetCancel);
-                }
-            });
-        return rxNetCancel;
+        return mRetrofitRequest.subcribe(mObservable, callback);
     }
 
     ///////////////////////////////////////////////////////////////////////////
-    // tools工具
+    // 基础方法
     ///////////////////////////////////////////////////////////////////////////
 
     /**
      * 串行访问网络
      *
+     * @param observable
      * @param params
      * @param <T>
      * @return
      */
-    public <T> Observable<ResponseBody> serial(Observable<BaseResponse<T>> observable, RxSerialParams params) {
+    public <T> Observable<ResponseBody> serial(Observable<T> observable, RxSerialParams params) {
         Preconditions.needNotNull(observable, params);
-        return observable.observeOn(Schedulers.io())
-                .flatMap(new io.reactivex.functions.Function<BaseResponse<T>, ObservableSource<ResponseBody>>() {
-                    @Override
-                    public ObservableSource<ResponseBody> apply(BaseResponse<T> baseResponse) {
-                        if (null != params) params.flatMapConvert(baseResponse);
-                        return Preconditions.needNotNull(params).getObservable();
-                    }
-                });
+        return mRetrofitRequest.serial(observable, params, params.getRxConvert());
     }
 
     /**
@@ -178,92 +164,7 @@ public class RxRequest {
      * @param <T>
      * @return
      */
-    public <T> Observable<ResponseBody> serial(Observable<T> observable, RxParams params, FlatMapConvert<T> convert) {
-        Preconditions.needNotNull(observable, params);
-        return observable.observeOn(Schedulers.io())
-                .flatMap(new io.reactivex.functions.Function<T, ObservableSource<ResponseBody>>() {
-                    @Override
-                    public ObservableSource<ResponseBody> apply(T t) {
-                        if (null != convert) convert.convert(t, params);
-                        return Preconditions.needNotNull(params).getObservable();
-                    }
-                });
-    }
-
-    /**
-     * 并行访问网络-2个
-     *
-     * @param observable1 网络1
-     * @param observable2 网络2
-     * @param biFunction  回调
-     * @param <T1>        网络1解析
-     * @param <T2>        网络1解析
-     * @param <R>         合并后返回
-     * @return
-     */
-    public <T1, T2, R> void parallel(Observable<T1> observable1, Observable<T2> observable2, BiFunction<T1, T2, R> biFunction) {
-        if (Preconditions.isNulls(observable1, observable2, biFunction)) return;
-        Observable.zip(observable1.subscribeOn(Schedulers.io()), observable2.subscribeOn(Schedulers.io()), biFunction);
-    }
-
-    /**
-     * 并行访问网络-3个
-     *
-     * @param observable1 网络1
-     * @param observable2 网络2
-     * @param observable3 网络3
-     * @param function3   回调
-     * @param <T1>        网络1解析
-     * @param <T2>        网络1解析
-     * @param <T3>        网络1解析
-     * @param <R>         合并后返回
-     * @return
-     */
-    public <T1, T2, T3, R> void parallel(Observable<T1> observable1, Observable<T2> observable2, Observable<T3> observable3, Function3<T1, T2, T3, R> function3) {
-        if (Preconditions.isNulls(observable1, observable2, observable3, function3)) return;
-        Observable.zip(observable1.subscribeOn(Schedulers.io()), observable2.subscribeOn(Schedulers.io()), observable3.subscribeOn(Schedulers.io()), function3);
-    }
-
-    /**
-     * 并行访问网络-4个
-     *
-     * @param observable1 网络1
-     * @param observable2 网络2
-     * @param observable3 网络3
-     * @param observable4 网络4
-     * @param function4   回调
-     * @param <T1>        网络1解析
-     * @param <T2>        网络1解析
-     * @param <T3>        网络1解析
-     * @param <T4>        网络4解析
-     * @param <R>         合并后返回
-     * @return
-     */
-    public <T1, T2, T3, T4, R> void parallel(Observable<T1> observable1, Observable<T2> observable2, Observable<T3> observable3, Observable<T4> observable4, Function4<T1, T2, T3, T4, R> function4) {
-        if (Preconditions.isNulls(observable1, observable2, observable3, observable4, function4))
-            return;
-        Observable.zip(observable1.subscribeOn(Schedulers.io()), observable2.subscribeOn(Schedulers.io()), observable3.subscribeOn(Schedulers.io()), observable4.subscribeOn(Schedulers.io()), function4);
-    }
-
-    /**
-     * 订阅网络（单个）
-     *
-     * @param observable 网络数据
-     * @param callback   网络回调
-     * @param <T>
-     * @return
-     */
-    public <T> RxNetCancel subcribe(Observable<T> observable, ICallback<T> callback) {
-        RxNetCancel rxNetCancel = new RxNetCancel(RxSubscriber.getInstance().subscribe(observable, callback));
-        mNetCancels.add(rxNetCancel);
-        if (null != callback)
-            callback.setOnCompleteListener(new OnCompleteListener() {
-                @Override
-                public void onComplete() {
-                    if (!Preconditions.isEmpty(mNetCancels))
-                        mNetCancels.remove(rxNetCancel);
-                }
-            });
-        return rxNetCancel;
+    public <T> Observable<ResponseBody> serial(Observable<T> observable, RxParams params, RxConvert<T> convert) {
+        return mRetrofitRequest.serial(observable, params, convert);
     }
 }
