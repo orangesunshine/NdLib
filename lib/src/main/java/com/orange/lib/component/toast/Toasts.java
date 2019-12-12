@@ -1,11 +1,10 @@
-package com.orange.lib.utils.toast;
+package com.orange.lib.component.toast;
 
 import android.content.Context;
 
 import androidx.annotation.DrawableRes;
 
 import com.orange.lib.R;
-import com.orange.lib.component.toast.CommonToast;
 
 /**
  * @Author: orange

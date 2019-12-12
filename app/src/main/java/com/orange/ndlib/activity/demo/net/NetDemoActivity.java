@@ -59,7 +59,6 @@ public class NetDemoActivity extends NetActivity<INetDemoContact.Presenter> impl
         mPage.showLoading();
     }
 
-
     @Retry
     public void test() {
         msg("test");

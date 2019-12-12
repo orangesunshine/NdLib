@@ -4,7 +4,7 @@ import android.os.SystemClock;
 
 import com.orange.lib.common.config.Config;
 import com.orange.lib.constance.IInitConst;
-import com.orange.lib.utils.toast.Toasts;
+import com.orange.lib.component.toast.Toasts;
 
 import static com.orange.lib.constance.IConst.LINE_SEPARATOR;
 

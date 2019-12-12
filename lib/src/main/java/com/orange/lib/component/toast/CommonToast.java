@@ -21,6 +21,7 @@ import com.orange.lib.common.convert.IHolderConvert;
 import com.orange.lib.common.holder.CommonHolder;
 import com.orange.lib.common.holder.IHolder;
 import com.orange.lib.utils.Preconditions;
+import com.orange.utils.base.Utils;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -254,10 +255,10 @@ public class CommonToast<T> {
 
         private WindowManager.LayoutParams mParams = new WindowManager.LayoutParams();
 
-        private final OnActivityDestroyListener LISTENER =
-                new OnActivityDestroyListener() {
+        private final Utils.OnActivityDestroyedListener LISTENER =
+                new Utils.OnActivityDestroyedListener() {
                     @Override
-                    public void onActivityDestroy() {
+                    public void onActivityDestroyed(Activity activity) {
                         if (mInstance == null || null == mInstance.getIToast()) return;
                         mInstance.getIToast().cancel();
                     }
@@ -283,7 +284,7 @@ public class CommonToast<T> {
                 mParams.type = WindowManager.LayoutParams.TYPE_TOAST;
             } else if (Build.VERSION.SDK_INT == Build.VERSION_CODES.N_MR1) {
                 if (Preconditions.isNull(context) || !(context instanceof Activity))
-                    context = Utils.getTopActivityOrApp();
+                    context = Utils.getApp();
                 if (Preconditions.isNull(context) || !(context instanceof Activity)) {
                     Log.e("ToastUtils", "Couldn't get top Activity.");
                     return;
@@ -295,7 +296,7 @@ public class CommonToast<T> {
                 }
                 mWM = activity.getWindowManager();
                 mParams.type = WindowManager.LayoutParams.LAST_APPLICATION_WINDOW;
-                Utils.getActivityLifecycle().addActDesLr(activity, LISTENER);
+                Utils.getActivityLifecycle().addOnActivityDestroyedListener(activity, LISTENER);
             } else {
                 mWM = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
                 mParams.type = WindowManager.LayoutParams.FIRST_SYSTEM_WINDOW + 37;

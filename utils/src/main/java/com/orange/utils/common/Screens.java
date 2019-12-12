@@ -18,7 +18,6 @@ import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresPermission;
-import com.orange.utils.base.Utils;
 
 import static android.Manifest.permission.WRITE_SETTINGS;
 

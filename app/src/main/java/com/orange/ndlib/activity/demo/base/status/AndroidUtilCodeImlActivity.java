@@ -5,7 +5,7 @@ import android.widget.SeekBar;
 
 import com.orange.lib.common.holder.IHolder;
 import com.orange.lib.mvp.contact.view.BaseActivity;
-import com.orange.lib.utils.toast.Toasts;
+import com.orange.lib.component.toast.Toasts;
 import com.orange.ndlib.R;
 import com.orange.utils.common.Bars;
 import com.orange.utils.common.Colors;

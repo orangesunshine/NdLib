@@ -2,7 +2,6 @@ package com.orange.lib.mvp.model.net.request.request;
 
 import com.orange.lib.utils.Preconditions;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,7 +10,6 @@ public class Params {
     protected Map<String, String> mParams = new HashMap<>();//请求参数
     protected Map<String, String> mHeaders = new HashMap<>();//请求头
     protected Method mMethod = Method.POST;//请求方式
-    protected Type mType;//解析泛型
 
     protected Params() {
     }
@@ -21,7 +19,6 @@ public class Params {
         mParams = builder.mParams;
         mHeaders = builder.mHeaders;
         mMethod = builder.mMethod;
-        mType = builder.mType;
     }
 
     public Params addParams(String key, String value) {
@@ -46,9 +43,6 @@ public class Params {
         return mMethod;
     }
 
-    public Type getType() {
-        return mType;
-    }
 
     @Override
     public String toString() {
@@ -57,7 +51,6 @@ public class Params {
                 ", mParams=" + mParams +
                 ", mHeaders=" + mHeaders +
                 ", mMethod=" + mMethod +
-                ", mType=" + mType +
                 '}';
     }
 
@@ -70,7 +63,6 @@ public class Params {
         protected Map<String, String> mParams = new HashMap<>();//请求参数
         protected Map<String, String> mHeaders = new HashMap<>();//请求头
         protected Method mMethod;//请求方式
-        protected Type mType;//解析泛型
 
         public static Builder builder() {
             return new Builder();
@@ -101,11 +93,6 @@ public class Params {
         public Builder method(Method method) {
             mMethod = method;
             return this;
-        }
-
-        public Params build(Type type) {
-            mType = type;
-            return new Params(this);
         }
 
         public Params build() {

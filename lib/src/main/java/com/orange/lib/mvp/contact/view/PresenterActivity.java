@@ -6,7 +6,7 @@ import com.orange.lib.mvp.contact.IContact;
 import com.orange.lib.mvp.view.loading.ILoading;
 import com.orange.lib.mvp.view.loading.Loading;
 import com.orange.lib.utils.Preconditions;
-import com.orange.lib.utils.toast.Toasts;
+import com.orange.lib.component.toast.Toasts;
 
 /**
  * @Author: orange

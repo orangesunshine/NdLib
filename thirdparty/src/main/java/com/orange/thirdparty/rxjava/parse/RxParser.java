@@ -7,7 +7,6 @@ import com.orange.lib.common.reponse.BaseResponse;
 import com.orange.lib.mvp.model.net.callback.loading.ICallback;
 import com.orange.lib.utils.Preconditions;
 import com.orange.lib.utils.Reflections;
-import com.orange.thirdparty.rxjava.params.RxParams;
 import com.orange.utils.common.Commons;
 import com.orange.utils.common.Gsons;
 
@@ -40,10 +39,6 @@ public class RxParser {
         if (null == type)
             throw new IllegalArgumentException("please special " + callback.getClass() + " GenericInterfaces");
         return parse(responseBody, new ParameterizedTypeImpl(BaseResponse.class, new Type[]{type}));
-    }
-
-    public static <T> BaseResponse<T> parse(ResponseBody responseBody, RxParams params) {
-        return parse(responseBody, Preconditions.needNotNull(params).getType());
     }
 
     public static <T> BaseResponse<T> parse(ResponseBody responseBody, Type type) {

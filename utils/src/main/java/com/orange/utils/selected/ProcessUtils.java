@@ -15,8 +15,6 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresPermission;
 
-import com.orange.utils.base.Utils;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;

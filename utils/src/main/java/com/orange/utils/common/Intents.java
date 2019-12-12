@@ -18,8 +18,6 @@ import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.content.FileProvider;
 import androidx.core.util.Pair;
 
-import com.orange.utils.base.Utils;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.LinkedList;

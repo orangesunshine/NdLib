@@ -58,19 +58,33 @@
             android:layout_height="wrap_content"
             android:text="parallel" />
 
+        <Button
+            android:id="@+id/btn_serial_enter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="serial_enter" />
+
+        <Button
+            android:id="@+id/btn_parallel_enter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="parallel_enter" />
+
         <TextView
             android:id="@+id/tv_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:gravity="center" />
+            android:gravity="center"
+            android:text="serial：" />
 
         <TextView
-            android:id="@+id/tv_multi"
+            android:id="@+id/tv_parallel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:gravity="center" />
+            android:gravity="center"
+            android:text="parallel：" />
     </LinearLayout>
 
     <FrameLayout

@@ -5,19 +5,20 @@ import com.orange.lib.mvp.model.net.callback.loading.OnCompleteListener;
 import com.orange.lib.mvp.model.net.netcancel.INetCancel;
 import com.orange.lib.utils.Preconditions;
 import com.orange.thirdparty.rxjava.RxNetCancel;
-import com.orange.thirdparty.rxjava.params.RxParams;
 import com.orange.thirdparty.rxjava.params.generate.IGenerateObservable;
+import com.orange.thirdparty.rxjava.parse.RxMapper;
 import com.orange.thirdparty.rxjava.subscriber.RxSubscriber;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
 import io.reactivex.functions.BiFunction;
+import io.reactivex.functions.Function;
 import io.reactivex.functions.Function3;
 import io.reactivex.functions.Function4;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.ResponseBody;
 
 public class RetrofitRequest {
     private List<INetCancel> mNetCancels = new ArrayList<>();
@@ -33,10 +34,6 @@ public class RetrofitRequest {
         return new RetrofitRequest(observable);
     }
 
-    public static RetrofitRequest newInstance(RxParams rxParams) {
-        return newInstance(Preconditions.needNotNull(rxParams).getObservable());
-    }
-
     // </editor-fold>
 
     /**
@@ -45,7 +42,18 @@ public class RetrofitRequest {
      * @param generate 用于动态添加参数，生成Observable
      * @return
      */
-    public <T1, T2> RetrofitRequest serial(IGenerateObservable<T2> generate, RetrofitConvert<T1, T2> convert) {
+    public <T, R> RetrofitRequest serial(IGenerateObservable<R> generate, RxMapper<T> convert) {
+        mObservable = serial(mObservable, generate, convert);
+        return this;
+    }
+
+    /**
+     * 串行访问网络，上一个接口返回ResponseBody
+     *
+     * @param generate 用于动态添加参数，生成Observable
+     * @return
+     */
+    public <T, R> RetrofitRequest serial(IGenerateObservable<R> generate, RetrofitMapper<T> convert) {
         mObservable = serial(mObservable, generate, convert);
         return this;
     }
@@ -114,8 +122,30 @@ public class RetrofitRequest {
      * @param <T>
      * @return
      */
-    public <T> RxNetCancel subcribe(ICallback<T> callback) {
-        return subcribe(mObservable, callback);
+    public <T> RxNetCancel subscribe(ICallback<T> callback) {
+        return subscribe(mObservable, callback);
+    }
+
+    /**
+     * 订阅网络（单个）
+     *
+     * @param callback 网络回调
+     * @param <T>
+     * @return
+     */
+    public <T> RxNetCancel subscribeResponseBody(ICallback<T> callback) {
+        return subscribeResponseBody(mObservable, callback);
+    }
+
+    /**
+     * 订阅网络（单个）
+     *
+     * @param callback 网络回调
+     * @param <T>
+     * @return
+     */
+    public <T> RxNetCancel subscribe(RetrofitSubscriber retrofitSubscriber, ICallback<T> callback) {
+        return subscribe(retrofitSubscriber, mObservable, callback);
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -126,21 +156,12 @@ public class RetrofitRequest {
      * 串行访问网络
      *
      * @param observable
-     * @param convert
-     * @param <T1>
-     * @param <T2>
      * @return
      */
-    public <T1, T2> Observable<T2> serial(Observable<T1> observable, IGenerateObservable<T2> generate, RetrofitConvert<T1, T2> convert) {
-        Preconditions.needNotNull(observable, generate, convert);
+    public Observable serial(Observable observable, IGenerateObservable generate, Function function) {
+        Preconditions.needNotNull(observable, generate);
         return observable.observeOn(Schedulers.io())
-                .flatMap(new io.reactivex.functions.Function<T1, ObservableSource<T2>>() {
-                    @Override
-                    public ObservableSource<T2> apply(T1 t1) {
-                        if (null != convert) convert.convert(t1, generate);
-                        return Preconditions.needNotNull(generate).getObservable();
-                    }
-                });
+                .flatMap(function);
     }
 
     /**
@@ -205,9 +226,56 @@ public class RetrofitRequest {
      * @param <T>
      * @return
      */
-    public <T> RxNetCancel subcribe(Observable<T> observable, ICallback<T> callback) {
+    public <T> RxNetCancel subscribe(Observable<T> observable, ICallback<T> callback) {
+        return subscribe(RetrofitSubscriber.newInstance(), observable, callback);
+    }
+
+    /**
+     * 订阅网络（单个）- 网络返回类型为泛型
+     *
+     * @param observable 网络数据
+     * @param callback   网络回调
+     * @param <T>
+     * @return
+     */
+    public <T> RxNetCancel subscribe(RetrofitSubscriber retrofitSubscriber, Observable<T> observable, ICallback<T> callback) {
         Preconditions.needNotNull(observable, callback);
-        RxNetCancel rxNetCancel = new RxNetCancel(RxSubscriber.newInstance().subscribe(observable, callback));
+        RxNetCancel rxNetCancel = new RxNetCancel(Preconditions.needNotNull(retrofitSubscriber).subscribe(observable, callback));
+        mNetCancels.add(rxNetCancel);
+        if (null != callback)
+            callback.setOnCompleteListener(new OnCompleteListener() {
+                @Override
+                public void onComplete() {
+                    if (!Preconditions.isEmpty(mNetCancels))
+                        mNetCancels.remove(rxNetCancel);
+                }
+            });
+        return rxNetCancel;
+    }
+
+    /**
+     * 订阅网络（单个）- 网络返回类型为ResponseBody
+     *
+     * @param observable
+     * @param callback
+     * @param <T>
+     * @return
+     */
+    public <T> RxNetCancel subscribeResponseBody(Observable<ResponseBody> observable, ICallback<T> callback) {
+        return subscribeResponseBody(RxSubscriber.newInstance(), observable, callback);
+    }
+
+    /**
+     * 订阅网络（单个）- 网络返回类型为ResponseBody
+     *
+     * @param observable 网络数据
+     * @param callback   网络回调
+     * @param <T>
+     * @return
+     */
+    public <T> RxNetCancel subscribeResponseBody(RxSubscriber rxSubscriber, Observable<ResponseBody> observable, ICallback<T> callback) {
+        Preconditions.needNotNull(observable, callback);
+        RxNetCancel rxNetCancel = new RxNetCancel(Preconditions.needNotNull(rxSubscriber).subscribe(observable, callback));
         mNetCancels.add(rxNetCancel);
         if (null != callback)
             callback.setOnCompleteListener(new OnCompleteListener() {

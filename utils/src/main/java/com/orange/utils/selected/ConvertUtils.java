@@ -11,7 +11,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 
-import com.orange.utils.base.Utils;
 import com.orange.utils.constant.MemoryConstants;
 import com.orange.utils.constant.TimeConstants;
 

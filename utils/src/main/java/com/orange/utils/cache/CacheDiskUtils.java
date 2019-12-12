@@ -12,7 +12,6 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.orange.utils.base.Utils;
 import com.orange.utils.constant.CacheConstants;
 
 import org.json.JSONArray;
