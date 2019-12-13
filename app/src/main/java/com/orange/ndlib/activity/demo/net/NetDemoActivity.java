@@ -77,6 +77,6 @@ public class NetDemoActivity extends NetActivity<INetDemoContact.Presenter> impl
 
     @Override
     public void setLoading2Data(String data) {
-        mHolder.setText(R.id.tv_multi, data);
+        mHolder.setText(R.id.tv_parallel, data);
     }
 }

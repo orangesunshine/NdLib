@@ -30,7 +30,7 @@ public class RetrofitPrefixSuffixApi implements IPrefixSuffixApi {
     private RxSubscriber mRxSubscriber;
 
     public <T> RetrofitPrefixSuffixApi() {
-        mRxSubscriber = RxSubscriber.getInstance();
+        mRxSubscriber = RxSubscriber.newInstance();
     }
 
     /**

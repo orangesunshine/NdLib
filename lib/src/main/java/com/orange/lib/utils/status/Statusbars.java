@@ -15,6 +15,8 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.orange.utils.base.Utils;
+
 import static com.orange.lib.utils.Activitys.getActivityByView;
 
 /**

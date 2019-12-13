@@ -48,7 +48,7 @@ public abstract class BaseActivity extends FragmentActivity {
     /**
      * onCreate生命周期调用
      */
-    public void onActivityCreate(Bundle bundle) {
+    public void onActivityCreated(Bundle bundle) {
         initVars(bundle);//初始化变量
 
         FrameLayout content = getWindow().getDecorView().findViewById(android.R.id.content);
@@ -100,7 +100,7 @@ public abstract class BaseActivity extends FragmentActivity {
      * 子类可以重写决定是否使用透明状态栏
      */
     protected boolean translucentStatusBar() {
-        return false;
+        return true;
     }
 
     /**

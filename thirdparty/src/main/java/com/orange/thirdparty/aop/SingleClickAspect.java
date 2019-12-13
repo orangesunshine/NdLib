@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 
-import com.orange.utils.common.antishake.SingleClickUtils;
+import com.orange.utils.common.antishake.AntiShakes;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -14,9 +14,9 @@ import org.aspectj.lang.annotation.Pointcut;
 
 import java.lang.ref.WeakReference;
 
-import static com.orange.utils.common.antishake.SingleClickUtils.DEFAULT_INTERVAL_MILLS;
-import static com.orange.utils.common.antishake.SingleClickUtils.MAX_INTERVAL_MILLS;
-import static com.orange.utils.common.antishake.SingleClickUtils.MIDDLE_INTERVAL_MILLS;
+import static com.orange.utils.common.antishake.AntiShakes.DEFAULT_INTERVAL_MILLS;
+import static com.orange.utils.common.antishake.AntiShakes.MAX_INTERVAL_MILLS;
+import static com.orange.utils.common.antishake.AntiShakes.MIDDLE_INTERVAL_MILLS;
 
 /**
  * @Author: orange
@@ -58,7 +58,7 @@ public class SingleClickAspect {
         }
         if (view == null) return;
         // 判断是否快速点击
-        if (!SingleClickUtils.isFastDoubleClick(view, getInterval(view))) {
+        if (!AntiShakes.isFastDoubleClick(view, getInterval(view))) {
             // 不是快速点击，执行原方法
             joinPoint.proceed();
         }
@@ -97,7 +97,7 @@ public class SingleClickAspect {
                 }
             }
         }
-        if (SingleClickUtils.isFastDoubleClick(DEFAULT_INTERVAL_MILLS))
+        if (AntiShakes.isFastDoubleClick(DEFAULT_INTERVAL_MILLS))
             return;
         if (null != joinPoint)
             joinPoint.proceed();

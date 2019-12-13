@@ -3,7 +3,6 @@ package com.orange.thirdparty.rxjava.params.pull;
 import com.orange.lib.utils.Preconditions;
 import com.orange.thirdparty.rxjava.params.RxParams;
 
-import java.lang.reflect.Type;
 import java.util.Map;
 
 import static com.orange.lib.constance.IConst.PAGE_SIZE;
@@ -64,12 +63,6 @@ public class RxPullParams extends RxParams {
         public Builder method(Method method) {
             mMethod = method;
             return this;
-        }
-
-        @Override
-        public RxPullParams build(Type type) {
-            mType = type;
-            return new RxPullParams(this);
         }
 
         @Override

@@ -34,7 +34,6 @@ import static com.orange.lib.constance.IConst.CUSTOM_DURATION_TOAST_LONG;
  */
 public class CommonToast<T> {
     private volatile static CommonToast mInstance;
-    private int mLayoutId;
     private IHolder mHolder;
     public AtomicBoolean isCancel = new AtomicBoolean(true);
     private static final Handler HANDLER = new Handler(Looper.getMainLooper());
@@ -99,7 +98,6 @@ public class CommonToast<T> {
             context = Utils.getTopActivityOrApp();
         if (Preconditions.isNull(context) || Preconditions.isNull(convert) || layoutId <= 0)
             return;
-        mLayoutId = layoutId;
         View contentView = LayoutInflater.from(context).inflate(layoutId, null);
         if (!Preconditions.isNull(contentView)) {
             mHolder = new CommonHolder(contentView);

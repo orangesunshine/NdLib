@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 
 import androidx.annotation.NonNull;
 
+import com.orange.utils.base.Utils;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,7 +25,7 @@ import java.util.Set;
 public final class SPUtils {
 
     private static final Map<String, SPUtils> SP_UTILS_MAP = new HashMap<>();
-    private              SharedPreferences    sp;
+    private SharedPreferences sp;
 
     /**
      * Return the single {@link SPUtils} instance
