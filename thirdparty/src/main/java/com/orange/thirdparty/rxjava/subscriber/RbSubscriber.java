@@ -16,9 +16,9 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.ResponseBody;
 
-public class RxSubscriber {
-    public static RxSubscriber newInstance() {
-        return new RxSubscriber();
+public class RbSubscriber {
+    public static RbSubscriber newInstance() {
+        return new RbSubscriber();
     }
 
     public <T> Disposable subscribe(Observable<ResponseBody> observable, ICallback<T> netCallback) {
@@ -54,7 +54,7 @@ public class RxSubscriber {
                 if (null != netCallback) {
                     int code = result.code;
                     if (Commons.checkCodeSuccess(code)) {
-                        netCallback.onSuccess(result.data);
+                        netCallback.onSuccess(null != result ? result.data : null);
                     } else {
                         netCallback.onError(code, new Throwable(result.msg));
                     }
@@ -73,13 +73,11 @@ public class RxSubscriber {
             @Override
             public void accept(ResponseBody responseBody) {
                 BaseResponse<R> result = RxParser.parse(responseBody, netCallback);
-                if (null == result)
-                    result = RxParser.parse(responseBody, netCallback);
                 if (null == result) return;
                 if (null != netCallback) {
                     int code = result.code;
                     if (Commons.checkCodeSuccess(code)) {
-                        netCallback.onSuccess(result.data);
+                        netCallback.onSuccess(null != result ? result.data : null);
                     } else {
                         netCallback.onError(code, new Throwable(result.msg));
                     }

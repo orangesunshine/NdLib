@@ -4,7 +4,6 @@ import com.orange.lib.mvp.view.page.loading.IPage;
 
 public class PageCallback<T> extends AbsCallback<T> {
     private IPage mPageStatus;
-    private LogCallback mLogNetCallback = new LogCallback();
 
     public PageCallback(IPage pageStatus) {
         mPageStatus = pageStatus;
@@ -15,8 +14,6 @@ public class PageCallback<T> extends AbsCallback<T> {
      */
     @Override
     public void onStart() {
-        if (null != mLogNetCallback)
-            mLogNetCallback.onStart();
         if (null != mPageStatus)
             mPageStatus.showLoading();
     }
@@ -28,8 +25,6 @@ public class PageCallback<T> extends AbsCallback<T> {
      */
     @Override
     public void onSuccess(T t) {
-        if (null != mLogNetCallback)
-            mLogNetCallback.onSuccess(t);
         if (null != mPageStatus)
             mPageStatus.showContent();
     }
@@ -42,19 +37,8 @@ public class PageCallback<T> extends AbsCallback<T> {
      */
     @Override
     public void onError(int code, Throwable error) {
-        if (null != mLogNetCallback)
-            mLogNetCallback.onError(code, error);
+        super.onError(code, error);
         if (null != mPageStatus)
             mPageStatus.showError();
-    }
-
-    /**
-     * 网络请求完成
-     */
-    @Override
-    public void onComplete() {
-        super.onComplete();
-        if (null != mLogNetCallback)
-            mLogNetCallback.onComplete();
     }
 }

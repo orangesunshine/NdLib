@@ -17,12 +17,12 @@ import com.orange.lib.component.recyclerview.IConvertRecyclerView;
 import com.orange.lib.mvp.model.net.callback.loading.ICallback;
 import com.orange.lib.mvp.model.net.callback.loading.LoadingCallback;
 import com.orange.lib.mvp.model.net.callback.loading.PageCallback;
-import com.orange.lib.mvp.view.page.loading.IPage;
-import com.orange.lib.mvp.model.net.request.request.INetRequest;
 import com.orange.lib.mvp.model.net.netcancel.INetCancel;
-import com.orange.lib.mvp.view.loading.ILoading;
-import com.orange.lib.mvp.view.page.pull.IPullPage;
 import com.orange.lib.mvp.model.net.request.IPageNetRequest;
+import com.orange.lib.mvp.model.net.request.request.INetRequest;
+import com.orange.lib.mvp.view.loading.ILoading;
+import com.orange.lib.mvp.view.page.loading.IPage;
+import com.orange.lib.mvp.view.page.pull.IPullPage;
 
 public class NetUtils {
 
@@ -41,7 +41,6 @@ public class NetUtils {
         return netRequest.request(new LoadingCallback<T>(loading) {
             @Override
             public void onSuccess(T t) {
-                super.onSuccess(t);
                 if (null != convert)
                     convert.convert(t);
             }

@@ -5,9 +5,13 @@ import android.view.View;
 import com.orange.lib.activity.retry.Retry;
 import com.orange.lib.common.holder.IHolder;
 import com.orange.lib.mvp.contact.view.NetActivity;
+import com.orange.lib.mvp.view.page.loading.IPage;
 import com.orange.lib.mvp.view.page.loading.LoadingDialogPage;
 import com.orange.lib.mvp.view.page.loading.LoadingPage;
+import com.orange.lib.utils.Activitys;
 import com.orange.ndlib.R;
+import com.orange.ndlib.activity.demo.net.parallel.ParallelNetDemoActivity;
+import com.orange.ndlib.activity.demo.net.serial.SerialNetDemoActivity;
 
 public class NetDemoActivity extends NetActivity<INetDemoContact.Presenter> implements INetDemoContact.View {
     @Override
@@ -34,7 +38,7 @@ public class NetDemoActivity extends NetActivity<INetDemoContact.Presenter> impl
                         mPresenter.pageDialogLoading();
                         break;
                     case R.id.btn_hide_loading:
-                        dismissLoading();
+                        mPage.dismissLoading();
                         break;
                     case R.id.btn_show_content:
                         mPresenter.pageContent();
@@ -42,15 +46,20 @@ public class NetDemoActivity extends NetActivity<INetDemoContact.Presenter> impl
                     case R.id.btn_show_error:
                         mPresenter.pageError();
                         break;
-                    case R.id.btn_serial:
-                        mPresenter.getLoadingData();
+                    case R.id.btn_serial_enter:
+                        Activitys.launchActivity(mActivity, SerialNetDemoActivity.class);
                         break;
-                    case R.id.btn_parallel:
-                        mPresenter.getMultiDatas();
+                    case R.id.btn_parallel_enter:
+                        Activitys.launchActivity(mActivity, ParallelNetDemoActivity.class);
                         break;
                 }
             }
-        }, R.id.btn_show_loading, R.id.btn_hide_loading, R.id.btn_show_dialog_loading, R.id.btn_show_content, R.id.btn_show_error, R.id.btn_serial, R.id.btn_parallel);
+        }, R.id.btn_show_loading, R.id.btn_hide_loading, R.id.btn_show_dialog_loading, R.id.btn_show_content, R.id.btn_show_error, R.id.btn_serial_enter, R.id.btn_parallel_enter);
+    }
+
+    @Override
+    protected IPage getPage() {
+        return new LoadingPage(mHolder);
     }
 
     @Override
@@ -73,10 +82,5 @@ public class NetDemoActivity extends NetActivity<INetDemoContact.Presenter> impl
     @Override
     public void setLoadingData(String data) {
         mHolder.setText(R.id.tv_content, data);
-    }
-
-    @Override
-    public void setLoading2Data(String data) {
-        mHolder.setText(R.id.tv_parallel, data);
     }
 }

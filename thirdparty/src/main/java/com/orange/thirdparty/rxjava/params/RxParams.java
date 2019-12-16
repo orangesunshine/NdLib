@@ -4,14 +4,14 @@ import com.orange.lib.mvp.model.net.request.request.Params;
 import com.orange.lib.utils.Preconditions;
 import com.orange.thirdparty.retrofit.RetrofitClient;
 import com.orange.thirdparty.retrofit.api.IRetrofitApi;
-import com.orange.thirdparty.rxjava.params.generate.IGenerateObservable;
+import com.orange.thirdparty.rxjava.params.generate.IGenObservable;
 
 import java.util.Map;
 
 import io.reactivex.Observable;
 import okhttp3.ResponseBody;
 
-public class RxParams extends Params implements IGenerateObservable<ResponseBody> {
+public class RxParams extends Params implements IGenObservable<ResponseBody> {
     public RxParams(Builder builder) {
         super(builder);
     }

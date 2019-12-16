@@ -249,7 +249,12 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder implements IHold
      */
     @Override
     public IHolder setVisible(int viewId, boolean visible) {
-        return null == mHolder ? null : mHolder.setVisible(viewId, visible);
+        return setVisible(viewId, visible, false);
+    }
+
+    @Override
+    public IHolder setVisible(int viewId, boolean visible, boolean print) {
+        return null == mHolder ? null : setVisible(mHolder.getView(viewId), visible, print);
     }
 
     /**
@@ -261,7 +266,12 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder implements IHold
      */
     @Override
     public IHolder setVisible(View view, boolean visible) {
-        return null == mHolder ? null : mHolder.setVisible(view, visible);
+        return setVisible(view, visible, false);
+    }
+
+    @Override
+    public IHolder setVisible(View view, boolean visible, boolean print) {
+        return null == mHolder ? null : mHolder.setVisible(view, visible, print);
     }
 
     /**

@@ -48,7 +48,7 @@ public class LoadingDialogPage implements IPage {
     public void showLoading() {
         if (null != mLoading)
             mLoading.showLoading();
-        Views.setVisible(mContentView, false);
+        Views.setVisible(mContentView, true);
         Views.setVisible(mEmtpyView, false);
         Views.setVisible(mErrorView, false);
     }

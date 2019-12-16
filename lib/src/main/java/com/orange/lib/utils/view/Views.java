@@ -147,7 +147,17 @@ public class Views {
      * @param visible
      */
     public static void setVisible(View view, boolean visible) {
-        if (Preconditions.isNull(view)) return;
+        setVisible(view, visible, false);
+    }
+
+    /**
+     * 设置visibile
+     *
+     * @param view
+     * @param visible
+     */
+    public static void setVisible(View view, boolean visible, boolean print) {
+        if (Preconditions.isNull(view, print ? "view not exist! " : null)) return;
         view.setVisibility(visible ? View.VISIBLE : View.GONE);
     }
 

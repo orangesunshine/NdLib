@@ -175,6 +175,16 @@ public interface IHolder extends View.OnClickListener {
     IHolder setVisible(int viewId, boolean visible);
 
     /**
+     * viewId设置可见性
+     *
+     * @param viewId
+     * @param visible
+     * @param print   打印日志
+     * @return
+     */
+    IHolder setVisible(int viewId, boolean visible, boolean print);
+
+    /**
      * view设置可见性
      *
      * @param view
@@ -182,6 +192,16 @@ public interface IHolder extends View.OnClickListener {
      * @return
      */
     IHolder setVisible(View view, boolean visible);
+
+    /**
+     * viewId设置可见性
+     *
+     * @param view
+     * @param visible
+     * @param print   打印日志
+     * @return
+     */
+    IHolder setVisible(View view, boolean visible, boolean print);
 
     /**
      * viewId设置选中

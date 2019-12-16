@@ -18,6 +18,7 @@
     <application
         android:name=".app.NdLibApp"
         android:allowBackup="true"
+        android:hardwareAccelerated="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:networkSecurityConfig="@xml/network_security_config"
@@ -41,5 +42,7 @@
         <activity android:name=".activity.demo.base.status.RxJavaSampleImpActivity" />
         <activity android:name=".activity.demo.base.status.AndroidUtilCodeImlActivity" />
         <activity android:name=".activity.demo.presenter.PresenterDemoActivity" />
+        <activity android:name=".activity.demo.net.serial.SerialNetDemoActivity" />
+        <activity android:name=".activity.demo.net.parallel.ParallelNetDemoActivity" />
     </application>
 </manifest>

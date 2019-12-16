@@ -4,92 +4,76 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <View
+        android:id="@+id/id_statusbar_orange"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/colorPrimary" />
+
     <ViewStub
         android:id="@+id/id_stub_actbar_orange"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_actbar"
         android:inflatedId="@+id/id_actbar_orange" />
 
-    <LinearLayout
-        android:id="@+id/id_content_orange"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <Button
-            android:id="@+id/btn_show_loading"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="show_loading" />
-
-        <Button
-            android:id="@+id/btn_show_dialog_loading"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="show_dialog_loading" />
-
-        <Button
-            android:id="@+id/btn_hide_loading"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="hide_loading" />
-
-        <Button
-            android:id="@+id/btn_show_content"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="show_content" />
-
-        <Button
-            android:id="@+id/btn_show_error"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="show_error" />
-
-        <Button
-            android:id="@+id/btn_serial"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="serial" />
-
-        <Button
-            android:id="@+id/btn_parallel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="parallel" />
-
-        <Button
-            android:id="@+id/btn_serial_enter"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="serial_enter" />
-
-        <Button
-            android:id="@+id/btn_parallel_enter"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="parallel_enter" />
-
-        <TextView
-            android:id="@+id/tv_content"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:text="serial：" />
-
-        <TextView
-            android:id="@+id/tv_parallel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:text="parallel：" />
-    </LinearLayout>
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/id_content_orange"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_show_loading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="show_loading" />
+
+            <Button
+                android:id="@+id/btn_show_dialog_loading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="show_dialog_loading" />
+
+            <Button
+                android:id="@+id/btn_hide_loading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="hide_loading" />
+
+            <Button
+                android:id="@+id/btn_show_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="show_content" />
+
+            <Button
+                android:id="@+id/btn_show_error"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="show_error" />
+
+            <Button
+                android:id="@+id/btn_serial_enter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="serial_enter" />
+
+            <Button
+                android:id="@+id/btn_parallel_enter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="parallel_enter" />
+        </LinearLayout>
+
+        <ViewStub
+            android:id="@+id/id_stub_loading_orange"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inflatedId="@+id/id_loading_orange" />
 
         <ViewStub
             android:id="@+id/id_stub_empty_orange"

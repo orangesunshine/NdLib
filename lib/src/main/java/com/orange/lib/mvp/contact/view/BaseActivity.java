@@ -14,6 +14,7 @@ import androidx.annotation.ColorInt;
 import androidx.fragment.app.FragmentActivity;
 
 import com.orange.lib.R;
+import com.orange.lib.common.adapterpattern.ActionBarCallbackAdapter;
 import com.orange.lib.common.config.Config;
 import com.orange.lib.common.holder.CommonHolder;
 import com.orange.lib.common.holder.IHolder;
@@ -57,7 +58,7 @@ public abstract class BaseActivity extends FragmentActivity {
 
         attachView(content);//视图
 
-        mHolder.setVisible(R.id.id_statusbar_orange, translucentStatusBar());
+        mHolder.setVisible(R.id.id_statusbar_orange, translucentStatusBar(), false);
         statusBar();//状态栏
 
         attachStub();//占位
@@ -170,6 +171,13 @@ public abstract class BaseActivity extends FragmentActivity {
         //actbar占位
         Views.attachStub(mHolder.getView(R.id.id_stub_actbar_orange), R.layout.stub_layout_actbar_common);
         mActbar = new CommonActionBar(mHolder);
+        mActbar.setLeftImg(R.drawable.ic_arrow_back_black_24dp);
+        mActbar.setActionBarCallback(new ActionBarCallbackAdapter() {
+            @Override
+            public void onLeft() {
+                onBackPressed();
+            }
+        });
     }
 
     /**

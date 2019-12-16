@@ -1,7 +1,9 @@
 package com.orange.thirdparty.retrofit;
 
+import com.orange.lib.common.reponse.BaseResponse;
 import com.orange.lib.mvp.model.net.callback.loading.ICallback;
 import com.orange.lib.utils.Preconditions;
+import com.orange.utils.common.Commons;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -9,13 +11,13 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-public class RetrofitSubscriber<T> {
+public class TSubscriber {
 
-    public static RetrofitSubscriber newInstance() {
-        return new RetrofitSubscriber();
+    public static TSubscriber newInstance() {
+        return new TSubscriber();
     }
 
-    public Disposable subscribe(Observable<T> observable, ICallback<T> netCallback) {
+    public Disposable subscribe(Observable observable, ICallback netCallback) {
         Preconditions.needNotNull(observable);
         CommonConsumer commonConsumer = new CommonConsumer(netCallback);
         return observable.subscribeOn(Schedulers.io())
@@ -27,11 +29,17 @@ public class RetrofitSubscriber<T> {
     }
 
     protected <T> Consumer nextConsumer(ICallback<T> netCallback) {
-        return new Consumer<T>() {
+        return new Consumer<BaseResponse<T>>() {
             @Override
-            public void accept(T response) {
-                if (null != netCallback)
-                    netCallback.onSuccess(response);
+            public void accept(BaseResponse<T> result) {
+                if (null != netCallback && null != result) {
+                    int code = result.code;
+                    if (Commons.checkCodeSuccess(code)) {
+                        netCallback.onSuccess(null != result ? result.data : null);
+                    } else {
+                        netCallback.onError(code, new Throwable(result.msg));
+                    }
+                }
             }
         };
     }

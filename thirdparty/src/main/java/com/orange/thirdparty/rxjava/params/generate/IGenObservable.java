@@ -4,7 +4,7 @@ import com.orange.thirdparty.rxjava.params.RxParams;
 
 import io.reactivex.Observable;
 
-public interface IGenerateObservable<T> {
+public interface IGenObservable<T> {
     Observable<T> getObservable();
 
     RxParams addParams(String key, String value);

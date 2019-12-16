@@ -286,7 +286,12 @@ public class CommonHolder implements IHolder {
      */
     @Override
     public IHolder setVisible(int viewId, boolean visible) {
-        return setVisible(getView(viewId), visible);
+        return setVisible(viewId, visible, true);
+    }
+
+    @Override
+    public IHolder setVisible(int viewId, boolean visible, boolean print) {
+        return setVisible(getView(viewId), visible, print);
     }
 
     /**
@@ -298,7 +303,12 @@ public class CommonHolder implements IHolder {
      */
     @Override
     public IHolder setVisible(View view, boolean visible) {
-        Views.setVisible(view, visible);
+        return setVisible(view, visible, true);
+    }
+
+    @Override
+    public IHolder setVisible(View view, boolean visible, boolean print) {
+        Views.setVisible(view, visible, print);
         return this;
     }
 
@@ -334,7 +344,7 @@ public class CommonHolder implements IHolder {
 
     @Override
     public IHolder setHeight(View view, int height) {
-        Views.setHeight(view,height);
+        Views.setHeight(view, height);
         return this;
     }
 
@@ -345,7 +355,7 @@ public class CommonHolder implements IHolder {
 
     @Override
     public IHolder setWidth(View view, int width) {
-        Views.setWidth(view,width);
+        Views.setWidth(view, width);
         return this;
     }
 

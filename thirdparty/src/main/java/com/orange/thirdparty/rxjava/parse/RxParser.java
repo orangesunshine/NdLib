@@ -2,6 +2,7 @@ package com.orange.thirdparty.rxjava.parse;
 
 import android.text.TextUtils;
 
+import com.google.gson.reflect.TypeToken;
 import com.orange.lib.common.config.Config;
 import com.orange.lib.common.reponse.BaseResponse;
 import com.orange.lib.mvp.model.net.callback.loading.ICallback;
@@ -38,7 +39,7 @@ public class RxParser {
         Type type = Reflections.getGenericActualTypeArg(callback.getClass());
         if (null == type)
             throw new IllegalArgumentException("please special " + callback.getClass() + " GenericInterfaces");
-        return parse(responseBody, new ParameterizedTypeImpl(BaseResponse.class, new Type[]{type}));
+        return parse(responseBody, type);
     }
 
     public static <T> BaseResponse<T> parse(ResponseBody responseBody, Type type) {
@@ -53,7 +54,7 @@ public class RxParser {
         } catch (Exception e) {
             Config.getInstance().getLog().e(e);
         }
-        return parseResponse(body, type);
+        return parseResponse(body, TypeToken.getParameterized(BaseResponse.class, type).getType());
     }
 
     public <T> BaseResponse<T> parseResponse(String json, Type type) {

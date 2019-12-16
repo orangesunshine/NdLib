@@ -1,7 +1,6 @@
 package com.orange.ndlib.activity.demo.net;
 
 import com.orange.lib.mvp.contact.INetContact;
-import com.orange.lib.mvp.model.net.netcancel.INetCancel;
 
 /**
  * @Author: orange
@@ -12,15 +11,9 @@ public interface INetDemoContact {
         void showDialogLoading();
 
         void setLoadingData(String data);
-
-        void setLoading2Data(String data);
     }
 
     interface Presenter extends INetContact.Presenter<View> {
-        INetCancel getLoadingData();
-
-        INetCancel getMultiDatas();
-
         void pageLoading();
 
         void pageDialogLoading();

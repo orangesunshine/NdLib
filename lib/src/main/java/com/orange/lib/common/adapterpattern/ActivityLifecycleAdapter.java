@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
 
-public abstract class ActivityLifecycleAdapt implements Application.ActivityLifecycleCallbacks {
+public abstract class ActivityLifecycleAdapter implements Application.ActivityLifecycleCallbacks {
     @Override
     public void onActivityCreated(Activity activity, Bundle bundle) {
 
