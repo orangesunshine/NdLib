@@ -1,18 +1,18 @@
-package com.orange.thirdparty.rxjava.params;
+package com.orange.thirdparty.retrofit.responsebody.params;
 
 import com.orange.lib.mvp.model.net.request.request.Params;
 import com.orange.lib.utils.Preconditions;
-import com.orange.thirdparty.retrofit.RetrofitClient;
+import com.orange.thirdparty.retrofit.client.RetrofitClient;
 import com.orange.thirdparty.retrofit.api.IRetrofitApi;
-import com.orange.thirdparty.rxjava.params.generate.IGenObservable;
+import com.orange.thirdparty.retrofit.responsebody.params.generate.IGenObservable;
 
 import java.util.Map;
 
 import io.reactivex.Observable;
 import okhttp3.ResponseBody;
 
-public class RxParams extends Params implements IGenObservable<ResponseBody> {
-    public RxParams(Builder builder) {
+public class RbParams extends Params implements IGenObservable<ResponseBody> {
+    public RbParams(Builder builder) {
         super(builder);
     }
 
@@ -54,13 +54,13 @@ public class RxParams extends Params implements IGenObservable<ResponseBody> {
         }
 
         @Override
-        public RxParams build() {
-            return new RxParams(this);
+        public RbParams build() {
+            return new RbParams(this);
         }
     }
 
     @Override
-    public RxParams addParams(String key, String value) {
+    public RbParams addParams(String key, String value) {
         if (Preconditions.isNull(mParams)) return this;
         mParams.put(key, value);
         return this;

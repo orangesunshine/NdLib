@@ -1,4 +1,4 @@
-package com.orange.thirdparty.retrofit;
+package com.orange.thirdparty.retrofit.client;
 
 import android.text.TextUtils;
 

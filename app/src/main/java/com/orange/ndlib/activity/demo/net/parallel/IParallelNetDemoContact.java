@@ -5,10 +5,16 @@ import com.orange.lib.mvp.model.net.netcancel.INetCancel;
 
 public interface IParallelNetDemoContact {
     interface View extends INetContact.View {
-        void showSerialResult(String result);
+        void showParallelResult(String result);
     }
 
     interface Presenter extends INetContact.Presenter<View> {
-        INetCancel getSerialData();
+        INetCancel getAllRbData();
+
+        INetCancel getAllTData();
+
+        INetCancel getTParallelRbData();
+
+        INetCancel getRbParallelTData();
     }
 }

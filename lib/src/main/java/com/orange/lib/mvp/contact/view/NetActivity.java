@@ -19,7 +19,6 @@ public abstract class NetActivity<P extends INetContact.Presenter> extends Prese
     @Override
     protected void init() {
         super.init();
-
         //网络错误点击刷新
         mHolder.addOnItemChildClick(new IHolder.OnItemChildClickListener() {
             @Override

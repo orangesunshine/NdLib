@@ -6,9 +6,9 @@ import com.orange.lib.mvp.model.net.netcancel.INetCancel;
 import com.orange.lib.mvp.model.net.callback.pull.IPullNetCallback;
 import com.orange.lib.mvp.model.net.api.pull.IPullApi;
 import com.orange.thirdparty.retrofit.api.IRetrofitApi;
-import com.orange.thirdparty.retrofit.RetrofitClient;
-import com.orange.thirdparty.rxjava.RxNetCancel;
-import com.orange.thirdparty.rxjava.subscriber.RxPullSubscriber;
+import com.orange.thirdparty.retrofit.client.RetrofitClient;
+import com.orange.thirdparty.retrofit.cancel.RetrofitNetCancel;
+import com.orange.thirdparty.retrofit.responsebody.subscriber.RxPullSubscriber;
 
 import java.lang.reflect.Type;
 import java.util.Map;
@@ -45,7 +45,7 @@ public class RetrofitPullApi implements IPullApi {
     public <T> INetCancel get(String url, Map<String, String> params, Type type, IPullNetCallback<T> callback) {
         Preconditions.checkNotNull(mRxPullSubscriber);
         Disposable subsribe = mRxPullSubscriber.subsribe(RetrofitClient.getRetrofitInstance().create(IRetrofitApi.class).get(url, params), type, callback);
-        return new RxNetCancel(subsribe);
+        return new RetrofitNetCancel(subsribe);
     }
 
 
@@ -61,7 +61,7 @@ public class RetrofitPullApi implements IPullApi {
     public <T> INetCancel get(Map<String, String> headers, String url, Map<String, String> params, Type type, IPullNetCallback<T> callback) {
         Preconditions.checkNotNull(mRxPullSubscriber);
         Disposable subsribe = mRxPullSubscriber.subsribe(RetrofitClient.getRetrofitInstance().create(IRetrofitApi.class).get(url, params, headers), type, callback);
-        return new RxNetCancel(subsribe);
+        return new RetrofitNetCancel(subsribe);
     }
 
     /**
@@ -75,7 +75,7 @@ public class RetrofitPullApi implements IPullApi {
     public <T> INetCancel post(String url, Map<String, String> params, Type type, IPullNetCallback<T> callback) {
         Preconditions.checkNotNull(mRxPullSubscriber);
         Disposable subsribe = mRxPullSubscriber.subsribe(RetrofitClient.getRetrofitInstance().create(IRetrofitApi.class).post(url, params), type, callback);
-        return new RxNetCancel(subsribe);
+        return new RetrofitNetCancel(subsribe);
     }
 
     /**
@@ -89,6 +89,6 @@ public class RetrofitPullApi implements IPullApi {
     public <T> INetCancel post(Map<String, String> headers, String url, Map<String, String> params, Type type, IPullNetCallback<T> callback) {
         Preconditions.checkNotNull(mRxPullSubscriber);
         Disposable subsribe = mRxPullSubscriber.subsribe(RetrofitClient.getRetrofitInstance().create(IRetrofitApi.class).post(url, params, headers), type, callback);
-        return new RxNetCancel(subsribe);
+        return new RetrofitNetCancel(subsribe);
     }
 }

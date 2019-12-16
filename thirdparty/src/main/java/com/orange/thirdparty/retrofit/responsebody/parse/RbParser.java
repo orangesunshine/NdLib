@@ -1,4 +1,4 @@
-package com.orange.thirdparty.rxjava.parse;
+package com.orange.thirdparty.retrofit.responsebody.parse;
 
 import android.text.TextUtils;
 
@@ -17,17 +17,17 @@ import okhttp3.ResponseBody;
 
 import static com.orange.lib.constance.IConst.LINE_SEPARATOR;
 
-public class RxParser {
-    private static RxParser mInstance;
+public class RbParser {
+    private static RbParser mInstance;
 
-    private RxParser() {
+    private RbParser() {
     }
 
-    public static RxParser getInstance() {
+    public static RbParser getInstance() {
         if (null == mInstance) {
-            synchronized (RxParser.class) {
+            synchronized (RbParser.class) {
                 if (null == mInstance)
-                    mInstance = new RxParser();
+                    mInstance = new RbParser();
             }
         }
         return mInstance;

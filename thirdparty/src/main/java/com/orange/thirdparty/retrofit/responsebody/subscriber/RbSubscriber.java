@@ -1,10 +1,10 @@
-package com.orange.thirdparty.rxjava.subscriber;
+package com.orange.thirdparty.retrofit.responsebody.subscriber;
 
 import com.orange.lib.common.reponse.BaseResponse;
 import com.orange.lib.mvp.model.net.callback.loading.ICallback;
 import com.orange.lib.utils.Preconditions;
-import com.orange.thirdparty.retrofit.CommonConsumer;
-import com.orange.thirdparty.rxjava.parse.RxParser;
+import com.orange.thirdparty.retrofit.consumer.CommonConsumer;
+import com.orange.thirdparty.retrofit.responsebody.parse.RbParser;
 import com.orange.utils.common.Commons;
 
 import java.lang.reflect.Type;
@@ -47,9 +47,9 @@ public class RbSubscriber {
         return new Consumer<ResponseBody>() {
             @Override
             public void accept(ResponseBody responseBody) {
-                BaseResponse<T> result = RxParser.parse(responseBody, type);
+                BaseResponse<T> result = RbParser.parse(responseBody, type);
                 if (null == result)
-                    result = RxParser.parse(responseBody, netCallback);
+                    result = RbParser.parse(responseBody, netCallback);
                 if (null == result) return;
                 if (null != netCallback) {
                     int code = result.code;
@@ -72,7 +72,7 @@ public class RbSubscriber {
         return new Consumer<ResponseBody>() {
             @Override
             public void accept(ResponseBody responseBody) {
-                BaseResponse<R> result = RxParser.parse(responseBody, netCallback);
+                BaseResponse<R> result = RbParser.parse(responseBody, netCallback);
                 if (null == result) return;
                 if (null != netCallback) {
                     int code = result.code;

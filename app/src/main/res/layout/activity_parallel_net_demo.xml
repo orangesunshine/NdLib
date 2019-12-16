@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/id_statusbar_orange"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/colorPrimary" />
+
+    <ViewStub
+        android:id="@+id/id_stub_actbar_orange"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_actbar"
+        android:inflatedId="@+id/id_actbar_orange" />
+
+    <LinearLayout
+        android:id="@+id/id_content_orange"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_parallel_rb_net"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="parallel_responsebody_net" />
+
+        <Button
+            android:id="@+id/btn_parallel_t_net"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="parallel_baseresponse_net" />
+
+        <Button
+            android:id="@+id/btn_parallel_t_rb_net"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="parallel_baseresponse_responsebody_net" />
+
+        <Button
+            android:id="@+id/btn_parallel_rb_t_net"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="parallel_responsebody_baseresponse_net" />
+
+        <Button
+            android:id="@+id/btn_parallel_net_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="parallel_net_cancel" />
+
+        <TextView
+            android:id="@+id/tv_parallel_ret"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ViewStub
+            android:id="@+id/id_stub_empty_orange"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inflatedId="@+id/id_empty_orange" />
+
+        <ViewStub
+            android:id="@+id/id_stub_error_orange"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inflatedId="@+id/id_error_orange" />
+    </FrameLayout>
+</LinearLayout>

@@ -6,11 +6,11 @@ import com.orange.lib.mvp.model.net.callback.loading.LoadingCallback;
 import com.orange.lib.mvp.model.net.callback.loading.PageCallback;
 import com.orange.lib.mvp.model.net.netcancel.INetCancel;
 import com.orange.ndlib.activity.demo.retrofit.RetrofitDemoApi;
-import com.orange.thirdparty.retrofit.RetrofitClient;
-import com.orange.thirdparty.retrofit.RetrofitRequest;
-import com.orange.thirdparty.retrofit.mapper.RbMapper;
+import com.orange.thirdparty.retrofit.client.RetrofitClient;
+import com.orange.thirdparty.retrofit.request.RetrofitRequest;
+import com.orange.thirdparty.retrofit.responsebody.mapper.RbMapper;
 import com.orange.thirdparty.retrofit.mapper.TMapper;
-import com.orange.thirdparty.rxjava.params.RxParams;
+import com.orange.thirdparty.retrofit.responsebody.params.RbParams;
 
 import java.util.List;
 
@@ -21,13 +21,13 @@ public class SerialNetDemoPresenter extends NetPresenter<ISerialNetDemoContact.V
     @Override
     public INetCancel getAllRbData() {
         return RetrofitRequest.newInstance(
-                RxParams.Builder.builder()
+                RbParams.Builder.builder()
                         .url("http://localhost:8080/serial/first")
                         .build())
                 .serial(new RbMapper<String>() {
                     @Override
                     public Observable convert(BaseResponse<String> t) {
-                        return RxParams.Builder.builder().url("http://localhost:8080/serial/third").build().getObservable();
+                        return RbParams.Builder.builder().url("http://localhost:8080/serial/third").build().getObservable();
                     }
                 })
                 .subscribeResponseBody(new PageCallback<List<String>>(mView) {
@@ -62,7 +62,7 @@ public class SerialNetDemoPresenter extends NetPresenter<ISerialNetDemoContact.V
                 .serial(new TMapper<String>() {
                     @Override
                     public Observable apply(BaseResponse<String> response) throws Exception {
-                        return RxParams.Builder.builder()
+                        return RbParams.Builder.builder()
                                 .url("http://localhost:8080/serial/second")
                                 .addParams("params", response.data)
                                 .build().getObservable();
@@ -80,7 +80,7 @@ public class SerialNetDemoPresenter extends NetPresenter<ISerialNetDemoContact.V
     @Override
     public INetCancel getRbSerialTData() {
         return RetrofitRequest.newInstance(
-                RxParams.Builder.builder()
+                RbParams.Builder.builder()
                         .url("http://localhost:8080/serial/first")
                         .build())
                 .serial(new RbMapper<String>() {

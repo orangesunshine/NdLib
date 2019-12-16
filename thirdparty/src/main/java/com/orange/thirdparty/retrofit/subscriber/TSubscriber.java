@@ -1,8 +1,9 @@
-package com.orange.thirdparty.retrofit;
+package com.orange.thirdparty.retrofit.subscriber;
 
 import com.orange.lib.common.reponse.BaseResponse;
 import com.orange.lib.mvp.model.net.callback.loading.ICallback;
 import com.orange.lib.utils.Preconditions;
+import com.orange.thirdparty.retrofit.consumer.CommonConsumer;
 import com.orange.utils.common.Commons;
 
 import io.reactivex.Observable;

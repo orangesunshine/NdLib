@@ -1,4 +1,4 @@
-package com.orange.thirdparty.retrofit;
+package com.orange.thirdparty.retrofit.consumer;
 
 import com.orange.lib.constance.IConst;
 import com.orange.lib.mvp.model.net.callback.loading.ICallback;

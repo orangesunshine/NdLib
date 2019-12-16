@@ -1,4 +1,4 @@
-package com.orange.thirdparty.rxjava.subscriber;
+package com.orange.thirdparty.retrofit.responsebody.subscriber;
 
 import android.text.TextUtils;
 

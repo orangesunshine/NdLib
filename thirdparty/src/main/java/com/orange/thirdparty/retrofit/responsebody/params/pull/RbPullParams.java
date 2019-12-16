@@ -1,21 +1,21 @@
-package com.orange.thirdparty.rxjava.params.pull;
+package com.orange.thirdparty.retrofit.responsebody.params.pull;
 
 import com.orange.lib.utils.Preconditions;
-import com.orange.thirdparty.rxjava.params.RxParams;
+import com.orange.thirdparty.retrofit.responsebody.params.RbParams;
 
 import java.util.Map;
 
 import static com.orange.lib.constance.IConst.PAGE_SIZE;
 
-public class RxPullParams extends RxParams {
+public class RbPullParams extends RbParams {
     protected int mPageIndex = 1;
     protected int mPageSize = PAGE_SIZE;
 
-    public RxPullParams(Builder builder) {
+    public RbPullParams(Builder builder) {
         super(builder);
     }
 
-    public static class Builder extends RxParams.Builder {
+    public static class Builder extends RbParams.Builder {
         protected int mPageIndex = 1;
         protected int mPageSize = PAGE_SIZE;
 
@@ -66,8 +66,8 @@ public class RxPullParams extends RxParams {
         }
 
         @Override
-        public RxPullParams build() {
-            return new RxPullParams(this);
+        public RbPullParams build() {
+            return new RbPullParams(this);
         }
     }
 }
